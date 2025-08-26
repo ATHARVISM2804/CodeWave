@@ -1,0 +1,421 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { MessageCircle, Phone, Mail, Calendar, Send, MapPin, Clock, Users, CheckCircle } from 'lucide-react';
+
+const ContactPage: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    service: '',
+    budget: '',
+    timeline: '',
+    message: ''
+  });
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const contactMethods = [
+    {
+      icon: MessageCircle,
+      title: 'WhatsApp',
+      description: 'Chat instantly with our team',
+      detail: '+1 (555) 123-4567',
+      action: 'Start Chat',
+      color: 'from-green-500 to-emerald-500'
+    },
+    {
+      icon: MessageCircle,
+      title: 'Live Chat',
+      description: 'Our AI assistant is ready to help',
+      detail: 'Available 24/7',
+      action: 'Chat Now',
+      color: 'from-blue-500 to-cyan-500'
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      description: 'Write to us directly',
+      detail: 'hello@codewave.it',
+      action: 'Send Email',
+      color: 'from-purple-500 to-pink-500'
+    },
+    {
+      icon: Calendar,
+      title: 'Schedule a Call',
+      description: 'Book a consultation',
+      detail: '30-min free consultation',
+      action: 'Book Call',
+      color: 'from-orange-500 to-red-500'
+    }
+  ];
+
+  const officeInfo = [
+    {
+      icon: MapPin,
+      title: 'Headquarters',
+      details: ['123 Innovation Drive', 'Tech Valley, CA 94025', 'United States']
+    },
+    {
+      icon: Clock,
+      title: 'Business Hours',
+      details: ['Monday - Friday: 9:00 AM - 6:00 PM PST', 'Saturday: 10:00 AM - 2:00 PM PST', 'Sunday: Closed']
+    },
+    {
+      icon: Users,
+      title: 'Response Time',
+      details: ['Email: Within 4 hours', 'Phone: Immediate', 'Project inquiries: Same day']
+    }
+  ];
+
+  const teamMembers = [
+    'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150',
+    'https://images.pexels.com/photos/1300402/pexels-photo-1300402.jpeg?auto=compress&cs=tinysrgb&w=150',
+    'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=150',
+    'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=150'
+  ];
+
+  const whyChooseUs = [
+    'Expert team with 10+ years experience',
+    'Cutting-edge AI and intelligent solutions',
+    'Dedicated support throughout your project',
+    'Proven track record with 120+ successful projects',
+    'Security-first approach for all solutions'
+  ];
+
+  const faqs = [
+    {
+      question: 'How long does a typical project take?',
+      answer: 'Project timelines vary based on complexity, but most projects range from 4-16 weeks. We provide detailed timelines during our initial consultation.'
+    },
+    {
+      question: 'Do you work with startups?',
+      answer: 'Absolutely! We love working with startups and offer flexible engagement models to fit different budgets and growth stages.'
+    },
+    {
+      question: 'What makes CodeWave different?',
+      answer: 'We integrate AI and intelligence into every solution we build, ensuring your software doesn\'t just work—it thinks and adapts.'
+    },
+    {
+      question: 'Do you provide ongoing support?',
+      answer: 'Yes, we offer comprehensive support packages including maintenance, updates, and continuous optimization of your solutions.'
+    }
+  ];
+
+  return (
+    <div className="pt-16">
+      {/* Hero Section */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-8">
+            <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                Let's Create Something{' '}
+                <span className="parallax-text neon-glow">Extraordinary Together</span>
+              </h1>
+              <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                Where human creativity meets technological innovation. Ready to transform your ideas into intelligent solutions?
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Methods */}
+      <section ref={sectionRef} className="py-20 relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+              Choose Your Preferred Way to Connect
+            </h2>
+            <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+              We're here to help you bring your vision to life.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {contactMethods.map((method, index) => (
+              <div
+                key={index}
+                className={`morph-card glare-card p-8 text-center hover-lift-premium magnetic-effect ripple-effect cursor-pointer ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+              >
+                <div className={`w-16 h-16 bg-gradient-to-r ${method.color} rounded-xl flex items-center justify-center mx-auto mb-6 magnetic-effect`}>
+                  <method.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 neon-glow">{method.title}</h3>
+                <p className="text-gray-300 mb-2 font-medium">{method.description}</p>
+                <p className="text-sm text-gray-400 mb-4">{method.detail}</p>
+                <button className="liquid-button text-white px-6 py-2 font-semibold glare-effect text-sm magnetic-effect">
+                  {method.action}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Main Contact Form */}
+      <section className="py-20 relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16">
+            {/* Contact Form */}
+            <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
+              <h3 className="text-3xl font-bold mb-8 neon-glow">Tell Us About Your Vision</h3>
+              
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Name *</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Your full name"
+                      className="w-full input-premium"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Email *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="your@email.com"
+                      className="w-full input-premium"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Company/Organization</label>
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    placeholder="Your company name"
+                    className="w-full input-premium"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Service Needed</label>
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleInputChange}
+                      className="w-full input-premium"
+                    >
+                      <option value="">Select service</option>
+                      <option value="web">Web Development</option>
+                      <option value="mobile">Mobile App Development</option>
+                      <option value="ai">AI & ML Solutions</option>
+                      <option value="uiux">UI/UX Design</option>
+                      <option value="govtech">GovTech Solutions</option>
+                      <option value="custom">Custom Software</option>
+                      <option value="consultation">Consultation Only</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Budget Range</label>
+                    <select
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleInputChange}
+                      className="w-full input-premium"
+                    >
+                      <option value="">Select budget</option>
+                      <option value="10k-25k">$10k - $25k</option>
+                      <option value="25k-50k">$25k - $50k</option>
+                      <option value="50k-100k">$50k - $100k</option>
+                      <option value="100k+">$100k+</option>
+                      <option value="discuss">Let's discuss</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Timeline</label>
+                  <select
+                    name="timeline"
+                    value={formData.timeline}
+                    onChange={handleInputChange}
+                    className="w-full input-premium"
+                  >
+                    <option value="">Select timeline</option>
+                    <option value="asap">ASAP</option>
+                    <option value="1-3months">1-3 months</option>
+                    <option value="3-6months">3-6 months</option>
+                    <option value="6months+">6+ months</option>
+                    <option value="flexible">Flexible</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Project Details *</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={6}
+                    placeholder="Tell us about your project, goals, and any specific requirements..."
+                    className="w-full input-premium resize-none"
+                    required
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
+                >
+                  Send Message →
+                </button>
+              </form>
+            </div>
+
+            {/* Contact Info & Team */}
+            <div className="space-y-8">
+              {/* Office Information */}
+              <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+                <h3 className="text-2xl font-bold mb-6 neon-glow">Get in Touch</h3>
+                
+                <div className="space-y-6">
+                  {officeInfo.map((info, index) => (
+                    <div key={index} className="flex items-start space-x-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-lg flex items-center justify-center flex-shrink-0 magnetic-effect">
+                        <info.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">{info.title}</h4>
+                        <div className="space-y-1">
+                          {info.details.map((detail, detailIndex) => (
+                            <p key={detailIndex} className="text-gray-300 text-sm">{detail}</p>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Team Section */}
+              <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
+                <h3 className="text-2xl font-bold mb-6 neon-glow">Meet Your Design Partners</h3>
+                
+                <div className="flex -space-x-4 mb-6">
+                  {teamMembers.map((avatar, index) => (
+                    <div
+                      key={index}
+                      className="w-16 h-16 rounded-full border-4 border-[#0b0e17] overflow-hidden magnetic-effect"
+                    >
+                      <img src={avatar} alt="Team member" className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-[#ff6a3d]">Why clients choose us:</h4>
+                  <div className="space-y-3">
+                    {whyChooseUs.map((reason, index) => (
+                      <div key={index} className="flex items-center text-sm text-gray-300">
+                        <CheckCircle className="w-4 h-4 text-green-400 mr-3 flex-shrink-0" />
+                        {reason}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-white/10">
+                  <p className="text-sm text-gray-400">
+                    <strong>Response guarantee:</strong> We respond within 4 hours on business days. 
+                    Your data is secure and never shared.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+              Frequently Asked Questions
+            </h2>
+            <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+              Quick answers to common questions about working with CodeWave.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-6">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+              >
+                <h3 className="text-xl font-bold mb-4 neon-glow">{faq.question}</h3>
+                <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="morph-card glare-card p-12 text-center hover-lift-premium">
+            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+              Still Have Questions?
+            </h2>
+            <p className={`text-xl text-gray-300 max-w-3xl mx-auto mb-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+              Schedule a free 30-minute consultation to discuss your project and get expert advice.
+            </p>
+            <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
+              <button className="liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg magnetic-effect">
+                Book Free Consultation
+              </button>
+              <button className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect">
+                View Our Work
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default ContactPage;
