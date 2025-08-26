@@ -26,32 +26,27 @@ const WhyUsSection: React.FC = () => {
     {
       icon: Zap,
       title: 'AI at the Core',
-      description: 'AI guides our design and development. Every solution designed to learn, adapt, and evolve.',
-      position: { top: '10%', left: '15%' }
+      description: 'AI guides our design and development. Every solution designed to learn, adapt, and evolve.'
     },
     {
       icon: Shield,
       title: 'Security by Design',
-      description: 'Every layer engineered with encryption, compliance, and resilience.',
-      position: { top: '10%', right: '15%' }
+      description: 'Every layer engineered with encryption, compliance, and resilience.'
     },
     {
       icon: TrendingUp,
       title: 'Scale Without Fear',
-      description: 'From lean startups to government platforms — serving millions — our architecture is built to grow.',
-      position: { bottom: '20%', left: '15%' }
+      description: 'From lean startups to government platforms — serving millions — our architecture is built to grow.'
     },
     {
       icon: Award,
       title: 'Trusted in High-Stakes',
-      description: 'Government contractors, high-growth startups, and mission-critical organizations trust us to deliver.',
-      position: { bottom: '20%', right: '15%' }
+      description: 'Government contractors, high-growth startups, and mission-critical organizations trust us to deliver.'
     },
     {
       icon: Target,
       title: 'Real Impact, Measured',
-      description: 'We support targets, actionable what matters, and give you real numbers on performance.',
-      position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }
+      description: 'We support targets, actionable what matters, and give you real numbers on performance.'
     }
   ];
 
@@ -68,8 +63,8 @@ const WhyUsSection: React.FC = () => {
         </div>
 
         {/* Network Visualization */}
-        <div className="relative max-w-6xl mx-auto h-96 lg:h-[500px]">
-          {/* Central Hexagon */}
+        <div className="relative max-w-6xl mx-auto h-[600px] md:h-[700px] lg:h-[800px]">
+          {/* Central Circle */}
           <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${isVisible ? 'animate-fade-in scale-100' : 'opacity-0 scale-50'}`} style={{ animationDelay: '400ms' }}>
             <div className="relative">
               <div className="w-32 h-32 lg:w-40 lg:h-40 border-2 border-[#ff6a3d] rounded-full bg-gradient-to-r from-[#ff6a3d]/20 to-[#ff8c42]/20 backdrop-blur-md flex items-center justify-center">
@@ -83,44 +78,46 @@ const WhyUsSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Feature Nodes */}
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className={`absolute ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-              style={{
-                ...feature.position,
-                animationDelay: `${600 + index * 150}ms`
-              }}
-            >
-              <div className="group">
-                {/* Connection Line */}
-                <svg className="absolute top-1/2 left-1/2 w-full h-full pointer-events-none" style={{ zIndex: -1 }}>
-                  <line
-                    x1="50%"
-                    y1="50%"
-                    x2="50%"
-                    y2="50%"
-                    stroke="rgba(255, 106, 61, 0.3)"
-                    strokeWidth="2"
-                    className="animate-pulse"
-                  />
-                </svg>
+          {/* Feature Nodes in Circle */}
+          <div className="absolute inset-0">
+            {features.map((feature, index) => {
+              const totalItems = features.length;
+              const angle = (index * (360 / totalItems)) - 90; // Start from top (-90°)
+              const rad = (angle * Math.PI) / 180;
 
-                <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 max-w-xs hover:border-[#ff6a3d]/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#ff6a3d]/20">
-                  <div className="w-12 h-12 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <feature.icon className="w-6 h-6 text-white" />
+              // Decreased radius for closer cards
+              const radius = window.innerWidth < 768 ? 25 : 30; // vw units for responsiveness
+              const x = 50 + radius * Math.cos(rad);
+              const y = 50 + radius * Math.sin(rad);
+              
+              return (
+                <div
+                  key={index}
+                  className={`absolute w-64 h- ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+                  style={{
+                    left: `${x}%`,
+                    top: `${y}%`,
+                    transform: 'translate(-50%, -50%)',
+                    animationDelay: `${600 + index * 150}ms`
+                  }}
+                >
+                  <div className="group h-full">
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 h-full flex flex-col hover:border-[#ff6a3d]/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#ff6a3d]/20">
+                      <div className="w-12 h-12 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <feature.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-lg font-bold mb-2 group-hover:text-[#ff6a3d] transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm text-gray-400 leading-relaxed flex-grow">
+                        {feature.description}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold mb-2 group-hover:text-[#ff6a3d] transition-colors duration-300">
-                    {feature.title}
-                  </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {feature.description}
-                  </p>
                 </div>
-              </div>
-            </div>
-          ))}
+              );
+            })}
+          </div>
         </div>
       </div>
 

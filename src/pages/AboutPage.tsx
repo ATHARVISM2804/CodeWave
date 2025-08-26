@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Users, Target, Award, Lightbulb, Code, Brain, Shield, Zap } from 'lucide-react';
+ import React, { useEffect, useRef, useState } from 'react';
+import { Shield, Award, TrendingUp, Zap, Users, Code, Brain, Palette, Smartphone } from 'lucide-react';
 
 const AboutPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -22,252 +22,213 @@ const AboutPage: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const teamMembers = [
+  const missionVision = [
     {
-      name: 'Alex Chen',
-      role: 'Founder & Lead AI Engineer',
-      image: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400',
-      bio: 'Former Google AI researcher with 12+ years in machine learning and intelligent systems.'
+      title: 'Our Mission',
+      description: (
+        <>
+          To build <span className="text-[#ff6a3d] font-semibold">intelligent, future-ready</span> technology that actively solves real problems—beautifully, securely, and with measurable impact.
+        </>
+      ),
     },
     {
-      name: 'Sarah Rodriguez',
-      role: 'Head of Design & UX',
-      image: 'https://images.pexels.com/photos/1300402/pexels-photo-1300402.jpeg?auto=compress&cs=tinysrgb&w=400',
-      bio: 'Award-winning designer who has crafted experiences for Fortune 500 companies.'
+      title: 'Our Vision',
+      description: (
+        <>
+          To become the <span className="text-[#ff6a3d] font-semibold">go-to tech team</span> for founders, enterprises, and governments looking to integrate <span className="text-[#ff6a3d] font-semibold">smart systems</span> into their digital stack.
+        </>
+      ),
     },
-    {
-      name: 'Marcus Johnson',
-      role: 'Senior Full-Stack Developer',
-      image: 'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=400',
-      bio: 'Full-stack expert specializing in scalable architectures and modern web technologies.'
-    },
-    {
-      name: 'Priya Patel',
-      role: 'GovTech Solutions Lead',
-      image: 'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=400',
-      bio: 'Government technology specialist with deep expertise in compliance and security.'
-    }
   ];
 
   const values = [
     {
+      icon: Code,
+      title: 'Clarity over complexity',
+      description: 'We believe in simple, elegant solutions that solve real problems effectively.'
+    },
+    {
+      icon: Users,
+      title: 'Human-first design',
+      description: 'Technology should adapt to humans, not the other way around.'
+    },
+    {
       icon: Brain,
-      title: 'Intelligence First',
-      description: 'We believe every solution should be smart, adaptive, and continuously learning.'
+      title: 'Practical use of AI',
+      description: 'We leverage AI to enhance productivity and creativity, not replace human ingenuity.'
     },
     {
       icon: Shield,
-      title: 'Security by Design',
-      description: 'Security isn\'t an afterthought—it\'s built into every layer of our solutions.'
+      title: 'Trust, security, and transparency',
+      description: 'We build with integrity and prioritize data security in everything we create.'
     },
     {
-      icon: Target,
-      title: 'Impact Driven',
-      description: 'We measure success by the real-world impact our solutions create for clients.'
+      icon: Award,
+      title: 'Results, not just deliverables',
+      description: 'We measure success by the impact our solutions have on your business.'
     },
-    {
-      icon: Zap,
-      title: 'Innovation Obsessed',
-      description: 'We stay ahead of the curve, constantly exploring new technologies and methodologies.'
-    }
   ];
 
-  const milestones = [
-    { year: '2019', event: 'CodeWave founded with a vision to merge AI with traditional development' },
-    { year: '2020', event: 'First major GovTech contract secured, establishing our compliance expertise' },
-    { year: '2021', event: 'Expanded to serve 50+ clients across 10 industries' },
-    { year: '2022', event: 'Launched AI-powered development tools, reducing project timelines by 40%' },
-    { year: '2023', event: 'Achieved 98% client satisfaction rate and 120+ successful project deliveries' },
-    { year: '2024', event: 'Recognized as a leading intelligence studio in the tech industry' }
+  const industries = [
+    { icon: TrendingUp, title: 'Startups & Scaleups', description: 'Scalable products, dashboards, MVPs, and automation.' },
+    { icon: Shield, title: 'Government & Law Enforcement', description: 'Secure digital tools for complaint handling, reporting, and citizen services.' },
+    { icon: Zap, title: 'Logistics & Delivery', description: 'AI-powered coordination apps, GPS, and ETAs.' },
+    { icon: Award, title: 'Fintech & Professional Services', description: 'Data-secure platforms, dashboards, and responsive web.' },
+    { icon: Palette, title: 'Education & eLearning', description: 'Mobile-first apps and portals for interactive learning.' },
+    { icon: Smartphone, title: 'Healthcare & Wellness', description: 'Secure portals, appointment systems, and data-centric reporting.' },
+  ];
+
+  const technologies = [
+    {
+      group: 'Frontend',
+      items: ['React JS', 'HTML5', 'CSS3', 'TailwindCSS', 'Vue.js'],
+    },
+    {
+      group: 'Backend',
+      items: ['Node.js', 'Express.js', 'Python', 'Firebase'],
+    },
+    {
+      group: 'Mobile',
+      items: ['Flutter', 'React Native', 'Kotlin', 'Swift'],
+    },
+    {
+      group: 'AI & Automation',
+      items: ['OpenAI (GPT-4)', 'LangChain', 'Pinecone', 'Python', 'Zapier'],
+    },
+    {
+      group: 'Databases',
+      items: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Supabase'],
+    },
+    {
+      group: 'APIs',
+      items: ['REST', 'GraphQL', 'WhatsApp API', 'Google APIs'],
+    },
+    {
+      group: 'CMS & Hosting',
+      items: ['Strapi', 'WordPress', 'Vercel', 'Netlify', 'AWS', 'Google Cloud'],
+    },
+    {
+      group: 'Design',
+      items: ['Figma', 'Adobe XD', 'Sketch', 'Framer'],
+    },
   ];
 
   return (
-    <div className="pt-16">
+    <div className="pt-16 bg-[#0a0d16] text-white">
       {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-8">
-            <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-                We're Not Just Developers.{' '}
-                <span className="parallax-text neon-glow">We're Intelligence Architects.</span>
-              </h1>
-              <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                At CodeWave, we merge human creativity with artificial intelligence to build software that doesn't just work—it thinks, adapts, and evolves with your business needs.
-              </p>
-            </div>
+      <section className="relative mt-10  min-h-[70vh] flex items-center justify-center overflow-hidden" >
+        {/* Optional: Add a background SVG or absolute div for dots/lines here */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12 z-10">
+          {/* Left: Image */}
+          <div className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
+            <img
+              src="https://images.pexels.com/photos/2422280/pexels-photo-2422280.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="About CodeWave"
+              className="rounded-2xl shadow-xl w-full max-w-lg object-cover"
+              style={{ minHeight: 320, minWidth: 320, background: '#181a2b' }}
+            />
           </div>
-        </div>
-      </section>
-
-      {/* Our Story Section */}
-      <section ref={sectionRef} className="py-20 relative">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className={`space-y-8 ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
-              <div>
-                <div className="text-[#ff6a3d] text-sm font-semibold mb-4">OUR STORY</div>
-                <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-                  Born from Frustration with{' '}
-                  <span className="text-[#ff6a3d]">Status Quo</span>
-                </h2>
-                <div className="space-y-4 text-gray-300 leading-relaxed">
-                  <p>
-                    CodeWave was founded in 2019 when our team realized that most development shops were still building software the same way they did a decade ago—without intelligence, without adaptability, without real innovation.
-                  </p>
-                  <p>
-                    We saw an opportunity to revolutionize how software is conceived, designed, and built. By integrating AI into every aspect of our development process, we create solutions that don't just meet today's requirements—they anticipate tomorrow's challenges.
-                  </p>
-                  <p>
-                    Today, we're proud to be recognized as an intelligence studio that builds software that thinks, serving everyone from fast-growing startups to secure government platforms.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
-              <div className="morph-card glare-card p-8 hover-lift-premium">
-                <div className="space-y-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-xl flex items-center justify-center magnetic-effect">
-                    <Lightbulb className="w-8 h-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold mb-4 neon-glow">Our Mission</h3>
-                    <p className="text-gray-300 leading-relaxed">
-                      To democratize intelligent software development, making AI-powered solutions accessible to businesses of all sizes while maintaining the highest standards of security, scalability, and performance.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-              Our Core Values
-            </h2>
-            <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
-              The principles that guide every decision, every line of code, and every client interaction.
+          {/* Right: Text */}
+          <div className="w-full md:w-1/2 flex flex-col items-start justify-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-8 text-white" style={{ lineHeight: 1.1 }}>
+              We’re not just another tech company —<br className="hidden md:block" />
+              we’re your innovation partner
+            </h1>
+            <p className="text-xl text-gray-300 mb-10 max-w-xl font-medium">
+              At CodeWave.ai, we build smart, scalable, and meaningful digital solutions that power startups, scale-ups, and public-sector teams alike. Whether it’s a sleek product for a growing SaaS startup or a secure platform for law enforcement — we treat every line of code like it matters. Because it does.
             </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
-              <div
-                key={index}
-                className={`morph-card glare-card p-8 hover-lift-premium magnetic-effect ripple-effect ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+            <div className="flex gap-6">
+              <button
+                className="px-8 py-3 rounded-full font-semibold text-lg bg-gradient-to-r from-cyan-400 via-blue-500 to-[#ff6a3d] text-white shadow-lg transition-all duration-200"
+                style={{ boxShadow: '0 4px 24px 0 #ff6a3d33' }}
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-xl flex items-center justify-center mb-6 magnetic-effect">
-                  <value.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-4 neon-glow">{value.title}</h3>
-                <p className="text-gray-300 leading-relaxed">{value.description}</p>
+                Our Mission
+              </button>
+              <button
+                className="px-8 py-3 rounded-full font-semibold text-lg border-2 border-cyan-400 text-cyan-300 bg-transparent hover:bg-cyan-900/10 transition-all duration-200"
+              >
+                See Our Work
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* Optional: Add animated dots/lines as absolutely positioned elements here */}
+      </section>
+
+      {/* Mission & Vision Section */}
+      <section className="py-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-center text-[#ff6a3d] text-lg font-semibold mb-8">OUR MISSION & VISION</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {missionVision.map((item, idx) => (
+              <div key={idx} className="bg-[#181a2b] rounded-2xl p-8 border border-[#23234a]">
+                <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
+                <p className="text-gray-300 text-lg">{item.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20 relative">
+      {/* What We Value Section */}
+      <section className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-              Meet the Intelligence Behind{' '}
-              <span className="text-[#ff6a3d]">CodeWave</span>
-            </h2>
-            <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
-              A diverse team of experts united by a passion for intelligent software development.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
-              <div
-                key={index}
-                className={`morph-card glare-card overflow-hidden hover-lift-premium magnetic-effect ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
-              >
-                <div className="h-64 overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                  />
+          <h2 className="text-center text-3xl font-bold mb-8">What We Value</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            {values.map((value, idx) => (
+              <div key={idx} className="bg-[#181a2b] rounded-2xl p-8 border border-[#23234a] flex flex-col items-center text-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-lg flex items-center justify-center mb-4">
+                  <value.icon className="w-6 h-6 text-white" />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 neon-glow">{member.name}</h3>
-                  <p className="text-[#ff6a3d] font-semibold mb-3">{member.role}</p>
-                  <p className="text-gray-300 text-sm leading-relaxed">{member.bio}</p>
-                </div>
+                <h3 className="text-lg font-bold mb-2">{value.title}</h3>
+                <p className="text-gray-300 text-sm">{value.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Timeline Section */}
-      <section className="py-20 relative">
+      {/* Industries We Serve Section */}
+      <section className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-              Our Journey to Intelligence
-            </h2>
-            <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
-              Key milestones that shaped CodeWave into the intelligence studio we are today.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#ff6a3d] to-[#ff8c42]"></div>
-              
-              <div className="space-y-12">
-                {milestones.map((milestone, index) => (
-                  <div
-                    key={index}
-                    className={`relative flex items-start space-x-8 ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
-                  >
-                    <div className="w-16 h-16 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-full flex items-center justify-center font-bold text-white magnetic-effect glare-effect">
-                      {milestone.year}
-                    </div>
-                    <div className="flex-1 morph-card glare-card p-6 hover-lift-premium">
-                      <p className="text-gray-300 leading-relaxed">{milestone.event}</p>
-                    </div>
-                  </div>
-                ))}
+          <h2 className="text-center text-3xl font-bold mb-8">Industries We Serve</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {industries.map((industry, idx) => (
+              <div key={idx} className="bg-[#181a2b] rounded-2xl p-8 border border-[#23234a] flex flex-col items-start">
+                <div className="w-10 h-10 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-lg flex items-center justify-center mb-4">
+                  <industry.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold mb-2">{industry.title}</h3>
+                <p className="text-gray-300 text-sm">{industry.description}</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 relative">
+      {/* Technologies We Work With Section */}
+      <section className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-8">
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-              Ready to Build Something{' '}
-              <span className="text-[#ff6a3d]">Intelligent?</span>
-            </h2>
-            <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
-              Let's discuss how we can bring intelligence to your next project.
-            </p>
-            <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
-              <button className="liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg magnetic-effect">
-                Start Your Project
-              </button>
-              <button className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect">
-                Learn About Our Process
-              </button>
-            </div>
+          <h2 className="text-center text-3xl font-bold mb-8">Technologies We Work With</h2>
+          <p className="text-center text-gray-300 mb-8">
+            Modern tools for modern problems. We stay current with the latest tech to deliver high-performing, scalable, and secure digital solutions.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {technologies.map((tech, idx) => (
+              <div key={idx} className="bg-[#181a2b] rounded-2xl p-6 border border-[#23234a]">
+                <h3 className="text-lg font-bold mb-4 text-[#ff6a3d]">{tech.group}</h3>
+                <ul className="space-y-2">
+                  {tech.items.map((item, i) => (
+                    <li key={i} className="text-gray-300 text-sm">{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
+    
     </div>
   );
 };

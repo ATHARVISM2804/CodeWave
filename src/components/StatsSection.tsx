@@ -21,68 +21,59 @@ const StatsSection: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const AnimatedText: React.FC<{ text: string; delay: number }> = ({ text, delay }) => {
-    const [displayedText, setDisplayedText] = useState('');
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    useEffect(() => {
-      if (!isVisible) return;
-
-      const timeout = setTimeout(() => {
-        if (currentIndex < text.length) {
-          setDisplayedText(text.slice(0, currentIndex + 1));
-          setCurrentIndex(currentIndex + 1);
-        }
-      }, delay + currentIndex * 50);
-
-      return () => clearTimeout(timeout);
-    }, [currentIndex, text, delay, isVisible]);
-
-    return <span>{displayedText}</span>;
+  // AnimatedText now fades in the whole line
+  const AnimatedText: React.FC<{ text: string; delay: number; className?: string }> = ({ text, delay, className }) => {
+    return (
+      <span
+        className={className}
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+          transition: 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)',
+          transitionDelay: isVisible ? `${delay}ms` : '0ms',
+          display: 'inline-block'
+        }}
+      >
+        {text}
+      </span>
+    );
   };
 
   return (
-    <section ref={sectionRef} className="relative py-20 overflow-hidden">
+    <section ref={sectionRef} className="relative h-[120vh] py-20 overflow-hidden">
       {/* Slanted Divider */}
       <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-r from-[#ff6a3d]/10 to-transparent transform -skew-y-2"></div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center space-y-12">
+        <div className="text-center mt-10 space-y-12">
           {/* Animated Tagline */}
           <div className="space-y-6">
-            <div className={`text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}>
+            <div className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
               <div className="mb-4">
-                <AnimatedText 
-                  text="We're not a dev " 
-                  delay={0} 
-                />
-                <span className="text-[#ff6a3d]">
-                  <AnimatedText text="shop." delay={800} />
-                </span>
+                <AnimatedText text="We're not a dev " delay={0} />
+                <AnimatedText text="shop." delay={200} className="text-[#ff6a3d]" />
               </div>
               <div className="mb-4">
-                <AnimatedText 
-                  text="We're an intelligence " 
-                  delay={1200} 
-                />
-                <span className="text-[#ff6a3d]">
-                  <AnimatedText text="studio." delay={2000} />
-                </span>
+                <AnimatedText text="We're an intelligence " delay={400} />
+                <AnimatedText text="studio." delay={600} className="text-[#ff6a3d]" />
               </div>
               <div>
-                <AnimatedText 
-                  text="We build software " 
-                  delay={2400} 
-                />
-                <span className="text-[#ff6a3d]">
-                  <AnimatedText text="that thinks." delay={3200} />
-                </span>
+                <AnimatedText text="We build software " delay={800} />
+                <AnimatedText text="that thinks." delay={1000} className="text-[#ff6a3d]" />
               </div>
             </div>
           </div>
 
           {/* Description */}
-          <div className={`max-w-4xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '3800ms' }}>
+          <div
+            className="max-w-4xl mx-auto"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+              transition: 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)',
+              transitionDelay: isVisible ? '1200ms' : '0ms'
+            }}
+          >
             <p className="text-xl text-gray-300 mb-8">
               At CodeWave, we merge clean code with strategic AI to build intelligent digital products—fast, reliable, scalable, and engineered to solve real-world problems.
             </p>
@@ -92,7 +83,15 @@ const StatsSection: React.FC = () => {
           </div>
 
           {/* Decorative Quote */}
-          <div className={`max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '4200ms' }}>
+          <div
+            className="max-w-3xl mx-auto"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+              transition: 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)',
+              transitionDelay: isVisible ? '1400ms' : '0ms'
+            }}
+          >
             <div className="bg-gradient-to-r from-[#ff6a3d]/20 to-transparent p-8 rounded-2xl border-l-4 border-[#ff6a3d]">
               <h2 className="text-2xl sm:text-3xl font-bold text-[#ff6a3d] mb-4">
                 We don't just write code. We make it think.

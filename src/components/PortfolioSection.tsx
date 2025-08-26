@@ -109,43 +109,43 @@ const PortfolioSection: React.FC = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`group card-premium glass-premium overflow-hidden hover-lift glare-effect ${isVisible ? 'animate-bounce-in' : 'opacity-0'}`}
+              className={`group card-premium glass-premium overflow-hidden ${isVisible ? 'animate-bounce-in' : 'opacity-0'}`}
               style={{ animationDelay: `${800 + index * 100}ms` }}
             >
               <div className={`h-52 bg-gradient-to-r ${project.color} relative overflow-hidden`}>
                 <img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-full object-cover mix-blend-overlay group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover mix-blend-overlay transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
-                  <button className="p-3 glass-premium rounded-lg hover-lift glare-effect">
+                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 transition-all duration-500 transform translate-y-2">
+                  <button className="p-3 glass-premium rounded-lg">
                     <ExternalLink className="w-4 h-4 text-white" />
                   </button>
-                  <button className="p-3 glass-premium rounded-lg hover-lift glare-effect">
+                  <button className="p-3 glass-premium rounded-lg">
                     <Github className="w-4 h-4 text-white" />
                   </button>
                 </div>
               </div>
 
               <div className="p-8">
-                <div className="text-shimmer text-sm font-semibold mb-3">{project.category}</div>
-                <h3 className="text-xl font-bold mb-4 group-hover:text-shimmer transition-all duration-300">
+                <div className="text-sm font-semibold mb-3">{project.category}</div>
+                <h3 className="text-xl font-bold mb-4 transition-all duration-300">
                   {project.title}
                 </h3>
                 <div className="space-y-2">
                   {project.features.map((feature, featureIndex) => (
                     <div key={featureIndex} className="flex items-start text-sm text-gray-300 font-medium">
-                      <div className="w-2 h-2 bg-[#ff6a3d] rounded-full mr-3 mt-2 group-hover:animate-pulse-premium particle-glow"></div>
+                      <div className="w-2 h-2 bg-[#ff6a3d] rounded-full mr-3 mt-2"></div>
                       {feature}
                     </div>
                   ))}
                 </div>
               </div>
               
-              {/* Enhanced hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#ff6a3d]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              {/* Remove hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#ff6a3d]/10 via-transparent to-transparent opacity-0 transition-opacity duration-700"></div>
             </div>
           ))}
         </div>

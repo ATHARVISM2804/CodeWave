@@ -84,11 +84,11 @@ const ContactSection: React.FC = () => {
     <section ref={sectionRef} className="py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Let's Create Something{' '}
             <span className="text-[#ff6a3d]">Extraordinary Together</span>
           </h2>
-          <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto" style={{ animationDelay: '200ms' }}>
             Where human creativity meets technological innovation
           </p>
         </div>
@@ -100,19 +100,18 @@ const ContactSection: React.FC = () => {
               {contactOptions.map((option, index) => (
                 <div
                   key={index}
-                  className={`group card-premium glass-premium p-6 hover-lift glare-effect cursor-pointer ${isVisible ? 'animate-bounce-in' : 'opacity-0'}`}
-                  style={{ animationDelay: `${400 + index * 100}ms` }}
+                  className="group card-premium glass-premium p-6 cursor-pointer"
                 >
-                  <div className={`w-14 h-14 bg-gradient-to-r ${option.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500 hover-glow glare-effect`}>
+                  <div className={`w-14 h-14 bg-gradient-to-r ${option.color} rounded-lg flex items-center justify-center mb-4`}>
                     <option.icon className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2 group-hover:text-shimmer transition-all duration-300">
+                  <h3 className="text-lg font-bold mb-2">
                     {option.title}
                   </h3>
                   <p className="text-sm text-gray-300 mb-3 font-medium">
                     {option.description}
                   </p>
-                  <button className="text-shimmer font-semibold hover:text-white transition-all duration-300 hover:translate-x-1">
+                  <button className="font-semibold">
                     {option.action}
                   </button>
                 </div>
@@ -120,9 +119,9 @@ const ContactSection: React.FC = () => {
             </div>
 
             {/* Quick Contact Form */}
-            <div className={`card-premium glass-premium p-8 glare-effect ${isVisible ? 'animate-slide-in-bottom' : 'opacity-0'}`} style={{ animationDelay: '800ms' }}>
+            <div className="card-premium glass-premium p-8">
               <div className="flex items-center space-x-2 mb-6">
-                <div className="w-8 h-8 bg-[#ff6a3d] rounded-lg flex items-center justify-center hover-glow">
+                <div className="w-8 h-8 bg-[#ff6a3d] rounded-lg flex items-center justify-center">
                   <Send className="w-4 h-4 text-white" />
                 </div>
                 <span className="text-lg font-semibold">Find the right fix - try ML integration or general</span>
@@ -132,7 +131,8 @@ const ContactSection: React.FC = () => {
                 {['Discuss a Project', 'Need Support?', 'Explore Ideas'].map((option, index) => (
                   <button
                     key={index}
-                    className="px-4 py-2 glass-premium border-animate rounded-full text-sm hover-lift glare-effect font-medium"
+                    className="px-4 py-2 glass-premium 
+                     rounded-full text-sm font-medium"
                   >
                     {option}
                   </button>
@@ -147,7 +147,7 @@ const ContactSection: React.FC = () => {
                     placeholder="Find the best - try ML integration or general"
                     className="w-full input-premium"
                   />
-                  <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-shimmer hover:text-white transition-all duration-300 hover-lift">
+                  <button className="absolute right-3 top-1/2 transform -translate-y-1/2">
                     <Send className="w-5 h-5" />
                   </button>
                 </div>
@@ -156,7 +156,7 @@ const ContactSection: React.FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div className={`card-premium glass-premium p-8 glare-effect ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '600ms' }}>
+          <div className="card-premium glass-premium p-8 glare-effect">
             <h3 className="text-2xl font-bold mb-6">Tell us about your vision</h3>
             
             <form className="space-y-6">

@@ -81,10 +81,10 @@ const ServicesSection: React.FC = () => {
             <div
               key={index}
               className={`group morph-card glare-card p-8 hover-lift-premium magnetic-effect ripple-effect ${isVisible ? 'animate-bounce-in' : 'opacity-0'}`}
-              style={{ animationDelay: `${600 + index * 100}ms` }}
+              // style={{ animationDelay: `${600 + index * 100}ms` }}
             >
               <div className="mb-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 hover-glow glare-effect magnetic-effect">
+                <div className="w-16 h-16 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-xl flex items-center justify-center mb-6 transition-all duration-500">
                   <service.icon className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 group-hover:text-white transition-all duration-300 neon-glow">
@@ -98,7 +98,7 @@ const ServicesSection: React.FC = () => {
               <div className="space-y-2">
                 {service.features.map((feature, featureIndex) => (
                   <div key={featureIndex} className="flex items-center text-sm text-gray-300 font-medium">
-                    <div className="w-2 h-2 bg-[#ff6a3d] rounded-full mr-3 group-hover:animate-pulse-premium particle-glow magnetic-effect"></div>
+                      <div className="w-2 h-2 bg-[#ff6a3d] rounded-full mr-3"></div>
                     {feature}
                   </div>
                 ))}

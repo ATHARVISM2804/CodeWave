@@ -40,7 +40,7 @@ const Header: React.FC = () => {
             ))}
           </nav>
 
-          <button className="hidden md:block liquid-button text-white px-6 py-3 font-semibold glare-effect">
+          <button className="hidden md:block liquid-button mt-6 text-white px-6 py-3 font-semibold ">
             Book a 30-min consult
           </button>
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Code, Terminal, Zap } from 'lucide-react';
+// import { Code, Terminal, Zap } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,23 +11,27 @@ const HeroSection: React.FC = () => {
   const codeSnippets = [
     { 
       code: 'const ai = new Intelligence();',
-      position: { top: '15%', right: '8%' },
-      delay: 0
+      position: { top: '25%', right: '6%' }, 
+      delay: 0,
+      rotate: 5,
     },
     { 
       code: 'function buildFuture() { return innovation; }',
-      position: { top: '55%', right: '12%' },
-      delay: 200
+      position: { top: '25%', right: '25%' }, 
+      delay: 200,
+      rotate: 0
     },
     { 
       code: 'if (problem) solve();',
-      position: { top: '35%', left: '3%' },
-      delay: 400
+      position: { top: '55%', right: '24%' }, 
+      delay: 400,
+      rotate: 0
     },
     { 
       code: 'AI.merge(creativity)',
-      position: { bottom: '25%', right: '18%' },
-      delay: 600
+      position: { top: '56%', right: '8%' }, 
+      delay: 600,
+      rotate: 0
     }
   ];
 
@@ -54,10 +58,10 @@ const HeroSection: React.FC = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg magnetic-effect">
+              <button className="liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg ">
                 Experience The Demo
               </button>
-              <button className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card border-animate text-lg ripple-effect">
+              <button className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card border-animate text-lg ">
                 Learn More
               </button>
             </div>
@@ -65,7 +69,7 @@ const HeroSection: React.FC = () => {
 
           <div className="relative animate-fade-in-right delay-300">
             {/* Stats Display */}
-            <div className="space-y-8">
+            {/* <div className="space-y-8">
               <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-bounce-in delay-500' : 'opacity-0'}`}>
                 <div className="text-right">
                   <div className="text-4xl font-bold parallax-text neon-glow mb-2">98%</div>
@@ -86,7 +90,7 @@ const HeroSection: React.FC = () => {
                   <div className="text-sm text-gray-300 font-medium">Delivering digital solutions across industries</div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -98,16 +102,55 @@ const HeroSection: React.FC = () => {
             style={{
               ...snippet.position,
               animationDelay: `${snippet.delay}ms`,
-              animationDuration: `${4 + index * 0.8}s`
+              animationDuration: `${4 + index * 0.8}s`,
+              zIndex: 30,
             }}
           >
-            <div className="morph-card glare-card rounded-xl p-4 font-mono text-sm hover-lift-premium magnetic-effect">
-              <div className="flex items-center space-x-2 mb-1">
-                <div className="w-2 h-2 bg-[#ff6a3d] rounded-full animate-pulse-premium"></div>
-                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse-premium delay-200"></div>
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse-premium delay-400"></div>
+            <div className="relative w-[320px] glass-card shadow-xl rounded-2xl overflow-visible backdrop-blur-lg border border-white/10">
+              {/* Header */}
+              <div className="flex items-center justify-between px-4 py-2 bg-white/10 rounded-t-2xl">
+                <div className="flex space-x-1">
+                  <div className="w-2 h-2 bg-[#ff6a3d] rounded-full"></div>
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                </div>
+                <span className="text-xs text-white/80 font-semibold tracking-wide">AI Suggestion</span>
+                <span className="text-cyan-300 text-lg font-bold">{'{}'}</span>
               </div>
-              <code className="text-white font-medium">{snippet.code}</code>
+              {/* Code Block */}
+              <div className="px-4 pt-3 pb-8 font-mono text-sm text-cyan-200 min-h-[70px]">
+                <span className="block whitespace-pre-line leading-relaxed">{snippet.code}</span>
+              </div>
+              {/* Code Analysis Bar (just below code block, not overlapping metrics) */}
+              <div className="absolute left-6 right-6" style={{ top: '100px' }}>
+                <div className="flex items-center justify-between px-4 py-2 bg-white/10 rounded-xl shadow-lg border border-white/10 backdrop-blur-md">
+                  <span className="text-xs text-white/80 font-semibold">Code Analysis</span>
+                </div>
+              </div>
+              {/* Performance Metrics */}
+              <div className="mt-16 px-4 pb-4">
+                <div className="text-xs text-white/70 font-semibold mb-2">Performance Metrics</div>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-white/60 w-16">Runtime</span>
+                    <div className="flex-1 h-2 rounded bg-white/10 relative overflow-hidden">
+                      <div className="absolute left-0 top-0 h-2 rounded bg-orange-500" style={{ width: '70%' }}></div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-white/60 w-16">Memory</span>
+                    <div className="flex-1 h-2 rounded bg-white/10 relative overflow-hidden">
+                      <div className="absolute left-0 top-0 h-2 rounded bg-orange-500" style={{ width: '60%' }}></div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-white/60 w-16">Optimization</span>
+                    <div className="flex-1 h-2 rounded bg-white/10 relative overflow-hidden">
+                      <div className="absolute left-0 top-0 h-2 rounded bg-orange-500" style={{ width: '80%' }}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         ))}
