@@ -10,12 +10,12 @@ const Footer: React.FC = () => {
     { title: 'Contact', href: '#contact' }
   ];
 
-  const resourceLinks = [
-    { title: 'Case Studies', href: '#case-studies' },
-    { title: 'Insights', href: '#insights' },
-    { title: 'How We Work', href: '#how-we-work' },
-    { title: 'FAQ', href: '#faq' }
-  ];
+  // const resourceLinks = [
+  //   { title: 'Case Studies', href: '#case-studies' },
+  //   { title: 'Insights', href: '#insights' },
+  //   { title: 'How We Work', href: '#how-we-work' },
+  //   { title: 'FAQ', href: '#faq' }
+  // ];
 
   const socialLinks = [
     { icon: Twitter, href: '#', name: 'Twitter' },
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-white/10">
+        <div className="mt-16 pt-8 border-t px-28 border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-gray-400">
               © 2024 CodeWave.it • Privacy • Terms
