@@ -1,113 +1,154 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Globe, Zap, Brain, Palette, Smartphone, Shield } from 'lucide-react';
+import React, { useEffect, useRef, useState } from "react";
+import { Globe, Zap, Brain, Palette, Smartphone, Shield } from "lucide-react";
 
 const ServicesSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [flippedIndex, setFlippedIndex] = useState<number | null>(null); // used for mobile tap
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.2 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
   const services = [
     {
       icon: Globe,
-      title: 'Web Development',
-      description: 'Front-end & full-stack solutions built with cutting-edge frameworks. Fast, responsive and future-ready.',
-      features: ['React/Next.js', 'Node.js APIs', 'Performance optimized']
+      title: "Web Development",
+      description:
+        "Front-end & full-stack solutions built with cutting-edge frameworks. Fast, responsive and future-ready.",
+      features: ["React/Next.js", "Node.js APIs", "Performance optimized"],
     },
     {
       icon: Zap,
-      title: 'Custom Software',
-      description: 'Tailored systems for unique operational challenges — built for scale and designed to last.',
-      features: ['Scalable architecture', 'API integrations', 'Cloud deployment']
+      title: "Custom Software",
+      description:
+        "Tailored systems for unique operational challenges — built for scale and designed to last.",
+      features: ["Scalable architecture", "API integrations", "Cloud deployment"],
     },
     {
       icon: Brain,
-      title: 'AI & ML Solutions',
-      description: 'Intelligent insights, automation, and predictive models — bringing artificial intelligence to real business problems.',
-      features: ['Machine learning', 'Data analysis', 'Intelligent automation']
+      title: "AI & ML Solutions",
+      description:
+        "Intelligent insights, automation, and predictive models — bringing artificial intelligence to real business problems.",
+      features: ["Machine learning", "Data analysis", "Intelligent automation"],
     },
     {
       icon: Palette,
-      title: 'UI/UX Design',
-      description: 'Experiences that convert and interfaces users love. Beautiful, functional and strategically designed.',
-      features: ['User research', 'Prototyping', 'Design systems']
+      title: "UI/UX Design",
+      description:
+        "Experiences that convert and interfaces users love. Beautiful, functional and strategically designed.",
+      features: ["User research", "Prototyping", "Design systems"],
     },
     {
       icon: Smartphone,
-      title: 'Mobile App Development',
-      description: 'Native iOS and Android applications plus cross-platform solutions — built with app store standards in mind.',
-      features: ['React Native', 'Native development', 'App store optimization']
+      title: "Mobile App Development",
+      description:
+        "Native iOS and Android applications plus cross-platform solutions — built with app store standards in mind.",
+      features: ["React Native", "Native development", "App store optimization"],
     },
     {
       icon: Shield,
-      title: 'GovTech Solutions',
-      description: 'Secure, compliant, scalable solutions for government and public sector. Built for transparency and built to last.',
-      features: ['Security compliant', 'Scalable platforms', 'Transparent processes']
-    }
+      title: "GovTech Solutions",
+      description:
+        "Secure, compliant, scalable solutions for government and public sector. Built for transparency and built to last.",
+      features: ["Security compliant", "Scalable platforms", "Transparent processes"],
+    },
   ];
+
+  const handleToggle = (i: number) => {
+    // toggle flip for mobile/tap
+    setFlippedIndex((prev) => (prev === i ? null : i));
+  };
 
   return (
     <section ref={sectionRef} className="py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-16">
-          <div className={`inline-block text-[#ff6a3d] text-sm font-semibold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <div
+            className={`inline-block text-[#ff6a3d] text-sm font-semibold mb-4 transition-all duration-700 ease-out ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
             OUR SERVICES
           </div>
-          <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+          <h2
+            className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 transition-all duration-700 ease-out delay-150 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
             Engineering Intelligence Into Every Solution
           </h2>
-          <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
-            We craft advanced digital products and platforms with precision, performance, and purpose — designing for impact.
+          <p
+            className={`text-xl text-gray-300 max-w-3xl mx-auto transition-all duration-700 ease-out delay-300 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
+            We craft advanced digital products and platforms with precision,
+            performance, and purpose — designing for impact.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className={`group morph-card glare-card p-8 hover-lift-premium magnetic-effect ripple-effect ${isVisible ? 'animate-bounce-in' : 'opacity-0'}`}
-              // style={{ animationDelay: `${600 + index * 100}ms` }}
-            >
-              <div className="mb-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-xl flex items-center justify-center mb-6 transition-all duration-500">
-                  <service.icon className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-4 group-hover:text-white transition-all duration-300 neon-glow">
-                  {service.title}
-                </h3>
-                <p className="text-gray-300 mb-6 leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                {service.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-center text-sm text-gray-300 font-medium">
-                      <div className="w-2 h-2 bg-[#ff6a3d] rounded-full mr-3"></div>
-                    {feature}
+        {/* Flip Cards Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            const isFlipped = flippedIndex === index;
+            return (
+              <div
+                key={index}
+                // perspective container + group so CSS .group:hover works for desktop
+                className={`perspective group relative w-full h-64 transition-all duration-700 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${400 + index * 120}ms` }}
+                // allow tap to flip on mobile
+                onClick={() => handleToggle(index)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") handleToggle(index);
+                }}
+              >
+                {/* inner card that actually flips */}
+                <div
+                  className={`card-inner relative w-full h-full transform-style-preserve-3d ${
+                    isFlipped ? "is-flipped" : ""
+                  }`}
+                >
+                  {/* FRONT */}
+                  <div className="card-face card-front absolute inset-0 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-2xl shadow-lg flex flex-col items-center justify-center text-white p-6">
+                    <Icon className="w-10 h-10 mb-3" />
+                    <h3 className="text-xl font-bold">{service.title}</h3>
                   </div>
-                ))}
+
+                  {/* BACK */}
+                  <div className="card-face card-back absolute inset-0 bg-white/95 rounded-2xl shadow-lg p-6 text-left flex flex-col justify-start">
+                    <h3 className="text-lg font-bold text-gray-800 mb-2">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-4">{service.description}</p>
+
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      {service.features.map((f, fi) => (
+                        <li key={fi} className="flex items-center">
+                          <span className="w-2 h-2 bg-[#ff6a3d] rounded-full mr-2"></span>
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
-              
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#ff6a3d]/10 to-[#ff8c42]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-2xl"></div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

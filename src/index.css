@@ -37,6 +37,53 @@ body {
   background: linear-gradient(135deg, #ff8c42, #ffab42);
 }
 
+/* ---- Flip-card essentials ---- */
+.perspective {
+  perspective: 1200px;
+}
+
+/* The flipping container */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 700ms cubic-bezier(.2,.85,.25,1);
+  /* allow hardware acceleration */
+  will-change: transform;
+}
+
+/* desktop hover (group) flips it */
+.group:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* explicit "is-flipped" for mobile taps */
+.card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* both faces */
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1rem; /* matches rounded-2xl */
+  overflow: hidden;
+}
+
+/* back face needs to be rotated initially */
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* small accessibility niceties */
+.perspective[role="button"] { cursor: pointer; }
+
+
+
 /* Premium Animations */
 @keyframes fadeInUp {
   from {
