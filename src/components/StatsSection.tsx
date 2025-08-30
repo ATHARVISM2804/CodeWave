@@ -1,108 +1,135 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import ThemeToggle from '../components/ThemeToggle/ThemeToggle';
+import AiImage from "../assets/AI.png"
+
+// Placeholder icon/image components (replace with actual images or SVGs as needed)
+const GitHubCopilotBadge = () => (
+  <div className="bg-white rounded-full shadow px-4 py-2 flex items-center gap-2 border border-gray-200">
+    <img src="https://github.gallerycdn.vsassets.io/extensions/github/copilot/1.364.1768/1756484122606/Microsoft.VisualStudio.Services.Icons.Default" alt="GitHub Copilot" className="h-6" />
+    <span className="font-semibold text-gray-800 text-sm">GitHub Copilot</span>
+  </div>
+);
+const CursorAIBadge = () => (
+  <div className="bg-white rounded-full shadow px-4 py-2 flex items-center gap-2 border border-gray-200">
+    <img src="/badges/cursor-ai.svg" alt="Cursor AI" className="h-6" />
+    <span className="font-semibold text-gray-800 text-sm">CURSOR <span className="text-[#7b61ff]">AI</span></span>
+  </div>
+);
+const GeminiAIBadge = () => (
+  <div className="bg-white rounded-full shadow px-4 py-2 flex items-center gap-2 border border-gray-200">
+    <img src="https://i.pinimg.com/736x/e5/a2/52/e5a252b0d1ceae9c5a7ee8cea147ce6f.jpg" alt="Gemini AI" className="h-6" />
+    <span className="font-semibold text-gray-800 text-sm">Gemini <span className="text-[#7b61ff]">AI</span></span>
+  </div>
+);
+const OpenAIBadge = () => (
+  <div className="bg-white rounded-full shadow px-4 py-2 flex items-center gap-2 border border-gray-200">
+    <img src="https://freebiehive.com/wp-content/uploads/2023/02/OpenAI-Logo-PNG.jpg" alt="OpenAI" className="h-6" />
+    <span className="font-semibold text-gray-800 text-sm"> </span>
+  </div>
+);
+
+// Update ServiceIcon to use <img> for the icon
+const ServiceIcon = ({ icon }: { icon: string }) => (
+  <img src={icon} alt="" className="h-12 w-12 object-contain mb-2" />
+);
+
+// Placeholder tech stack icons (replace with actual SVGs)
+const TechIcon = ({ src, alt }: { src: string; alt: string }) => (
+  <img src={src} alt={alt} className="h-10 w-10 object-contain" />
+);
+
+const services = [
+  { icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png', label: 'Custom ERP & CRM Development' },
+  { icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB7mgTzfml9-fyRSDxIFT0GiGK1loPmUxNeA0p_ZuMA5hwO1Gxg3X5otZim6Mivh9e8Gw&usqp=CAU', label: 'AI-Powered SaaS Applications' },
+  { icon: 'https://cdn-icons-png.flaticon.com/512/5968/5968292.png', label: 'API-First & Microservices Architecture' },
+  { icon: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png', label: 'MVP Development For Startups' },
+  { icon: AiImage, label: 'Generative AI Integration' },
+  { icon: 'https://cdn-icons-png.flaticon.com/512/3523/3523887.png', label: 'Legacy System Maintenance & Modernization' },
+];
+
+const techStack = [
+  { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png', alt: 'React' },
+  { src: 'https://cdn.freebiesupply.com/logos/large/2x/nodejs-1-logo-png-transparent.png', alt: 'Node.js' },
+  { src: 'https://img.icons8.com/fluent-systems-filled/512/FFFFFF/nextjs.png', alt: 'Next.js' },
+  { src: 'https://e7.pngegg.com/pngimages/10/113/png-clipart-django-web-development-web-framework-python-software-framework-django-text-trademark-thumbnail.png', alt: 'Django' },
+  { src: 'https://icon2.cleanpng.com/20240131/ia/transparent-python-logo-python-icon-symbolizes-flexibility-1710891761988.webp', alt: 'Python' },
+  { src: 'https://www.php.net/images/logos/new-php-logo.svg', alt: 'PHP' },
+  { src: 'https://irislogic.com/wp-content/uploads/2024/07/Digital-Transformation.png', alt: 'Flutter' },
+  { src: 'https://png.pngtree.com/png-vector/20220606/ourmid/pngtree-adobe-illustrator-ai-icon-png-image_4899504.png', alt: 'AI' },
+];
 
 const StatsSection: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  // AnimatedText now fades in the whole line
-  const AnimatedText: React.FC<{ text: string; delay: number; className?: string }> = ({ text, delay, className }) => {
-    return (
-      <span
-        className={className}
-        style={{
-          opacity: isVisible ? 1 : 0,
-          transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-          transition: 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)',
-          transitionDelay: isVisible ? `${delay}ms` : '0ms',
-          display: 'inline-block'
-        }}
-      >
-        {text}
-      </span>
-    );
-  };
-
   return (
-    <section ref={sectionRef} className="relative h-[120vh] py-20 overflow-hidden">
-      {/* Slanted Divider */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-r from-[#ff6a3d]/10 to-transparent transform -skew-y-2"></div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mt-10 space-y-12">
-          {/* Animated Tagline */}
-          <div className="space-y-6">
-            <div className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-              <div className="mb-4">
-                <AnimatedText text="We're not a dev " delay={0} />
-                <AnimatedText text="shop." delay={200} className="text-[#ff6a3d]" />
-              </div>
-              <div className="mb-4">
-                <AnimatedText text="We're an intelligence " delay={400} />
-                <AnimatedText text="studio." delay={600} className="text-[#ff6a3d]" />
-              </div>
-              <div>
-                <AnimatedText text="We build software " delay={800} />
-                <AnimatedText text="that thinks." delay={1000} className="text-[#ff6a3d]" />
-              </div>
-            </div>
-          </div>
+    <section
+      className="relative min-h-[100vh] py-16 px-2 flex flex-col items-center justify-start"
+      // style={{ background: '#eaf8fd' }}
+    >
+      <div className="fixed top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
 
-          {/* Description */}
-          <div
-            className="max-w-4xl mx-auto"
-            style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-              transition: 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)',
-              transitionDelay: isVisible ? '1200ms' : '0ms'
-            }}
-          >
-            <p className="text-xl text-gray-300 mb-8">
-              At CodeWave, we merge clean code with strategic AI to build intelligent digital products—fast, reliable, scalable, and engineered to solve real-world problems.
-            </p>
-            <p className="text-lg text-gray-400">
-              From fast-growing startups to secure government platforms, we bring structure to chaos — and intelligence to code.
-            </p>
-          </div>
+      {/* AI Tool Badges */}
+      {/* <div className="w-full flex justify-between items-center max-w-5xl mx-auto mb-4">
+        <div className="flex flex-col gap-6">
+          <GitHubCopilotBadge />
+          <CursorAIBadge />
+        </div>
+        <div className="flex flex-col gap-6 items-end">
+          <GeminiAIBadge />
+          <OpenAIBadge />
+        </div>
+      </div> */}
 
-          {/* Decorative Quote */}
-          <div
-            className="max-w-3xl mx-auto"
-            style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-              transition: 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)',
-              transitionDelay: isVisible ? '1400ms' : '0ms'
-            }}
-          >
-            <div className="bg-gradient-to-r from-[#ff6a3d]/20 to-transparent p-8 rounded-2xl border-l-4 border-[#ff6a3d]">
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#ff6a3d] mb-4">
-                We don't just write code. We make it think.
-              </h2>
-            </div>
-          </div>
+      {/* Headline and Description */}
+      <div className="w-full max-w-3xl mx-auto text-center mt-2">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+          <span className="text-white">At Codewave, we’re a technology-driven</span>{' '}
+          <span className="text-[#ff4e4e]">Intelligence Studio</span>
+        </h1>
+        <p className="text-lg md:text-xl text-white mb-6 font-medium">
+          We love solving the hardest problems with smart engineering and AI.<br />
+          Bring us a challenge — whether it’s building a fast, scalable website, designing a secure GovTech platform, creating AI-powered automation, or launching a digital marketing strategy — we’ll deliver solutions that are intelligent, reliable, and built for impact.
+        </p>
+        <p className="text-base md:text-lg text-white mb-4">
+          We work with startups, enterprises, and government teams across the globe — helping founders scale faster, organizations automate smarter, and public-sector projects go digital with confidence.
+        </p>
+        <p className="text-base md:text-lg text-white mb-8">
+          Our mindset is geeky, our process is precise, and our mission is simple: <br />
+          to turn complexity into clarity and make technology think for you.
+        </p>
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap gap-4 justify-center mb-8">
+          <button className="bg-[#2ed8c3] hover:bg-[#1fc9b2] text-white font-semibold px-6 py-3 rounded-lg shadow transition">Get Started</button>
+          <button className="bg-[#2ed8c3] hover:bg-[#1fc9b2] text-white font-semibold px-6 py-3 rounded-lg shadow transition">Schedule a Meeting</button>
+          <button className="bg-[#ff7a4e] hover:bg-[#ff4e4e] text-white font-semibold px-6 py-3 rounded-lg shadow transition">Video Demo</button>
         </div>
       </div>
 
-      {/* Bottom Slanted Divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-l from-[#ff6a3d]/10 to-transparent transform skew-y-2"></div>
+      {/* Services Grid */}
+      <div className="w-full max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8">
+        {services.map((service, idx) => (
+          <div key={idx} className="flex flex-col items-center text-center">
+            <ServiceIcon icon={service.icon} />
+            <div className="text-base font-medium text-white">{service.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Tech Stack Row */}
+      <div className="w-full max-w-4xl mx-auto flex flex-wrap justify-center gap-6 mt-4">
+        {techStack.map((tech, idx) => (
+          <TechIcon key={idx} src={tech.src} alt={tech.alt} />
+        ))}
+      </div>
+
+      {/* Decorative Quote */}
+      <div className="w-full max-w-3xl mx-auto text-center mt-8">
+        <div className="bg-gradient-to-r from-[#ff6a3d]/20 to-transparent p-6 rounded-2xl border-l-4 border-[#ff6a3d] shadow">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#ff6a3d] mb-0">
+            Codewave — your global partner in AI automation, software development, web innovation, and digital growth.
+          </h2>
+        </div>
+      </div>
     </section>
   );
 };

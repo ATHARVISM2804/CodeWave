@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import React from 'react';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import StatsSection from './components/StatsSection';

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { MessageCircle, Phone, Mail, Calendar, Send } from 'lucide-react';
+import { MessageCircle, Mail, Calendar, Send } from 'lucide-react';
 
 const ContactSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -88,7 +88,7 @@ const ContactSection: React.FC = () => {
             Let's Create Something{' '}
             <span className="text-[#ff6a3d]">Extraordinary Together</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto" style={{ animationDelay: '200ms' }}>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto" style={{ animationDelay: '80ms' }}>
             Where human creativity meets technological innovation
           </p>
         </div>
