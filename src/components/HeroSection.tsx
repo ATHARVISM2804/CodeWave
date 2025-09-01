@@ -36,7 +36,7 @@ const HeroSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-16 overflow-hidden" style={{ background: 'var(--bg-primary)' }}>
       {/* Enhanced Background Gradient */}
       <div className="absolute inset-0 bg-gradient-radial opacity-50"></div>
       <div className="absolute inset-0 bg-gradient-premium"></div>
@@ -45,23 +45,39 @@ const HeroSection: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className={`space-y-8 ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight" style={{ color: 'var(--text-secondary)' }}>
                 We Speak Fluent Code. 
-                <span className="parallax-text neon-glow">
+                <span
+                  className="parallax-text neon-glow"
+                  style={{
+                    color: 'var(--accent-primary)'
+                  }}
+                >
                   {' '}And AI Has Joined the Team.
                 </span>
               </h1>
-              <p className="text-xl text-gray-300 max-w-2xl leading-relaxed">
+              <p className="text-xl" style={{ color: 'var(--text-secondary)' }}>
                 We build powerful digital solutions that help startups and businesses work smarter—with custom web, mobile, 
                 and AI technology—while supporting government projects with secure, scalable innovation.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg ">
+              <button
+                className="liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg "
+                style={{
+                  background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))'
+                }}
+              >
                 Experience The Demo
               </button>
-              <button className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card border-animate text-lg ">
+              <button
+                className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card border-animate text-lg "
+                style={{
+                  color: 'var(--accent-primary)',
+                  borderColor: 'var(--accent-primary)'
+                }}
+              >
                 Learn More
               </button>
             </div>
@@ -108,45 +124,46 @@ const HeroSection: React.FC = () => {
           >
             <div className="relative w-[320px] glass-card shadow-xl rounded-2xl overflow-visible backdrop-blur-lg border border-white/10">
               {/* Header */}
-              <div className="flex items-center justify-between px-4 py-2 bg-white/10 rounded-t-2xl">
+              <div className="flex items-center justify-between px-4 py-2" style={{ background: 'var(--glass-bg)' }}>
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-[#ff6a3d] rounded-full"></div>
+                  <div className="w-2 h-2 rounded-full" style={{ background: 'var(--accent-primary)' }}></div>
                   <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                 </div>
-                <span className="text-xs text-white/80 font-semibold tracking-wide">AI Suggestion</span>
-                <span className="text-cyan-300 text-lg font-bold">{'{}'}</span>
+                <span className="text-xs" style={{ color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.05em' }}>AI Suggestion</span>
+                <span style={{ color: 'var(--accent-secondary)' }} className="text-lg font-bold">{'{}'}</span>
               </div>
               {/* Code Block */}
-              <div className="px-4 pt-3 pb-8 font-mono text-sm text-cyan-200 min-h-[70px]">
+              <div className="px-4 pt-3 pb-8 font-mono text-sm" style={{ color: 'var(--accent-secondary)', minHeight: '70px' }}>
                 <span className="block whitespace-pre-line leading-relaxed">{snippet.code}</span>
               </div>
               {/* Code Analysis Bar (just below code block, not overlapping metrics) */}
               <div className="absolute left-6 right-6" style={{ top: '100px' }}>
-                <div className="flex items-center justify-between px-4 py-2 bg-white/10 rounded-xl shadow-lg border border-white/10 backdrop-blur-md">
-                  <span className="text-xs text-white/80 font-semibold">Code Analysis</span>
+                <div className="flex items-center justify-between px-4 py-2 rounded-xl shadow-lg border border-white/10 backdrop-blur-md"
+                  style={{ background: 'var(--glass-bg)' }}>
+                  <span className="text-xs" style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Code Analysis</span>
                 </div>
               </div>
               {/* Performance Metrics */}
               <div className="mt-16 px-4 pb-4">
-                <div className="text-xs text-white/70 font-semibold mb-2">Performance Metrics</div>
+                <div className="text-xs mb-2" style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Performance Metrics</div>
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-white/60 w-16">Runtime</span>
-                    <div className="flex-1 h-2 rounded bg-white/10 relative overflow-hidden">
-                      <div className="absolute left-0 top-0 h-2 rounded bg-orange-500" style={{ width: '70%' }}></div>
+                    <span className="text-xs w-16" style={{ color: 'var(--text-muted)' }}>Runtime</span>
+                    <div className="flex-1 h-2 rounded" style={{ background: 'var(--glass-bg)', position: 'relative', overflow: 'hidden' }}>
+                      <div className="absolute left-0 top-0 h-2 rounded" style={{ background: 'var(--accent-primary)', width: '70%' }}></div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-white/60 w-16">Memory</span>
-                    <div className="flex-1 h-2 rounded bg-white/10 relative overflow-hidden">
-                      <div className="absolute left-0 top-0 h-2 rounded bg-orange-500" style={{ width: '60%' }}></div>
+                    <span className="text-xs w-16" style={{ color: 'var(--text-muted)' }}>Memory</span>
+                    <div className="flex-1 h-2 rounded" style={{ background: 'var(--glass-bg)', position: 'relative', overflow: 'hidden' }}>
+                      <div className="absolute left-0 top-0 h-2 rounded" style={{ background: 'var(--accent-primary)', width: '60%' }}></div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-white/60 w-16">Optimization</span>
-                    <div className="flex-1 h-2 rounded bg-white/10 relative overflow-hidden">
-                      <div className="absolute left-0 top-0 h-2 rounded bg-orange-500" style={{ width: '80%' }}></div>
+                    <span className="text-xs w-16" style={{ color: 'var(--text-muted)' }}>Optimization</span>
+                    <div className="flex-1 h-2 rounded" style={{ background: 'var(--glass-bg)', position: 'relative', overflow: 'hidden' }}>
+                      <div className="absolute left-0 top-0 h-2 rounded" style={{ background: 'var(--accent-primary)', width: '80%' }}></div>
                     </div>
                   </div>
                 </div>

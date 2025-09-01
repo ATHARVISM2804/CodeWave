@@ -68,14 +68,19 @@ const ServicesSection: React.FC = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 relative">
+    <section
+      ref={sectionRef}
+      className="py-20 relative"
+      style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <div
-            className={`inline-block text-[#ff6a3d] text-sm font-semibold mb-4 transition-all duration-700 ease-out ${
+            className={`inline-block text-sm font-semibold mb-4 transition-all duration-700 ease-out ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
+            style={{ color: 'var(--accent-primary)' }}
           >
             OUR SERVICES
           </div>
@@ -83,13 +88,15 @@ const ServicesSection: React.FC = () => {
             className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 transition-all duration-700 ease-out delay-150 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
+            style={{ color: 'var(--text-primary)' }}
           >
             Engineering Intelligence Into Every Solution
           </h2>
           <p
-            className={`text-xl text-gray-300 max-w-3xl mx-auto transition-all duration-700 ease-out delay-300 ${
+            className={`text-xl max-w-3xl mx-auto transition-all duration-700 ease-out delay-300 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
+            style={{ color: 'var(--text-secondary)' }}
           >
             We craft advanced digital products and platforms with precision,
             performance, and purpose — designing for impact.
@@ -104,12 +111,10 @@ const ServicesSection: React.FC = () => {
             return (
               <div
                 key={index}
-                // perspective container + group so CSS .group:hover works for desktop
                 className={`perspective group relative w-full h-64 transition-all duration-700 ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${400 + index * 120}ms` }}
-                // allow tap to flip on mobile
                 onClick={() => handleToggle(index)}
                 role="button"
                 tabIndex={0}
@@ -124,22 +129,35 @@ const ServicesSection: React.FC = () => {
                   }`}
                 >
                   {/* FRONT */}
-                  <div className="card-face card-front absolute inset-0 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-2xl shadow-lg flex flex-col items-center justify-center text-white p-6">
+                  <div
+                    className="card-face card-front absolute inset-0 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6"
+                    style={{
+                      background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))',
+                      color: 'var(--text-primary)'
+                    }}
+                  >
                     <Icon className="w-10 h-10 mb-3" />
                     <h3 className="text-xl font-bold">{service.title}</h3>
                   </div>
 
                   {/* BACK */}
-                  <div className="card-face card-back absolute inset-0 bg-white/95 rounded-2xl shadow-lg p-6 text-left flex flex-col justify-start">
-                    <h3 className="text-lg font-bold text-gray-800 mb-2">
+                  <div
+                    className="card-face card-back absolute inset-0 rounded-2xl shadow-lg p-6 text-left flex flex-col justify-start"
+                    style={{
+                      background: 'var(--glass-bg)',
+                      color: 'var(--text-primary)',
+                      border: '1px solid var(--glass-border)'
+                    }}
+                  >
+                    <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
                       {service.title}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-4">{service.description}</p>
+                    <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
 
-                    <ul className="space-y-2 text-sm text-gray-700">
+                    <ul className="space-y-2 text-sm">
                       {service.features.map((f, fi) => (
-                        <li key={fi} className="flex items-center">
-                          <span className="w-2 h-2 bg-[#ff6a3d] rounded-full mr-2"></span>
+                        <li key={fi} className="flex items-center" style={{ color: 'var(--text-secondary)' }}>
+                          <span className="w-2 h-2 rounded-full mr-2" style={{ background: 'var(--accent-primary)' }}></span>
                           {f}
                         </li>
                       ))}

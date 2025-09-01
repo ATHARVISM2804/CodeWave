@@ -14,7 +14,10 @@ export default function useTheme(): [Theme, () => void] {
   const [theme, setTheme] = useState<Theme>(getPreferredTheme());
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
+    // Remove both classes first
+    document.documentElement.classList.remove('dark', 'light');
+    // Add the correct class for theme
+    document.documentElement.classList.add(theme === 'dark' ? 'dark' : 'light');
     localStorage.setItem('theme', theme);
   }, [theme]);
 

@@ -62,7 +62,7 @@ const StatsSection: React.FC = () => {
   return (
     <section
       className="relative min-h-[100vh] py-16 px-2 flex flex-col items-center justify-start"
-      // style={{ background: '#eaf8fd' }}
+      style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
     >
       <div className="fixed top-4 right-4 z-50">
         <ThemeToggle />
@@ -83,25 +83,49 @@ const StatsSection: React.FC = () => {
       {/* Headline and Description */}
       <div className="w-full max-w-3xl mx-auto text-center mt-2">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-          <span className="text-white">At Codewave, we’re a technology-driven</span>{' '}
-          <span className="text-[#ff4e4e]">Intelligence Studio</span>
+          <span style={{ color: 'var(--text-primary)' }}>At Codewave, we’re a technology-driven</span>{' '}
+          <span style={{ color: 'var(--accent-primary)' }}>Intelligence Studio</span>
         </h1>
-        <p className="text-lg md:text-xl text-white mb-6 font-medium">
+        <p className="text-lg md:text-xl mb-6 font-medium" style={{ color: 'var(--text-secondary)' }}>
           We love solving the hardest problems with smart engineering and AI.<br />
           Bring us a challenge — whether it’s building a fast, scalable website, designing a secure GovTech platform, creating AI-powered automation, or launching a digital marketing strategy — we’ll deliver solutions that are intelligent, reliable, and built for impact.
         </p>
-        <p className="text-base md:text-lg text-white mb-4">
+        <p className="text-base md:text-lg mb-4" style={{ color: 'var(--text-secondary)' }}>
           We work with startups, enterprises, and government teams across the globe — helping founders scale faster, organizations automate smarter, and public-sector projects go digital with confidence.
         </p>
-        <p className="text-base md:text-lg text-white mb-8">
+        <p className="text-base md:text-lg mb-8" style={{ color: 'var(--text-secondary)' }}>
           Our mindset is geeky, our process is precise, and our mission is simple: <br />
           to turn complexity into clarity and make technology think for you.
         </p>
         {/* CTA Buttons */}
         <div className="flex flex-wrap gap-4 justify-center mb-8">
-          <button className="bg-[#2ed8c3] hover:bg-[#1fc9b2] text-white font-semibold px-6 py-3 rounded-lg shadow transition">Get Started</button>
-          <button className="bg-[#2ed8c3] hover:bg-[#1fc9b2] text-white font-semibold px-6 py-3 rounded-lg shadow transition">Schedule a Meeting</button>
-          <button className="bg-[#ff7a4e] hover:bg-[#ff4e4e] text-white font-semibold px-6 py-3 rounded-lg shadow transition">Video Demo</button>
+          <button
+            className="font-semibold px-6 py-3 rounded-lg shadow transition"
+            style={{
+              background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+              color: 'white'
+            }}
+          >
+            Get Started
+          </button>
+          <button
+            className="font-semibold px-6 py-3 rounded-lg shadow transition"
+            style={{
+              background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+              color: 'white'
+            }}
+          >
+            Schedule a Meeting
+          </button>
+          <button
+            className="font-semibold px-6 py-3 rounded-lg shadow transition"
+            style={{
+              background: 'linear-gradient(135deg, #ff7a4e, #ff4e4e)',
+              color: 'white'
+            }}
+          >
+            Video Demo
+          </button>
         </div>
       </div>
 
@@ -110,7 +134,7 @@ const StatsSection: React.FC = () => {
         {services.map((service, idx) => (
           <div key={idx} className="flex flex-col items-center text-center">
             <ServiceIcon icon={service.icon} />
-            <div className="text-base font-medium text-white">{service.label}</div>
+            <div className="text-base font-medium" style={{ color: 'var(--text-primary)' }}>{service.label}</div>
           </div>
         ))}
       </div>
@@ -124,8 +148,15 @@ const StatsSection: React.FC = () => {
 
       {/* Decorative Quote */}
       <div className="w-full max-w-3xl mx-auto text-center mt-8">
-        <div className="bg-gradient-to-r from-[#ff6a3d]/20 to-transparent p-6 rounded-2xl border-l-4 border-[#ff6a3d] shadow">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#ff6a3d] mb-0">
+        <div
+          className="p-6 rounded-2xl border-l-4 shadow"
+          style={{
+            background: 'linear-gradient(to right, var(--accent-primary)20%, transparent 100%)',
+            borderColor: 'var(--accent-primary)'
+          }}
+        >
+          <h2 className="text-xl sm:text-2xl font-bold mb-0" style={{ color: 'var(--text-primary)'  }}
+          >
             Codewave — your global partner in AI automation, software development, web innovation, and digital growth.
           </h2>
         </div>

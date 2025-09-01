@@ -51,20 +51,26 @@ const WhyUsSection: React.FC = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-20 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="py-20 relative overflow-hidden"
+      style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2
             className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 transition-all duration-700 ease-out transform ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
+            style={{ color: 'var(--text-primary)' }}
           >
             Why CodeWave.it?
           </h2>
           <p
-            className={`text-xl text-gray-300 max-w-3xl mx-auto transition-all duration-700 ease-out delay-200 transform ${
+            className={`text-xl max-w-3xl mx-auto transition-all duration-700 ease-out delay-200 transform ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
+            style={{ color: 'var(--text-secondary)' }}
           >
             Because building smarter means partnering with the ones who think ahead.
           </p>
@@ -79,14 +85,24 @@ const WhyUsSection: React.FC = () => {
             }`}
           >
             <div className="relative">
-              <div className="w-32 h-32 lg:w-40 lg:h-40 border-2 border-[#ff6a3d] rounded-full bg-gradient-to-r from-[#ff6a3d]/20 to-[#ff8c42]/20 backdrop-blur-md flex items-center justify-center">
+              <div
+                className="w-32 h-32 lg:w-40 lg:h-40 border-2 rounded-full flex items-center justify-center"
+                style={{
+                  borderColor: 'var(--accent-primary)',
+                  background: 'linear-gradient(to right, var(--accent-primary)20%, var(--accent-secondary)20%)',
+                  backdropFilter: 'blur(8px)'
+                }}
+              >
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[#ff6a3d]">CW</div>
-                  <div className="text-xs text-white mt-1">Intelligence</div>
+                  <div className="text-2xl font-bold" style={{ color: 'var(--accent-primary)' }}>CW</div>
+                  <div className="text-xs mt-1" style={{ color: 'var(--text-primary)' }}>Intelligence</div>
                 </div>
               </div>
               {/* Pulsing Ring */}
-              <div className="absolute inset-0 w-32 h-32 lg:w-40 lg:h-40 border-2 border-[#ff6a3d]/50 rounded-full animate-ping"></div>
+              <div
+                className="absolute inset-0 w-32 h-32 lg:w-40 lg:h-40 border-2 rounded-full animate-ping"
+                style={{ borderColor: 'var(--accent-primary)', opacity: 0.5 }}
+              ></div>
             </div>
           </div>
 
@@ -114,14 +130,28 @@ const WhyUsSection: React.FC = () => {
                   }}
                 >
                   <div className="group h-full">
-                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 h-full flex flex-col items-center hover:border-[#ff6a3d]/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#ff6a3d]/20">
-                      <div className="w-12 h-12  bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <feature.icon className="w-6 h-6 text-white " />
+                    <div
+                      className="backdrop-blur-md border rounded-xl p-6 h-full flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                      style={{
+                        background: 'var(--glass-bg)',
+                        borderColor: 'var(--glass-border)'
+                      }}
+                    >
+                      <div
+                        className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                        style={{
+                          background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))'
+                        }}
+                      >
+                        <feature.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
                       </div>
-                      <h3 className="text-lg font-bold mb-2 group-hover:text-[#ff6a3d] transition-colors duration-300">
+                      <h3
+                        className="text-lg font-bold mb-2 transition-colors duration-300"
+                        style={{ color: 'var(--accent-primary)' }}
+                      >
                         {feature.title}
                       </h3>
-                      <p className="text-sm text-gray-400 leading-relaxed flex-grow">
+                      <p className="text-sm leading-relaxed flex-grow" style={{ color: 'var(--text-secondary)' }}>
                         {feature.description}
                       </p>
                     </div>
@@ -135,16 +165,16 @@ const WhyUsSection: React.FC = () => {
 
       {/* Background Code Snippets */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
-        <div className="absolute top-20 left-10 font-mono text-xs text-[#ff6a3d] transform rotate-12">
+        <div className="absolute top-20 left-10 font-mono text-xs transform rotate-12" style={{ color: 'var(--accent-primary)' }}>
           {'{ intelligence: "core" }'}
         </div>
-        <div className="absolute top-40 right-20 font-mono text-xs text-[#ff6a3d] transform -rotate-6">
+        <div className="absolute top-40 right-20 font-mono text-xs transform -rotate-6" style={{ color: 'var(--accent-primary)' }}>
           {'security.byDesign()'}
         </div>
-        <div className="absolute bottom-20 left-20 font-mono text-xs text-[#ff6a3d] transform rotate-6">
+        <div className="absolute bottom-20 left-20 font-mono text-xs transform rotate-6" style={{ color: 'var(--accent-primary)' }}>
           {'scale.infinitely()'}
         </div>
-        <div className="absolute bottom-40 right-10 font-mono text-xs text-[#ff6a3d] transform -rotate-12">
+        <div className="absolute bottom-40 right-10 font-mono text-xs transform -rotate-12" style={{ color: 'var(--accent-primary)' }}>
           {'impact.measure()'}
         </div>
       </div>
