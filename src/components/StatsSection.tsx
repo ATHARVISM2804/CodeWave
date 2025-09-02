@@ -1,5 +1,4 @@
 import React from 'react';
-import ThemeToggle from '../components/ThemeToggle/ThemeToggle';
 import AiImage from "../assets/AI.png"
 
 // Placeholder icon/image components (replace with actual images or SVGs as needed)
@@ -64,21 +63,7 @@ const StatsSection: React.FC = () => {
       className="relative min-h-[100vh] py-16 px-2 flex flex-col items-center justify-start"
       
     >
-      <div className="fixed top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
 
-      {/* AI Tool Badges */}
-      {/* <div className="w-full flex justify-between items-center max-w-5xl mx-auto mb-4">
-        <div className="flex flex-col gap-6">
-          <GitHubCopilotBadge />
-          <CursorAIBadge />
-        </div>
-        <div className="flex flex-col gap-6 items-end">
-          <GeminiAIBadge />
-          <OpenAIBadge />
-        </div>
-      </div> */}
 
       {/* Headline and Description */}
       <div className="w-full max-w-3xl mx-auto text-center mt-2">

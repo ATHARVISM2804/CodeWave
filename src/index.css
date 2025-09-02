@@ -987,3 +987,61 @@ select:focus {
 .theme-toggle:hover::after {
   opacity: 1;
 }
+
+/* MovingData marquee animation */
+@keyframes scroll-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); } /* because we duplicate content, -50% scrolls one full set */
+}
+
+.moving-data {
+  /* ensure contents stay on one line */
+  -webkit-mask-image: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,1)), to(rgba(0,0,0,1)));
+}
+
+.moving-track {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  /* animation will move entire duplicated sequence left */
+  animation-name: scroll-left;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  will-change: transform;
+}
+
+/* dark gradient edges (fade at both ends) */
+.moving-edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4.5rem; /* visible fade width; adjust as needed */
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 200ms ease;
+}
+
+/* left fade (dark to transparent) */
+.moving-edge-left {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-primary), rgba(0,0,0,0));
+}
+
+/* right fade (dark to transparent) */
+.moving-edge-right {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-primary), rgba(0,0,0,0));
+}
+
+/* reduce overlay width on small screens */
+@media (max-width: 640px) {
+  .moving-edge { width: 2.5rem; }
+}
+
+/* pause animation on hover or focus (keyboard users) */
+.moving-data:hover .moving-track,
+.moving-data:focus .moving-track {
+  animation-play-state: paused;
+}

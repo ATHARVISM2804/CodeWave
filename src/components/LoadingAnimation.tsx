@@ -47,49 +47,52 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
       }}
     >
       <div className="relative mb-8">
-        {/* CodeWave Logo or Icon */}
-        <div className="text-5xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center" style={{ color: 'var(--accent-primary)' }}>CW</div>
-        
-        {/* Main circular container */}
-        <div className="w-24 h-24 relative">
-          {/* Animated ring around logo */}
-          <div className="absolute inset-0 rounded-full animate-spin-slow"
-            style={{
-              border: '2px solid transparent',
-              borderTopColor: 'var(--accent-primary)',
-              borderLeftColor: 'var(--accent-secondary)',
-              width: '100%',
-              height: '100%'
-            }}
-          ></div>
-          
-          {/* Second ring rotating in opposite direction */}
-          <div className="absolute inset-0 rounded-full animate-spin-reverse"
-            style={{
-              border: '1px solid transparent',
-              borderRightColor: 'var(--accent-secondary)',
-              borderBottomColor: 'var(--accent-primary)',
-              width: '90%',
-              height: '90%',
-              top: '5%',
-              left: '5%'
-            }}
-          ></div>
-        </div>
-        
-        {/* Outer pulsing ring */}
-        <div
-          className="absolute inset-0 rounded-full animate-ping"
-          style={{ 
-            border: '2px solid var(--accent-primary)',
-            opacity: 0.3,
-            width: '120%',
-            height: '120%',
-            top: '-10%',
-            left: '-10%'
-          }}
-        ></div>
-      </div>
+        {/* Main circular container with logo centered */}
+        <div className="w-24 h-24 relative flex items-center justify-center mx-auto">
+          <img
+            src="https://code-wave-sage.vercel.app/assets/logo-CUgePuug.png"
+            alt="CodeWave logo"
+            className="w-16 h-16 lg:w-20 lg:h-20 object-contain z-10"
+            style={{ display: 'block' }}
+          />
+           {/* Animated ring around logo */}
+           <div className="absolute inset-0 rounded-full animate-spin-slow"
+             style={{
+               border: '2px solid transparent',
+               borderTopColor: 'var(--accent-primary)',
+               borderLeftColor: 'var(--accent-secondary)',
+               width: '100%',
+               height: '100%'
+             }}
+           ></div>
+           
+           {/* Second ring rotating in opposite direction */}
+           <div className="absolute inset-0 rounded-full animate-spin-reverse"
+             style={{
+               border: '1px solid transparent',
+               borderRightColor: 'var(--accent-secondary)',
+               borderBottomColor: 'var(--accent-primary)',
+               width: '90%',
+               height: '90%',
+               top: '5%',
+               left: '5%'
+             }}
+           ></div>
+         </div>
+         
+         {/* Outer pulsing ring */}
+         <div
+           className="absolute inset-0 rounded-full animate-ping"
+           style={{ 
+             border: '2px solid var(--accent-primary)',
+             opacity: 0.3,
+             width: '120%',
+             height: '120%',
+             top: '-10%',
+             left: '-10%'
+           }}
+         ></div>
+       </div>
       
       {/* Progress bar */}
       <div className="w-64 h-1 bg-opacity-20 rounded-full overflow-hidden mb-4" 

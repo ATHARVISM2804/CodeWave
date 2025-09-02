@@ -17,10 +17,12 @@ import ContactPage from './pages/ContactPage';
 import MouseFollower from './components/CursorFollower';
 import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 import LoadingAnimation from './components/LoadingAnimation';
+import MovingData from './components/MovingData';
 
 const HomePage = () => (
   <>
     <HeroSection />
+    <MovingData />
     <StatsSection />
     <ServicesSection />
     <WhyUsSection />
