@@ -27,41 +27,65 @@ const Header: React.FC = () => {
   return (
     <>
       {/* Top header (only visible when not scrolled) */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? 'pointer-events-none opacity-0' : 'bg-transparent'
-      }`}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <img src={Codewavelogo} alt="" className='w-40 mt-20' />
-            <nav className="hidden md:flex space-x-8">
-              {['Home', 'About Us', 'Services', 'Portfolio', 'Contact'].map((item) => (
-                <a
-                  key={item}
-                  href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' us', '').replace(' ', '')}`}
-                  className="transition-all duration-300 font-medium relative group magnetic-effect"
-                  style={{ color: 'var(--text-secondary)' }}
-                  onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'}
-                  onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r transition-all duration-500 group-hover:w-full"
-                    style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}></span>
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r blur-sm opacity-0 transition-all duration-500 group-hover:w-full group-hover:opacity-100"
-                    style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}></span>
-                </a>
-              ))}
-            </nav>
-            <button className="hidden md:block p-4 liquid-button mt-6 font-semibold"
-              style={{ color: 'var(--text-primary)', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}>
-              Book a 30-min consult
-            </button>
-            <button
-              className="md:hidden hover-lift magnetic-effect"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              style={{ color: 'var(--text-primary)' }}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all  mt-5 duration-500 ${isScrolled ? 'pointer-events-none opacity-0' : 'bg-transparent'
+        }`}>
+        <div className="container mx-auto w-full px-4 sm:px-6 lg:px-8">
+          <div className="relative flex items-center h-16">
+            {/* left: logo */}
+            <div className="flex items-center">
+              <a href="/" className="flex items-center">
+                <img src={Codewavelogo} alt="CodeWave" className="w-32 h-auto" />
+              </a>
+            </div>
+
+            {/* spacer to push nav/cta to right */}
+            <div className="flex-1" />
+
+            {/* right: nav pill + CTA + mobile toggle */}
+            <div className="flex items-center gap-4">
+              <nav className="hidden md:block">
+                <div className="nav-pill flex items-center gap-4 px-4 py-2 rounded-full">
+                  {['Home', 'About Us', 'Services', 'Portfolio', 'Contact'].map((item) => (
+                    <a
+                      key={item}
+                      href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' us', '').replace(' ', '')}`}
+                      className={`nav-link relative font-medium px-3 py-1 ${item === 'Home' ? 'active' : ''}`}
+                      onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
+                      onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              </nav>
+
+              <a
+                href="#"
+                className="cta-pill hidden md:inline-flex items-center gap-3 px-5 py-2 rounded-full"
+                style={{
+                  background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))',
+                  color: 'white',
+                  boxShadow: '0 8px 30px rgba(0,0,0,0.25)'
+                }}
+              >
+                <span className="font-semibold">Book a 30-min consult</span>
+                <span className="cta-count inline-flex items-center justify-center ml-3 px-3 py-1 rounded-full"
+                  style={{ background: 'rgba(0,0,0,0.25)', color: 'white', fontWeight: 700 }}>
+                  {/* keep the visual badge but empty/optional - no change to functionality */}
+                  →
+                </span>
+              </a>
+
+              <button
+                className="md:hidden hover-lift magnetic-effect p-2"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
         {/* Mobile Menu */}
