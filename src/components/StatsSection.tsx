@@ -62,7 +62,7 @@ const StatsSection: React.FC = () => {
   return (
     <section
       className="relative min-h-[100vh] py-16 px-2 flex flex-col items-center justify-start"
-      style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
+      
     >
       <div className="fixed top-4 right-4 z-50">
         <ThemeToggle />

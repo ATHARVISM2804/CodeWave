@@ -81,15 +81,30 @@ const ContactSection: React.FC = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-20 relative">
+    <section
+      ref={sectionRef}
+      className="py-20 relative"
+      style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Let's Create Something{' '}
-            <span className="text-[#ff6a3d]">Extraordinary Together</span>
+          <div
+            className="inline-block text-sm font-semibold mb-4"
+            style={{ color: 'var(--accent-primary)' }}
+          >
+            CONTACT US
+          </div>
+          <h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            Let's Build Something Great Together
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto" style={{ animationDelay: '80ms' }}>
-            Where human creativity meets technological innovation
+          <p
+            className="text-xl max-w-3xl mx-auto"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Reach out for a free consult, project quote, or partnership.
           </p>
         </div>
 
@@ -170,6 +185,7 @@ const ContactSection: React.FC = () => {
                     onChange={handleInputChange}
                     placeholder="Your name"
                     className="w-full input-premium"
+                    style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--card-border)' }}
                   />
                 </div>
 
@@ -182,6 +198,7 @@ const ContactSection: React.FC = () => {
                     onChange={handleInputChange}
                     placeholder="your@email.com"
                     className="w-full input-premium"
+                    style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--card-border)' }}
                   />
                 </div>
 
@@ -194,6 +211,7 @@ const ContactSection: React.FC = () => {
                     onChange={handleInputChange}
                     placeholder="Your company"
                     className="w-full input-premium"
+                    style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--card-border)' }}
                   />
                 </div>
 
@@ -204,6 +222,7 @@ const ContactSection: React.FC = () => {
                     value={formData.service}
                     onChange={handleInputChange}
                     className="w-full input-premium"
+                    style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--card-border)' }}
                   >
                     <option value="">Select service</option>
                     <option value="web">Web Development</option>
@@ -224,6 +243,7 @@ const ContactSection: React.FC = () => {
                     rows={4}
                     placeholder="Tell us about your project"
                     className="w-full input-premium resize-none"
+                    style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--card-border)' }}
                   ></textarea>
                 </div>
               </div>
@@ -231,6 +251,7 @@ const ContactSection: React.FC = () => {
               <button
                 type="submit"
                 className="w-full btn-premium glare-effect text-lg"
+                style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}
               >
                 Send Message →
               </button>

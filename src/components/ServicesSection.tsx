@@ -132,11 +132,12 @@ const ServicesSection: React.FC = () => {
                   <div
                     className="card-face card-front absolute inset-0 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6"
                     style={{
-                      background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))',
-                      color: 'var(--text-primary)'
+                      background: 'var(--card-bg)',
+                      color: 'var(--text-primary)',
+                      border: '1px solid var(--card-border)'
                     }}
                   >
-                    <Icon className="w-10 h-10 mb-3" />
+                    <Icon className="w-10 h-10 mb-3" style={{ color: 'var(--accent-primary)' }} />
                     <h3 className="text-xl font-bold">{service.title}</h3>
                   </div>
 

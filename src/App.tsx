@@ -30,7 +30,7 @@ const HomePage = () => (
 function App() {
   return (
     <Router>
-      <div className="relative min-h-screen bg-[#0b0e17] text-white overflow-x-hidden">
+      <div className="relative min-h-screen  text-white overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
         <ParticleBackground />
         <MouseFollower />
         <Header />

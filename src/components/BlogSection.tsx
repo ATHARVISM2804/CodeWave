@@ -58,17 +58,18 @@ const BlogSection: React.FC = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-20 relative">
+    <section ref={sectionRef} className="py-20 relative" >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className={`inline-block text-[#ff6a3d] text-sm font-semibold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <div className={`inline-block text-sm font-semibold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+            style={{ color: 'var(--accent-primary)' }}>
             BLOG & INSIGHTS
           </div>
-          <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
-            Fresh Thinking. Smart Tech.{' '}
-            <span className="text-[#ff6a3d]">Real Impact.</span>
+          <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-primary)' }}>
+            Fresh Thinking. Smart Tech.{ ' ' }
+            <span style={{ color: 'var(--accent-primary)' }}>Real Impact.</span>
           </h2>
-          <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
+          <p className={`text-xl max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms', color: 'var(--text-secondary)' }}>
             We publish 2-3 times a month.
           </p>
         </div>
@@ -77,13 +78,18 @@ const BlogSection: React.FC = () => {
           {blogPosts.map((post, index) => (
             <article
               key={index}
-              className={`group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:border-[#ff6a3d]/50 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-[#ff6a3d]/10 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-              style={{ animationDelay: `${600 + index * 100}ms` }}
+              className={`group rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-xl ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+              style={{
+                animationDelay: `${600 + index * 100}ms`,
+                background: 'var(--glass-bg)',
+                border: '1px solid var(--glass-border)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.2)',
+              }}
             >
               <div className={`h-3 bg-gradient-to-r ${post.color}`}></div>
               
               <div className="p-8">
-                <div className="flex items-center space-x-4 text-sm text-gray-400 mb-4">
+                <div className="flex items-center space-x-4 text-sm mb-4" style={{ color: 'var(--text-muted)' }}>
                   <div className="flex items-center space-x-1">
                     <Calendar className="w-4 h-4" />
                     <span>{post.date}</span>
@@ -92,18 +98,20 @@ const BlogSection: React.FC = () => {
                     <Clock className="w-4 h-4" />
                     <span>{post.readTime}</span>
                   </div>
-                  <span className="text-[#ff6a3d] font-semibold">{post.category}</span>
+                  <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>{post.category}</span>
                 </div>
 
-                <h3 className="text-xl font-bold mb-3 group-hover:text-[#ff6a3d] transition-colors duration-300 leading-tight">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-[var(--accent-primary)] transition-colors duration-300 leading-tight"
+                  style={{ color: 'var(--text-primary)' }}>
                   {post.title}
                 </h3>
                 
-                <p className="text-gray-400 mb-6 leading-relaxed">
+                <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                   {post.excerpt}
                 </p>
 
-                <div className="flex items-center text-[#ff6a3d] font-semibold hover:text-white transition-colors duration-300 cursor-pointer group-hover:translate-x-2 group-hover:transition-transform">
+                <div className="flex items-center font-semibold transition-colors duration-300 cursor-pointer group-hover:translate-x-2 group-hover:transition-transform"
+                  style={{ color: 'var(--accent-primary)' }}>
                   Read Article
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:animate-pulse" />
                 </div>
@@ -113,7 +121,14 @@ const BlogSection: React.FC = () => {
         </div>
 
         <div className={`text-center mt-12 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '1000ms' }}>
-          <button className="bg-[#ff6a3d] hover:bg-[#ff8c42] text-white px-8 py-3 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-[#ff6a3d]/30 font-semibold">
+          <button
+            className="px-8 py-3 rounded-full transition-all duration-300 font-semibold"
+            style={{
+              background: 'var(--accent-primary)',
+              color: 'var(--text-primary)',
+              boxShadow: '0 4px 24px var(--accent-primary)',
+            }}
+          >
             Read All Insights
           </button>
         </div>

@@ -38,20 +38,27 @@ const Header: React.FC = () => {
                 <a
                   key={item}
                   href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' us', '').replace(' ', '')}`}
-                  className="text-gray-300 hover:text-white transition-all duration-300 font-medium relative group magnetic-effect"
+                  className="transition-all duration-300 font-medium relative group magnetic-effect"
+                  style={{ color: 'var(--text-secondary)' }}
+                  onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'}
+                  onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                 >
                   {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] transition-all duration-500 group-hover:w-full"></span>
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] blur-sm opacity-0 transition-all duration-500 group-hover:w-full group-hover:opacity-100"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r transition-all duration-500 group-hover:w-full"
+                    style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r blur-sm opacity-0 transition-all duration-500 group-hover:w-full group-hover:opacity-100"
+                    style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}></span>
                 </a>
               ))}
             </nav>
-            <button className="hidden md:block liquid-button mt-6 text-white px-6 py-3 font-semibold ">
+            <button className="hidden md:block liquid-button mt-6 font-semibold"
+              style={{ color: 'var(--text-primary)', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}>
               Book a 30-min consult
             </button>
             <button
               className="md:hidden hover-lift magnetic-effect"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              style={{ color: 'var(--text-primary)' }}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -59,19 +66,28 @@ const Header: React.FC = () => {
         </div>
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-[#0b0e17]/95 backdrop-blur-xl border-b border-white/10 animate-slide-in-bottom morph-card">
+          <div className="md:hidden morph-card animate-slide-in-bottom"
+            style={{
+              background: 'var(--bg-primary)',
+              borderBottom: '1px solid var(--glass-border)',
+              color: 'var(--text-primary)'
+            }}>
             <div className="px-4 py-4 space-y-4">
               {['Home', 'About Us', 'Services', 'Portfolio', 'Contact'].map((item, index) => (
                 <a
                   key={item}
                   href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' us', '').replace(' ', '')}`}
-                  className={`block text-gray-300 hover:text-white transition-all duration-300 font-medium hover:translate-x-2 stagger-animation stagger-${index + 1}`}
+                  className={`block transition-all duration-300 font-medium hover:translate-x-2 stagger-animation stagger-${index + 1}`}
+                  style={{ color: 'var(--text-secondary)' }}
+                  onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'}
+                  onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item}
                 </a>
               ))}
-              <button className="w-full liquid-button text-white px-6 py-3 font-semibold glare-effect stagger-animation stagger-6">
+              <button className="w-full liquid-button font-semibold glare-effect stagger-animation stagger-6"
+                style={{ color: 'var(--text-primary)', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}>
                 Book a 30-min consult
               </button>
             </div>
@@ -82,12 +98,11 @@ const Header: React.FC = () => {
       {/* Floating glassmorphism sidebar when scrolled */}
       {isScrolled && (
         <nav
-          className="fixed top-1/2 left-6 z-50 -translate-y-1/2 flex flex-col items-center gap-6
-            bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-2 py-6 shadow-2xl
-            transition-all duration-500"
+          className="fixed top-1/2 left-6 z-50 -translate-y-1/2 flex flex-col items-center gap-6 rounded-2xl px-2 py-6 shadow-2xl transition-all duration-500"
           style={{
+            background: 'var(--glass-bg)',
             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-            border: '1px solid rgba(255,255,255,0.18)',
+            border: '1px solid var(--glass-border)',
             minHeight: '340px',
             width: '60px',
           }}
@@ -96,12 +111,16 @@ const Header: React.FC = () => {
             <a
               key={item.label}
               href={item.href}
-              className="flex flex-col items-center group text-white hover:text-[#ff6a3d] transition"
+              className="flex flex-col items-center group transition"
               title={item.label}
+              style={{ color: 'var(--text-primary)' }}
+              onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
+              onMouseLeave={e => e.currentTarget.style.color = 'var(--text-primary)'}
             >
               <span>{item.icon}</span>
               {/* Optionally show label on hover */}
-              <span className="text-xs mt-1 opacity-0 group-hover:opacity-100 transition-all duration-300 absolute left-14 bg-black/80 px-2 py-1 rounded text-white pointer-events-none">
+              <span className="text-xs mt-1 opacity-0 group-hover:opacity-100 transition-all duration-300 absolute left-14 px-2 py-1 rounded pointer-events-none"
+                style={{ background: 'rgba(0,0,0,0.8)', color: 'var(--text-primary)' }}>
                 {item.label}
               </span>
             </a>
