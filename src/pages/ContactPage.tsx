@@ -38,6 +38,54 @@ const ContactPage: React.FC = () => {
     });
   };
 
+  // new: submission state + handler for web3forms
+  const [submitResult, setSubmitResult] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitResult('Sending....');
+
+    try {
+      const formEl = e.currentTarget;
+      const payload = new FormData(formEl);
+
+      // TODO: replace with your real access key
+      payload.append('access_key', '94eef6d5-373f-4730-b7a1-ac117be18f20');
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitResult('Form Submitted Successfully');
+        formEl.reset();
+        // clear local controlled form state as well
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          service: '',
+          budget: '',
+          timeline: '',
+          message: ''
+        });
+      } else {
+        console.error('Submission error', data);
+        setSubmitResult(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      console.error(err);
+      setSubmitResult('Network error, please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const contactMethods = [
     {
       icon: MessageCircle,
@@ -126,17 +174,25 @@ const ContactPage: React.FC = () => {
   ];
 
   return (
-    <div className="pt-16">
+    <div
+      className="pt-12"
+      style={{
+        background: 'var(--bg-secondary)',
+        color: 'var(--text-primary)',
+        fontSize: '0.97rem', // Slightly scale down font size
+        letterSpacing: '0.01em'
+      }}
+    >
       {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-16 relative overflow-hidden" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-8">
             <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight" style={{ color: 'var(--text-primary)' }}>
                 Let's Create Something{' '}
-                <span className="parallax-text neon-glow">Extraordinary Together</span>
+                <span className="parallax-text neon-glow" style={{ color: 'var(--accent-primary)' }}>Extraordinary Together</span>
               </h1>
-              <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+              <p className="text-xl max-w-4xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Where human creativity meets technological innovation. Ready to transform your ideas into intelligent solutions?
               </p>
             </div>
@@ -145,13 +201,13 @@ const ContactPage: React.FC = () => {
       </section>
 
       {/* Contact Methods */}
-      <section ref={sectionRef} className="py-20 relative">
+      <section ref={sectionRef} className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+            <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Choose Your Preferred Way to Connect
             </h2>
-            <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+            <p className={`text-xl max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
               We're here to help you bring your vision to life.
             </p>
           </div>
@@ -161,14 +217,20 @@ const ContactPage: React.FC = () => {
               <div
                 key={index}
                 className={`morph-card glare-card p-8 text-center hover-lift-premium magnetic-effect ripple-effect cursor-pointer ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                style={{
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  color: 'var(--text-primary)'
+                }}
               >
                 <div className={`w-16 h-16 bg-gradient-to-r ${method.color} rounded-xl flex items-center justify-center mx-auto mb-6 magnetic-effect`}>
-                  <method.icon className="w-8 h-8 text-white" />
+                  <method.icon className="w-8 h-8" style={{ color: 'var(--text-primary)' }} />
                 </div>
-                <h3 className="text-xl font-bold mb-3 neon-glow">{method.title}</h3>
-                <p className="text-gray-300 mb-2 font-medium">{method.description}</p>
-                <p className="text-sm text-gray-400 mb-4">{method.detail}</p>
-                <button className="liquid-button text-white px-6 py-2 font-semibold glare-effect text-sm magnetic-effect">
+                <h3 className="text-xl font-bold mb-3 neon-glow" style={{ color: 'var(--text-primary)' }}>{method.title}</h3>
+                <p className="mb-2 font-medium" style={{ color: 'var(--text-secondary)' }}>{method.description}</p>
+                <p className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>{method.detail}</p>
+                <button className="liquid-button px-6 py-2 font-semibold glare-effect text-sm magnetic-effect"
+                  style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
                   {method.action}
                 </button>
               </div>
@@ -178,17 +240,18 @@ const ContactPage: React.FC = () => {
       </section>
 
       {/* Main Contact Form */}
-      <section className="py-20 relative">
+      <section className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
-            <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
-              <h3 className="text-3xl font-bold mb-8 neon-glow">Tell Us About Your Vision</h3>
+            <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}
+              style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
+              <h3 className="text-3xl font-bold mb-8 neon-glow" style={{ color: 'var(--text-primary)' }}>Tell Us About Your Vision</h3>
               
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ color: 'var(--text-primary)' }}>
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Name *</label>
+                    <label className="block text-sm font-medium mb-2">Name *</label>
                     <input
                       type="text"
                       name="name"
@@ -201,7 +264,7 @@ const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Email *</label>
+                    <label className="block text-sm font-medium mb-2">Email *</label>
                     <input
                       type="email"
                       name="email"
@@ -215,7 +278,7 @@ const ContactPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Company/Organization</label>
+                  <label className="block text-sm font-medium mb-2">Company/Organization</label>
                   <input
                     type="text"
                     name="company"
@@ -228,7 +291,7 @@ const ContactPage: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Service Needed</label>
+                    <label className="block text-sm font-medium mb-2">Service Needed</label>
                     <select
                       name="service"
                       value={formData.service}
@@ -247,7 +310,7 @@ const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Budget Range</label>
+                    <label className="block text-sm font-medium mb-2">Budget Range</label>
                     <select
                       name="budget"
                       value={formData.budget}
@@ -265,7 +328,7 @@ const ContactPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Timeline</label>
+                  <label className="block text-sm font-medium mb-2">Timeline</label>
                   <select
                     name="timeline"
                     value={formData.timeline}
@@ -282,7 +345,7 @@ const ContactPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Project Details *</label>
+                  <label className="block text-sm font-medium mb-2">Project Details *</label>
                   <textarea
                     name="message"
                     value={formData.message}
@@ -296,30 +359,40 @@ const ContactPage: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="w-full liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
+                  className="w-full liquid-button  px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
+                  disabled={isSubmitting}
+                  aria-busy={isSubmitting}
                 >
-                  Send Message →
+                  {isSubmitting ? 'Sending...' : 'Send Message →'}
                 </button>
+
+                {/* submission result */}
+                {submitResult && (
+                  <div className="mt-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                    {submitResult}
+                  </div>
+                )}
               </form>
             </div>
 
             {/* Contact Info & Team */}
             <div className="space-y-8">
               {/* Office Information */}
-              <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
-                <h3 className="text-2xl font-bold mb-6 neon-glow">Get in Touch</h3>
+              <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '200ms', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
+                <h3 className="text-2xl font-bold mb-6 neon-glow" style={{ color: 'var(--text-primary)' }}>Get in Touch</h3>
                 
                 <div className="space-y-6">
                   {officeInfo.map((info, index) => (
                     <div key={index} className="flex items-start space-x-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-lg flex items-center justify-center flex-shrink-0 magnetic-effect">
-                        <info.icon className="w-6 h-6 text-white" />
+                      <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 magnetic-effect"
+                        style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}>
+                        <info.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
                       </div>
                       <div>
-                        <h4 className="font-semibold mb-2">{info.title}</h4>
+                        <h4 className="font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{info.title}</h4>
                         <div className="space-y-1">
                           {info.details.map((detail, detailIndex) => (
-                            <p key={detailIndex} className="text-gray-300 text-sm">{detail}</p>
+                            <p key={detailIndex} className="text-sm" style={{ color: 'var(--text-secondary)' }}>{detail}</p>
                           ))}
                         </div>
                       </div>
@@ -329,14 +402,15 @@ const ContactPage: React.FC = () => {
               </div>
 
               {/* Team Section */}
-              <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
-                <h3 className="text-2xl font-bold mb-6 neon-glow">Meet Your Design Partners</h3>
+              <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '400ms', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
+                <h3 className="text-2xl font-bold mb-6 neon-glow" style={{ color: 'var(--text-primary)' }}>Meet Your Design Partners</h3>
                 
                 <div className="flex -space-x-4 mb-6">
                   {teamMembers.map((avatar, index) => (
                     <div
                       key={index}
-                      className="w-16 h-16 rounded-full border-4 border-[#0b0e17] overflow-hidden magnetic-effect"
+                      className="w-16 h-16 rounded-full border-4 overflow-hidden magnetic-effect"
+                      style={{ borderColor: 'var(--bg-primary)' }}
                     >
                       <img src={avatar} alt="Team member" className="w-full h-full object-cover" />
                     </div>
@@ -344,20 +418,20 @@ const ContactPage: React.FC = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <h4 className="font-semibold text-[#ff6a3d]">Why clients choose us:</h4>
+                  <h4 className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Why clients choose us:</h4>
                   <div className="space-y-3">
                     {whyChooseUs.map((reason, index) => (
-                      <div key={index} className="flex items-center text-sm text-gray-300">
-                        <CheckCircle className="w-4 h-4 text-green-400 mr-3 flex-shrink-0" />
+                      <div key={index} className="flex items-center text-sm" style={{ color: 'var(--text-secondary)' }}>
+                        <CheckCircle className="w-4 h-4" style={{ color: 'var(--accent-secondary)', marginRight: '0.75rem' }} />
                         {reason}
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-white/10">
-                  <p className="text-sm text-gray-400">
-                    <strong>Response guarantee:</strong> We respond within 4 hours on business days. 
+                <div className="mt-6 pt-6 border-t" style={{ borderTop: '1px solid var(--glass-border)' }}>
+                  <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                    <strong>Response guarantee:</strong> We respond within 4 hours on business days.
                     Your data is secure and never shared.
                   </p>
                 </div>
@@ -368,13 +442,13 @@ const ContactPage: React.FC = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 relative">
+      <section className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+            <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Frequently Asked Questions
             </h2>
-            <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+            <p className={`text-xl max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
               Quick answers to common questions about working with CodeWave.
             </p>
           </div>
@@ -384,9 +458,10 @@ const ContactPage: React.FC = () => {
               <div
                 key={index}
                 className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}
               >
-                <h3 className="text-xl font-bold mb-4 neon-glow">{faq.question}</h3>
-                <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+                <h3 className="text-xl font-bold mb-4 neon-glow" style={{ color: 'var(--text-primary)' }}>{faq.question}</h3>
+                <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{faq.answer}</p>
               </div>
             ))}
           </div>
@@ -394,20 +469,23 @@ const ContactPage: React.FC = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 relative">
+      <section className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="morph-card glare-card p-12 text-center hover-lift-premium">
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <div className="morph-card glare-card p-12 text-center hover-lift-premium"
+            style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
+            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Still Have Questions?
             </h2>
-            <p className={`text-xl text-gray-300 max-w-3xl mx-auto mb-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+            <p className={`text-xl max-w-3xl mx-auto mb-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
               Schedule a free 30-minute consultation to discuss your project and get expert advice.
             </p>
             <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
-              <button className="liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg magnetic-effect">
+              <button className="liquid-button px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
+                style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
                 Book Free Consultation
               </button>
-              <button className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect">
+              <button className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect"
+                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
                 View Our Work
               </button>
             </div>

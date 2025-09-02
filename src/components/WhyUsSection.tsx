@@ -89,13 +89,16 @@ const WhyUsSection: React.FC = () => {
                 className="w-32 h-32 lg:w-40 lg:h-40 border-2 rounded-full flex items-center justify-center"
                 style={{
                   borderColor: 'var(--accent-primary)',
-                  background: 'linear-gradient(to right, var(--accent-primary)20%, var(--accent-secondary)20%)',
+                  // background: 'linear-gradient(to right, var(--accent-primary)20%, var(--accent-secondary)20%)',
                   backdropFilter: 'blur(8px)'
                 }}
               >
-                <div className="text-center">
-                  <div className="text-2xl font-bold" style={{ color: 'var(--accent-primary)' }}>CW</div>
-                  <div className="text-xs mt-1" style={{ color: 'var(--text-primary)' }}>Intelligence</div>
+                <div className="flex items-center justify-center">
+                  <img
+                    src="https://code-wave-sage.vercel.app/assets/logo-CUgePuug.png"
+                    alt="CodeWave logo"
+                    className="w-20 h-20 lg:w-24 lg:h-24 object-contain"
+                  />
                 </div>
               </div>
               {/* Pulsing Ring */}

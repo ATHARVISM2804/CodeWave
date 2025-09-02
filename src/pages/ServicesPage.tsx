@@ -130,17 +130,17 @@ const ServicesPage: React.FC = () => {
   ];
 
   return (
-    <div className="pt-16">
+    <div className="pt-16" style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}>
       {/* Hero Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-8">
             <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight" style={{ color: 'var(--text-primary)' }}>
                 Engineering Intelligence Into{' '}
-                <span className="parallax-text neon-glow">Every Solution</span>
+                <span className="parallax-text neon-glow" style={{ color: 'var(--accent-primary)' }}>Every Solution</span>
               </h1>
-              <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+              <p className="text-xl max-w-4xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 We don't just build software—we craft intelligent digital experiences that adapt, learn, and evolve with your business needs.
               </p>
             </div>
@@ -152,10 +152,10 @@ const ServicesPage: React.FC = () => {
       <section ref={sectionRef} className="py-20 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Our Core Services
             </h2>
-            <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+            <p className={`text-xl max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
               Comprehensive solutions designed to transform your digital presence with intelligence at the core.
             </p>
           </div>
@@ -165,36 +165,43 @@ const ServicesPage: React.FC = () => {
               <div
                 key={index}
                 className={`morph-card glare-card p-8 hover-lift-premium magnetic-effect ripple-effect ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                style={{
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  color: 'var(--text-primary)'
+                }}
               >
                 <div className="flex items-start space-x-6">
                   <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center flex-shrink-0 magnetic-effect`}>
-                    <service.icon className="w-8 h-8 text-white" />
+                    <service.icon className="w-8 h-8" style={{ color: 'var(--text-primary)' }} />
                   </div>
-                  
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold mb-4 neon-glow">{service.title}</h3>
-                    <p className="text-gray-300 mb-6 leading-relaxed">{service.description}</p>
-                    
+                    <h3 className="text-2xl font-bold mb-4 neon-glow" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
+                    <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
                     <div className="space-y-4">
                       <div>
-                        <h4 className="text-sm font-semibold text-[#ff6a3d] mb-2">KEY FEATURES</h4>
+                        <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--accent-primary)' }}>KEY FEATURES</h4>
                         <div className="grid grid-cols-2 gap-2">
                           {service.features.map((feature, featureIndex) => (
-                            <div key={featureIndex} className="flex items-center text-sm text-gray-300">
-                              <div className="w-1.5 h-1.5 bg-[#ff6a3d] rounded-full mr-2"></div>
+                            <div key={featureIndex} className="flex items-center text-sm" style={{ color: 'var(--text-secondary)' }}>
+                              <div className="w-1.5 h-1.5 rounded-full mr-2" style={{ background: 'var(--accent-primary)' }}></div>
                               {feature}
                             </div>
                           ))}
                         </div>
                       </div>
-                      
                       <div>
-                        <h4 className="text-sm font-semibold text-[#ff6a3d] mb-2">TECHNOLOGIES</h4>
+                        <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--accent-primary)' }}>TECHNOLOGIES</h4>
                         <div className="flex flex-wrap gap-2">
                           {service.technologies.map((tech, techIndex) => (
                             <span
                               key={techIndex}
-                              className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium hover:border-[#ff6a3d]/50 transition-colors duration-300"
+                              className="px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300"
+                              style={{
+                                background: 'var(--glass-bg)',
+                                border: '1px solid var(--glass-border)',
+                                color: 'var(--text-secondary)'
+                              }}
                             >
                               {tech}
                             </span>
@@ -214,10 +221,10 @@ const ServicesPage: React.FC = () => {
       <section className="py-20 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+            <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Additional Expertise
             </h2>
-            <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+            <p className={`text-xl max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
               Specialized services to complement your core development needs.
             </p>
           </div>
@@ -227,12 +234,18 @@ const ServicesPage: React.FC = () => {
               <div
                 key={index}
                 className={`morph-card glare-card p-6 hover-lift-premium magnetic-effect text-center ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                style={{
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  color: 'var(--text-primary)'
+                }}
               >
-                <div className="w-12 h-12 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-lg flex items-center justify-center mx-auto mb-4 magnetic-effect">
-                  <service.icon className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 magnetic-effect"
+                  style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}>
+                  <service.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
                 </div>
-                <h3 className="text-lg font-bold mb-2 neon-glow">{service.title}</h3>
-                <p className="text-gray-300 text-sm leading-relaxed">{service.description}</p>
+                <h3 className="text-lg font-bold mb-2 neon-glow" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
               </div>
             ))}
           </div>
@@ -243,10 +256,10 @@ const ServicesPage: React.FC = () => {
       <section className="py-20 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Our Development Process
             </h2>
-            <p className={`text-xl text-gray-300 max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+            <p className={`text-xl max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
               A proven methodology that ensures quality, transparency, and intelligent solutions.
             </p>
           </div>
@@ -258,19 +271,26 @@ const ServicesPage: React.FC = () => {
                   key={index}
                   className={`relative ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
                 >
-                  <div className="morph-card glare-card p-6 hover-lift-premium magnetic-effect h-full">
+                  <div className="morph-card glare-card p-6 hover-lift-premium magnetic-effect h-full"
+                    style={{
+                      background: 'var(--card-bg)',
+                      border: '1px solid var(--card-border)',
+                      color: 'var(--text-primary)'
+                    }}
+                  >
                     <div className="text-center">
-                      <div className="w-16 h-16 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-white text-lg magnetic-effect">
+                      <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg magnetic-effect"
+                        style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
                         {step.step}
                       </div>
-                      <h3 className="text-lg font-bold mb-3 neon-glow">{step.title}</h3>
-                      <p className="text-gray-300 text-sm mb-4 leading-relaxed">{step.description}</p>
-                      <div className="text-xs text-[#ff6a3d] font-semibold">{step.duration}</div>
+                      <h3 className="text-lg font-bold mb-3 neon-glow" style={{ color: 'var(--text-primary)' }}>{step.title}</h3>
+                      <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{step.description}</p>
+                      <div className="text-xs font-semibold" style={{ color: 'var(--accent-primary)' }}>{step.duration}</div>
                     </div>
                   </div>
-                  
                   {index < process.length - 1 && (
-                    <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42]"></div>
+                    <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5"
+                      style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}></div>
                   )}
                 </div>
               ))}
@@ -282,19 +302,34 @@ const ServicesPage: React.FC = () => {
       {/* CTA Section */}
       <section className="py-20 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="morph-card glare-card p-12 text-center hover-lift-premium">
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <div className="morph-card glare-card p-12 text-center hover-lift-premium"
+            style={{
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              color: 'var(--text-primary)'
+            }}
+          >
+            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Ready to Build Something{' '}
-              <span className="text-[#ff6a3d]">Intelligent?</span>
+              <span style={{ color: 'var(--accent-primary)' }}>Intelligent?</span>
             </h2>
-            <p className={`text-xl text-gray-300 max-w-3xl mx-auto mb-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+            <p className={`text-xl max-w-3xl mx-auto mb-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
               Let's discuss your project and explore how we can bring intelligence to your digital solutions.
             </p>
             <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
-              <button className="liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg magnetic-effect">
+              <button className="liquid-button px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
+                style={{
+                  background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                  color: 'var(--text-primary)'
+                }}>
                 Start Your Project
               </button>
-              <button className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect">
+              <button className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect"
+                style={{
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  color: 'var(--text-primary)'
+                }}>
                 View Our Portfolio
               </button>
             </div>

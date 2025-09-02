@@ -8,7 +8,7 @@ const navItems = [
   { label: 'About Us', href: '/about', icon: <Info size={22} /> },
   { label: 'Services', href: '/services', icon: <Calendar size={22} /> },
   { label: 'Portfolio', href: '/portfolio', icon: <Users size={22} /> },
-  { label: 'Pricing', href: '/pricing', icon: <DollarSign size={22} /> },
+  // { label: 'Pricing', href: '/pricing', icon: <DollarSign size={22} /> },
   { label: 'Contact', href: '/contact', icon: <Mail size={22} /> },
 ];
 
@@ -51,7 +51,7 @@ const Header: React.FC = () => {
                 </a>
               ))}
             </nav>
-            <button className="hidden md:block liquid-button mt-6 font-semibold"
+            <button className="hidden md:block p-4 liquid-button mt-6 font-semibold"
               style={{ color: 'var(--text-primary)', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}>
               Book a 30-min consult
             </button>
@@ -98,20 +98,20 @@ const Header: React.FC = () => {
       {/* Floating glassmorphism sidebar when scrolled */}
       {isScrolled && (
         <nav
-          className="fixed top-1/2 left-6 z-50 -translate-y-1/2 flex flex-col items-center gap-6 rounded-2xl px-2 py-6 shadow-2xl transition-all duration-500"
+          className="fixed bottom-8 left-1/2 z-50 -translate-x-1/2 flex flex-row items-center gap-6 rounded-2xl backdrop-blur-lg px-6 py-4 shadow-2xl transition-all duration-500"
           style={{
             background: 'var(--glass-bg)',
             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
             border: '1px solid var(--glass-border)',
-            minHeight: '340px',
-            width: '60px',
+            minHeight: '64px',
+            width: 'auto',
           }}
         >
           {navItems.map((item, idx) => (
             <a
               key={item.label}
               href={item.href}
-              className="flex flex-col items-center group transition"
+              className="flex flex-col items-center group transition relative"
               title={item.label}
               style={{ color: 'var(--text-primary)' }}
               onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
@@ -119,7 +119,7 @@ const Header: React.FC = () => {
             >
               <span>{item.icon}</span>
               {/* Optionally show label on hover */}
-              <span className="text-xs mt-1 opacity-0 group-hover:opacity-100 transition-all duration-300 absolute left-14 px-2 py-1 rounded pointer-events-none"
+              <span className="text-xs mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 absolute left-1/2 -translate-x-1/2 top-12 px-2 py-1 rounded pointer-events-none"
                 style={{ background: 'rgba(0,0,0,0.8)', color: 'var(--text-primary)' }}>
                 {item.label}
               </span>

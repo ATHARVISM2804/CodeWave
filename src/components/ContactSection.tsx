@@ -36,34 +36,77 @@ const ContactSection: React.FC = () => {
     });
   };
 
+  // <-- added: submission state + handler
+  const [submitResult, setSubmitResult] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitResult('Sending....');
+
+    try {
+      const formEl = e.currentTarget;
+      const payload = new FormData(formEl);
+
+      // replace with your Web3Forms access key if desired
+      payload.append('access_key', '94eef6d5-373f-4730-b7a1-ac117be18f20');
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitResult('Form Submitted Successfully');
+        formEl.reset();
+        setFormData({ name: '', email: '', company: '', service: '', message: '' });
+      } else {
+        console.error('Submission error', data);
+        setSubmitResult(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      console.error(err);
+      setSubmitResult('Network error, please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const contactOptions = [
     {
       icon: MessageCircle,
       title: 'WhatsApp',
       description: 'Chat instantly with our team',
       action: 'Start Chat',
-      color: 'from-green-500 to-emerald-500'
+      color: 'from-green-500 to-emerald-500',
+      href: 'https://wa.me/15551234567?text=Hello%20CodeWave%21%20I%20would%20like%20to%20discuss%20a%20project.' // phone from UI, replace if needed
     },
     {
       icon: MessageCircle,
       title: 'Live Chat',
       description: 'Our AI wants to chat with you',
       action: 'Chat Now',
-      color: 'from-blue-500 to-cyan-500'
+      color: 'from-blue-500 to-cyan-500',
+      href: '#live-chat' // anchor for an on-page chat or widget trigger
     },
     {
       icon: Mail,
       title: 'Email',
       description: 'Write to hello@codewave.it',
       action: 'Send Email',
-      color: 'from-purple-500 to-pink-500'
+      color: 'from-purple-500 to-pink-500',
+      href: 'mailto:hello@codewave.it?subject=Website%20Inquiry'
     },
     {
       icon: Calendar,
       title: 'Schedule a Call',
       description: 'Book a time slot for call',
       action: 'Book Call',
-      color: 'from-orange-500 to-red-500'
+      color: 'from-orange-500 to-red-500',
+      href: 'https://calendly.com/codewave/30min' // replace with real scheduling URL
     }
   ];
 
@@ -126,9 +169,17 @@ const ContactSection: React.FC = () => {
                   <p className="text-sm text-gray-300 mb-3 font-medium">
                     {option.description}
                   </p>
-                  <button className="font-semibold">
+
+                  {/* replaced button with anchor so actions are functional */}
+                  <a
+                    href={option.href}
+                    target={option.href && option.href.startsWith('http') ? '_blank' : undefined}
+                    rel={option.href && option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="font-semibold inline-flex items-center gap-2"
+                    // preserve keyboard focus styles
+                  >
                     {option.action}
-                  </button>
+                  </a>
                 </div>
               ))}
             </div>
@@ -174,7 +225,7 @@ const ContactSection: React.FC = () => {
           <div className="card-premium glass-premium p-8 glare-effect">
             <h3 className="text-2xl font-bold mb-6">Tell us about your vision</h3>
             
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 gap-6">
                 <div className="group">
                   <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
@@ -252,9 +303,18 @@ const ContactSection: React.FC = () => {
                 type="submit"
                 className="w-full btn-premium glare-effect text-lg"
                 style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}
+                disabled={isSubmitting}
+                aria-busy={isSubmitting}
               >
-                Send Message →
+                {isSubmitting ? 'Sending...' : 'Send Message →'}
               </button>
+
+              {/* submission result */}
+              {submitResult && (
+                <div className="mt-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  {submitResult}
+                </div>
+              )}
             </form>
 
             <div className="mt-8 pt-8 border-t border-white/10">

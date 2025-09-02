@@ -1,4 +1,4 @@
- import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Shield, Award, TrendingUp, Zap, Users, Code, Brain, Palette, Smartphone } from 'lucide-react';
 
 const AboutPage: React.FC = () => {
@@ -114,10 +114,11 @@ const AboutPage: React.FC = () => {
   ];
 
   return (
-    <div className="pt-16 bg-[#0a0d16] text-white">
+    <div className="pt-16"
+      style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
+    >
       {/* Hero Section */}
-      <section className="relative mt-10  min-h-[70vh] flex items-center justify-center overflow-hidden" >
-        {/* Optional: Add a background SVG or absolute div for dots/lines here */}
+      <section className="relative mt-10 min-h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12 z-10">
           {/* Left: Image */}
           <div className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
@@ -125,45 +126,65 @@ const AboutPage: React.FC = () => {
               src="https://images.pexels.com/photos/2422280/pexels-photo-2422280.jpeg?auto=compress&cs=tinysrgb&w=800"
               alt="About CodeWave"
               className="rounded-2xl shadow-xl w-full max-w-lg object-cover"
-              style={{ minHeight: 320, minWidth: 320, background: '#181a2b' }}
+              style={{ minHeight: 320, minWidth: 320, background: 'var(--bg-primary)' }}
             />
           </div>
           {/* Right: Text */}
           <div className="w-full md:w-1/2 flex flex-col items-start justify-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-8 text-white" style={{ lineHeight: 1.1 }}>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-8"
+              style={{ color: 'var(--text-primary)', lineHeight: 1.1 }}>
               We’re not just another tech company —<br className="hidden md:block" />
               we’re your innovation partner
             </h1>
-            <p className="text-xl text-gray-300 mb-10 max-w-xl font-medium">
+            <p className="text-xl mb-10 max-w-xl font-medium"
+              style={{ color: 'var(--text-secondary)' }}>
               At CodeWave.ai, we build smart, scalable, and meaningful digital solutions that power startups, scale-ups, and public-sector teams alike. Whether it’s a sleek product for a growing SaaS startup or a secure platform for law enforcement — we treat every line of code like it matters. Because it does.
             </p>
             <div className="flex gap-6">
               <button
-                className="px-8 py-3 rounded-full font-semibold text-lg bg-gradient-to-r from-cyan-400 via-blue-500 to-[#ff6a3d] text-white shadow-lg transition-all duration-200"
-                style={{ boxShadow: '0 4px 24px 0 #ff6a3d33' }}
+                className="px-8 py-3 rounded-full font-semibold text-lg shadow-lg transition-all duration-200"
+                style={{
+                  background: 'linear-gradient(to right, var(--accent-secondary), var(--accent-primary))',
+                  color: 'var(--text-primary)',
+                  boxShadow: '0 4px 24px 0 var(--accent-primary)'
+                }}
               >
                 Our Mission
               </button>
               <button
-                className="px-8 py-3 rounded-full font-semibold text-lg border-2 border-cyan-400 text-cyan-300 bg-transparent hover:bg-cyan-900/10 transition-all duration-200"
+                className="px-8 py-3 rounded-full font-semibold text-lg border-2 transition-all duration-200"
+                style={{
+                  borderColor: 'var(--accent-secondary)',
+                  color: 'var(--accent-secondary)',
+                  background: 'transparent'
+                }}
               >
                 See Our Work
               </button>
             </div>
           </div>
         </div>
-        {/* Optional: Add animated dots/lines as absolutely positioned elements here */}
       </section>
 
       {/* Mission & Vision Section */}
       <section className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-[#ff6a3d] text-lg font-semibold mb-8">OUR MISSION & VISION</h2>
+          <h2 className="text-center text-lg font-semibold mb-8"
+            style={{ color: 'var(--accent-primary)' }}>
+            OUR MISSION & VISION
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {missionVision.map((item, idx) => (
-              <div key={idx} className="bg-[#181a2b] rounded-2xl p-8 border border-[#23234a]">
+              <div key={idx}
+                className="rounded-2xl p-8 border"
+                style={{
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  color: 'var(--text-primary)'
+                }}
+              >
                 <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
-                <p className="text-gray-300 text-lg">{item.description}</p>
+                <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>{item.description}</p>
               </div>
             ))}
           </div>
@@ -173,15 +194,25 @@ const AboutPage: React.FC = () => {
       {/* What We Value Section */}
       <section className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-3xl font-bold mb-8">What We Value</h2>
+          <h2 className="text-center text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>What We Value</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {values.map((value, idx) => (
-              <div key={idx} className="bg-[#181a2b] rounded-2xl p-8 border border-[#23234a] flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-lg flex items-center justify-center mb-4">
-                  <value.icon className="w-6 h-6 text-white" />
+              <div key={idx}
+                className="rounded-2xl p-8 border flex flex-col items-center text-center"
+                style={{
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  color: 'var(--text-primary)'
+                }}
+              >
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
+                  style={{
+                    background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))'
+                  }}>
+                  <value.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
                 </div>
                 <h3 className="text-lg font-bold mb-2">{value.title}</h3>
-                <p className="text-gray-300 text-sm">{value.description}</p>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{value.description}</p>
               </div>
             ))}
           </div>
@@ -191,15 +222,25 @@ const AboutPage: React.FC = () => {
       {/* Industries We Serve Section */}
       <section className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-3xl font-bold mb-8">Industries We Serve</h2>
+          <h2 className="text-center text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>Industries We Serve</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {industries.map((industry, idx) => (
-              <div key={idx} className="bg-[#181a2b] rounded-2xl p-8 border border-[#23234a] flex flex-col items-start">
-                <div className="w-10 h-10 bg-gradient-to-r from-[#ff6a3d] to-[#ff8c42] rounded-lg flex items-center justify-center mb-4">
-                  <industry.icon className="w-6 h-6 text-white" />
+              <div key={idx}
+                className="rounded-2xl p-8 border flex flex-col items-start"
+                style={{
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  color: 'var(--text-primary)'
+                }}
+              >
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
+                  style={{
+                    background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))'
+                  }}>
+                  <industry.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
                 </div>
                 <h3 className="text-lg font-bold mb-2">{industry.title}</h3>
-                <p className="text-gray-300 text-sm">{industry.description}</p>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{industry.description}</p>
               </div>
             ))}
           </div>
@@ -209,17 +250,24 @@ const AboutPage: React.FC = () => {
       {/* Technologies We Work With Section */}
       <section className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-3xl font-bold mb-8">Technologies We Work With</h2>
-          <p className="text-center text-gray-300 mb-8">
+          <h2 className="text-center text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>Technologies We Work With</h2>
+          <p className="text-center mb-8" style={{ color: 'var(--text-secondary)' }}>
             Modern tools for modern problems. We stay current with the latest tech to deliver high-performing, scalable, and secure digital solutions.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {technologies.map((tech, idx) => (
-              <div key={idx} className="bg-[#181a2b] rounded-2xl p-6 border border-[#23234a]">
-                <h3 className="text-lg font-bold mb-4 text-[#ff6a3d]">{tech.group}</h3>
+              <div key={idx}
+                className="rounded-2xl p-6 border"
+                style={{
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  color: 'var(--text-primary)'
+                }}
+              >
+                <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--accent-primary)' }}>{tech.group}</h3>
                 <ul className="space-y-2">
                   {tech.items.map((item, i) => (
-                    <li key={i} className="text-gray-300 text-sm">{item}</li>
+                    <li key={i} className="text-sm" style={{ color: 'var(--text-secondary)' }}>{item}</li>
                   ))}
                 </ul>
               </div>
@@ -227,8 +275,6 @@ const AboutPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-    
     </div>
   );
 };

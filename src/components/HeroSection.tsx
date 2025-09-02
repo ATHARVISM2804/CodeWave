@@ -36,7 +36,7 @@ const HeroSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center pt-16 overflow-hidden" >
+    <section className="relative min-h-screen px-10 flex items-center pt-16 overflow-hidden" >
       {/* Enhanced Background Gradient */}
       <div className="absolute inset-0 bg-gradient-radial opacity-50"></div>
       <div className="absolute inset-0 bg-gradient-premium"></div>
@@ -45,12 +45,13 @@ const HeroSection: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className={`space-y-8 ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight" style={{ color: 'var(--text-secondary)' }}>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight" style={{ color: 'var(--text-primary)' }}>
                 We Speak Fluent Code. 
+                {/* Removed parallax-text and neon-glow classes, added static styling */}
                 <span
-                  className="parallax-text neon-glow"
                   style={{
-                    color: 'var(--accent-primary)'
+                    color: 'var(--accent-primary)',
+                    textShadow: '0 0 8px rgba(255, 106, 61, 0.4)'
                   }}
                 >
                   {' '}And AI Has Joined the Team.
