@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import AiImage from "../assets/AI.png";
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
 
 // Placeholder icon/image components (replace with actual images or SVGs as needed)
 const GitHubCopilotBadge = () => (
@@ -61,34 +60,7 @@ const techStack = [
 
 const StatsSection: React.FC = () => {
   const [hoveredService, setHoveredService] = useState<number | null>(null);
-
-  // GSAP refs
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const descRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const servicesRef = useRef<HTMLDivElement>(null);
-  const techRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-    if (headlineRef.current) {
-      tl.from(headlineRef.current, { y: 60, opacity: 0, duration: 0.7 });
-    }
-    if (descRef.current) {
-      tl.from(descRef.current.children, { y: 40, opacity: 0, stagger: 0.15, duration: 0.5 }, "-=0.4");
-    }
-    if (ctaRef.current) {
-      tl.from(ctaRef.current.children, { y: 30, opacity: 0, stagger: 0.1, duration: 0.4 }, "-=0.3");
-    }
-    if (servicesRef.current) {
-      tl.from(servicesRef.current.children, { y: 50, opacity: 0, stagger: 0.12, duration: 0.5 }, "-=0.2");
-    }
-    if (techRef.current) {
-      tl.from(techRef.current.children, { scale: 0.8, opacity: 0, stagger: 0.08, duration: 0.4 }, "-=0.2");
-    }
-    return () => tl.kill();
-  }, []);
-
+  
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -138,67 +110,123 @@ const StatsSection: React.FC = () => {
       <div className="absolute top-40 -right-64 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
 
       {/* Headline and Description */}
-      <motion.div
+      <motion.div 
         className="w-full max-w-3xl mx-auto text-center mt-2 z-10"
-        initial={false}
-        animate={false}
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
       >
-        <h1 ref={headlineRef} className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight tracking-tighter">
+        <motion.h1 
+          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight tracking-tighter"
+          variants={itemVariants}
+        >
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-gray-300">
             At Codewave, we're a technology-driven
           </span>{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 animate-pulse-premium">
             Intelligence Studio
           </span>
-        </h1>
-        <div ref={descRef}>
-          <p className="text-lg md:text-xl mb-8 font-medium" style={{ color: 'var(--text-secondary)' }}>
-            We love solving the hardest problems with smart engineering and AI.<br className="hidden md:block" />
-            Bring us a challenge — whether it's building a fast, scalable website, designing a secure GovTech platform, creating AI-powered automation, or launching a digital marketing strategy — we'll deliver solutions that are intelligent, reliable, and built for impact.
-          </p>
-          <div className="mt-6 space-y-4">
-            <p className="text-base md:text-lg mb-4" style={{ color: 'var(--text-secondary)' }}>
-              We work with startups, enterprises, and government teams across the globe — helping founders scale faster, organizations automate smarter, and public-sector projects go digital with confidence.
-            </p>
-            <p className="text-base md:text-lg mb-8" style={{ color: 'var(--text-secondary)' }}>
-              Our mindset is geeky, our process is precise, and our mission is simple: <br className="hidden md:block" />
-              <span className="font-semibold text-white">to turn complexity into clarity and make technology think for you.</span>
-            </p>
-          </div>
-        </div>
+        </motion.h1>
+        
+        <motion.p 
+          className="text-lg md:text-xl mb-8 font-medium" 
+          style={{ color: 'var(--text-secondary)' }}
+          variants={itemVariants}
+        >
+          We love solving the hardest problems with smart engineering and AI.<br className="hidden md:block" />
+          Bring us a challenge — whether it's building a fast, scalable website, designing a secure GovTech platform, creating AI-powered automation, or launching a digital marketing strategy — we'll deliver solutions that are intelligent, reliable, and built for impact.
+        </motion.p>
+        
+        <motion.div 
+          className="mt-6 space-y-4"
+          variants={containerVariants}
+        >
+          <motion.p 
+            className="text-base md:text-lg mb-4" 
+            style={{ color: 'var(--text-secondary)' }}
+            variants={itemVariants}
+          >
+            We work with startups, enterprises, and government teams across the globe — helping founders scale faster, organizations automate smarter, and public-sector projects go digital with confidence.
+          </motion.p>
+          
+          <motion.p 
+            className="text-base md:text-lg mb-8" 
+            style={{ color: 'var(--text-secondary)' }}
+            variants={itemVariants}
+          >
+            Our mindset is geeky, our process is precise, and our mission is simple: <br className="hidden md:block" />
+            <span className="font-semibold text-white">to turn complexity into clarity and make technology think for you.</span>
+          </motion.p>
+        </motion.div>
+        
         {/* CTA Buttons */}
-        <div ref={ctaRef} className="flex flex-wrap gap-4 justify-center mb-16">
-          <button className="font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'white' }}>
+        <motion.div 
+          className="flex flex-wrap gap-4 justify-center mb-16"
+          variants={containerVariants}
+        >
+          <motion.button
+            className="font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            style={{
+              background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+              color: 'white'
+            }}
+          >
             Get Started
-          </button>
-          <button className="font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'white' }}>
+          </motion.button>
+          
+          <motion.button
+            className="font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            style={{
+              background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+              color: 'white'
+            }}
+          >
             Schedule a Meeting
-          </button>
-          <button className="font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            style={{ background: 'linear-gradient(135deg, #ff7a4e, #ff4e4e)', color: 'white' }}>
+          </motion.button>
+          
+          <motion.button
+            className="font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            style={{
+              background: 'linear-gradient(135deg, #ff7a4e, #ff4e4e)',
+              color: 'white'
+            }}
+          >
             Video Demo
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </motion.div>
 
       {/* Services Section with Enhanced Cards */}
-      <motion.div
+      <motion.div 
         className="w-full max-w-6xl mx-auto"
-        initial={false}
-        animate={false}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
       >
         <h2 className="text-3xl font-bold text-center mb-10">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">Our Services</span>
         </h2>
-        <div ref={servicesRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {services.map((service, idx) => (
-            <div
+            <motion.div 
               key={idx}
               className="group relative"
               onMouseEnter={() => setHoveredService(idx)}
               onMouseLeave={() => setHoveredService(null)}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: idx * 0.1 + 0.3 }}
+              whileHover={{ y: -10 }}
             >
               <div className={`morph-card h-full p-6 flex flex-col items-center text-center transition-all duration-300 ${hoveredService === idx ? 'border-cyan-500 shadow-lg shadow-cyan-500/20' : ''}`}>
                 <div className="relative mb-6">
@@ -229,30 +257,39 @@ const StatsSection: React.FC = () => {
                 <h3 className="text-lg font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>{service.label}</h3>
                 <div className={`w-12 h-1 mx-auto rounded transition-all duration-500 ${hoveredService === idx ? 'w-24 bg-gradient-to-r from-cyan-400 to-blue-500' : 'bg-gray-600'}`}></div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>
 
       {/* Tech Stack with Enhanced Visuals */}
-      <motion.div
+      <motion.div 
         className="w-full max-w-4xl mx-auto mt-8"
-        initial={false}
-        animate={false}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
       >
         <h3 className="text-2xl font-bold text-center mb-8">Technologies We Use</h3>
-        <div ref={techRef} className="grid grid-cols-4 md:grid-cols-8 gap-6 justify-center">
+        <div className="grid grid-cols-4 md:grid-cols-8 gap-6 justify-center">
           {techStack.map((tech, idx) => (
-            <div
+            <motion.div
               key={idx}
               className="group glass-premium rounded-2xl aspect-square flex items-center justify-center p-3 hover:shadow-lg transition-all duration-300"
+              whileHover={{ 
+                y: -5, 
+                scale: 1.1,
+                boxShadow: '0 15px 30px rgba(0, 0, 0, 0.2), 0 0 10px rgba(var(--accent-primary-rgb), 0.3)' 
+              }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: idx * 0.05 + 0.5 }}
             >
-              <img
-                src={tech.src}
-                alt={tech.alt}
-                className="w-full h-full object-contain filter group-hover:brightness-125 transition-all duration-300"
+              <img 
+                src={tech.src} 
+                alt={tech.alt} 
+                className="w-full h-full object-contain filter group-hover:brightness-125 transition-all duration-300" 
               />
-            </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>
