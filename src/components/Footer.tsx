@@ -133,7 +133,7 @@ const Footer: React.FC = () => {
           style={{ borderTop: '1px solid var(--glass-border)' }}>
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-              © 2024 CodeWave.it • <a href="#privacy" className="hover:text-[var(--accent-primary)]">Privacy</a> • <a href="#terms" className="hover:text-[var(--accent-primary)]">Terms</a>
+              © 2025 CodeWave.it • <a href="#privacy" className="hover:text-[var(--accent-primary)]">Privacy</a> • <a href="#terms" className="hover:text-[var(--accent-primary)]">Terms</a>
             </p>
             <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
               Trusted by SaaS, GovTech, and Fast-Growing Startups
