@@ -117,7 +117,7 @@ const PortfolioSection: React.FC = () => {
                 color: 'var(--text-primary)'
               }}
             >
-              <div className={`h-52 bg-gradient-to-r ${project.color} relative overflow-hidden`}>
+              <div className="h-52 relative overflow-hidden" style={{ background: 'var(--glass-bg)' }}>
                 <img 
                   src={project.image} 
                   alt={project.title}

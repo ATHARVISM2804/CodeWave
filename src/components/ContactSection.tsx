@@ -132,23 +132,23 @@ const ContactSection: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <div
-            className="inline-block text-sm font-semibold mb-4"
-            style={{ color: 'var(--accent-primary)' }}
+            className="inline-block text-4xl font-bold mb-4"
+            style={{ color: 'var(--text-primary)' }}
           >
             CONTACT US
           </div>
           <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6"
+            className="text-xl sm:text-xl lg:text-xl font-bold mb-6"
             style={{ color: 'var(--text-primary)' }}
           >
             Let's Build Something Great Together
           </h2>
-          <p
+          {/* <p
             className="text-xl max-w-3xl mx-auto"
             style={{ color: 'var(--text-secondary)' }}
           >
             Reach out for a free consult, project quote, or partnership.
-          </p>
+          </p> */}
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -301,8 +301,8 @@ const ContactSection: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full btn-premium glare-effect text-lg"
-                style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}
+                className="w-full text-lg font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'white' }}
                 disabled={isSubmitting}
                 aria-busy={isSubmitting}
               >

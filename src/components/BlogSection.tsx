@@ -61,17 +61,17 @@ const BlogSection: React.FC = () => {
     <section ref={sectionRef} className="py-20 relative" >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className={`inline-block text-sm font-semibold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-            style={{ color: 'var(--accent-primary)' }}>
+          <div className={`inline-block text-4xl font-bold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+            style={{ color: 'var(--text-primary)' }}>
             BLOG & INSIGHTS
           </div>
-          <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-primary)' }}>
+          <h2 className={`text-xl sm:text-xl lg:text-xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-primary)' }}>
             Fresh Thinking. Smart Tech.{ ' ' }
             <span style={{ color: 'var(--accent-primary)' }}>Real Impact.</span>
           </h2>
-          <p className={`text-xl max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms', color: 'var(--text-secondary)' }}>
+          {/* <p className={`text-xl max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms', color: 'var(--text-secondary)' }}>
             We publish 2-3 times a month.
-          </p>
+          </p> */}
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
@@ -86,7 +86,6 @@ const BlogSection: React.FC = () => {
                 boxShadow: '0 4px 24px rgba(0,0,0,0.2)',
               }}
             >
-              <div className={`h-3 bg-gradient-to-r ${post.color}`}></div>
               
               <div className="p-8">
                 <div className="flex items-center space-x-4 text-sm mb-4" style={{ color: 'var(--text-muted)' }}>
