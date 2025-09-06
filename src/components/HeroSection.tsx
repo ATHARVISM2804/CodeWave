@@ -73,9 +73,9 @@ const HeroSection: React.FC = () => {
                 Experience The Demo
               </button>
               <button
-                className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card border-animate text-lg "
+                className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium  border-animate text-lg "
                 style={{
-                  color: 'var(--accent-primary)',
+                  color: 'var(--text-primary)',
                   borderColor: 'var(--accent-primary)'
                 }}
               >
