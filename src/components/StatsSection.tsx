@@ -161,7 +161,7 @@ const StatsSection: React.FC = () => {
         
         {/* CTA Buttons */}
         <motion.div 
-          className="flex flex-wrap gap-4 justify-center mb-16"
+          className="flex flex-wrap gap-4 justify-center mt-10 mb-16"
           variants={containerVariants}
         >
           <motion.button
