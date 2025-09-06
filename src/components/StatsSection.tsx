@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AiImage from "../assets/AI.png";
 import { motion } from 'framer-motion';
+import RollingGallery from './RollingGallary';
 
 // Placeholder icon/image components (replace with actual images or SVGs as needed)
 const GitHubCopilotBadge = () => (
@@ -47,16 +48,6 @@ const services = [
   { icon: 'https://cdn-icons-png.flaticon.com/512/3523/3523887.png', label: 'Legacy System Maintenance & Modernization' },
 ];
 
-const techStack = [
-  { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png', alt: 'React' },
-  { src: 'https://cdn.freebiesupply.com/logos/large/2x/nodejs-1-logo-png-transparent.png', alt: 'Node.js' },
-  { src: 'https://img.icons8.com/fluent-systems-filled/512/FFFFFF/nextjs.png', alt: 'Next.js' },
-  { src: 'https://e7.pngegg.com/pngimages/10/113/png-clipart-django-web-development-web-framework-python-software-framework-django-text-trademark-thumbnail.png', alt: 'Django' },
-  { src: 'https://icon2.cleanpng.com/20240131/ia/transparent-python-logo-python-icon-symbolizes-flexibility-1710891761988.webp', alt: 'Python' },
-  { src: 'https://www.php.net/images/logos/new-php-logo.svg', alt: 'PHP' },
-  { src: 'https://irislogic.com/wp-content/uploads/2024/07/Digital-Transformation.png', alt: 'Flutter' },
-  { src: 'https://png.pngtree.com/png-vector/20220606/ourmid/pngtree-adobe-illustrator-ai-icon-png-image_4899504.png', alt: 'AI' },
-];
 
 const StatsSection: React.FC = () => {
   const [hoveredService, setHoveredService] = useState<number | null>(null);
@@ -262,37 +253,8 @@ const StatsSection: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Tech Stack with Enhanced Visuals */}
-      <motion.div 
-        className="w-full max-w-4xl mx-auto mt-8"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      >
-        <h3 className="text-2xl font-bold text-center mb-8">Technologies We Use</h3>
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-6 justify-center">
-          {techStack.map((tech, idx) => (
-            <motion.div
-              key={idx}
-              className="group glass-premium rounded-2xl aspect-square flex items-center justify-center p-3 hover:shadow-lg transition-all duration-300"
-              whileHover={{ 
-                y: -5, 
-                scale: 1.1,
-                boxShadow: '0 15px 30px rgba(0, 0, 0, 0.2), 0 0 10px rgba(var(--accent-primary-rgb), 0.3)' 
-              }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: idx * 0.05 + 0.5 }}
-            >
-              <img 
-                src={tech.src} 
-                alt={tech.alt} 
-                className="w-full h-full object-contain filter group-hover:brightness-125 transition-all duration-300" 
-              />
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
+      <RollingGallery autoplay={true} />
+
 
       {/* Enhanced Decorative Quote */}
       <motion.div 

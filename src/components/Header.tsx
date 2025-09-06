@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Home, Info, Calendar, Users, DollarSign, Mail } from 'lucide-react';
-import ThemeToggle from './ThemeToggle/ThemeToggle';
-// import Codewavelogo from "../assets/logo.png";
+import { Menu, X, Home, Info, Calendar, Users, Mail } from 'lucide-react';
 
 const Codewavelogo = "https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png"
 
@@ -150,7 +148,6 @@ const Header: React.FC = () => {
         </nav>
       )}
       {/* Place ThemeToggle fixed at bottom left */}
-      <ThemeToggle />
     </>
   );
 };

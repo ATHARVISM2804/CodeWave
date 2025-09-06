@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { Code, Terminal, Zap } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);

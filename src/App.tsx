@@ -24,7 +24,6 @@ const HomePage = () => (
     <HeroSection />
     <MovingData />
     <StatsSection />
-    {/* <ServicesSection /> */}
     <WhyUsSection />
     <PortfolioSection />
     <BlogSection />
@@ -49,7 +48,6 @@ function App() {
     <Router>
       <div className="relative min-h-screen  text-white overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
         <ParticleBackground />
-        <ThemeToggle />
         <MouseFollower />
         <Header />
         {isLoading ? (
