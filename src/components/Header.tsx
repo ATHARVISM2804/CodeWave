@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, Info, Calendar, Users, DollarSign, Mail } from 'lucide-react';
-import Codewavelogo from "../assets/logo.png";
+import ThemeToggle from './ThemeToggle/ThemeToggle';
+// import Codewavelogo from "../assets/logo.png";
+
+const Codewavelogo = "https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png"
 
 // Sidebar nav items with icons
 const navItems = [
@@ -30,36 +33,32 @@ const Header: React.FC = () => {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all  mt-5 duration-500 ${isScrolled ? 'pointer-events-none opacity-0' : 'bg-transparent'
         }`}>
         <div className="container mx-auto w-full px-4 sm:px-6 lg:px-8">
-          <div className="relative flex items-center h-16">
+          <div className="relative flex items-center justify-between h-16">
             {/* left: logo */}
-            <div className="flex items-center">
+            <div className="flex items-center flex-shrink-0">
               <a href="/" className="flex items-center">
-                <img src={Codewavelogo} alt="CodeWave" className="w-32 h-auto" />
+                <img src={Codewavelogo} alt="CodeWave" className="w-52 h-auto" />
               </a>
             </div>
-
-            {/* spacer to push nav/cta to right */}
-            <div className="flex-1" />
-
-            {/* right: nav pill + CTA + mobile toggle */}
-            <div className="flex items-center gap-4">
-              <nav className="hidden md:block">
-                <div className="nav-pill flex items-center gap-4 px-4 py-2 rounded-full">
-                  {['Home', 'About Us', 'Services', 'Portfolio', 'Contact'].map((item) => (
-                    <a
-                      key={item}
-                      href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' us', '').replace(' ', '')}`}
-                      className={`nav-link relative font-medium px-3 py-1 ${item === 'Home' ? 'active' : ''}`}
-                      onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
-                      onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                      style={{ color: 'var(--text-secondary)' }}
-                    >
-                      {item}
-                    </a>
-                  ))}
-                </div>
-              </nav>
-
+            {/* center: nav */}
+            <nav className="hidden md:flex flex-1 justify-center">
+              <div className="nav-pill flex items-center gap-8 px-4 py-2 rounded-full">
+                {['Home', 'About Us', 'Services', 'Portfolio', 'Contact'].map((item) => (
+                  <a
+                    key={item}
+                    href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' us', '').replace(' ', '')}`}
+                    className={`nav-link relative font-medium px-4 py-1 ${item === 'Home' ? 'active' : ''}`}
+                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </nav>
+            {/* right: CTA + mobile toggle */}
+            <div className="flex items-center gap-2">
               <a
                 href="#"
                 className="cta-pill hidden md:inline-flex items-center gap-3 px-5 py-2 rounded-full"
@@ -76,7 +75,6 @@ const Header: React.FC = () => {
                   →
                 </span>
               </a>
-
               <button
                 className="md:hidden hover-lift magnetic-effect p-2"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -151,6 +149,8 @@ const Header: React.FC = () => {
           ))}
         </nav>
       )}
+      {/* Place ThemeToggle fixed at bottom left */}
+      <ThemeToggle />
     </>
   );
 };

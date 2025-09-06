@@ -33,10 +33,10 @@ const WhyUsSection: React.FC = () => {
         setContainerSize({ width, height });
       }
     };
-    
+
     // Initial measurement
     updateDimensions();
-    
+
     // Set up resize listener
     window.addEventListener('resize', updateDimensions);
     return () => window.removeEventListener('resize', updateDimensions);
@@ -74,16 +74,16 @@ const WhyUsSection: React.FC = () => {
   const getCardPosition = (index: number, totalItems: number) => {
     // Calculate angle in radians (start from top, move clockwise)
     const angleInRadians = (2 * Math.PI * index) / totalItems - Math.PI / 2;
-    
+
     // Base radius calculation - adjust these values as needed
     const radius = Math.min(containerSize.width, containerSize.height) * 0.35;
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     const finalRadius = isMobile ? radius * 0.8 : radius;
-    
+
     // Calculate x and y coordinates
     const x = Math.cos(angleInRadians) * finalRadius;
     const y = Math.sin(angleInRadians) * finalRadius;
-    
+
     return {
       // Offset each card by its own width/height for better positioning
       // This moves each card outward from its center point
@@ -102,11 +102,11 @@ const WhyUsSection: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-900/5 to-transparent pointer-events-none"></div>
       <div className="absolute -top-64 -right-64 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-64 -left-64 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl"></div>
-      
+
       {/* Floating particles in background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {Array.from({ length: 10 }).map((_, i) => (
-          <div 
+          <div
             key={i}
             className="absolute rounded-full"
             style={{
@@ -125,10 +125,9 @@ const WhyUsSection: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <h2
-            className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 transition-all duration-700 ease-out transform ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-            style={{ 
+            className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 transition-all duration-700 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            style={{
               background: 'linear-gradient(to right, white, #e0e7ff, white)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -138,9 +137,8 @@ const WhyUsSection: React.FC = () => {
             Why CodeWave.it?
           </h2>
           <p
-            className={`text-xl max-w-3xl mx-auto transition-all duration-700 ease-out delay-200 transform ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
+            className={`text-xl max-w-3xl mx-auto transition-all duration-700 ease-out delay-200 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
             style={{ color: 'var(--text-secondary)' }}
           >
             Because building smarter means partnering with the ones who think ahead.
@@ -148,15 +146,14 @@ const WhyUsSection: React.FC = () => {
         </div>
 
         {/* Network Visualization - Improved circular layout */}
-        <div 
+        <div
           ref={containerRef}
           className="relative w-full max-w-4xl mx-auto aspect-square"
         >
           {/* Central Circle - Enhanced Design */}
           <div
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-out delay-300 z-20 ${
-              isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-            }`}
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-out delay-300 z-20 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+              }`}
           >
             <div className="relative">
               <div
@@ -174,9 +171,9 @@ const WhyUsSection: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-center relative z-10">
                   <img
-                    src="https://code-wave-sage.vercel.app/assets/logo-CUgePuug.png"
+                    src="https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png"
                     alt="CodeWave logo"
-                    className="w-24 h-24 lg:w-32 lg:h-32 object-contain"
+                    className="w-24 h-24 lg:w-56 lg:h-56 object-contain"
                   />
                 </div>
               </div>
@@ -197,13 +194,12 @@ const WhyUsSection: React.FC = () => {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
               {features.map((feature, index) => {
                 const position = getCardPosition(index, features.length);
-                
+
                 return (
                   <div
                     key={index}
-                    className={`absolute transition-all duration-700 ease-out ${
-                      isVisible ? 'opacity-100' : 'opacity-0'
-                    }`}
+                    className={`absolute transition-all duration-700 ease-out ${isVisible ? 'opacity-100' : 'opacity-0'
+                      }`}
                     style={{
                       left: '50%',
                       top: '50%',
@@ -218,23 +214,23 @@ const WhyUsSection: React.FC = () => {
                       <div
                         className="backdrop-blur-md border rounded-xl p-6 h-full flex flex-col items-center transition-all duration-300"
                         style={{
-                          background: hoverIndex === index 
-                            ? 'linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.15), rgba(var(--accent-secondary-rgb), 0.05))' 
+                          background: hoverIndex === index
+                            ? 'linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.15), rgba(var(--accent-secondary-rgb), 0.05))'
                             : 'rgba(var(--glass-bg), 0.8)',
-                          borderColor: hoverIndex === index 
-                            ? 'var(--accent-primary)' 
+                          borderColor: hoverIndex === index
+                            ? 'var(--accent-primary)'
                             : 'var(--glass-border)',
                           transform: hoverIndex === index ? 'translateY(-10px) scale(1.05)' : 'translateY(0) scale(1)',
-                          boxShadow: hoverIndex === index 
-                            ? '0 15px 30px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(var(--accent-primary-rgb), 0.2)' 
+                          boxShadow: hoverIndex === index
+                            ? '0 15px 30px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(var(--accent-primary-rgb), 0.2)'
                             : '0 4px 6px rgba(0, 0, 0, 0.1)'
                         }}
                       >
                         <div
                           className="w-14 h-14 rounded-lg flex items-center justify-center mb-4 transition-all duration-300"
                           style={{
-                            background: hoverIndex === index 
-                              ? 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' 
+                            background: hoverIndex === index
+                              ? 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))'
                               : 'linear-gradient(to right, rgba(var(--accent-primary-rgb), 0.8), rgba(var(--accent-secondary-rgb), 0.8))',
                             transform: hoverIndex === index ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0)',
                             boxShadow: hoverIndex === index ? '0 10px 20px rgba(var(--accent-primary-rgb), 0.3)' : 'none'
@@ -251,9 +247,9 @@ const WhyUsSection: React.FC = () => {
                         <p className="text-sm leading-relaxed flex-grow" style={{ color: 'var(--text-secondary)' }}>
                           {feature.description}
                         </p>
-                      
+
                         {/* Animated underline */}
-                        <div 
+                        <div
                           className="h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 mt-4 rounded-full transition-all duration-300"
                           style={{ width: hoverIndex === index ? '100%' : '30%' }}
                         ></div>
@@ -270,13 +266,12 @@ const WhyUsSection: React.FC = () => {
             {features.map((_, index) => {
               const position = getCardPosition(index, features.length);
               const angle = (position.angle * 180) / Math.PI;
-              
+
               return (
                 <div
                   key={`line-${index}`}
-                  className={`absolute top-1/2 left-1/2 h-px transition-all duration-500 ${
-                    isVisible ? 'opacity-30 scale-100' : 'opacity-0 scale-0'
-                  } ${hoverIndex === index ? '!opacity-80' : ''}`}
+                  className={`absolute top-1/2 left-1/2 h-px transition-all duration-500 ${isVisible ? 'opacity-30 scale-100' : 'opacity-0 scale-0'
+                    } ${hoverIndex === index ? '!opacity-80' : ''}`}
                   style={{
                     background: `linear-gradient(90deg, rgba(var(--accent-primary-rgb), 0.7), rgba(var(--accent-primary-rgb), 0.1))`,
                     transformOrigin: 'left center',
@@ -293,28 +288,27 @@ const WhyUsSection: React.FC = () => {
 
       {/* Enhanced background code snippets */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
-        <div className="absolute top-20 left-10 font-mono text-xs transform rotate-12 animate-pulse-premium" 
-             style={{ color: 'var(--accent-primary)' }}>
+        <div className="absolute top-20 left-10 font-mono text-xs transform rotate-12 animate-pulse-premium"
+          style={{ color: 'var(--accent-primary)' }}>
           {'{ intelligence: "core" }'}
         </div>
-        <div className="absolute top-40 right-20 font-mono text-xs transform -rotate-6 animate-pulse-premium" 
-             style={{ color: 'var(--accent-primary)', animationDelay: '1s' }}>
+        <div className="absolute top-40 right-20 font-mono text-xs transform -rotate-6 animate-pulse-premium"
+          style={{ color: 'var(--accent-primary)', animationDelay: '1s' }}>
           {'security.byDesign()'}
         </div>
-        <div className="absolute bottom-20 left-20 font-mono text-xs transform rotate-6 animate-pulse-premium" 
-             style={{ color: 'var(--accent-primary)', animationDelay: '0.5s' }}>
+        <div className="absolute bottom-20 left-20 font-mono text-xs transform rotate-6 animate-pulse-premium"
+          style={{ color: 'var(--accent-primary)', animationDelay: '0.5s' }}>
           {'scale.infinitely()'}
         </div>
-        <div className="absolute bottom-40 right-10 font-mono text-xs transform -rotate-12 animate-pulse-premium" 
-             style={{ color: 'var(--accent-primary)', animationDelay: '1.5s' }}>
+        <div className="absolute bottom-40 right-10 font-mono text-xs transform -rotate-12 animate-pulse-premium"
+          style={{ color: 'var(--accent-primary)', animationDelay: '1.5s' }}>
           {'impact.measure()'}
         </div>
       </div>
-      
+
       {/* Call to Action */}
-      <div className={`text-center mt-12 transition-all duration-700 ease-out delay-500 transform ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-      }`}>
+      <div className={`text-center mt-12 transition-all duration-700 ease-out delay-500 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+        }`}>
         <button
           className="px-8 py-3 rounded-full font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
           style={{

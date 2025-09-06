@@ -955,9 +955,9 @@ select:focus {
 }
 
 .theme-toggle {
-  transition: all 0.3s ease;
-  will-change: transform;
   position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
   z-index: 100;
 }
 

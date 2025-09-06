@@ -54,16 +54,16 @@ const PortfolioSection: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-block text-sm font-semibold mb-4" style={{ color: 'var(--accent-primary)' }}>
+          <div className="inline-block text-4xl font-bold " style={{ color: 'var(--text-primary)' }}>
             OUR WORK & INSIGHTS
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+          <h2 className="text-3xl sm:text-4xl lg:text-xl mb-6" style={{ color: 'var(--text-primary)' }}>
             See What Intelligence Builds.{ ' ' }
             <span style={{ color: 'var(--accent-primary)' }}>Then Learn Why.</span>
           </h2>
-          <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+          {/* <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
             Intelligence-driven solutions that transform how you work and connect.
-          </p>
+          </p> */}
         </motion.div>
 
         {/* Featured Project */}

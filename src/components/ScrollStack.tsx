@@ -1,5 +1,5 @@
 import React, { ReactNode, useLayoutEffect, useRef, useCallback } from 'react';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 
 export interface ScrollStackItemProps {
   itemClassName?: string;
@@ -183,11 +183,10 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       wrapper: scroller,
       content: scroller.querySelector('.scroll-stack-inner') as HTMLElement,
       duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 2,
       infinite: false,
-      orientation: 'vertical',
       gestureOrientation: 'vertical',
       wheelMultiplier: 1,
       lerp: 0.1,
