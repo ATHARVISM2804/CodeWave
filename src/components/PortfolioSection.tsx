@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
+import ChromaGrid from './ChromaGrid';
 
 const PortfolioSection: React.FC = () => {
   const sectionRef = useRef(null);
@@ -43,6 +44,16 @@ const PortfolioSection: React.FC = () => {
       image: 'https://images.pexels.com/photos/8439093/pexels-photo-8439093.jpeg?auto=compress&cs=tinysrgb&w=800'
     }
   ];
+  
+  // Map projects to ChromaGrid format
+  const portfolioGridItems = projects.map(project => ({
+    image: project.image,
+    title: project.title,
+    subtitle: project.category,
+    borderColor: 'var(--accent-primary)',
+    gradient: 'linear-gradient(to bottom, var(--card-bg), var(--bg-primary))',
+    url: '#'
+  }));
 
   return (
     <section ref={sectionRef} className="py-20 relative">
@@ -102,56 +113,22 @@ const PortfolioSection: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Project Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
-              className="group card-premium glass-premium overflow-hidden"
-              style={{
-                background: 'var(--card-bg)',
-                border: '1px solid var(--card-border)',
-                color: 'var(--text-primary)'
-              }}
-            >
-              <div className="h-52 relative overflow-hidden" style={{ background: 'var(--glass-bg)' }}>
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover mix-blend-overlay transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #00000099, transparent)' }}></div>
-                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
-                  <button className="p-3 glass-premium rounded-lg" style={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border)' }}>
-                    <ExternalLink className="w-4 h-4" style={{ color: 'var(--text-primary)' }} />
-                  </button>
-                  <button className="p-3 glass-premium rounded-lg" style={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border)' }}>
-                    <Github className="w-4 h-4" style={{ color: 'var(--text-primary)' }} />
-                  </button>
-                </div>
-              </div>
-
-              <div className="p-8">
-                <div className="text-sm font-semibold mb-3" style={{ color: 'var(--accent-primary)' }}>{project.category}</div>
-                <h3 className="text-xl font-bold mb-4 transition-all duration-300" style={{ color: 'var(--text-primary)' }}>
-                  {project.title}
-                </h3>
-                <div className="space-y-2">
-                  {project.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-start text-sm font-medium"
-                      style={{ color: 'var(--text-secondary)' }}>
-                      <div className="w-2 h-2 rounded-full mr-3 mt-2" style={{ background: 'var(--accent-primary)' }}></div>
-                      {feature}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {/* Project Grid - Replace with ChromaGrid */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.4 }}
+        >
+          <div style={{ height: '750px', position: 'relative' }}>
+            <ChromaGrid 
+              items={portfolioGridItems}
+              radius={280}
+              damping={0.25}  // Decreased from 0.45
+              fadeOut={0.4}   // Decreased from 0.6
+              ease="power3.out"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

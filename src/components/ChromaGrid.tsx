@@ -151,9 +151,10 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
       ref={rootRef}
       onPointerMove={handleMove}
       onPointerLeave={handleLeave}
-      className={`relative w-full h-full flex flex-wrap justify-center items-start gap-3 ${className}`}
+      className={`relative w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ${className}`}
       style={
         {
+          background: 'var(--bg-primary)',
           '--r': `${radius}px`,
           '--x': '50%',
           '--y': '50%'
@@ -165,12 +166,14 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
           key={i}
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c.url)}
-          className="group relative flex flex-col w-[300px] rounded-[20px] overflow-hidden border-2 border-transparent transition-colors duration-300 cursor-pointer"
+          className="group relative flex flex-col w-full h-[340px] rounded-2xl overflow-hidden border-2 border-transparent transition-colors duration-300 cursor-pointer shadow-xl"
           style={
             {
-              '--card-border': c.borderColor || 'transparent',
-              background: c.gradient,
-              '--spotlight-color': 'rgba(255,255,255,0.3)'
+              '--card-border': c.borderColor || 'var(--accent-primary)',
+              background: c.gradient || 'var(--card-bg)',
+              borderColor: c.borderColor || 'var(--accent-primary)',
+              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.18), 0 1.5px 8px 0 rgba(var(--accent-primary-rgb),0.08)',
+              '--spotlight-color': 'rgba(var(--accent-primary-rgb), 0.18)'
             } as React.CSSProperties
           }
         >
@@ -182,7 +185,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
             }}
           />
           <div className="relative z-10 flex-1 p-[10px] box-border">
-            <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover rounded-[10px]" />
+            <img src={c.image} alt={c.title} loading="lazy" className="w-full h-[220px] object-cover rounded-[10px]" />
           </div>
           <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
             <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
@@ -198,6 +201,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
           backdropFilter: 'grayscale(1) brightness(0.78)',
           WebkitBackdropFilter: 'grayscale(1) brightness(0.78)',
           background: 'rgba(0,0,0,0.001)',
+          // background: 'var(--bg-primary)',
           maskImage:
             'radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0%,transparent 15%,rgba(0,0,0,0.10) 30%,rgba(0,0,0,0.22)45%,rgba(0,0,0,0.35)60%,rgba(0,0,0,0.50)75%,rgba(0,0,0,0.68)88%,white 100%)',
           WebkitMaskImage:

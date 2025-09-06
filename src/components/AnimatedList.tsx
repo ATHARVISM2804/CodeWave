@@ -21,7 +21,7 @@ const AnimatedItem: React.FC<AnimatedItemProps> = ({ children, delay = 0, index,
       initial={{ scale: 0.7, opacity: 0 }}
       animate={inView ? { scale: 1, opacity: 1 } : { scale: 0.7, opacity: 0 }}
       transition={{ duration: 0.2, delay }}
-      style={{ marginBottom: '1rem', cursor: 'pointer' }}
+      className="mb-4 cursor-pointer"
     >
       {children}
     </motion.div>
@@ -72,8 +72,7 @@ const AnimatedList: React.FC<AnimatedListProps> = ({
   const [bottomGradientOpacity, setBottomGradientOpacity] = useState<number>(1);
 
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLDivElement;
-    const { scrollTop, scrollHeight, clientHeight } = target;
+    const { scrollTop, scrollHeight, clientHeight } = e.target as HTMLDivElement;
     setTopGradientOpacity(Math.min(scrollTop / 50, 1));
     const bottomDistance = scrollHeight - (scrollTop + clientHeight);
     setBottomGradientOpacity(scrollHeight <= clientHeight ? 0 : Math.min(bottomDistance / 50, 1));
@@ -127,8 +126,20 @@ const AnimatedList: React.FC<AnimatedListProps> = ({
   }, [selectedIndex, keyboardNav]);
 
   return (
-    <div className={`scroll-list-container ${className}`}>
-      <div ref={listRef} className={`scroll-list ${!displayScrollbar ? 'no-scrollbar' : ''}`} onScroll={handleScroll}>
+    <div className={`relative w-[500px] ${className}`}>
+      <div
+        ref={listRef}
+        className={`max-h-[400px] overflow-y-auto p-4 ${
+          displayScrollbar
+            ? '[&::-webkit-scrollbar]:w-[8px] [&::-webkit-scrollbar-track]:bg-[#060010] [&::-webkit-scrollbar-thumb]:bg-[#222] [&::-webkit-scrollbar-thumb]:rounded-[4px]'
+            : 'scrollbar-hide'
+        }`}
+        onScroll={handleScroll}
+        style={{
+          scrollbarWidth: displayScrollbar ? 'thin' : 'none',
+          scrollbarColor: '#222 #060010'
+        }}
+      >
         {items.map((item, index) => (
           <AnimatedItem
             key={index}
@@ -142,16 +153,22 @@ const AnimatedList: React.FC<AnimatedListProps> = ({
               }
             }}
           >
-            <div className={`item ${selectedIndex === index ? 'selected' : ''} ${itemClassName}`}>
-              <p className="item-text">{item}</p>
+            <div className={`p-4 bg-[#111] rounded-lg ${selectedIndex === index ? 'bg-[#222]' : ''} ${itemClassName}`}>
+              <p className="text-white m-0">{item}</p>
             </div>
           </AnimatedItem>
         ))}
       </div>
       {showGradients && (
         <>
-          <div className="top-gradient" style={{ opacity: topGradientOpacity }}></div>
-          <div className="bottom-gradient" style={{ opacity: bottomGradientOpacity }}></div>
+          <div
+            className="absolute top-0 left-0 right-0 h-[50px] bg-gradient-to-b from-[#060010] to-transparent pointer-events-none transition-opacity duration-300 ease"
+            style={{ opacity: topGradientOpacity }}
+          ></div>
+          <div
+            className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-[#060010] to-transparent pointer-events-none transition-opacity duration-300 ease"
+            style={{ opacity: bottomGradientOpacity }}
+          ></div>
         </>
       )}
     </div>
