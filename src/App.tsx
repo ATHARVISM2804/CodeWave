@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async'; // Add this import
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import StatsSection from './components/StatsSection';
@@ -23,6 +24,18 @@ import LightRays from './components/LightRays';
 const HomePage = () => (
   <>
     <HeroSection />
+      <LightRays
+    raysOrigin="top-center"
+    raysColor="#00ffff"
+    raysSpeed={1.5}
+    lightSpread={0.8}
+    rayLength={1.2}
+    followMouse={true}
+    mouseInfluence={0.1}
+    noiseAmount={0.1}
+    distortion={0.05}
+    className="custom-rays"
+  />
     <MovingData />
     <StatsSection />
     <WhyUsSection />
@@ -46,39 +59,31 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="relative min-h-screen  text-white overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
-        <ParticleBackground />
-        <MouseFollower />
-        <Header />
-  <LightRays
-    raysOrigin="top-center"
-    raysColor="#00ffff"
-    raysSpeed={1.5}
-    lightSpread={0.8}
-    rayLength={1.2}
-    followMouse={true}
-    mouseInfluence={0.1}
-    noiseAmount={0.1}
-    distortion={0.05}
-    className="custom-rays"
-  />
-        {isLoading ? (
-          <LoadingAnimation duration={1000} onComplete={handleLoadingComplete} />
-        ) : (
-          <main>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/portfolio" element={<PortfolioPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-            </Routes>
-          </main>
-        )}
-        <Footer />
-      </div>
-    </Router>
+    <HelmetProvider> {/* Add this provider */}
+      <Router>
+        <div className="relative min-h-screen  text-white overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
+          <ParticleBackground />
+          <MouseFollower />
+          <Header />
+          <ThemeToggle />
+
+          {isLoading ? (
+            <LoadingAnimation duration={1000} onComplete={handleLoadingComplete} />
+          ) : (
+            <main>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/portfolio" element={<PortfolioPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+              </Routes>
+            </main>
+          )}
+          <Footer />
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 }
 

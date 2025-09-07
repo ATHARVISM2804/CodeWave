@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Shield, Award, TrendingUp, Zap, Users, Code, Brain, Palette, Smartphone } from 'lucide-react';
+import SpotlightCard from '../components/SpotlightCard';
 
 const AboutPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -197,13 +198,10 @@ const AboutPage: React.FC = () => {
           <h2 className="text-center text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>What We Value</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {values.map((value, idx) => (
-              <div key={idx}
-                className="rounded-2xl p-8 border flex flex-col items-center text-center"
-                style={{
-                  background: 'var(--card-bg)',
-                  border: '1px solid var(--card-border)',
-                  color: 'var(--text-primary)'
-                }}
+              <SpotlightCard
+                key={idx}
+                className="custom-spotlight-card rounded-2xl p-8 border flex flex-col items-center text-center"
+                spotlightColor="rgba(0, 229, 255, 0.2)"
               >
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
                   style={{
@@ -213,7 +211,7 @@ const AboutPage: React.FC = () => {
                 </div>
                 <h3 className="text-lg font-bold mb-2">{value.title}</h3>
                 <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{value.description}</p>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         </div>
