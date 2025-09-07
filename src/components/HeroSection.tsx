@@ -35,19 +35,17 @@ const HeroSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative min-h-screen px-10 flex items-center pt-16 overflow-hidden" >
-      
+    <section className="relative min-h-screen px-4 sm:px-6 md:px-10 flex items-center pt-16 overflow-hidden">
       {/* Enhanced Background Gradient */}
       <div className="absolute inset-0 bg-gradient-radial opacity-50"></div>
       <div className="absolute inset-0 bg-gradient-premium"></div>
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-0 sm:px-4 lg:px-8 z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className={`space-y-8 ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight" style={{ color: 'var(--text-primary)' }}>
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight" style={{ color: 'var(--text-primary)' }}>
                 We Speak Fluent Code. 
-                {/* Removed parallax-text and neon-glow classes, added static styling */}
                 <span
                   style={{
                     color: 'var(--accent-primary)',
@@ -57,7 +55,7 @@ const HeroSection: React.FC = () => {
                   {' '}And AI Has Joined the Team.
                 </span>
               </h1>
-              <p className="text-xl" style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-base sm:text-lg md:text-xl" style={{ color: 'var(--text-secondary)' }}>
                 We build powerful digital solutions that help startups and businesses work smarter—with custom web, mobile, 
                 and AI technology—while supporting government projects with secure, scalable innovation.
               </p>
@@ -65,7 +63,7 @@ const HeroSection: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <button
-                className="liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg "
+                className="liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg"
                 style={{
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))'
                 }}
@@ -73,7 +71,7 @@ const HeroSection: React.FC = () => {
                 Experience The Demo
               </button>
               <button
-                className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium  border-animate text-lg "
+                className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium border-animate text-lg"
                 style={{
                   color: 'var(--text-primary)',
                   borderColor: 'var(--accent-primary)'
@@ -84,7 +82,8 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative animate-fade-in-right delay-300">
+          {/* Hide right column on small screens */}
+          <div className="relative animate-fade-in-right delay-300 hidden lg:block">
             {/* Stats Display */}
             {/* <div className="space-y-8">
               <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-bounce-in delay-500' : 'opacity-0'}`}>
@@ -112,6 +111,7 @@ const HeroSection: React.FC = () => {
         </div>
 
         {/* Floating Code Snippets */}
+        {/* Show on lg+ screens only, and use responsive width for code cards */}
         {codeSnippets.map((snippet, index) => (
           <div
             key={index}
@@ -123,7 +123,7 @@ const HeroSection: React.FC = () => {
               zIndex: 30,
             }}
           >
-            <div className="relative w-[320px] glass-card shadow-xl rounded-2xl overflow-visible backdrop-blur-lg border border-white/10">
+            <div className="relative w-[260px] xl:w-[320px] glass-card shadow-xl rounded-2xl overflow-visible backdrop-blur-lg border border-white/10">
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-2" style={{ background: 'var(--glass-bg)' }}>
                 <div className="flex space-x-1">
@@ -135,10 +135,10 @@ const HeroSection: React.FC = () => {
                 <span style={{ color: 'var(--accent-secondary)' }} className="text-lg font-bold">{'{}'}</span>
               </div>
               {/* Code Block */}
-              <div className="px-4 pt-3 pb-8 font-mono text-sm" style={{ color: 'var(--accent-secondary)', minHeight: '70px' }}>
+              <div className="px-4 pt-3 pb-8 font-mono text-xs xl:text-sm" style={{ color: 'var(--accent-secondary)', minHeight: '70px' }}>
                 <span className="block whitespace-pre-line leading-relaxed">{snippet.code}</span>
               </div>
-              {/* Code Analysis Bar (just below code block, not overlapping metrics) */}
+              {/* Code Analysis Bar */}
               <div className="absolute left-6 right-6" style={{ top: '100px' }}>
                 <div className="flex items-center justify-between px-4 py-2 rounded-xl shadow-lg border border-white/10 backdrop-blur-md"
                   style={{ background: 'var(--glass-bg)' }}>
@@ -174,7 +174,6 @@ const HeroSection: React.FC = () => {
         ))}
         
       </div>
-    
     </section>
   );
 };
