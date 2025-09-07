@@ -20,6 +20,7 @@ import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 import LoadingAnimation from './components/LoadingAnimation';
 import MovingData from './components/MovingData';
 import LightRays from './components/LightRays';
+import Chatbot from './components/Chatbot';
 
 const HomePage = () => (
   <>
@@ -64,6 +65,7 @@ function App() {
         <div className="relative min-h-screen  text-white overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
           <ParticleBackground />
           <MouseFollower />
+          <Chatbot />
           <Header />
           <ThemeToggle />
 
