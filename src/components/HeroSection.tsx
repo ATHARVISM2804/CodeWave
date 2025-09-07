@@ -36,6 +36,7 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative min-h-screen px-10 flex items-center pt-16 overflow-hidden" >
+      
       {/* Enhanced Background Gradient */}
       <div className="absolute inset-0 bg-gradient-radial opacity-50"></div>
       <div className="absolute inset-0 bg-gradient-premium"></div>

@@ -18,6 +18,7 @@ import MouseFollower from './components/CursorFollower';
 import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 import LoadingAnimation from './components/LoadingAnimation';
 import MovingData from './components/MovingData';
+import LightRays from './components/LightRays';
 
 const HomePage = () => (
   <>
@@ -50,8 +51,20 @@ function App() {
         <ParticleBackground />
         <MouseFollower />
         <Header />
+  <LightRays
+    raysOrigin="top-center"
+    raysColor="#00ffff"
+    raysSpeed={1.5}
+    lightSpread={0.8}
+    rayLength={1.2}
+    followMouse={true}
+    mouseInfluence={0.1}
+    noiseAmount={0.1}
+    distortion={0.05}
+    className="custom-rays"
+  />
         {isLoading ? (
-          <LoadingAnimation duration={2500} onComplete={handleLoadingComplete} />
+          <LoadingAnimation duration={1000} onComplete={handleLoadingComplete} />
         ) : (
           <main>
             <Routes>

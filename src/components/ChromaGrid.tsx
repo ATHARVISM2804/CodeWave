@@ -167,15 +167,14 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c.url)}
           className="group relative flex flex-col w-full h-[340px] rounded-2xl overflow-hidden border-2 border-transparent transition-colors duration-300 cursor-pointer shadow-xl"
-          style={
-            {
-              '--card-border': c.borderColor || 'var(--accent-primary)',
-              background: c.gradient || 'var(--card-bg)',
-              borderColor: c.borderColor || 'var(--accent-primary)',
-              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.18), 0 1.5px 8px 0 rgba(var(--accent-primary-rgb),0.08)',
-              '--spotlight-color': 'rgba(var(--accent-primary-rgb), 0.18)'
-            } as React.CSSProperties
-          }
+          style={{
+            '--card-border': c.borderColor || 'var(--accent-primary)',
+            background: c.gradient || 'var(--card-bg)',
+            borderColor: c.borderColor || 'var(--accent-primary)',
+            boxShadow: '0 8px 32px 0 rgba(0,0,0,0.18), 0 1.5px 8px 0 rgba(var(--accent-primary-rgb),0.08)',
+            '--spotlight-color': 'rgba(var(--accent-primary-rgb), 0.18)',
+            filter: 'grayscale(1) brightness(0.85)' // <-- grayscale and slightly dim
+          } as React.CSSProperties}
         >
           <div
             className="absolute inset-0 pointer-events-none transition-opacity duration-500 z-20 opacity-0 group-hover:opacity-100"
@@ -185,7 +184,13 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
             }}
           />
           <div className="relative z-10 flex-1 p-[10px] box-border">
-            <img src={c.image} alt={c.title} loading="lazy" className="w-full h-[220px] object-cover rounded-[10px]" />
+            <img
+              src={c.image}
+              alt={c.title}
+              loading="lazy"
+              className="w-full h-[220px] object-cover rounded-[10px] group-hover:filter-none transition-all duration-300"
+              style={{ filter: 'grayscale(1) brightness(0.85)' }}
+            />
           </div>
           <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
             <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
@@ -197,26 +202,29 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
       ))}
       <div
         className="absolute inset-0 pointer-events-none z-30"
-        style={{    
-          backdropFilter: 'grayscale(1) brightness(0.78)',
-          WebkitBackdropFilter: 'grayscale(1) brightness(0.78)',
-          background: 'rgba(0,0,0,0.001)',
-          // background: 'var(--bg-primary)',
+        style={{
+          // More glowing mask
+          backdropFilter: 'brightness(0.95) blur(2px)',
+          WebkitBackdropFilter: 'brightness(0.95) blur(2px)',
+          background: 'rgba(0,0,0,0.01)',
+          boxShadow: '0 0 80px 30px rgba(var(--accent-primary-rgb),0.18), 0 0 120px 60px rgba(var(--accent-secondary-rgb),0.12)',
           maskImage:
-            'radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0%,transparent 15%,rgba(0,0,0,0.10) 30%,rgba(0,0,0,0.22)45%,rgba(0,0,0,0.35)60%,rgba(0,0,0,0.50)75%,rgba(0,0,0,0.68)88%,white 100%)',
+            'radial-gradient(circle var(--r) at var(--x) var(--y),rgba(var(--accent-primary-rgb),0.18) 0%,rgba(var(--accent-primary-rgb),0.12) 30%,rgba(0,0,0,0.10) 45%,rgba(0,0,0,0.22)60%,rgba(0,0,0,0.35)75%,rgba(0,0,0,0.50)88%,white 100%)',
           WebkitMaskImage:
-            'radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0%,transparent 15%,rgba(0,0,0,0.10) 30%,rgba(0,0,0,0.22)45%,rgba(0,0,0,0.35)60%,rgba(0,0,0,0.50)75%,rgba(0,0,0,0.68)88%,white 100%)'
+            'radial-gradient(circle var(--r) at var(--x) var(--y),rgba(var(--accent-primary-rgb),0.18) 0%,rgba(var(--accent-primary-rgb),0.12) 30%,rgba(0,0,0,0.10) 45%,rgba(0,0,0,0.22)60%,rgba(0,0,0,0.35)75%,rgba(0,0,0,0.50)88%,white 100%)'
         }}
       />
       <div
         ref={fadeRef}
         className="absolute inset-0 pointer-events-none transition-opacity duration-[250ms] z-40"
         style={{
-          backdropFilter: 'grayscale(1) brightness(0.78)',
-          WebkitBackdropFilter: 'grayscale(1) brightness(0.78)',
-          background: 'rgba(0,0,0,0.001)',
+          // Even more glowing for the circle
+          backdropFilter: 'brightness(0.85) blur(4px)',
+          WebkitBackdropFilter: 'brightness(0.85) blur(4px)',
+          background: 'rgba(0,0,0,0.01)',
+          boxShadow: '0 0 120px 40px rgba(var(--accent-primary-rgb),0.28), 0 0 180px 80px rgba(var(--accent-secondary-rgb),0.18)',
           maskImage:
-            'radial-gradient(circle var(--r) at var(--x) var(--y),white 0%,white 15%,rgba(255,255,255,0.90)30%,rgba(255,255,255,0.78)45%,rgba(255,255,255,0.65)60%,rgba(255,255,255,0.50)75%,rgba(255,255,255,0.32)88%,transparent 100%)',
+            'radial-gradient(circle var(--r) at var(--x) var(--y),rgba(var(--accent-primary-rgb),0.32) 0%,rgba(var(--accent-primary-rgb),0.22) 30%,rgba(255,255,255,0.90)45%,rgba(255,255,255,0.98)60%,rgba(255,255,255,0.99)75%,rgba(255,255,255,0.50)88%,transparent 100%)',
           WebkitMaskImage:
             'radial-gradient(circle var(--r) at var(--x) var(--y),white 0%,white 15%,rgba(255,255,255,0.90)30%,rgba(255,255,255,0.78)45%,rgba(255,255,255,0.65)60%,rgba(255,255,255,0.50)75%,rgba(255,255,255,0.32)88%,transparent 100%)',
           opacity: 1

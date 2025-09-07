@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, Info, Calendar, Users, Mail } from 'lucide-react';
+import CalendlyPopup from './Calendlypopup';
 
 const Codewavelogo = "https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png"
 
@@ -16,6 +17,7 @@ const navItems = [
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showCalendly, setShowCalendly] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +26,12 @@ const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Handle Calendly popup
+  const handleCalendlyClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowCalendly(true);
+  };
 
   return (
     <>
@@ -57,22 +65,22 @@ const Header: React.FC = () => {
             </nav>
             {/* right: CTA + mobile toggle */}
             <div className="flex items-center gap-2">
-              <a
-                href="#"
-                className="cta-pill hidden md:inline-flex items-center gap-3 px-5 py-2 rounded-full"
+              <button
+                onClick={handleCalendlyClick}
+                className="cta-pill hidden md:inline-flex items-center gap-3 px-5 py-2 rounded-full cursor-pointer"
                 style={{
                   background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))',
                   color: 'white',
-                  boxShadow: '0 8px 30px rgba(0,0,0,0.25)'
+                  boxShadow: '0 8px 30px rgba(0,0,0,0.25)',
+                  border: 'none'
                 }}
               >
                 <span className="font-semibold">Book a 30-min consult</span>
                 <span className="cta-count inline-flex items-center justify-center ml-3 px-3 py-1 rounded-full"
                   style={{ background: 'rgba(0,0,0,0.25)', color: 'white', fontWeight: 700 }}>
-                  {/* keep the visual badge but empty/optional - no change to functionality */}
                   →
                 </span>
-              </a>
+              </button>
               <button
                 className="md:hidden hover-lift magnetic-effect p-2"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -106,8 +114,11 @@ const Header: React.FC = () => {
                   {item}
                 </a>
               ))}
-              <button className="w-full liquid-button font-semibold glare-effect stagger-animation stagger-6"
-                style={{ color: 'var(--text-primary)', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}>
+              <button
+                onClick={handleCalendlyClick}
+                className="w-full liquid-button font-semibold glare-effect stagger-animation stagger-6"
+                style={{ color: 'var(--text-primary)', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}
+              >
                 Book a 30-min consult
               </button>
             </div>
@@ -148,6 +159,13 @@ const Header: React.FC = () => {
         </nav>
       )}
       {/* Place ThemeToggle fixed at bottom left */}
+
+      {/* Calendly Popup */}
+      <CalendlyPopup
+        url="https://calendly.com/your-calendly-username/30min" // Replace with your actual Calendly URL
+        isOpen={showCalendly}
+        onClose={() => setShowCalendly(false)}
+      />
     </>
   );
 };
