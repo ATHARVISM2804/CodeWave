@@ -146,22 +146,17 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
   };
 
   return (
-    <div className={`relative ${isScreenSizeSm ? 'h-[180px]' : 'h-[300px]'} w-full overflow-x-hidden overflow-y-visible`}>
+          <div className={`relative  w-full overflow-x-hidden overflow-y-visible overflow-hidden`}
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            '&::-webkit-scrollbar': {
+              display: 'none'
+            }
+          }}>
       <h1 className='text-white text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-4'>Techstack We use</h1>
 
-      <div
-        className="absolute top-0 left-0 h-full w-[32px] sm:w-[48px] z-10"
-        style={{
-          background: 'linear-gradient(to left, rgba(0,0,0,0) 0%, #060010 100%)'
-        }}
-      />
-
-      <div
-        className="absolute top-0 right-0 h-full w-[32px] sm:w-[48px] z-10"
-        style={{
-          background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, #060010 100%)'
-        }}
-      />
+     
       <div className="flex h-full items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">
         <motion.div
           drag="x"

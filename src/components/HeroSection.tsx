@@ -10,25 +10,25 @@ const HeroSection: React.FC = () => {
   const codeSnippets = [
     { 
       code: 'const ai = new Intelligence();',
-      position: { top: '8%', right: '2%' }, 
+      position: { top: '15%', right: '12%' }, 
       delay: 0,
       rotate: 5,
     },
     { 
       code: 'function buildFuture() { return innovation; }',
-      position: { top: '22%', right: '18%' }, 
+      position: { top: '22%', right: '38%' }, 
       delay: 200,
       rotate: 0
     },
     { 
       code: 'if (problem) solve();',
-      position: { top: '60%', right: '16%' }, 
+      position: { top: '60%', right: '36%' }, 
       delay: 400,
       rotate: 0
     },
     { 
       code: 'AI.merge(creativity)',
-      position: { top: '70%', right: '4%' }, 
+      position: { top: '62%', right: '14%' }, 
       delay: 600,
       rotate: 0
     }
