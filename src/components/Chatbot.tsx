@@ -186,7 +186,7 @@ const Chatbot: React.FC = () => {
             auto-complete="off"
           >
             <input
-              className="flex-1 px-3 py-2 text-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-50 placeholder-gray-400 transition-all duration-200"
+              className="flex-1 px-3  py-2 text-sm text-black rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-50 placeholder-gray-400 transition-all duration-200"
               type="text"
               placeholder="Type your message..."
               value={input}
