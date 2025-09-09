@@ -146,7 +146,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
   };
 
   return (
-          <div className={`relative  w-full overflow-x-hidden overflow-y-visible overflow-hidden`}
+          <div className={`relative  w-full  overflow-x-hidden overflow-y-hidden`}
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
@@ -157,7 +157,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
       <h1 className='text-white text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-4'>Techstack We use</h1>
 
      
-      <div className="flex h-full items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">
+      <div className="flex items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">
         <motion.div
           drag="x"
           dragElastic={0}
@@ -173,7 +173,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
             width: cylinderWidth,
             transformStyle: 'preserve-3d'
           }}
-          className="flex min-h-[100px] sm:min-h-[200px] cursor-grab items-center justify-center [transform-style:preserve-3d]"
+          className="flex h-[200px] sm:min-h-[200px] cursor-grab items-center justify-center [transform-style:preserve-3d]"
         >
           {galleryImages.map((url, i) => {
             const blurTransform = createBlurTransform(i);
@@ -194,7 +194,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
                 <img
                   src={url}
                   alt="gallery"
-                  className="pointer-events-none rounded-[12px] border-[2px] border-white object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                  className="pointer-events-none rounded-[12px] border-[2px] bg-white border-white object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                   style={{
                     width: `${imageWidth}px`,
                     height: `${imageHeight}px`,
