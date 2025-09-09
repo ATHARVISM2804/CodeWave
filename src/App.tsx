@@ -25,7 +25,7 @@ import Chatbot from './components/Chatbot';
 const HomePage = () => (
   <>
     <HeroSection />
-      <LightRays
+      {/* <LightRays
     raysOrigin="top-center"
     raysColor="#00ffff"
     raysSpeed={1.5}
@@ -36,7 +36,7 @@ const HomePage = () => (
     noiseAmount={0.1}
     distortion={0.05}
     className="custom-rays"
-  />
+  /> */}
     <MovingData />
     <StatsSection />
     <WhyUsSection />

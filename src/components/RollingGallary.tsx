@@ -28,16 +28,69 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const cylinderWidth: number = isScreenSizeSm ? 1100 : 1800;
+  // Responsive cylinder and image sizes
+  const cylinderWidth: number = isScreenSizeSm ? 600 : 1800;
   const faceCount: number = galleryImages.length;
-  const faceWidth: number = (cylinderWidth / faceCount) * 1.5;
+  const faceWidth: number = isScreenSizeSm ? 120 : (cylinderWidth / faceCount) * 1.5;
   const radius: number = cylinderWidth / (2 * Math.PI);
+  const imageWidth = isScreenSizeSm ? 90 : 220;
+  const imageHeight = isScreenSizeSm ? 50 : 100;
+  const imagePadding = isScreenSizeSm ? '4%' : '6%';
 
   const dragFactor: number = 0.05;
   const rotation = useMotionValue(0);
   const controls = useAnimation();
 
   const transform = useTransform(rotation, (val: number) => `rotate3d(0,1,0,${val}deg)`);
+
+  // Create blur transforms for each face
+  const createBlurTransform = (faceIndex: number) => {
+    return useTransform(rotation, (rotationValue) => {
+      const faceAngle = (360 / faceCount) * faceIndex;
+      // Normalize rotation to 0-360 range
+      const normalizedRotation = ((-rotationValue % 360) + 360) % 360;
+      // Calculate relative angle (how far this face is from the front)
+      let relativeAngle = ((faceAngle - normalizedRotation + 360) % 360);
+      
+      // Convert to shortest distance from front (0-180 range)
+      if (relativeAngle > 180) {
+        relativeAngle = 360 - relativeAngle;
+      }
+      
+      // Create smooth blur based on angle from front
+      // Front faces (0-30 degrees): No blur
+      // Side faces (30-150 degrees): Gradual blur increase
+      // Back faces (150-180 degrees): Maximum blur
+      let blurAmount = 0;
+      if (relativeAngle > 30) {
+        const blurFactor = Math.min((relativeAngle - 30) / 120, 1); // 0 to 1
+        blurAmount = blurFactor * 3; // Max 3px blur
+      }
+      
+      return `blur(${blurAmount}px)`;
+    });
+  };
+
+  // Create opacity transforms for each face
+  const createOpacityTransform = (faceIndex: number) => {
+    return useTransform(rotation, (rotationValue) => {
+      const faceAngle = (360 / faceCount) * faceIndex;
+      const normalizedRotation = ((-rotationValue % 360) + 360) % 360;
+      let relativeAngle = ((faceAngle - normalizedRotation + 360) % 360);
+      
+      if (relativeAngle > 180) {
+        relativeAngle = 360 - relativeAngle;
+      }
+      
+      // Reduce opacity for faces that are more than 90 degrees from front
+      if (relativeAngle > 90) {
+        const opacityFactor = Math.max(0.4, 1 - ((relativeAngle - 90) / 90) * 0.6);
+        return opacityFactor;
+      }
+      
+      return 1;
+    });
+  };
 
   const startInfiniteSpin = (startAngle: number) => {
     controls.start({
@@ -77,7 +130,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
     if (autoplay) {
       startInfiniteSpin(finalAngle);
     }
-  };
+  };  
 
   const handleMouseEnter = (): void => {
     if (autoplay && pauseOnHover) {
@@ -93,18 +146,18 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
   };
 
   return (
-    <div className="relative h-[300px] w- overflow-hidden">
-      <h1 className='text-white text-2xl font-bold text-center'>Techstack We use</h1>
+    <div className={`relative ${isScreenSizeSm ? 'h-[180px]' : 'h-[300px]'} w-full overflow-x-hidden overflow-y-visible`}>
+      <h1 className='text-white text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-4'>Techstack We use</h1>
 
       <div
-        className="absolute top-0 bg-green-400 left-0 h-full w-[48px] z-10"
+        className="absolute top-0 left-0 h-full w-[32px] sm:w-[48px] z-10"
         style={{
           background: 'linear-gradient(to left, rgba(0,0,0,0) 0%, #060010 100%)'
         }}
       />
 
       <div
-        className="absolute top-0 right-0 h-full w-[48px] z-10"
+        className="absolute top-0 right-0 h-full w-[32px] sm:w-[48px] z-10"
         style={{
           background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, #060010 100%)'
         }}
@@ -125,24 +178,38 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
             width: cylinderWidth,
             transformStyle: 'preserve-3d'
           }}
-          className="flex min-h-[200px] cursor-grab items-center justify-center [transform-style:preserve-3d]"
+          className="flex min-h-[100px] sm:min-h-[200px] cursor-grab items-center justify-center [transform-style:preserve-3d]"
         >
-          {galleryImages.map((url, i) => (
-            <div
-              key={i}
-              className="group absolute flex h-fit items-center justify-center p-[8%] [backface-visibility:hidden] md:p-[6%]"
-              style={{
-                width: `${faceWidth}px`,
-                transform: `rotateY(${(360 / faceCount) * i}deg) translateZ(${radius}px)`
-              }}
-            >
-              <img
-                src={url}
-                alt="gallery"
-                className="pointer-events-none h-[120px] w-[300px] rounded-[15px] border-[3px] border-white object-contain transition-transform duration-300 ease-out group-hover:scale-105 sm:h-[100px] sm:w-[220px]"
-              />
-            </div>
-          ))}
+          {galleryImages.map((url, i) => {
+            const blurTransform = createBlurTransform(i);
+            const opacityTransform = createOpacityTransform(i);
+            
+            return (
+              <motion.div
+                key={i}
+                className="group absolute flex h-fit items-center justify-center"
+                style={{
+                  width: `${faceWidth}px`,
+                  padding: imagePadding,
+                  transform: `rotateY(${(360 / faceCount) * i}deg) translateZ(${radius}px)`,
+                  filter: blurTransform,
+                  opacity: opacityTransform
+                }}
+              >
+                <img
+                  src={url}
+                  alt="gallery"
+                  className="pointer-events-none rounded-[12px] border-[2px] border-white object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                  style={{
+                    width: `${imageWidth}px`,
+                    height: `${imageHeight}px`,
+                    minWidth: '60px',
+                    minHeight: '30px'
+                  }}
+                />
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </div>
