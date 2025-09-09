@@ -182,7 +182,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
             return (
               <motion.div
                 key={i}
-                className="group absolute flex h-fit items-center justify-center"
+                className="group absolute p-10 flex h-fit items-center justify-center"
                 style={{
                   width: `${faceWidth}px`,
                   padding: imagePadding,
@@ -194,7 +194,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
                 <img
                   src={url}
                   alt="gallery"
-                  className="pointer-events-none rounded-[12px] border-[2px] bg-white border-white object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                  className="pointer-events-none rounded-[12px] border-[2px] bg-white  border-white object-contain transition-transform duration-300 ease-out"
                   style={{
                     width: `${imageWidth}px`,
                     height: `${imageHeight}px`,
