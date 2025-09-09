@@ -41,7 +41,7 @@ const MovingData: React.FC<{ speed?: number }> = ({ speed = 30 }) => {
 										</div>
 										<div>
 											<div className="text-lg font-bold neon-glow" style={{ color: 'var(--text-primary)' }}>{s.value}</div>
-											<div className="text-sm" style={{ color: 'var(--text-secondary)' }}>{s.label}</div>
+											<div className="text-xs" style={{ color: 'var(--text-secondary)' }}>{s.label}</div>
 										</div>
 									</div>
 								</div>
