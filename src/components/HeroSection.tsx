@@ -10,41 +10,41 @@ const HeroSection: React.FC = () => {
   const codeSnippets = [
     { 
       code: 'const ai = new Intelligence();',
-      position: { top: '25%', right: '6%' }, 
+      position: { top: '8%', right: '2%' }, 
       delay: 0,
       rotate: 5,
     },
     { 
       code: 'function buildFuture() { return innovation; }',
-      position: { top: '25%', right: '25%' }, 
+      position: { top: '22%', right: '18%' }, 
       delay: 200,
       rotate: 0
     },
     { 
       code: 'if (problem) solve();',
-      position: { top: '55%', right: '24%' }, 
+      position: { top: '60%', right: '16%' }, 
       delay: 400,
       rotate: 0
     },
     { 
       code: 'AI.merge(creativity)',
-      position: { top: '56%', right: '8%' }, 
+      position: { top: '70%', right: '4%' }, 
       delay: 600,
       rotate: 0
     }
   ];
 
   return (
-    <section className="relative min-h-screen px-4 sm:px-6 md:px-10 flex items-center pt-16 overflow-hidden">
+    <section className="relative min-h-[80vh] sm:min-h-screen px-2 sm:px-4 md:px-6 flex items-center pt-16 overflow-hidden">
       {/* Enhanced Background Gradient */}
       <div className="absolute inset-0 bg-gradient-radial opacity-50"></div>
       <div className="absolute inset-0 bg-gradient-premium"></div>
       
       <div className="container mx-auto px-0 sm:px-4 lg:px-8 z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className={`space-y-8 ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
             <div className="space-y-4">
-              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight" style={{ color: 'var(--text-primary)' }}>
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight break-words" style={{ color: 'var(--text-primary)' }}>
                 We Speak Fluent Code. 
                 <span
                   style={{
@@ -55,15 +55,15 @@ const HeroSection: React.FC = () => {
                   {' '}And AI Has Joined the Team.
                 </span>
               </h1>
-              <p className="text-base sm:text-lg md:text-xl" style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-sm xs:text-base sm:text-lg md:text-xl" style={{ color: 'var(--text-secondary)' }}>
                 We build powerful digital solutions that help startups and businesses work smarter—with custom web, mobile, 
                 and AI technology—while supporting government projects with secure, scalable innovation.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 w-full max-w-[420px]">
               <button
-                className="liquid-button text-white px-8 py-4 font-semibold glare-effect text-lg"
+                className="liquid-button text-white px-6 sm:px-8 py-3 sm:py-4 font-semibold glare-effect text-base sm:text-lg w-full xs:w-auto"
                 style={{
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))'
                 }}
@@ -71,7 +71,7 @@ const HeroSection: React.FC = () => {
                 Experience The Demo
               </button>
               <button
-                className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium border-animate text-lg"
+                className="morph-card px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover-lift-premium border-animate text-base sm:text-lg w-full xs:w-auto"
                 style={{
                   color: 'var(--text-primary)',
                   borderColor: 'var(--accent-primary)'
@@ -83,7 +83,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Hide right column on small screens */}
-          <div className="relative animate-fade-in-right delay-300 hidden lg:block">
+          <div className="relative animate-fade-in-right delay-300 hidden md:block">
             {/* Stats Display */}
             {/* <div className="space-y-8">
               <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-bounce-in delay-500' : 'opacity-0'}`}>
@@ -110,20 +110,21 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Floating Code Snippets */}
-        {/* Show on lg+ screens only, and use responsive width for code cards */}
+        {/* Floating Code Snippets - show on md+ screens, responsive width */}
         {codeSnippets.map((snippet, index) => (
           <div
             key={index}
-            className={`absolute hidden lg:block ${isVisible ? 'float-enhanced particle-glow' : 'opacity-0'}`}
+            className={`absolute hidden md:block ${isVisible ? 'float-enhanced particle-glow' : 'opacity-0'}`}
             style={{
               ...snippet.position,
               animationDelay: `${snippet.delay}ms`,
               animationDuration: `${4 + index * 0.8}s`,
               zIndex: 30,
+              width: '180px',
+              maxWidth: '60vw',
             }}
           >
-            <div className="relative w-[260px] xl:w-[320px] glass-card shadow-xl rounded-2xl overflow-visible backdrop-blur-lg border border-white/10">
+            <div className="relative w-full sm:w-[220px] md:w-[260px] xl:w-[320px] glass-card shadow-xl rounded-2xl overflow-visible backdrop-blur-lg border border-white/10">
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-2" style={{ background: 'var(--glass-bg)' }}>
                 <div className="flex space-x-1">
