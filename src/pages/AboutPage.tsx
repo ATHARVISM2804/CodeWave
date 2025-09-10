@@ -119,7 +119,7 @@ const AboutPage: React.FC = () => {
       style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
     >
       {/* Hero Section */}
-      <section className="relative mt-10 min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative mt-10 min-h-[70vh] flex items-center justify-center">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12 z-10">
           {/* Left: Image */}
           <div className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">

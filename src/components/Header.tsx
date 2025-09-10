@@ -43,7 +43,7 @@ const Header: React.FC = () => {
             {/* left: logo */}
             <div className="flex items-center flex-shrink-0">
               <a href="/" className="flex items-center">
-                <img src={Codewavelogo} alt="CodeWave" className="w-52 h-auto" />
+                <img src={Codewavelogo} alt="CodeWave" className="w-52 rounded-lg h-auto" />
               </a>
             </div>
             {/* center: nav */}

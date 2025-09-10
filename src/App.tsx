@@ -48,10 +48,32 @@ const HomePage = () => (
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
-    // You can add actual resource loading checks here
-    // For now, we'll just use the animation with a fixed duration
+    // Check for stored theme preference or system preference
+    const storedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    const initialTheme = storedTheme || systemTheme;
+    
+    setTheme(initialTheme);
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(initialTheme);
+    
+    // Listen for theme changes
+    const handleThemeChange = () => {
+      const currentTheme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
+      setTheme(currentTheme);
+    };
+    
+    // Create a MutationObserver to watch for class changes on html element
+    const observer = new MutationObserver(handleThemeChange);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+    
+    return () => observer.disconnect();
   }, []);
 
   // Handle completion of loading animation
@@ -62,8 +84,14 @@ function App() {
   return (
     <HelmetProvider> {/* Add this provider */}
       <Router>
-        <div className="relative min-h-screen  text-white overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
-          <ParticleBackground />
+        <div 
+          className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}
+          style={{ 
+            background: 'var(--bg-primary)',
+            color: 'var(--text-primary)'
+          }}
+        >
+          {/* <ParticleBackground /> */}
           <MouseFollower />
           <Chatbot />
           <Header />

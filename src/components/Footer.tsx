@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
               <img 
                 src="https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png" 
                 alt="CodeWave Logo" 
-                className="w-56 h-14 mb-12 object-cover"
+                className="w-56 h-14 mb-12 bg-black rounded-lg object-cover"
               />
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 <span style={{ color: 'var(--text-primary)' }}>We don't just write code.</span> <br />
