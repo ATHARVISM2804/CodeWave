@@ -49,7 +49,7 @@ const HeroSection: React.FC = () => {
                 <span
                   style={{
                     color: 'var(--accent-primary)',
-                    textShadow: '0 0 8px rgba(255, 106, 61, 0.4)'
+                    textShadow: `0 0 8px rgba(var(--accent-primary-rgb), 0.4)`
                   }}
                 >
                   {' '}And AI Has Joined the Team.
@@ -124,13 +124,14 @@ const HeroSection: React.FC = () => {
               maxWidth: '60vw',
             }}
           >
-            <div className="relative w-full sm:w-[220px] md:w-[260px] xl:w-[320px] glass-card shadow-xl rounded-2xl overflow-visible backdrop-blur-lg border border-white/10">
+            <div className="relative w-full sm:w-[220px] md:w-[260px] xl:w-[320px] morph-card glare-card shadow-xl rounded-2xl overflow-visible backdrop-blur-lg"
+              style={{ border: '1px solid var(--card-border)' }}>
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-2" style={{ background: 'var(--glass-bg)' }}>
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 rounded-full" style={{ background: 'var(--accent-primary)' }}></div>
-                  <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <div className="w-2 h-2 rounded-full" style={{ background: '#ff5f56' }}></div>
+                  <div className="w-2 h-2 rounded-full" style={{ background: '#ffbd2e' }}></div>
+                  <div className="w-2 h-2 rounded-full" style={{ background: '#27ca3f' }}></div>
                 </div>
                 <span className="text-xs" style={{ color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.05em' }}>AI Suggestion</span>
                 <span style={{ color: 'var(--accent-secondary)' }} className="text-lg font-bold">{'{}'}</span>
@@ -141,8 +142,11 @@ const HeroSection: React.FC = () => {
               </div>
               {/* Code Analysis Bar */}
               <div className="absolute left-6 right-6" style={{ top: '100px' }}>
-                <div className="flex items-center justify-between px-4 py-2 rounded-xl shadow-lg border border-white/10 backdrop-blur-md"
-                  style={{ background: 'var(--glass-bg)' }}>
+                <div className="flex items-center justify-between px-4 py-2 rounded-xl shadow-lg backdrop-blur-md"
+                  style={{ 
+                    background: 'var(--glass-bg)', 
+                    border: '1px solid var(--glass-border)' 
+                  }}>
                   <span className="text-xs" style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Code Analysis</span>
                 </div>
               </div>

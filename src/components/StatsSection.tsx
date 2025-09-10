@@ -111,7 +111,9 @@ const StatsSection: React.FC = () => {
           className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight tracking-tighter"
           variants={itemVariants}
         >
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-gray-300">
+          <span 
+          style={{ color: 'var(--text-primary)' }}
+          className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-gray-300">
             At Codewave, we're a technology-driven
           </span>{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 animate-pulse-premium">
@@ -121,7 +123,7 @@ const StatsSection: React.FC = () => {
         
         <motion.p 
           className="text-lg md:text-xl mb-8 font-medium" 
-          style={{ color: 'var(--text-secondary)' }}
+          style={{ color: 'var(--text-primary)' }}
           variants={itemVariants}
         >
           We love solving the hardest problems with smart engineering and AI.<br className="hidden md:block" />
@@ -134,7 +136,7 @@ const StatsSection: React.FC = () => {
         >
           <motion.p 
             className="text-base md:text-lg mb-4" 
-            style={{ color: 'var(--text-secondary)' }}
+            style={{ color: 'var(--text-primary)' }}
             variants={itemVariants}
           >
             We work with startups, enterprises, and government teams across the globe — helping founders scale faster, organizations automate smarter, and public-sector projects go digital with confidence.
@@ -142,11 +144,13 @@ const StatsSection: React.FC = () => {
           
           <motion.p 
             className="text-base md:text-lg mb-8" 
-            style={{ color: 'var(--text-secondary)' }}
+            style={{ color: 'var(--text-primary)' }}
             variants={itemVariants}
           >
             Our mindset is geeky, our process is precise, and our mission is simple: <br className="hidden md:block" />
-            <span className="font-semibold text-white">to turn complexity into clarity and make technology think for you.</span>
+            <span className="font-semibold "
+            style={{ color: 'var(--text-primary)' }}
+            >to turn complexity into clarity and make technology think for you.</span>
           </motion.p>
         </motion.div>
         

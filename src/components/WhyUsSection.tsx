@@ -128,10 +128,7 @@ const WhyUsSection: React.FC = () => {
             className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 transition-all duration-700 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
             style={{
-              background: 'linear-gradient(to right, white, #e0e7ff, white)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
+              color: 'var(--text-primary)'
             }}
           >
             Why CodeWave.it?
@@ -167,7 +164,7 @@ const WhyUsSection: React.FC = () => {
               >
                 {/* Circle content with animated overlay */}
                 <div className="absolute inset-0 rounded-full overflow-hidden">
-                  <div className="w-full h-full bg-gradient-to-br from-transparent via-cyan-500/10 to-transparent animate-pulse-premium"></div>
+                  <div className="w-full h-full bg-gradient-to-br from-transparent via-cyan-500/30 to-transparent animate-pulse-premium"></div>
                 </div>
                 <div className="flex items-center justify-center relative z-10">
                   <img

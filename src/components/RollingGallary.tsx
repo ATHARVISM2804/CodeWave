@@ -51,12 +51,12 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
       const normalizedRotation = ((-rotationValue % 360) + 360) % 360;
       // Calculate relative angle (how far this face is from the front)
       let relativeAngle = ((faceAngle - normalizedRotation + 360) % 360);
-      
+
       // Convert to shortest distance from front (0-180 range)
       if (relativeAngle > 180) {
         relativeAngle = 360 - relativeAngle;
       }
-      
+
       // Create smooth blur based on angle from front
       // Front faces (0-30 degrees): No blur
       // Side faces (30-150 degrees): Gradual blur increase
@@ -66,7 +66,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
         const blurFactor = Math.min((relativeAngle - 30) / 120, 1); // 0 to 1
         blurAmount = blurFactor * 3; // Max 3px blur
       }
-      
+
       return `blur(${blurAmount}px)`;
     });
   };
@@ -77,17 +77,17 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
       const faceAngle = (360 / faceCount) * faceIndex;
       const normalizedRotation = ((-rotationValue % 360) + 360) % 360;
       let relativeAngle = ((faceAngle - normalizedRotation + 360) % 360);
-      
+
       if (relativeAngle > 180) {
         relativeAngle = 360 - relativeAngle;
       }
-      
+
       // Reduce opacity for faces that are more than 90 degrees from front
       if (relativeAngle > 90) {
         const opacityFactor = Math.max(0.4, 1 - ((relativeAngle - 90) / 90) * 0.6);
         return opacityFactor;
       }
-      
+
       return 1;
     });
   };
@@ -130,7 +130,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
     if (autoplay) {
       startInfiniteSpin(finalAngle);
     }
-  };  
+  };
 
   const handleMouseEnter = (): void => {
     if (autoplay && pauseOnHover) {
@@ -146,17 +146,17 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
   };
 
   return (
-          <div className={`relative  w-full  overflow-x-hidden overflow-y-hidden`}
-          style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-            '&::-webkit-scrollbar': {
-              display: 'none'
-            }
-          }}>
-      <h1 className='text-white text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-4'>Techstack We use</h1>
+    <div className={`relative  w-full  overflow-x-hidden overflow-y-hidden`}
+      style={{
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        '&::-webkit-scrollbar': {
+          display: 'none'
+        }
+      }}>
+      <h1 className='text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-4' style={{ color: 'var(--text-primary)' }}>Techstack We use</h1>
 
-     
+
       <div className="flex items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">
         <motion.div
           drag="x"
@@ -178,7 +178,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
           {galleryImages.map((url, i) => {
             const blurTransform = createBlurTransform(i);
             const opacityTransform = createOpacityTransform(i);
-            
+
             return (
               <motion.div
                 key={i}
@@ -194,14 +194,18 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
                 <img
                   src={url}
                   alt="gallery"
-                  className="pointer-events-none rounded-[12px] border-[2px] bg-white  border-white object-contain transition-transform duration-300 ease-out"
+                  className="pointer-events-none rounded-[12px] object-contain transition-transform duration-300 ease-out group-hover:scale-105"
                   style={{
                     width: `${imageWidth}px`,
                     height: `${imageHeight}px`,
+                    background: 'var(--card-bg)',
+                    border: '2px solid var(--card-border)',
+                    padding: '8px',
                     minWidth: '60px',
                     minHeight: '30px'
                   }}
                 />
+
               </motion.div>
             );
           })}

@@ -121,10 +121,10 @@ const BlogSection: React.FC = () => {
 
         <div className={`text-center mt-12 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '1000ms' }}>
           <button
-            className="px-8 py-3 rounded-full transition-all duration-300 font-semibold"
+            className="px-8 py-3 rounded-full text-white transition-all duration-300 font-semibold"
             style={{
               background: 'var(--accent-primary)',
-              color: 'var(--text-primary)',
+              // color: 'var(--bg-primary)',
               boxShadow: '0 4px 24px var(--accent-primary)',
             }}
           >
