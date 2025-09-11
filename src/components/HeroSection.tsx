@@ -35,10 +35,14 @@ const HeroSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative min-h-[80vh] sm:min-h-screen px-2 sm:px-4 md:px-6 flex items-center pt-16 overflow-hidden">
-      {/* Enhanced Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-radial opacity-50"></div>
-      <div className="absolute inset-0 bg-gradient-premium"></div>
+    <section className="relative min-h-screen px-4 sm:px-6 lg:px-8 flex items-center pt-20 overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}>
+      
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] opacity-10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-[var(--accent-secondary)] to-[var(--accent-primary)] opacity-10 rounded-full blur-3xl"></div>
+      </div>
       
       <div className="container mx-auto px-0 sm:px-4 lg:px-8 z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -61,24 +65,33 @@ const HeroSection: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex  xs:flex-row gap-3 sm:gap-4 w-full max-w-[420px]">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
-                className="liquid-button text-white h-20 flex justify-center items-center text-nowrap px-6 sm:px-8 py-3 sm:py-4 font-semibold glare-effect text-base sm:text-lg w-full xs:w-auto"
+                className="group px-8 py-4 rounded-full font-semibold text-lg flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
                 style={{
-                  background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))'
-                }}
-              >
-                Experience The Demo
-              </button>
-  
-              <button
-                className="morph-card px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover-lift-premium border-animate text-base sm:text-lg w-full xs:w-auto"
-                style={{
+                  background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                   color: 'var(--text-primary)',
-                  borderColor: 'var(--accent-primary)'
+                  boxShadow: '0 10px 30px rgba(var(--accent-primary-rgb), 0.3)'
                 }}
               >
-                Learn More
+                <span>Start Your Project</span>
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </button>
+              
+              <button
+                className="group px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg"
+                style={{
+                  borderColor: 'var(--accent-primary)',
+                  color: 'var(--text-primary)',
+                  background: 'transparent'
+                }}
+              >
+                <span>View Our Work</span>
+                <svg className="w-5 h-5 group-hover:rotate-45 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
               </button>
             </div>
           </div>
