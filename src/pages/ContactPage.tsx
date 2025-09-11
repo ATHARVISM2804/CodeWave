@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { MessageCircle, Phone, Mail, Calendar, Send, MapPin, Clock, Users, CheckCircle } from 'lucide-react';
+import { MessageCircle, Phone, Mail, Calendar, Send, MapPin, Clock, Users, CheckCircle, Twitter, Linkedin, Github } from 'lucide-react';
 
 const ContactPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -176,22 +176,11 @@ const ContactPage: React.FC = () => {
   ];
 
   const socialLinks = [
-    {
-      icon: Phone,
-      href: 'tel:+1234567890'
-    },
-    {
-      icon: Mail,
-      href: 'mailto:hello@codewave.it'
-    },
-    {
-      icon: 'https://img.icons8.com/ios-filled/50/000000/linkedin.png',
-      href: 'https://www.linkedin.com/company/codewave-tech/mycompany/'
-    },
-    {
-      icon: 'https://img.icons8.com/ios-filled/50/000000/twitter.png',
-      href: 'https://twitter.com/codewave_tech'
-    }
+    { icon: Phone, href: 'tel:+1234567890' },
+    { icon: Mail, href: 'mailto:hello@codewave.it' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/codewave-tech/mycompany/' },
+    { icon: Twitter, href: 'https://twitter.com/codewave_tech' },
+    { icon: Github, href: '#' }
   ];
 
   return (
