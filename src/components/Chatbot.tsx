@@ -122,7 +122,12 @@ const Chatbot: React.FC = () => {
       {/* Floating Chat Button */}
       <button
         aria-label="Open chat"
-        className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-indigo-500 to-sky-500 text-white rounded-full shadow-2xl w-16 h-16 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+        className="fixed bottom-6 right-6 z-50 rounded-full shadow-2xl w-16 h-16 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+        style={{
+          background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+          color: 'var(--text-primary)',
+          boxShadow: '0 8px 30px rgba(var(--accent-primary-rgb))'
+        }}
         onClick={() => setOpen((v) => !v)}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-square-text"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="10" x2="14" y1="10" y2="10"/><line x1="10" x2="14" y1="14" y2="14"/></svg>
@@ -130,9 +135,20 @@ const Chatbot: React.FC = () => {
 
       {/* Chat Window */}
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 w-96 max-w-[95vw] h-[550px] bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden animate-fade-in-up">
+        <div className="fixed bottom-24 right-6 z-50 w-96 max-w-[95vw] h-[550px] rounded-xl shadow-2xl border flex flex-col overflow-hidden animate-fade-in-up"
+          style={{
+            background: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            color: 'var(--text-primary)'
+          }}
+        >
           {/* Header */}
-          <div className="bg-gradient-to-r from-indigo-500 to-sky-500 text-white px-4 py-3 flex items-center justify-between shadow-md">
+          <div className="px-4 py-3 flex items-center justify-between shadow-md"
+            style={{
+              background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))',
+              color: 'var(--text-primary)'
+            }}
+          >
             <div className="flex items-center gap-2">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -150,7 +166,8 @@ const Chatbot: React.FC = () => {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 p-4 overflow-y-auto bg-gray-50 space-y-3">
+          <div className="flex-1 p-4 overflow-y-auto space-y-3"
+            style={{ background: 'var(--glass-bg)' }}>
             {messages.map((msg, idx) => (
               <div
                 key={idx}
@@ -159,9 +176,14 @@ const Chatbot: React.FC = () => {
                 <div
                   className={`px-4 py-3 rounded-2xl text-sm max-w-[80%] drop-shadow-sm ${
                     msg.sender === "user"
-                      ? "bg-indigo-500 text-white rounded-br-none"
-                      : "bg-white border border-gray-200 text-gray-800 rounded-bl-none"
+                      ? "rounded-br-none"
+                      : "rounded-bl-none"
                   }`}
+                  style={{
+                    background: msg.sender === 'user' ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' : 'var(--card-bg)',
+                    color: msg.sender === 'user' ? 'white' : 'var(--text-primary)',
+                    border: msg.sender === 'user' ? 'none' : '1px solid var(--card-border)'
+                  }}
                 >
                   <ReactMarkdown>{msg.text}</ReactMarkdown>
                 </div>
@@ -169,10 +191,16 @@ const Chatbot: React.FC = () => {
             ))}
             {isThinking && (
               <div className="flex justify-start">
-                <div className="px-4 py-3 rounded-2xl text-sm max-w-[80%] bg-white border border-gray-200 text-gray-800 flex items-center gap-2 rounded-bl-none">
-                  <span className="inline-block w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
-                  <span className="inline-block w-2 h-2 rounded-full bg-sky-400 animate-pulse delay-150"></span>
-                  <span className="inline-block w-2 h-2 rounded-full bg-indigo-300 animate-pulse delay-300"></span>
+                <div className="px-4 py-3 rounded-2xl text-sm max-w-[80%] flex items-center gap-2 rounded-bl-none"
+                  style={{
+                    background: 'var(--card-bg)',
+                    color: 'var(--text-primary)',
+                    border: '1px solid var(--card-border)'
+                  }}
+                >
+                  <span className="inline-block w-2 h-2 rounded-full" style={{ background: 'var(--accent-primary)' }}></span>
+                  <span className="inline-block w-2 h-2 rounded-full animate-pulse delay-150" style={{ background: 'var(--accent-secondary)' }}></span>
+                  <span className="inline-block w-2 h-2 rounded-full animate-pulse delay-300" style={{ background: 'var(--accent-primary)' }}></span>
                 </div>
               </div>
             )}
@@ -181,12 +209,23 @@ const Chatbot: React.FC = () => {
 
           {/* Input */}
           <form
-            className="flex border-t border-gray-200 bg-white p-2"
+            className="flex border-t p-2"
+            style={{
+              background: 'var(--card-bg)',
+              borderTop: '1px solid var(--card-border)'
+            }}
             onSubmit={handleSend}
             auto-complete="off"
           >
             <input
-              className="flex-1 px-3  py-2 text-sm text-black rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-50 placeholder-gray-400 transition-all duration-200"
+              className="flex-1 px-3 py-2 text-sm rounded-lg border focus:outline-none focus:ring-2 transition-all duration-200"
+              style={{
+                color: 'var(--text-primary)',
+                background: 'var(--glass-bg)',
+                border: '1px solid var(--card-border)',
+                boxShadow: 'none',
+                fontFamily: 'inherit'
+              }}
               type="text"
               placeholder="Type your message..."
               value={input}
@@ -197,11 +236,17 @@ const Chatbot: React.FC = () => {
             />
             <button
               type="submit"
-              className={`ml-2 px-4 py-2 text-sm font-semibold rounded-lg transition-colors duration-200 flex items-center justify-center gap-1 ${
-                input.trim() && !isThinking
-                  ? "bg-indigo-600 text-white hover:bg-indigo-700"
-                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
-              }`}
+              className={`ml-2 px-4 py-2 text-sm font-semibold rounded-lg transition-colors duration-200 flex items-center justify-center gap-1`}
+              style={{
+                background: input.trim() && !isThinking
+                  ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))'
+                  : 'var(--card-bg)',
+                color: input.trim() && !isThinking
+                  ? 'white'
+                  : 'var(--text-muted)',
+                cursor: !input.trim() || isThinking ? 'not-allowed' : 'pointer',
+                border: '1px solid var(--card-border)'
+              }}
               disabled={!input.trim() || isThinking}
             >
               Send

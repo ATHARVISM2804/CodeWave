@@ -13,7 +13,7 @@ interface SpotlightCardProps extends React.PropsWithChildren {
 const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
   className = '',
-  spotlightColor = 'rgba(0, 174, 239, 0.18)' // Use --accent-primary-rgb with alpha
+  spotlightColor = 'rgba(0, 174, 239)' // Stronger glow color with more opacity
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -29,7 +29,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
 
   const handleFocus = () => {
     setIsFocused(true);
-    setOpacity(0.6);
+    setOpacity(1); // Full intensity on focus
   };
 
   const handleBlur = () => {
@@ -38,7 +38,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
   };
 
   const handleMouseEnter = () => {
-    setOpacity(0.6);
+    setOpacity(1); // Stronger glow on hover
   };
 
   const handleMouseLeave = () => {
@@ -56,14 +56,14 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
       className={`relative rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] overflow-hidden p-8 ${className}`}
       style={{
         color: 'var(--text-primary)',
-        boxShadow: '0 8px 32px 0 rgba(var(--accent-primary-rgb),0.10), 0 1.5px 8px 0 rgba(var(--accent-primary-rgb),0.08)'
+        boxShadow: '0 8px 32px 0 rgba(var(--accent-primary-rgb),0.15), 0 1.5px 8px 0 rgba(var(--accent-primary-rgb),0.12)'
       }}
     >
       <div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ease-in-out"
         style={{
           opacity,
-          background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`
+          background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 60%)`
         }}
       />
       {children}

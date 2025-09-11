@@ -99,9 +99,9 @@ const WhyUsSection: React.FC = () => {
       style={{ color: 'var(--text-primary)' }}
     >
       {/* Enhanced background with subtle gradients */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-900/5 to-transparent pointer-events-none"></div>
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-900/5 to-transparent pointer-events-none"></div>
       <div className="absolute -top-64 -right-64 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-64 -left-64 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl"></div>
+      <div className="absolute -bottom-64 -left-64 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl"></div> */}
 
       {/* Floating particles in background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

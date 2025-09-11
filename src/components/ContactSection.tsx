@@ -166,7 +166,7 @@ const ContactSection: React.FC = () => {
                   <h3 className="text-lg font-bold mb-2">
                     {option.title}
                   </h3>
-                  <p className="text-sm text-gray-300 mb-3 font-medium">
+                  <p className={`text-sm ${option.color} mb-3 font-medium`}>
                     {option.description}
                   </p>
 
@@ -206,7 +206,9 @@ const ContactSection: React.FC = () => {
               </div>
 
               <div className="mt-6">
-                <p className="text-sm text-gray-300 mb-4 font-medium">Popular: Pricing, Support, Integration</p>
+                <p 
+                style={{ color: 'var(--text-secondary)' }}
+                className="text-sm mb-4 font-medium">Popular: Pricing, Support, Integration</p>
                 <div className="relative">
                   <input
                     type="text"

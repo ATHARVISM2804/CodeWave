@@ -21,7 +21,7 @@
   --accent-primary-rgb: 0, 174, 239;
   --accent-secondary-rgb: 0, 119, 204;
 
-  --card-bg: rgba(255, 255, 255, 0.04);
+  --card-bg: rgba(20, 28, 44); /* Increased opacity and made it a dark blue for dark theme */
   --card-border: rgba(255, 255, 255, 0.08);
   --glass-bg: rgba(255, 255, 255, 0.06);
   --glass-border: rgba(255, 255, 255, 0.12);

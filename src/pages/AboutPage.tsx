@@ -114,6 +114,25 @@ const AboutPage: React.FC = () => {
     },
   ];
 
+  // Mission & Vision Section with animation
+  const missionVisionRef = useRef<HTMLDivElement>(null);
+  const [missionVisible, setMissionVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setMissionVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (missionVisionRef.current) {
+      observer.observe(missionVisionRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="pt-16"
       style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
@@ -168,23 +187,25 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-lg font-semibold mb-8"
-            style={{ color: 'var(--accent-primary)' }}>
+      <section className="py-16 md:py-24">
+        <div
+          ref={missionVisionRef}
+          className={`container mx-auto px-4 sm:px-8 lg:px-16 transition-all duration-1000 ${missionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <h2 className="text-center text-3xl font-extrabold mb-12 tracking-tight" style={{ color: 'var(--text-primary)' }}>
             OUR MISSION & VISION
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
             {missionVision.map((item, idx) => (
               <div key={idx}
-                className="rounded-2xl p-8 border"
+                className="rounded-3xl p-10 border shadow-xl bg-opacity-80 backdrop-blur-md transform transition-transform duration-500 hover:scale-105 hover:-rotate-1 hover:shadow-2xl group"
                 style={{
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
                   color: 'var(--text-primary)'
                 }}
               >
-                <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-[var(--accent-primary)] transition-colors duration-300">{item.title}</h3>
                 <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>{item.description}</p>
               </div>
             ))}
@@ -193,23 +214,20 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* What We Value Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>What We Value</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      <section className="py-16 md:py-24 bg-[var(--bg-primary)]">
+        <div className="container mx-auto px-4 sm:px-8 lg:px-16">
+          <h2 className="text-center text-3xl font-extrabold mb-12 tracking-tight" style={{ color: 'var(--text-primary)' }}>What We Value</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-12">
             {values.map((value, idx) => (
               <SpotlightCard
                 key={idx}
-                className="custom-spotlight-card rounded-2xl p-8 border flex flex-col items-center text-center"
+                className="custom-spotlight-card rounded-3xl p-8 border flex flex-col items-center text-center shadow-lg bg-opacity-80 backdrop-blur-md transform transition-transform duration-500 hover:scale-110 hover:shadow-2xl group"
                 spotlightColor="rgba(0, 229, 255, 0.2)"
               >
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
-                  style={{
-                    background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))'
-                  }}>
-                  <value.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
+                <div className="w-14 h-14 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] group-hover:scale-110 transition-transform duration-300">
+                  <value.icon className="w-7 h-7" style={{ color: 'var(--text-primary)' }} />
                 </div>
-                <h3 className="text-lg font-bold mb-2">{value.title}</h3>
+                <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--accent-primary)] transition-colors duration-300">{value.title}</h3>
                 <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{value.description}</p>
               </SpotlightCard>
             ))}
@@ -218,26 +236,23 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Industries We Serve Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>Industries We Serve</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4 sm:px-8 lg:px-16">
+          <h2 className="text-center text-3xl font-extrabold mb-12 tracking-tight" style={{ color: 'var(--text-primary)' }}>Industries We Serve</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-14">
             {industries.map((industry, idx) => (
               <div key={idx}
-                className="rounded-2xl p-8 border flex flex-col items-start"
+                className="rounded-3xl p-8 border flex flex-col items-start shadow-lg bg-opacity-80 backdrop-blur-md transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl group"
                 style={{
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
                   color: 'var(--text-primary)'
                 }}
               >
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
-                  style={{
-                    background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))'
-                  }}>
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] group-hover:scale-110 transition-transform duration-300">
                   <industry.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
                 </div>
-                <h3 className="text-lg font-bold mb-2">{industry.title}</h3>
+                <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--accent-primary)] transition-colors duration-300">{industry.title}</h3>
                 <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{industry.description}</p>
               </div>
             ))}
@@ -246,23 +261,23 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Technologies We Work With Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-3xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>Technologies We Work With</h2>
-          <p className="text-center mb-8" style={{ color: 'var(--text-secondary)' }}>
+      <section className="py-16 md:py-24 bg-[var(--bg-primary)]">
+        <div className="container mx-auto px-4 sm:px-8 lg:px-16">
+          <h2 className="text-center text-3xl font-extrabold mb-12 tracking-tight" style={{ color: 'var(--text-primary)' }}>Technologies We Work With</h2>
+          <p className="text-center mb-8 text-lg" style={{ color: 'var(--text-secondary)' }}>
             Modern tools for modern problems. We stay current with the latest tech to deliver high-performing, scalable, and secure digital solutions.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {technologies.map((tech, idx) => (
               <div key={idx}
-                className="rounded-2xl p-6 border"
+                className="rounded-3xl p-6 border shadow-lg bg-opacity-80 backdrop-blur-md transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl group"
                 style={{
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
                   color: 'var(--text-primary)'
                 }}
               >
-                <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--accent-primary)' }}>{tech.group}</h3>
+                <h3 className="text-lg font-bold mb-4 group-hover:text-[var(--accent-primary)] transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>{tech.group}</h3>
                 <ul className="space-y-2">
                   {tech.items.map((item, i) => (
                     <li key={i} className="text-sm" style={{ color: 'var(--text-secondary)' }}>{item}</li>
