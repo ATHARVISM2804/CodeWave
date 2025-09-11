@@ -1,0 +1,405 @@
+{
+  "intents": [
+    {
+      "name": "greeting",
+      "examples": [
+        "Hi",
+        "Hello",
+        "Hey Codewave",
+        "Hello there",
+        "Hi — who are you?",
+        "Good morning",
+        "Good afternoon",
+        "Hey — tell me about Codewave",
+        "Hi there",
+        "Hey there",
+        "Good evening",
+        "Greetings",
+        "Yo",
+        "What's up?",
+        "How's it going?"
+      ],
+      "responses": {
+        "short": "Hi — welcome to Codewave! I'm the virtual assistant. How can I help — explore services, schedule a demo, or get a quick AI suggestion?",
+        "long": "Welcome 👋 — Codewave is an Intelligence Studio that builds AI-enabled software, websites, mobile apps, GovTech platforms and marketing. Tell me what you're interested in — launching an MVP, automating a workflow, or exploring GovTech solutions?",
+        "quick_replies": ["[See Services]", "[Book a Call]", "[Ask about AI Automation]"]
+      }
+    },
+    {
+      "name": "company_overview",
+      "examples": [
+        "Who are you?",
+        "Tell me about Codewave.",
+        "What is Codewave.it?",
+        "Are you a software company?",
+        "What do you guys do?",
+        "What does Codewave stand for?",
+        "Are you a dev shop?",
+        "Do you only build websites?",
+        "Are you an AI company?",
+        "What makes you different?",
+        "Do you work internationally?",
+        "Can you handle enterprise projects?",
+        "Do you work with governments?",
+        "Do you focus on startups only?",
+        "What kind of clients do you work with?",
+        "What's your vision?",
+        "What's your mission?",
+        "Why should I choose you over others?",
+        "Do you only work in India?",
+        "Do you work with global clients?"
+      ],
+      "responses": {
+        "primary": "We're Codewave.it — an intelligence studio that builds AI-powered digital solutions. From startups to governments, we deliver websites, custom software, automation tools, mobile apps, GovTech platforms, and digital marketing that are secure, scalable, and future-ready. 🚀 Would you like to see what we offer?",
+        "quick_replies": ["[Explore Services]", "[Our Case Studies]", "[Book a Call]"]
+      }
+    },
+    {
+      "name": "services_overview",
+      "examples": [
+        "What services do you offer?",
+        "Tell me your services",
+        "Do you do web development and AI?",
+        "What can you build for me?",
+        "Show me your services",
+        "What do you specialize in?",
+        "List your offerings",
+        "What technologies do you work with?",
+        "What solutions do you provide?",
+        "Can you help with digital transformation?"
+      ],
+      "responses": {
+        "primary": "We offer a complete suite of AI-powered services:\n\n🌐 **Web Development** - Fast, SEO-optimized, AI-friendly sites\n🛠️ **Custom Software** - Tailored dashboards & internal tools\n🤖 **AI Automation** - Chatbots, document processing & smart workflows\n🏛️ **GovTech** - Secure portals & compliance-ready systems\n📱 **Mobile Apps** - Cross-platform with real-time features\n🎨 **UI/UX Design** - User-centered design & prototyping\n🔗 **API Integration** - Connect systems & build dashboards\n📈 **Digital Marketing** - SEO, content & AI-driven campaigns\n\nWhich service interests you most?",
+        "quick_replies": ["[Web Dev]", "[AI Automation]", "[GovTech]", "[All Services]"]
+      }
+    },
+    {
+      "name": "web_development",
+      "examples": [
+        "I need a website.",
+        "Can you build my website?",
+        "Do you design websites?",
+        "How much for a website?",
+        "Do you build ecommerce websites?",
+        "Do you make government websites?",
+        "Can you create landing pages?",
+        "I need a business website.",
+        "Do you do SEO-friendly websites?",
+        "Can you build fast-loading websites?",
+        "Do you offer CMS integration?",
+        "Do you build portals?",
+        "Can you redesign my site?",
+        "Do you make responsive websites?",
+        "Can you optimize site speed?",
+        "Do you create custom websites?",
+        "Can you help me with WordPress?",
+        "Do you offer headless CMS?",
+        "Do you build enterprise websites?",
+        "Do you make websites secure?",
+        "Can you make mobile-friendly sites?",
+        "Do you do government citizen portals?",
+        "I want a modern website.",
+        "Do you handle website maintenance?",
+        "Can you make an SEO-ready website?"
+      ],
+      "responses": {
+        "primary": "Yes! We build fast, scalable, and AI-friendly websites — from high-conversion landing pages to enterprise portals and secure government sites. Every build is SEO-optimized, responsive, and designed for long-term growth.\n\n✅ **Fast & Secure** - Optimized for speed & security\n✅ **SEO & AI-Ready** - Structured for search engines & AI discovery\n✅ **Responsive Design** - Perfect on all devices\n✅ **CMS Integration** - Easy content management\n✅ **Government-Grade** - Compliance & audit-ready\n\nWant to get started?",
+        "quick_replies": ["[Launch My Website]", "[View Web Examples]", "[Get Quote]"]
+      }
+    },
+    {
+      "name": "custom_software",
+      "examples": [
+        "Can you build custom software?",
+        "I need a dashboard for my team.",
+        "Do you make enterprise software?",
+        "Do you build internal tools?",
+        "Can you automate HR processes?",
+        "Do you do workflow management systems?",
+        "I need custom CRM.",
+        "Can you build finance tools?",
+        "Do you build portals?",
+        "Can you create an operations dashboard?",
+        "Do you make SaaS products?",
+        "Can you build reporting tools?",
+        "Do you create role-based access systems?",
+        "Do you develop back-office tools?",
+        "Can you replace Excel with software?",
+        "Do you build ERP-like systems?",
+        "Can you make software for my business?",
+        "I want a customized tool for my company.",
+        "Do you develop case management software?",
+        "Can you create custom HR software?",
+        "Do you do enterprise-grade systems?",
+        "Can you make software that integrates with APIs?",
+        "Do you provide long-term software support?",
+        "Do you design scalable software?",
+        "Can you build secure business apps?"
+      ],
+      "responses": {
+        "primary": "We create custom software tailored to your workflows — dashboards, internal tools, client portals, and automated systems that scale with your growth. No off-the-shelf limitations, just solutions built around you. 🛠️\n\n✅ **Custom Dashboards** - Real-time insights & reporting\n✅ **Internal Tools** - Streamlined workflows & automation\n✅ **Client Portals** - Secure, branded user experiences\n✅ **Integration Ready** - Connect with existing systems\n✅ **Scalable Architecture** - Grows with your business\n\nCurious about options?",
+        "quick_replies": ["[Explore Software Solutions]", "[Request Demo]", "[Discuss Requirements]"]
+      }
+    },
+    {
+      "name": "ai_automation",
+      "examples": [
+        "Can you build a chatbot?",
+        "Do you make AI assistants?",
+        "Can you automate reporting?",
+        "I want document summarization.",
+        "Do you make knowledge bots?",
+        "Can you integrate AI with my system?",
+        "Do you create email automation?",
+        "Can you auto-generate meeting notes?",
+        "Can AI handle customer support?",
+        "Do you build AI tools for startups?",
+        "Do you build GPT-based apps?",
+        "Can you automate workflows with Zapier?",
+        "Can you make AI handle HR tasks?",
+        "Do you create AI dashboards?",
+        "Do you build smart search tools?",
+        "Can you train AI for my data?",
+        "Do you build AI assistants for enterprises?",
+        "Can AI reduce manual work?",
+        "Do you make voice bots?",
+        "Can AI handle multilingual support?",
+        "Do you make AI onboarding tools?",
+        "Can AI reduce my support tickets?",
+        "Do you create AI for compliance?",
+        "Do you design custom AI solutions?",
+        "Can you automate lead generation?"
+      ],
+      "responses": {
+        "primary": "We design AI-powered tools like chatbots, assistants, document summarizers, reporting systems, and smart workflows that reduce manual work and accelerate decisions. 🤖\n\n✅ **Custom Chatbots** - 24/7 intelligent customer support\n✅ **Document AI** - Summarize, extract & process docs\n✅ **Smart Workflows** - Automate repetitive tasks\n✅ **Knowledge Assistants** - Internal AI for your team\n✅ **Report Automation** - Generate insights automatically\n\nWant to see AI in action?",
+        "quick_replies": ["[Automate My Workflow]", "[AI Demo]", "[Which Process?]"]
+      }
+    },
+    {
+      "name": "govtech",
+      "examples": [
+        "Do you build complaint portals?",
+        "Can you digitize government services?",
+        "Do you make law enforcement apps?",
+        "Can you create grievance systems?",
+        "Do you work with public-sector teams?",
+        "Do you design dashboards for officers?",
+        "Can you build citizen-facing apps?",
+        "Do you work with GovCloud?",
+        "Do you make case management systems?",
+        "Do you build audit-ready tools?",
+        "Can you handle sensitive data?",
+        "Do you design secure platforms?",
+        "Do you make e-governance tools?",
+        "Can you build transport authority dashboards?",
+        "Do you create apps for municipalities?",
+        "Do you build portals for education departments?",
+        "Do you work with health departments?",
+        "Do you design digital record systems?",
+        "Do you make disaster response tools?",
+        "Can you build for compliance with Indian laws?"
+      ],
+      "responses": {
+        "primary": "Yes, we specialize in GovTech — secure complaint portals, field-force dashboards, citizen communication tools, and case management systems. Every solution is designed for compliance, accountability, and scale. 🛡️\n\n✅ **Complaint Portals** - Transparent grievance handling\n✅ **Field Officer Apps** - Mobile-first, offline-capable\n✅ **Citizen Services** - User-friendly public interfaces\n✅ **Case Management** - Track & manage workflows\n✅ **Audit-Ready** - Complete compliance & security\n\nWant to explore more?",
+        "quick_replies": ["[Explore GovTech Projects]", "[Security Details]", "[Compliance Info]"]
+      }
+    },
+    {
+      "name": "mobile_apps",
+      "examples": [
+        "Do you build Android apps?",
+        "Do you build iOS apps?",
+        "Can you make cross-platform apps?",
+        "Do you use Flutter or React Native?",
+        "Do you make delivery apps?",
+        "Can you build EdTech apps?",
+        "Do you build health apps?",
+        "Can you integrate my app with backend?",
+        "Do you do push notifications?",
+        "Can you make GPS tracking apps?",
+        "Do you provide app store deployment?",
+        "Do you make enterprise apps?",
+        "Do you design apps for startups?",
+        "Do you do secure mobile apps?",
+        "Can you add messaging to my app?",
+        "Do you build lightweight apps?",
+        "Can you make offline-ready apps?",
+        "Do you do custom mobile tools?",
+        "Can you redesign my app?",
+        "Do you provide app maintenance?"
+      ],
+      "responses": {
+        "primary": "We build mobile apps that perform in the real world — cross-platform and native, with GPS, notifications, offline support, and seamless backend integration. 📱\n\n✅ **Cross-Platform** - Flutter & React Native\n✅ **Real-Time Features** - GPS, messaging, notifications\n✅ **Offline Support** - Works without internet\n✅ **App Store Ready** - Complete deployment & optimization\n✅ **Enterprise Security** - Secure authentication & data\n\nReady to go mobile?",
+        "quick_replies": ["[Explore Mobile Apps]", "[Platform Choice]", "[Feature Discussion]"]
+      }
+    },
+    {
+      "name": "ui_ux",
+      "examples": [
+        "Do you do UI design?",
+        "Do you do UX research?",
+        "Can you make wireframes?",
+        "Do you design prototypes?",
+        "Do you do user testing?",
+        "Can you make responsive designs?",
+        "Do you design mobile-first?",
+        "Do you create dashboards UI?",
+        "Can you do SaaS product design?",
+        "Do you make government portals UI?",
+        "Can you improve my app's design?",
+        "Can you make design systems?",
+        "Do you use Figma?",
+        "Do you create accessibility-first designs?",
+        "Can you make landing page designs?",
+        "Do you do enterprise UX?",
+        "Can you design EdTech platforms?",
+        "Do you improve user flows?",
+        "Do you focus on retention with UX?",
+        "Do you make conversion-focused designs?"
+      ],
+      "responses": {
+        "primary": "We create UI/UX that goes beyond looks — wireframes, prototypes, design systems, and responsive interfaces tested with real users. 🎨\n\n✅ **User Research** - Data-driven design decisions\n✅ **Wireframes & Prototypes** - Test before you build\n✅ **Design Systems** - Consistent, scalable interfaces\n✅ **Accessibility First** - Inclusive design standards\n✅ **Conversion Focus** - Design that drives action\n\nWant to see how design can drive action?",
+        "quick_replies": ["[Explore UI/UX Services]", "[Design Examples]", "[UX Audit]"]
+      }
+    },
+    {
+      "name": "api_integration",
+      "examples": [
+        "Can you integrate APIs?",
+        "Do you make custom APIs?",
+        "Can you integrate CRM with my website?",
+        "Can you connect ERP and mobile apps?",
+        "Do you integrate payment gateways?",
+        "Do you sync Google Sheets with apps?",
+        "Can you integrate WhatsApp APIs?",
+        "Do you build Slack bots?",
+        "Can you connect multiple tools together?",
+        "Do you create data dashboards?",
+        "Do you automate reports?",
+        "Can you clean raw data?",
+        "Do you build GraphQL APIs?",
+        "Do you enable real-time data sync?",
+        "Can you connect Stripe with CRM?",
+        "Do you make API-based workflows?",
+        "Can you integrate multiple databases?",
+        "Do you provide API management?",
+        "Can you automate lead capture?",
+        "Do you handle API security?"
+      ],
+      "responses": {
+        "primary": "We connect your tools with secure APIs and build intelligent dashboards that turn data into decisions. No silos, just seamless workflows. 🔗\n\n✅ **API Integration** - Connect CRMs, ERPs & tools\n✅ **Data Dashboards** - Real-time insights & analytics\n✅ **Workflow Automation** - Eliminate manual data entry\n✅ **Secure Architecture** - Enterprise-grade security\n✅ **Real-Time Sync** - Keep systems updated instantly\n\nWant smarter systems?",
+        "quick_replies": ["[Explore API & Data Services]", "[Integration Audit]", "[Dashboard Demo]"]
+      }
+    },
+    {
+      "name": "digital_marketing",
+      "examples": [
+        "Do you offer SEO?",
+        "Can you improve my Google ranking?",
+        "Do you do content marketing?",
+        "Do you run social ads?",
+        "Can you manage Facebook ads?",
+        "Do you do LinkedIn marketing?",
+        "Can you grow my audience?",
+        "Do you run paid campaigns?",
+        "Do you do Google Ads?",
+        "Do you offer email automation?",
+        "Do you create marketing funnels?",
+        "Do you write blogs?",
+        "Do you create brand content?",
+        "Can you manage influencer marketing?",
+        "Do you track campaign ROI?",
+        "Do you run performance marketing?",
+        "Can you optimize existing campaigns?",
+        "Do you do remarketing?",
+        "Can you grow my startup visibility?",
+        "Do you provide analytics reports?"
+      ],
+      "responses": {
+        "primary": "We help brands grow with SEO, content, paid campaigns, and AI-powered marketing automation. 📈\n\n✅ **Technical SEO** - Rank higher, get found faster\n✅ **Content Strategy** - Engaging, conversion-focused content\n✅ **Paid Campaigns** - Google Ads, Facebook, LinkedIn\n✅ **Marketing Automation** - AI-driven lead nurturing\n✅ **Analytics & ROI** - Data-driven optimization\n\nLooking to boost your reach?",
+        "quick_replies": ["[Grow My Audience]", "[SEO Audit]", "[Campaign Strategy]"]
+      }
+    },
+    {
+      "name": "contact_engagement",
+      "examples": [
+        "How can I contact you?",
+        "What's your email?",
+        "Can I book a call?",
+        "Do you offer free consultation?",
+        "Do you have WhatsApp?",
+        "Do you provide instant chat?",
+        "Do you do demo sessions?",
+        "Can I see your portfolio?",
+        "Do you have case studies?",
+        "What's your phone number?",
+        "Do you work remotely?",
+        "Do you work internationally?",
+        "Can we collaborate long-term?",
+        "Do you have NDA option?",
+        "Do you work on retainer models?"
+      ],
+      "responses": {
+        "primary": "You can reach us via:\n\n📩 **Email:** hello@codewave.it\n💬 **WhatsApp:** Available on our website\n📞 **Free Call:** Schedule a consultation\n\nNo hard pitch — just a conversation about smarter solutions. We work globally with startups, enterprises, and governments.",
+        "quick_replies": ["[Let's Talk Solutions]", "[Schedule Call]", "[Send Email]"]
+      }
+    },
+    {
+      "name": "pricing_and_costs",
+      "examples": [
+        "How much does a website cost?",
+        "What's the price for an app?",
+        "Do you work on fixed cost?",
+        "What are your rates?",
+        "Can you give me a quote?",
+        "How do you price projects?",
+        "Do you offer payment plans?",
+        "What's your hourly rate?",
+        "Do you have package deals?",
+        "How much for a chatbot?"
+      ],
+      "responses": {
+        "primary": "Pricing depends on scope and complexity. We offer flexible models:\n\n💰 **Fixed Price** - Clear scope, predictable cost\n📊 **Milestone-Based** - Pay as we deliver value\n⏰ **Time & Material** - Flexible, ongoing work\n🔄 **Retainer** - Dedicated team access\n\nTo give you an accurate estimate, I'd need to understand your requirements better.",
+        "quick_replies": ["[Request Quote]", "[Budget Discussion]", "[Project Scope]"]
+      }
+    },
+    {
+      "name": "small_talk",
+      "examples": [
+        "How are you?",
+        "What's up?",
+        "Tell me a joke",
+        "Nice to meet you",
+        "How's your day?",
+        "Are you human?",
+        "What's the weather like?",
+        "Do you sleep?",
+        "What do you think about AI?",
+        "Are you smart?"
+      ],
+      "responses": {
+        "primary": "I'm just code — but I'm ready to help! 😊 What project are you exploring today? Whether it's launching a website, automating workflows, or building something completely new — I can point you in the right direction.",
+        "quick_replies": ["[See Services]", "[Schedule a Call]", "[Ask About AI]"]
+      }
+    },
+    {
+      "name": "goodbye_thanks",
+      "examples": [
+        "Thanks",
+        "Thank you, bye",
+        "That's all for now",
+        "Goodbye",
+        "See you later",
+        "Thanks for the help",
+        "Appreciate it",
+        "Bye",
+        "Take care",
+        "Have a good day"
+      ],
+      "responses": {
+        "primary": "Thanks — glad I could help! 🙏 Feel free to reach out anytime at hello@codewave.it or book a call when you're ready to move forward.",
+        "quick_replies": ["[Book a Call]", "[Email Us]", "[Save Contact]"]
+      }
+    }
+  ]
+}
