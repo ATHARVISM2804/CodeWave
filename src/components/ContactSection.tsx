@@ -82,7 +82,7 @@ const ContactSection: React.FC = () => {
       description: 'Chat instantly with our team',
       action: 'Start Chat',
       color: 'from-green-500 to-emerald-500',
-      href: 'https://wa.me/15551234567?text=Hello%20CodeWave%21%20I%20would%20like%20to%20discuss%20a%20project.' // phone from UI, replace if needed
+      href: 'https://wa.me/+918929942819?text=Hello%20CodeWave%21%20I%20would%20like%20to%20discuss%20a%20project.' // phone from UI, replace if needed
     },
     {
       icon: MessageCircle,
@@ -90,7 +90,7 @@ const ContactSection: React.FC = () => {
       description: 'Our AI wants to chat with you',
       action: 'Chat Now',
       color: 'from-blue-500 to-cyan-500',
-      href: '#live-chat' // anchor for an on-page chat or widget trigger
+      href: '#live-chat'
     },
     {
       icon: Mail,

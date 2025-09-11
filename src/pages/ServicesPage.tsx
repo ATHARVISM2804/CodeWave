@@ -132,7 +132,7 @@ const ServicesPage: React.FC = () => {
   return (
     <div className="pt-16" style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}>
       {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-8">
             <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>

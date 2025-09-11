@@ -1,50 +1,15 @@
 import React, { useState } from 'react';
-import AiImage from "../assets/AI.png";
 import { motion } from 'framer-motion';
 import RollingGallery from './RollingGallary';
 
-// Placeholder icon/image components (replace with actual images or SVGs as needed)
-const GitHubCopilotBadge = () => (
-  <div className="bg-white rounded-full shadow px-4 py-2 flex items-center gap-2 border border-gray-200">
-    <img src="https://github.gallerycdn.vsassets.io/extensions/github/copilot/1.364.1768/1756484122606/Microsoft.VisualStudio.Services.Icons.Default" alt="GitHub Copilot" className="h-6" />
-    <span className="font-semibold text-gray-800 text-sm">GitHub Copilot</span>
-  </div>
-);
-const CursorAIBadge = () => (
-  <div className="bg-white rounded-full shadow px-4 py-2 flex items-center gap-2 border border-gray-200">
-    <img src="/badges/cursor-ai.svg" alt="Cursor AI" className="h-6" />
-    <span className="font-semibold text-gray-800 text-sm">CURSOR <span className="text-[#7b61ff]">AI</span></span>
-  </div>
-);
-const GeminiAIBadge = () => (
-  <div className="bg-white rounded-full shadow px-4 py-2 flex items-center gap-2 border border-gray-200">
-    <img src="https://i.pinimg.com/736x/e5/a2/52/e5a252b0d1ceae9c5a7ee8cea147ce6f.jpg" alt="Gemini AI" className="h-6" />
-    <span className="font-semibold text-gray-800 text-sm">Gemini <span className="text-[#7b61ff]">AI</span></span>
-  </div>
-);
-const OpenAIBadge = () => (
-  <div className="bg-white rounded-full shadow px-4 py-2 flex items-center gap-2 border border-gray-200">
-    <img src="https://freebiehive.com/wp-content/uploads/2023/02/OpenAI-Logo-PNG.jpg" alt="OpenAI" className="h-6" />
-    <span className="font-semibold text-gray-800 text-sm"> </span>
-  </div>
-);
 
-// Update ServiceIcon to use <img> for the icon
-const ServiceIcon = ({ icon }: { icon: string }) => (
-  <img src={icon} alt="" className="h-12 w-12 object-contain mb-2" />
-);
-
-// Placeholder tech stack icons (replace with actual SVGs)
-const TechIcon = ({ src, alt }: { src: string; alt: string }) => (
-  <img src={src} alt={alt} className="h-10 w-10 object-contain" />
-);
 
 const services = [
   { icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png', label: 'Custom ERP & CRM Development' },
   { icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB7mgTzfml9-fyRSDxIFT0GiGK1loPmUxNeA0p_ZuMA5hwO1Gxg3X5otZim6Mivh9e8Gw&usqp=CAU', label: 'AI-Powered SaaS Applications' },
   { icon: 'https://cdn-icons-png.flaticon.com/512/5968/5968292.png', label: 'API-First & Microservices Architecture' },
   { icon: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png', label: 'MVP Development For Startups' },
-  { icon: AiImage, label: 'Generative AI Integration' },
+  { icon: 'https://landing.bismart.com/hubfs/genAI%20logo.jpg', label: 'Generative AI Integration' },
   { icon: 'https://cdn-icons-png.flaticon.com/512/3523/3523887.png', label: 'Legacy System Maintenance & Modernization' },
 ];
 

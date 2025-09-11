@@ -116,7 +116,9 @@ const Footer: React.FC = () => {
                     color: 'white'
                   }}
                 >
+                  <a target='_blank' href="https://calendly.com/codewave/30min">
                   Schedule a consult
+                  </a>
                 </a>
               </li>
               <li className="flex items-center space-x-4 mt-6">

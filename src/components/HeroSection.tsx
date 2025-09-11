@@ -61,15 +61,16 @@ const HeroSection: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 w-full max-w-[420px]">
+            <div className="flex  xs:flex-row gap-3 sm:gap-4 w-full max-w-[420px]">
               <button
-                className="liquid-button text-white px-6 sm:px-8 py-3 sm:py-4 font-semibold glare-effect text-base sm:text-lg w-full xs:w-auto"
+                className="liquid-button text-white h-20 flex justify-center items-center text-nowrap px-6 sm:px-8 py-3 sm:py-4 font-semibold glare-effect text-base sm:text-lg w-full xs:w-auto"
                 style={{
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))'
                 }}
               >
                 Experience The Demo
               </button>
+  
               <button
                 className="morph-card px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover-lift-premium border-animate text-base sm:text-lg w-full xs:w-auto"
                 style={{

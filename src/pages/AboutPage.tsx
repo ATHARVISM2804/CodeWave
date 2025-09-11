@@ -28,7 +28,7 @@ const AboutPage: React.FC = () => {
       title: 'Our Mission',
       description: (
         <>
-          To build <span className="text-[#ff6a3d] font-semibold">intelligent, future-ready</span> technology that actively solves real problems—beautifully, securely, and with measurable impact.
+          To build <span className="text- font-semibold">intelligent, future-ready</span> technology that actively solves real problems—beautifully, securely, and with measurable impact.
         </>
       ),
     },
@@ -261,31 +261,45 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Technologies We Work With Section */}
-      <section className="py-16 md:py-24 bg-[var(--bg-primary)]">
-        <div className="container mx-auto px-4 sm:px-8 lg:px-16">
-          <h2 className="text-center text-3xl font-extrabold mb-12 tracking-tight" style={{ color: 'var(--text-primary)' }}>Technologies We Work With</h2>
-          <p className="text-center mb-8 text-lg" style={{ color: 'var(--text-secondary)' }}>
-            Modern tools for modern problems. We stay current with the latest tech to deliver high-performing, scalable, and secure digital solutions.
-          </p>
+      <section className="py-20 md:py-28 bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--accent-secondary)/10] relative overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
+          <div className="flex flex-col items-center mb-12">
+            <div className="flex items-center gap-3 justify-center mb-2">
+              <svg className="w-8 h-8 text-[var(--accent-primary)] animate-pulse" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16.88 3.549A9 9 0 1021 12.001M19.07 4.93A9 9 0 0112 21a9 9 0 01-7.07-16.07" /></svg>
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-center bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] select-none">
+                Technologies We Work With
+              </h2>
+            </div>
+            <p className="text-center mb-4 text-lg max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
+              Modern tools for modern problems. We stay current with the latest tech to deliver high-performing, scalable, and secure digital solutions.
+            </p>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {technologies.map((tech, idx) => (
               <div key={idx}
-                className="rounded-3xl p-6 border shadow-lg bg-opacity-80 backdrop-blur-md transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl group"
+                className="rounded-3xl p-7 border shadow-xl bg-white/10 backdrop-blur-lg border-[var(--accent-primary)] hover:border-[var(--accent-secondary)] transition-all duration-500 transform hover:scale-105 hover:shadow-2xl group relative overflow-hidden"
                 style={{
-                  background: 'var(--card-bg)',
-                  border: '1px solid var(--card-border)',
+                  background: 'linear-gradient(135deg, var(--card-bg) 80%, var(--accent-secondary) 100%)',
                   color: 'var(--text-primary)'
                 }}
               >
-                <h3 className="text-lg font-bold mb-4 group-hover:text-[var(--accent-primary)] transition-colors duration-300" style={{ color: 'var(--accent-primary)' }}>{tech.group}</h3>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="inline-block px-3 py-1 rounded-full bg-[var(--accent-primary)]/20 text-[var(--accent-primary)] font-semibold text-xs tracking-wider uppercase animate-fade-in">
+                    {tech.group}
+                  </span>
+                </div>
                 <ul className="space-y-2">
                   {tech.items.map((item, i) => (
-                    <li key={i} className="text-sm" style={{ color: 'var(--text-secondary)' }}>{item}</li>
+                    <li key={i} className="text-sm pl-2 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-1 before:h-1 before:rounded-full before:bg-[var(--accent-primary)]" style={{ color: 'var(--text-secondary)' }}>{item}</li>
                   ))}
                 </ul>
               </div>
             ))}
           </div>
+        </div>
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute -top-20 -left-20 w-96 h-96 bg-[var(--accent-primary)] opacity-10 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[var(--accent-secondary)] opacity-10 rounded-full blur-3xl"></div>
         </div>
       </section>
     </div>

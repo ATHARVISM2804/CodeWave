@@ -11,13 +11,13 @@ const CalendlyPopup: React.FC<CalendlyPopupProps> = ({ url, isOpen, onClose }) =
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Load Calendly script if not already loaded
+    // Load Calendly script only once
     if (!document.querySelector('script[src*="calendly.com/assets/external/widget.js"]')) {
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
       script.onload = () => {
-        console.log('Calendly script loaded successfully');
+        console.log('Calendly script loaded');
         setCalendlyLoaded(true);
         setLoading(false);
       };
@@ -30,36 +30,24 @@ const CalendlyPopup: React.FC<CalendlyPopupProps> = ({ url, isOpen, onClose }) =
       setCalendlyLoaded(true);
       setLoading(false);
     }
-
-    // Cleanup function
-    return () => {
-      // Remove script if component unmounts
-      const script = document.querySelector('script[src*="calendly.com/assets/external/widget.js"]');
-      if (script) {
-        document.head.removeChild(script);
-      }
-    };
   }, []);
 
-  // Handle body scroll lock
+  // Lock scroll when popup is open
   useEffect(() => {
     if (isOpen) {
-      // Prevent body scroll when popup is open
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
     } else {
-      // Restore body scroll when popup is closed
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
     }
-
-    // Cleanup on unmount
     return () => {
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
     };
   }, [isOpen]);
 
+  // Initialize Calendly popup when open
   useEffect(() => {
     if (isOpen && calendlyLoaded && (window as any).Calendly) {
       try {
@@ -68,13 +56,27 @@ const CalendlyPopup: React.FC<CalendlyPopupProps> = ({ url, isOpen, onClose }) =
           parentElement: document.getElementById('calendly-popup-container')
         });
       } catch (error) {
-        console.error('Error initializing Calendly popup:', error);
+        console.error('Calendly initialization error:', error);
       }
     }
   }, [isOpen, calendlyLoaded, url]);
 
+  // Handle ESC key to close popup
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        handleClose();
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
   const handleClose = () => {
-    // Ensure scroll is restored before closing
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
     onClose();
@@ -85,23 +87,6 @@ const CalendlyPopup: React.FC<CalendlyPopupProps> = ({ url, isOpen, onClose }) =
       handleClose();
     }
   };
-
-  // Handle ESC key to close popup
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        handleClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -124,10 +109,7 @@ const CalendlyPopup: React.FC<CalendlyPopupProps> = ({ url, isOpen, onClose }) =
           className="flex items-center justify-between p-6 border-b"
           style={{ borderColor: 'var(--glass-border)' }}
         >
-          <h2
-            className="text-2xl font-bold"
-            style={{ color: 'var(--text-primary)' }}
-          >
+          <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
             Schedule a Consultation
           </h2>
           <button
@@ -170,7 +152,7 @@ const CalendlyPopup: React.FC<CalendlyPopupProps> = ({ url, isOpen, onClose }) =
               </div>
             </div>
           )}
-          
+
           {!calendlyLoaded && !loading && (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
