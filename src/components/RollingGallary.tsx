@@ -119,16 +119,21 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
     }
   };
 
+  // Helper to normalize angle to 0-360
+  const normalizeAngle = (angle: number) => ((angle % 360) + 360) % 360;
+
   const handleDrag = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void => {
     controls.stop();
-    rotation.set(rotation.get() + info.offset.x * dragFactor);
+    const newAngle = rotation.get() + info.offset.x * dragFactor;
+    rotation.set(normalizeAngle(newAngle));
   };
 
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void => {
     const finalAngle = rotation.get() + info.velocity.x * dragFactor;
-    rotation.set(finalAngle);
+    const normalized = normalizeAngle(finalAngle);
+    rotation.set(normalized);
     if (autoplay) {
-      startInfiniteSpin(finalAngle);
+      startInfiniteSpin(normalized);
     }
   };
 

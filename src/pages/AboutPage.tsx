@@ -158,7 +158,7 @@ const AboutPage: React.FC = () => {
             </h1>
             <p className="text-xl mb-10 max-w-xl font-medium"
               style={{ color: 'var(--text-secondary)' }}>
-              At CodeWave.ai, we build smart, scalable, and meaningful digital solutions that power startups, scale-ups, and public-sector teams alike. Whether it’s a sleek product for a growing SaaS startup or a secure platform for law enforcement — we treat every line of code like it matters. Because it does.
+              At CodeWave.it, we build smart, scalable, and meaningful digital solutions that power startups, scale-ups, and public-sector teams alike. Whether it’s a sleek product for a growing SaaS startup or a secure platform for law enforcement — we treat every line of code like it matters. Because it does.
             </p>
             <div className="flex gap-6">
               <button
@@ -261,7 +261,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Technologies We Work With Section */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--accent-secondary)/10] relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--accent-secondary)/10] relative">
         <div className="container mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
           <div className="flex flex-col items-center mb-12">
             <div className="flex items-center gap-3 justify-center mb-2">

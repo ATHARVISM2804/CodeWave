@@ -91,33 +91,37 @@ const ContactPage: React.FC = () => {
       icon: MessageCircle,
       title: 'WhatsApp',
       description: 'Chat instantly with our team',
-      detail: '+1 (555) 123-4567',
+      detail: '+91 89299 42819',
       action: 'Start Chat',
-      color: 'from-green-500 to-emerald-500'
+      color: 'from-green-500 to-emerald-500',
+      href: 'https://wa.me/+918929942819?text=Hello%20CodeWave%21%20I%20would%20like%20to%20discuss%20a%20project.'
     },
     {
       icon: MessageCircle,
       title: 'Live Chat',
-      description: 'Our AI assistant is ready to help',
+      description: 'Our AI wants to chat with you',
       detail: 'Available 24/7',
       action: 'Chat Now',
-      color: 'from-blue-500 to-cyan-500'
+      color: 'from-blue-500 to-cyan-500',
+      href: '#live-chat'
     },
     {
       icon: Mail,
       title: 'Email',
-      description: 'Write to us directly',
+      description: 'Write to hello@codewave.it',
       detail: 'hello@codewave.it',
       action: 'Send Email',
-      color: 'from-purple-500 to-pink-500'
+      color: 'from-purple-500 to-pink-500',
+      href: 'mailto:hello@codewave.it?subject=Website%20Inquiry'
     },
     {
       icon: Calendar,
       title: 'Schedule a Call',
-      description: 'Book a consultation',
+      description: 'Book a time slot for call',
       detail: '30-min free consultation',
       action: 'Book Call',
-      color: 'from-orange-500 to-red-500'
+      color: 'from-orange-500 to-red-500',
+      href: 'https://calendly.com/codewave/30min'
     }
   ];
 
@@ -148,10 +152,8 @@ const ContactPage: React.FC = () => {
 
   const whyChooseUs = [
     'Expert team with 10+ years experience',
-    'Cutting-edge AI and intelligent solutions',
-    'Dedicated support throughout your project',
-    'Proven track record with 120+ successful projects',
-    'Security-first approach for all solutions'
+    'Cutting-edge tech solutions for modern challenges',
+    'Dedicated support throughout your project'
   ];
 
   const faqs = [
@@ -170,6 +172,25 @@ const ContactPage: React.FC = () => {
     {
       question: 'Do you provide ongoing support?',
       answer: 'Yes, we offer comprehensive support packages including maintenance, updates, and continuous optimization of your solutions.'
+    }
+  ];
+
+  const socialLinks = [
+    {
+      icon: Phone,
+      href: 'tel:+1234567890'
+    },
+    {
+      icon: Mail,
+      href: 'mailto:hello@codewave.it'
+    },
+    {
+      icon: 'https://img.icons8.com/ios-filled/50/000000/linkedin.png',
+      href: 'https://www.linkedin.com/company/codewave-tech/mycompany/'
+    },
+    {
+      icon: 'https://img.icons8.com/ios-filled/50/000000/twitter.png',
+      href: 'https://twitter.com/codewave_tech'
     }
   ];
 
@@ -229,10 +250,12 @@ const ContactPage: React.FC = () => {
                 <h3 className="text-xl font-bold mb-3 neon-glow" style={{ color: 'var(--text-primary)' }}>{method.title}</h3>
                 <p className="mb-2 font-medium" style={{ color: 'var(--text-secondary)' }}>{method.description}</p>
                 <p className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>{method.detail}</p>
-                <button className="liquid-button px-6 py-2 font-semibold glare-effect text-sm magnetic-effect"
-                  style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
-                  {method.action}
-                </button>
+                <a href={method.href} target="_blank" rel="noopener noreferrer">
+                  <button className="liquid-button px-6 py-2 font-semibold glare-effect text-sm magnetic-effect"
+                    style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
+                    {method.action}
+                  </button>
+                </a>
               </div>
             ))}
           </div>
@@ -404,7 +427,6 @@ const ContactPage: React.FC = () => {
               {/* Team Section */}
               <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '400ms', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
                 <h3 className="text-2xl font-bold mb-6 neon-glow" style={{ color: 'var(--text-primary)' }}>Meet Your Design Partners</h3>
-                
                 <div className="flex -space-x-4 mb-6">
                   {teamMembers.map((avatar, index) => (
                     <div
@@ -416,7 +438,6 @@ const ContactPage: React.FC = () => {
                     </div>
                   ))}
                 </div>
-
                 <div className="space-y-4">
                   <h4 className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Why clients choose us:</h4>
                   <div className="space-y-3">
@@ -428,12 +449,39 @@ const ContactPage: React.FC = () => {
                     ))}
                   </div>
                 </div>
-
                 <div className="mt-6 pt-6 border-t" style={{ borderTop: '1px solid var(--glass-border)' }}>
                   <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-                    <strong>Response guarantee:</strong> We respond within 4 hours on business days.
-                    Your data is secure and never shared.
+                    <strong>Response guarantee:</strong> We respond within 4 hours on business days. Your data is secure and never shared.
                   </p>
+                </div>
+                <div className="flex items-center space-x-4 mt-6">
+                  {socialLinks.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.href}
+                      className="transition-all duration-300 hover:-translate-y-1"
+                      style={{
+                        color: 'var(--text-secondary)',
+                        background: 'var(--card-bg)',
+                        border: '1px solid var(--card-border)',
+                        borderRadius: '50%',
+                        padding: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.color = 'var(--accent-primary)';
+                        e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.color = 'var(--text-secondary)';
+                        e.currentTarget.style.borderColor = 'var(--card-border)';
+                      }}
+                    >
+                      <social.icon size={18} />
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
@@ -480,14 +528,16 @@ const ContactPage: React.FC = () => {
               Schedule a free 30-minute consultation to discuss your project and get expert advice.
             </p>
             <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
-              <button className="liquid-button px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
-                style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
-                Book Free Consultation
-              </button>
-              <button className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect"
+              <a href="https://calendly.com/codewave/30min" target="_blank" rel="noopener noreferrer">
+                <button className="liquid-button px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
+                  style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
+                  Book Free Consultation
+                </button>
+              </a>
+              <a href="#portfolio" className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect"
                 style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
                 View Our Work
-              </button>
+              </a>
             </div>
           </div>
         </div>

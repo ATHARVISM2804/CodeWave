@@ -152,7 +152,7 @@ const PortfolioPage: React.FC = () => {
         </script>
       </Helmet>
       
-      <div className="pt-16 min-h-screen" style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}>
+      <div className="pt-16 min-h-screen mt-10" style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}>
         {/* Hero Section */}
         <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}>
           {/* Background Elements */}

@@ -35,7 +35,7 @@ const HeroSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative min-h-screen px-4 sm:px-6 lg:px-8 flex items-center pt-20 overflow-hidden"
+    <section className="relative min-h-screen px-4 sm:px-6 lg:px-8 flex items-center pt-20"
       // style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}
       >
       
@@ -54,7 +54,9 @@ const HeroSection: React.FC = () => {
                 <span
                   style={{
                     color: 'var(--accent-primary)',
-                    textShadow: `0 0 8px rgba(var(--accent-primary-rgb), 0.4)`
+                    textShadow: document.documentElement.classList.contains('dark') 
+                      ? `0 0 8px rgba(var(--accent-primary-rgb), 0.4)`
+                      : `0 0 8px rgba(16, 185, 129, 0.3)` // Emerald glow for light theme
                   }}
                 >
                   {' '}And AI Has Joined the Team.
@@ -158,10 +160,11 @@ const HeroSection: React.FC = () => {
               {/* Code Analysis Bar */}
               <div className="absolute left-6 right-6" style={{ top: '100px' }}>
                 <div className="flex items-center justify-between px-4 py-2 rounded-xl shadow-lg backdrop-blur-md"
-                  style={{ 
-                    background: 'var(--glass-bg)', 
-                    border: '1px solid var(--glass-border)' 
-                  }}>
+                  // style={{ 
+                  //   background: 'var(--glass-bg)', 
+                  //   border: '1px solid var(--glass-border)' 
+                  // }}
+                  >
                   <span className="text-xs" style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Code Analysis</span>
                 </div>
               </div>

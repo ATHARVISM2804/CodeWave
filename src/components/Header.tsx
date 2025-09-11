@@ -34,7 +34,7 @@ const Header: React.FC = () => {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all mt-5 duration-500 ${isScrolled ? 'pointer-events-none opacity-0' : 'bg-transparent'}`}>
         <div className="container mx-auto w-full px-4 sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
-            <div className="flex items-center flex-shrink-0">
+            <div className="flex items-center bg-black/80 h-16 rounded-lg flex-shrink-0">
               <a href="/" className="flex items-center">
                 <img src={Codewavelogo} alt="CodeWave" className="w-52 rounded-lg h-auto" />
               </a>

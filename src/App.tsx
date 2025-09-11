@@ -4,13 +4,12 @@ import { HelmetProvider } from 'react-helmet-async'; // Add this import
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import StatsSection from './components/StatsSection';
-import ServicesSection from './components/ServicesSection';
 import WhyUsSection from './components/WhyUsSection';
 import PortfolioSection from './components/PortfolioSection';
 import BlogSection from './components/BlogSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import ParticleBackground from './components/ParticleBackground';
+import ParticleBackground from './components/BgAnimation';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import PortfolioPage from './pages/PortfolioPage';
@@ -20,11 +19,8 @@ import MouseFollower from './components/CursorFollower';
 import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 import LoadingAnimation from './components/LoadingAnimation';
 import MovingData from './components/MovingData';
-import LightRays from './components/LightRays';
 import Chatbot from './components/Chatbot';
 import ScrollToTop from './components/ScrollToTop';
-import DarkVeil from './components/DarkViel';
-import Orb from './components/Orb';
 
 const HomePage = () => (
   <>
@@ -45,6 +41,7 @@ const HomePage = () => (
     <StatsSection />
     <WhyUsSection />
     <PortfolioSection />
+    <ParticleBackground />
     <BlogSection />
     <ContactSection />
 
