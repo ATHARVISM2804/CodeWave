@@ -36,7 +36,8 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative min-h-screen px-4 sm:px-6 lg:px-8 flex items-center pt-20 overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}>
+      // style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}
+      >
       
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">

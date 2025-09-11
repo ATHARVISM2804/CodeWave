@@ -74,8 +74,9 @@ const BlogSection: React.FC = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 relative overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary))' }}>
+    <section ref={sectionRef} className="py-20 md:py-28 relative z-0"
+      // style={{ background: 'linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary))' }}
+      >
       
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">

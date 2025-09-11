@@ -152,15 +152,23 @@ const PortfolioPage: React.FC = () => {
         </script>
       </Helmet>
       
-      <div className="pt-16" style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}>
+      <div className="pt-16 min-h-screen" style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}>
         {/* Hero Section */}
-        <section className="py-20 relative overflow-hidden">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}>
+          {/* Background Elements */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] opacity-5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-[var(--accent-secondary)] to-[var(--accent-primary)] opacity-5 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center space-y-8">
               <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight" style={{ color: 'var(--text-primary)' }}>
                   See What Intelligence Builds.{ ' ' }
-                  <span className="parallax-text neon-glow" style={{ color: 'var(--accent-primary)' }}>Then Learn Why.</span>
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+                    Then Learn Why.
+                  </span>
                 </h1>
                 <p className="text-xl max-w-4xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                   Explore our portfolio of intelligent solutions that have transformed businesses across industries.
@@ -177,18 +185,18 @@ const PortfolioPage: React.FC = () => {
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className={`morph-card glare-card p-8 text-center hover-lift-premium magnetic-effect ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                  className={`bg-white dark:bg-gray-800 rounded-2xl p-8 text-center transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700 ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
                   style={{
                     background: 'var(--card-bg)',
                     border: '1px solid var(--card-border)',
-                    color: 'var(--text-primary)'
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
                   }}
                 >
-                  <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 magnetic-effect"
-                    style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}>
-                    <stat.icon className="w-8 h-8" style={{ color: 'var(--text-primary)' }} />
+                  <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg"
+                    style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}>
+                    <stat.icon className="w-8 h-8 text-white" />
                   </div>
-                  <div className="text-3xl font-bold parallax-text neon-glow mb-2" style={{ color: 'var(--accent-primary)' }}>{stat.value}</div>
+                  <div className="text-3xl font-bold mb-2" style={{ color: 'var(--accent-primary)' }}>{stat.value}</div>
                   <div className="font-medium" style={{ color: 'var(--text-secondary)' }}>{stat.label}</div>
                 </div>
               ))}
@@ -204,19 +212,24 @@ const PortfolioPage: React.FC = () => {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 magnetic-effect ${
+                  className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-sm hover:shadow-md ${
                     selectedCategory === category
-                      ? 'liquid-button glare-effect'
-                      : 'morph-card glare-card hover-lift-premium'
+                      ? 'shadow-lg'
+                      : ''
                   }`}
                   style={{
                     background: selectedCategory === category
                       ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))'
                       : 'var(--card-bg)',
-                    color: 'var(--text-primary)',
+                    color: selectedCategory === category 
+                      ? 'white' 
+                      : 'var(--text-primary)',
                     border: selectedCategory === category
                       ? 'none'
-                      : '1px solid var(--card-border)'
+                      : '1px solid var(--card-border)',
+                    boxShadow: selectedCategory === category
+                      ? '0 4px 15px rgba(var(--accent-primary-rgb), 0.3)'
+                      : '0 2px 10px rgba(0, 0, 0, 0.1)'
                   }}
                 >
                   {category}
@@ -233,11 +246,12 @@ const PortfolioPage: React.FC = () => {
               {filteredProjects.map((project, index) => (
                 <article
                   key={index}
-                  className={`morph-card glare-card overflow-hidden hover-lift-premium magnetic-effect ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                  className={`bg-white dark:bg-gray-800 rounded-2xl overflow-hidden transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700 ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
                   style={{
                     background: 'var(--card-bg)',
                     border: '1px solid var(--card-border)',
-                    color: 'var(--text-primary)'
+                    color: 'var(--text-primary)',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)'
                   }}
                   itemScope 
                   itemType="https://schema.org/CreativeWork"
@@ -267,7 +281,7 @@ const PortfolioPage: React.FC = () => {
                   </div>
 
                   <div className="p-8">
-                    <h3 className="text-2xl font-bold mb-4 neon-glow" style={{ color: 'var(--text-primary)' }} itemProp="name">{project.title}</h3>
+                    <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }} itemProp="name">{project.title}</h3>
                     <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }} itemProp="description">{project.description}</p>
 
                     <div className="space-y-6">
@@ -315,7 +329,7 @@ const PortfolioPage: React.FC = () => {
                       </div>
 
                       <div className="flex space-x-4 pt-4">
-                        <a href={project.url} className="flex items-center space-x-2 px-4 py-2 morph-card rounded-lg hover-lift-premium glare-card text-sm font-semibold"
+                        <a href={project.url} className="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 shadow-sm hover:shadow-md"
                           style={{
                             background: 'var(--glass-bg)',
                             border: '1px solid var(--glass-border)',
@@ -325,7 +339,7 @@ const PortfolioPage: React.FC = () => {
                           <ExternalLink className="w-4 h-4" style={{ color: 'var(--accent-primary)' }} />
                           <span>View Live</span>
                         </a>
-                        <a href={`${project.url}/case-study`} className="flex items-center space-x-2 px-4 py-2 morph-card rounded-lg hover-lift-premium glare-card text-sm font-semibold"
+                        <a href={`${project.url}/case-study`} className="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 shadow-sm hover:shadow-md"
                           style={{
                             background: 'var(--glass-bg)',
                             border: '1px solid var(--glass-border)',
@@ -347,11 +361,12 @@ const PortfolioPage: React.FC = () => {
         {/* CTA Section */}
         <section className="py-20 relative">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="morph-card glare-card p-12 text-center hover-lift-premium"
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-12 text-center transform hover:scale-105 transition-all duration-300 shadow-lg border border-gray-100 dark:border-gray-700"
               style={{
                 background: 'var(--card-bg)',
                 border: '1px solid var(--card-border)',
-                color: 'var(--text-primary)'
+                color: 'var(--text-primary)',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)'
               }}
             >
               <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
@@ -362,18 +377,19 @@ const PortfolioPage: React.FC = () => {
                 Let's discuss how we can create an intelligent solution that transforms your business.
               </p>
               <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
-                <button className="liquid-button px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
+                <button className="px-8 py-4 font-semibold text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
                   style={{
                     background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                    color: 'var(--text-primary)'
+                    color: 'var(--text-primary)',
+                    boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.3)'
                   }}>
                   Start Your Project
                 </button>
-                <button className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect"
+                <button className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-md"
                   style={{
                     background: 'var(--card-bg)',
-                    border: '1px solid var(--card-border)',
-                    color: 'var(--text-primary)'
+                    border: '2px solid var(--accent-primary)',
+                    color: 'var(--accent-primary)'
                   }}>
                   Schedule Consultation
                 </button>

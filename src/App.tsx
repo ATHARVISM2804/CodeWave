@@ -23,11 +23,13 @@ import MovingData from './components/MovingData';
 import LightRays from './components/LightRays';
 import Chatbot from './components/Chatbot';
 import ScrollToTop from './components/ScrollToTop';
+import DarkVeil from './components/DarkViel';
+import Orb from './components/Orb';
 
 const HomePage = () => (
   <>
     <HeroSection />
-      {/* <LightRays
+    {/* <LightRays
     raysOrigin="top-center"
     raysColor="#00ffff"
     raysSpeed={1.5}
@@ -45,6 +47,7 @@ const HomePage = () => (
     <PortfolioSection />
     <BlogSection />
     <ContactSection />
+
   </>
 );
 
@@ -60,24 +63,24 @@ function App() {
     const storedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
     const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     const initialTheme = storedTheme || systemTheme;
-    
+
     setTheme(initialTheme);
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(initialTheme);
-    
+
     // Listen for theme changes
     const handleThemeChange = () => {
       const currentTheme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
       setTheme(currentTheme);
     };
-    
+
     // Create a MutationObserver to watch for class changes on html element
     const observer = new MutationObserver(handleThemeChange);
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class']
     });
-    
+
     return () => observer.disconnect();
   }, []);
 
@@ -89,18 +92,19 @@ function App() {
   return (
     <HelmetProvider> {/* Add this provider */}
       <Router>
-        <div 
+        <div
           className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}
-          style={{ 
-            background: 'var(--bg-primary)',
-            color: 'var(--text-primary)'
-          }}
+        // style={{ 
+        //   background: 'var(--bg-primary)',
+        //   color: 'var(--text-primary)'
+        // }}
         >
           {/* <ParticleBackground /> */}
           <MouseFollower />
           <Chatbot />
           <Header />
-          <ThemeToggle />
+          <ParticleBackground />
+          <ThemeToggle /> 
           <ScrollToTop />
 
           {isLoading ? (
@@ -112,6 +116,8 @@ function App() {
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
+                <Route path="/portfolio" element={<PortfolioPage />} />
+                <Route path="/contact" element={<ContactPage />} />
               </Routes>
             </main>
           )}

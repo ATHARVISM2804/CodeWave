@@ -73,7 +73,7 @@ const PortfolioSection: React.FC = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 relative overflow-hidden" 
+    <section ref={sectionRef} className="py-20 md:py-28 relative z-1" 
       style={{ background: 'linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary))' }}>
       
       {/* Background Elements */}
