@@ -1,13 +1,20 @@
 import React, { useRef, useState } from 'react';
 import { ArrowRight, Calendar, Clock, BookOpen, TrendingUp, User, Eye } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const BlogSection: React.FC = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [hoveredPost, setHoveredPost] = useState<number | null>(null);
+  const navigate = useNavigate();
+
+  const handleBlogClick = (blogId: string) => {
+    navigate(`/blog/${blogId}`);
+  };
 
   const featuredPost = {
+    id: 'future-intelligent-software',
     title: 'The Future of Intelligent Software Development',
     excerpt: 'How AI is revolutionizing the way we build, test, and deploy software solutions. A deep dive into practical applications that are changing the industry right now.',
     category: 'AI & Development',
@@ -21,6 +28,7 @@ const BlogSection: React.FC = () => {
 
   const blogPosts = [
     {
+      id: 'startups-digital-transformation',
       title: 'Why Startups Fail at Digital Transformation',
       excerpt: 'Most startups think they need to digitize everything. Here\'s why strategic digital transformation is different and more effective.',
       category: 'Strategy',
@@ -31,6 +39,7 @@ const BlogSection: React.FC = () => {
       image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800'
     },
     {
+      id: 'govtech-security',
       title: 'GovTech Security: Beyond Compliance',
       excerpt: 'Building secure government solutions requires more than checking compliance boxes. Here\'s our approach to real security.',
       category: 'Security',
@@ -41,6 +50,7 @@ const BlogSection: React.FC = () => {
       image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800'
     },
     {
+      id: 'psychology-ui-design',
       title: 'The Psychology of User Interface Design',
       excerpt: 'Great UX isn\'t just about pretty interfaces. It\'s about understanding human psychology and behavior patterns.',
       category: 'Design',
@@ -51,6 +61,7 @@ const BlogSection: React.FC = () => {
       image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800'
     },
     {
+      id: 'api-design-future',
       title: 'API Design for the Next Decade',
       excerpt: 'APIs are the backbone of modern applications. Here\'s how to design APIs that will scale and evolve with your business.',
       category: 'Development',
@@ -98,7 +109,8 @@ const BlogSection: React.FC = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mb-16"
         >
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl group cursor-pointer">
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl group cursor-pointer"
+            onClick={() => handleBlogClick(featuredPost.id)}>
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] p-1">
               <div className="w-full h-full rounded-3xl" style={{ background: 'var(--card-bg)' }}>
                 <div className="grid lg:grid-cols-2 gap-8 items-center p-8 lg:p-12">
@@ -160,10 +172,14 @@ const BlogSection: React.FC = () => {
                       </div>
                     </div>
 
-                    <button className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold transform hover:scale-105 transition-all duration-200 group"
-                      style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
+                    <button className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold transform hover:scale-105 transition-all duration-200 group/btn"
+                      style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleBlogClick(featuredPost.id);
+                      }}>
                       Read Full Article
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </div>
@@ -188,6 +204,7 @@ const BlogSection: React.FC = () => {
                 className="group cursor-pointer"
                 onMouseEnter={() => setHoveredPost(index)}
                 onMouseLeave={() => setHoveredPost(null)}
+                onClick={() => handleBlogClick(post.id)}
               >
                 <div className="rounded-3xl overflow-hidden shadow-lg transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl"
                   style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>

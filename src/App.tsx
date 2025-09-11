@@ -15,12 +15,14 @@ import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import PortfolioPage from './pages/PortfolioPage';
 import ContactPage from './pages/ContactPage';
+import BlogPost from './pages/BlogPost';
 import MouseFollower from './components/CursorFollower';
 import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 import LoadingAnimation from './components/LoadingAnimation';
 import MovingData from './components/MovingData';
 import LightRays from './components/LightRays';
 import Chatbot from './components/Chatbot';
+import ScrollToTop from './components/ScrollToTop';
 
 const HomePage = () => (
   <>
@@ -47,7 +49,10 @@ const HomePage = () => (
 );
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    // Only show loading animation on first load, not on route change
+    return window.performance && performance.navigation.type === 1;
+  });
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
@@ -96,6 +101,7 @@ function App() {
           <Chatbot />
           <Header />
           <ThemeToggle />
+          <ScrollToTop />
 
           {isLoading ? (
             <LoadingAnimation duration={1000} onComplete={handleLoadingComplete} />
@@ -105,8 +111,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/services" element={<ServicesPage />} />
-                <Route path="/portfolio" element={<PortfolioPage />} />
-                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/blog/:id" element={<BlogPost />} />
               </Routes>
             </main>
           )}
