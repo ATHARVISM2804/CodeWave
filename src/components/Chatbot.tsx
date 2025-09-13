@@ -79,7 +79,7 @@ const Chatbot: React.FC = () => {
         role: msg.sender === 'user' ? 'user' : 'model',
         parts: [{ text: msg.text }]
       }));
-      
+
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`, {
         method: "POST",
         headers: {
@@ -137,7 +137,7 @@ const Chatbot: React.FC = () => {
         }}
         onClick={() => setOpen((v) => !v)}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-square-text"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="10" x2="14" y1="10" y2="10"/><line x1="10" x2="14" y1="14" y2="14"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-square-text"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /><line x1="10" x2="14" y1="10" y2="10" /><line x1="10" x2="14" y1="14" y2="14" /></svg>
       </button>
 
       {/* Chat Window */}
@@ -181,11 +181,10 @@ const Chatbot: React.FC = () => {
                 className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`px-4 py-3 rounded-2xl text-sm max-w-[80%] drop-shadow-sm ${
-                    msg.sender === "user"
+                  className={`px-4 py-3 rounded-2xl text-sm max-w-[80%] drop-shadow-sm ${msg.sender === "user"
                       ? "rounded-br-none"
                       : "rounded-bl-none"
-                  }`}
+                    }`}
                   style={{
                     background: msg.sender === 'user' ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' : 'var(--card-bg)',
                     color: msg.sender === 'user' ? 'white' : 'var(--text-primary)',
@@ -257,7 +256,7 @@ const Chatbot: React.FC = () => {
               disabled={!input.trim() || isThinking}
             >
               Send
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send"><path d="m22 2-7 20-4-9-9-4 20-7z"/><path d="M22 2 11 13"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send"><path d="m22 2-7 20-4-9-9-4 20-7z" /><path d="M22 2 11 13" /></svg>
             </button>
           </form>
         </div>

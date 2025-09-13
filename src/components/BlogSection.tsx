@@ -75,9 +75,9 @@ const BlogSection: React.FC = () => {
 
   return (
     <section ref={sectionRef} className="py-20 md:py-28 relative z-0"
-      // style={{ background: 'linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary))' }}
-      >
-      
+    // style={{ background: 'linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary))' }}
+    >
+
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] opacity-5 rounded-full blur-3xl"></div>
@@ -116,7 +116,7 @@ const BlogSection: React.FC = () => {
               <div className="w-full h-full rounded-3xl" style={{ background: 'var(--card-bg)' }}>
                 <div className="grid lg:grid-cols-2 gap-8 items-center p-8 lg:p-12">
                   <div className="relative overflow-hidden rounded-2xl">
-                    <img 
+                    <img
                       src={featuredPost.image}
                       alt={featuredPost.title}
                       className="w-full h-64 lg:h-80 object-cover transform group-hover:scale-110 transition-transform duration-700"
@@ -147,7 +147,7 @@ const BlogSection: React.FC = () => {
                           {featuredPost.date}
                         </div>
                       </div>
-                      <h3 className="text-2xl lg:text-3xl font-bold mb-4 group-hover:text-[var(--accent-primary)] transition-colors duration-300" 
+                      <h3 className="text-2xl lg:text-3xl font-bold mb-4 group-hover:text-[var(--accent-primary)] transition-colors duration-300"
                         style={{ color: 'var(--text-primary)' }}>
                         {featuredPost.title}
                       </h3>
@@ -155,7 +155,7 @@ const BlogSection: React.FC = () => {
                         {featuredPost.excerpt}
                       </p>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4 text-sm" style={{ color: 'var(--text-secondary)' }}>
                         <div className="flex items-center gap-1">
@@ -209,9 +209,9 @@ const BlogSection: React.FC = () => {
               >
                 <div className="rounded-3xl overflow-hidden shadow-lg transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl"
                   style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
-                  
+
                   <div className="relative overflow-hidden">
-                    <img 
+                    <img
                       src={post.image}
                       alt={post.title}
                       className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-700"
@@ -236,16 +236,16 @@ const BlogSection: React.FC = () => {
                         {post.readTime}
                       </div>
                     </div>
-                    
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-[var(--accent-primary)] transition-colors duration-300 line-clamp-2" 
+
+                    <h3 className="text-xl font-bold mb-3 group-hover:text-[var(--accent-primary)] transition-colors duration-300 line-clamp-2"
                       style={{ color: 'var(--text-primary)' }}>
                       {post.title}
                     </h3>
-                    
+
                     <p className="text-sm mb-4 line-clamp-3" style={{ color: 'var(--text-secondary)' }}>
                       {post.excerpt}
                     </p>
-                    
+
                     <div className="flex items-center justify-between pt-4 border-t" style={{ borderColor: 'var(--card-border)' }}>
                       <div className="flex items-center gap-4 text-xs" style={{ color: 'var(--text-secondary)' }}>
                         <div className="flex items-center gap-1">
@@ -290,10 +290,10 @@ const BlogSection: React.FC = () => {
                 type="email"
                 placeholder="Enter your email"
                 className="flex-1 px-4 py-3 rounded-full border focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
-                style={{ 
-                  background: 'var(--bg-secondary)', 
-                  borderColor: 'var(--card-border)', 
-                  color: 'var(--text-primary)' 
+                style={{
+                  background: 'var(--bg-secondary)',
+                  borderColor: 'var(--card-border)',
+                  color: 'var(--text-primary)'
                 }}
               />
               <button className="px-6 py-3 rounded-full font-semibold whitespace-nowrap transform hover:scale-105 transition-transform duration-200"

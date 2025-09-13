@@ -37,9 +37,9 @@ const Footer: React.FC = () => {
           {/* Logo and Tagline Column */}
           <div className="md:col-span-2">
             <div className="flex flex-col items-start">
-              <img 
-                src="https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png" 
-                alt="CodeWave Logo" 
+              <img
+                src="https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png"
+                alt="CodeWave Logo"
                 className="w-56 h-14 mb-12 bg-black rounded-lg object-cover"
               />
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -58,9 +58,9 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               {navigationLinks.map((link, index) => (
                 <li key={index} className="group flex items-center">
-                  <ChevronRight 
-                    size={16} 
-                    className="mr-2 transform transition-transform duration-300 group-hover:translate-x-1" 
+                  <ChevronRight
+                    size={16}
+                    className="mr-2 transform transition-transform duration-300 group-hover:translate-x-1"
                     style={{ color: 'var(--accent-primary)' }}
                   />
                   <a
@@ -82,25 +82,25 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-6" style={{ color: 'var(--text-primary)' }}>Contact Us</h3>
             <ul className="space-y-4">
               <li style={{ color: 'var(--text-secondary)' }}>
-                <a 
-                  href="mailto:careersparushapandey@gmail.com" 
+                <a
+                  href="mailto:careersparushapandey@gmail.com"
                   className="flex items-center gap-2 hover:text-[var(--accent-primary)] transition-colors duration-300"
                 >
                   <Mail size={18} /> careersparushapandey@gmail.com
                 </a>
               </li>
               <li style={{ color: 'var(--text-secondary)' }}>
-                <a 
-                  href="tel:+1234567890" 
+                <a
+                  href="tel:+1234567890"
                   className="flex items-center gap-2 hover:text-[var(--accent-primary)] transition-colors duration-300"
                 >
                   <Phone size={18} /> +91 89299 42819
                 </a>
               </li>
               <li style={{ color: 'var(--text-secondary)' }}>
-                <a 
-                  href="https://wa.me/+918929942819" 
-                  target="_blank" 
+                <a
+                  href="https://wa.me/+918929942819"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-[var(--accent-primary)] transition-colors duration-300"
                 >
@@ -108,16 +108,16 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a 
-                  href="#schedule" 
+                <a
+                  href="#schedule"
                   className="px-4 py-2 rounded-lg inline-flex items-center transition-all duration-300 hover:-translate-y-1"
-                  style={{ 
+                  style={{
                     background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                     color: 'white'
                   }}
                 >
                   <a target='_blank' href="https://calendly.com/codewave/30min">
-                  Schedule a consult
+                    Schedule a consult
                   </a>
                 </a>
               </li>
@@ -127,9 +127,9 @@ const Footer: React.FC = () => {
                     key={index}
                     href={social.href}
                     className="transition-all duration-300 hover:-translate-y-1"
-                    style={{ 
+                    style={{
                       color: 'var(--text-secondary)',
-                      background: 'var(--card-bg)', 
+                      background: 'var(--card-bg)',
                       border: '1px solid var(--card-border)',
                       borderRadius: '50%',
                       padding: '8px',

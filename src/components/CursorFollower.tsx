@@ -32,9 +32,9 @@ const CursorFollower: React.FC = () => {
       const target = e.target as HTMLElement
       pointerScale =
         window.getComputedStyle(target).cursor === 'pointer' ||
-        target.tagName.toLowerCase() === 'button' ||
-        target.tagName.toLowerCase() === 'a'
-        ? 1.5 : 1
+          target.tagName.toLowerCase() === 'button' ||
+          target.tagName.toLowerCase() === 'a'
+          ? 1.5 : 1
     }
 
     window.addEventListener('mousemove', handleMouseMove)

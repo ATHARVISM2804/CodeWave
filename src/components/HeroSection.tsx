@@ -8,27 +8,27 @@ const HeroSection: React.FC = () => {
   }, []);
 
   const codeSnippets = [
-    { 
+    {
       code: 'const ai = new Intelligence();',
-      position: { top: '15%', right: '12%' }, 
+      position: { top: '15%', right: '12%' },
       delay: 0,
       rotate: 5,
     },
-    { 
+    {
       code: 'function buildFuture() { return innovation; }',
-      position: { top: '22%', right: '38%' }, 
+      position: { top: '22%', right: '38%' },
       delay: 200,
       rotate: 0
     },
-    { 
+    {
       code: 'if (problem) solve();',
-      position: { top: '60%', right: '36%' }, 
+      position: { top: '60%', right: '36%' },
       delay: 400,
       rotate: 0
     },
-    { 
+    {
       code: 'AI.merge(creativity)',
-      position: { top: '62%', right: '14%' }, 
+      position: { top: '62%', right: '14%' },
       delay: 600,
       rotate: 0
     }
@@ -36,25 +36,25 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative min-h-screen px-4 sm:px-6 lg:px-8 flex items-center pt-20"
-      // style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}
-      >
-      
+    // style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}
+    >
+
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] opacity-10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-[var(--accent-secondary)] to-[var(--accent-primary)] opacity-10 rounded-full blur-3xl"></div>
       </div>
-      
+
       <div className="container mx-auto px-0 sm:px-4 lg:px-8 z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className={`space-y-8 ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
             <div className="space-y-4">
               <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight break-words" style={{ color: 'var(--text-primary)' }}>
-                We Speak Fluent Code. 
+                We Speak Fluent Code.
                 <span
                   style={{
                     color: 'var(--accent-primary)',
-                    textShadow: document.documentElement.classList.contains('dark') 
+                    textShadow: document.documentElement.classList.contains('dark')
                       ? `0 0 8px rgba(var(--accent-primary-rgb), 0.4)`
                       : `0 0 8px rgba(16, 185, 129, 0.3)` // Emerald glow for light theme
                   }}
@@ -63,7 +63,7 @@ const HeroSection: React.FC = () => {
                 </span>
               </h1>
               <p className="text-sm xs:text-base sm:text-lg md:text-xl" style={{ color: 'var(--text-secondary)' }}>
-                We build powerful digital solutions that help startups and businesses work smarter—with custom web, mobile, 
+                We build powerful digital solutions that help startups and businesses work smarter—with custom web, mobile,
                 and AI technology—while supporting government projects with secure, scalable innovation.
               </p>
             </div>
@@ -82,7 +82,7 @@ const HeroSection: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </button>
-              
+
               <button
                 className="group px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg"
                 style={{
@@ -160,11 +160,11 @@ const HeroSection: React.FC = () => {
               {/* Code Analysis Bar */}
               <div className="absolute left-6 right-6" style={{ top: '100px' }}>
                 <div className="flex items-center justify-between px-4 py-2 rounded-xl shadow-lg backdrop-blur-md"
-                  // style={{ 
-                  //   background: 'var(--glass-bg)', 
-                  //   border: '1px solid var(--glass-border)' 
-                  // }}
-                  >
+                // style={{ 
+                //   background: 'var(--glass-bg)', 
+                //   border: '1px solid var(--glass-border)' 
+                // }}
+                >
                   <span className="text-xs" style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Code Analysis</span>
                 </div>
               </div>
@@ -195,7 +195,7 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
         ))}
-        
+
       </div>
     </section>
   );

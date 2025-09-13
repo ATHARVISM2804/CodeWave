@@ -48,7 +48,7 @@ const ParticleBackground: React.FC = () => {
     // Get theme-aware colors
     const getThemeColors = () => {
       const isDark = document.documentElement.classList.contains('dark');
-      
+
       if (isDark) {
         return {
           primary: [100, 149, 237] as [number, number, number], // CornflowerBlue
@@ -99,7 +99,7 @@ const ParticleBackground: React.FC = () => {
     const createDot = (): Dot => {
       const colors = getThemeColors();
       const colorOptions = [colors.primary, colors.secondary, colors.accent];
-      
+
       return {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -122,7 +122,7 @@ const ParticleBackground: React.FC = () => {
     // Draw subtle grid
     const drawGrid = () => {
       const colors = getThemeColors();
-      
+
       gridLines.forEach(line => {
         ctx.strokeStyle = `rgba(${colors.grid.join(',')}, ${line.opacity})`;
         ctx.lineWidth = 0.5;
@@ -147,7 +147,7 @@ const ParticleBackground: React.FC = () => {
       gradient.addColorStop(0, `rgba(${dot.color.join(',')}, ${dot.opacity})`);
       gradient.addColorStop(0.5, `rgba(${dot.color.join(',')}, ${dot.opacity * 0.3})`);
       gradient.addColorStop(1, `rgba(${dot.color.join(',')}, 0)`);
-      
+
       ctx.fillStyle = gradient;
       ctx.beginPath();
       ctx.arc(dot.x, dot.y, dot.radius * 2, 0, Math.PI * 2);
@@ -158,16 +158,16 @@ const ParticleBackground: React.FC = () => {
     const drawConnections = () => {
       const colors = getThemeColors();
       const connectionDistance = 150;
-      
+
       dots.forEach((dot, i) => {
         dots.slice(i + 1).forEach((otherDot) => {
           const dx = dot.x - otherDot.x;
           const dy = dot.y - otherDot.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
-          
+
           if (distance < connectionDistance) {
             const opacity = (1 - distance / connectionDistance) * 0.05; // Very subtle
-            
+
             ctx.strokeStyle = `rgba(${colors.primary.join(',')}, ${opacity})`;
             ctx.lineWidth = 0.5;
             ctx.beginPath();
@@ -183,17 +183,17 @@ const ParticleBackground: React.FC = () => {
     const drawDataStreams = (globalTime: number) => {
       const colors = getThemeColors();
       const streamCount = 3;
-      
+
       for (let i = 0; i < streamCount; i++) {
         const streamY = (canvas.height / (streamCount + 1)) * (i + 1);
         const streamX = (globalTime * 30 + i * 200) % (canvas.width + 100) - 50;
-        
+
         // Draw subtle moving line
         const gradient = ctx.createLinearGradient(streamX - 50, streamY, streamX + 50, streamY);
         gradient.addColorStop(0, `rgba(${colors.accent.join(',')}, 0)`);
         gradient.addColorStop(0.5, `rgba(${colors.accent.join(',')}, 0.15)`);
         gradient.addColorStop(1, `rgba(${colors.accent.join(',')}, 0)`);
-        
+
         ctx.strokeStyle = gradient;
         ctx.lineWidth = 1;
         ctx.beginPath();
@@ -218,7 +218,7 @@ const ParticleBackground: React.FC = () => {
         // Slow, gentle movement
         dot.x += dot.vx;
         dot.y += dot.vy;
-        
+
         // Add subtle drift
         dot.x += Math.sin(time + dot.pulse) * 0.1;
         dot.y += Math.cos(time * 0.7 + dot.pulse) * 0.08;
@@ -241,7 +241,7 @@ const ParticleBackground: React.FC = () => {
     const handleResize = () => {
       resize();
       createGrid();
-      
+
       // Adjust dot positions for new canvas size
       dots.forEach(dot => {
         if (dot.x > canvas.width) dot.x = canvas.width;
@@ -263,7 +263,7 @@ const ParticleBackground: React.FC = () => {
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-      style={{ 
+      style={{
         opacity: document.documentElement.classList.contains('dark') ? 0.3 : 0.2,
         mixBlendMode: 'multiply'
       }}

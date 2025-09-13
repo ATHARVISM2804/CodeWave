@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async'; // Add this import
 import Header from './components/Header';
@@ -25,18 +25,6 @@ import ScrollToTop from './components/ScrollToTop';
 const HomePage = () => (
   <>
     <HeroSection />
-    {/* <LightRays
-    raysOrigin="top-center"
-    raysColor="#00ffff"
-    raysSpeed={1.5}
-    lightSpread={0.8}
-    rayLength={1.2}
-    followMouse={true}
-    mouseInfluence={0.1}
-    noiseAmount={0.1}
-    distortion={0.05}
-    className="custom-rays"
-  /> */}
     <MovingData />
     <StatsSection />
     <WhyUsSection />
@@ -101,7 +89,7 @@ function App() {
           <Chatbot />
           <Header />
           <ParticleBackground />
-          <ThemeToggle /> 
+          <ThemeToggle />
           <ScrollToTop />
 
           {isLoading ? (

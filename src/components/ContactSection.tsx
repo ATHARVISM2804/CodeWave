@@ -176,7 +176,7 @@ const ContactSection: React.FC = () => {
                     target={option.href && option.href.startsWith('http') ? '_blank' : undefined}
                     rel={option.href && option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                     className="font-semibold inline-flex items-center gap-2"
-                    // preserve keyboard focus styles
+                  // preserve keyboard focus styles
                   >
                     {option.action}
                   </a>
@@ -192,7 +192,7 @@ const ContactSection: React.FC = () => {
                 </div>
                 <span className="text-lg font-semibold">Find the right fix - try ML integration or general</span>
               </div>
-              
+
               <div className="flex flex-wrap gap-3">
                 {['Discuss a Project', 'Need Support?', 'Explore Ideas'].map((option, index) => (
                   <button
@@ -206,9 +206,9 @@ const ContactSection: React.FC = () => {
               </div>
 
               <div className="mt-6">
-                <p 
-                style={{ color: 'var(--text-secondary)' }}
-                className="text-sm mb-4 font-medium">Popular: Pricing, Support, Integration</p>
+                <p
+                  style={{ color: 'var(--text-secondary)' }}
+                  className="text-sm mb-4 font-medium">Popular: Pricing, Support, Integration</p>
                 <div className="relative">
                   <input
                     type="text"
@@ -226,7 +226,7 @@ const ContactSection: React.FC = () => {
           {/* Contact Form */}
           <div className="card-premium glass-premium p-8 glare-effect">
             <h3 className="text-2xl font-bold mb-6">Tell us about your vision</h3>
-            
+
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 gap-6">
                 <div className="group">
@@ -334,7 +334,7 @@ const ContactSection: React.FC = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="text-right text-sm text-gray-400">
                   <p>We respond within 24 hours on business days</p>
                   <p className="mt-1">Your data is secure and never shared.</p>
