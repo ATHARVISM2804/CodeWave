@@ -208,10 +208,11 @@ const WhyUsSection: React.FC = () => {
 
           {/* Feature Nodes - Updated for responsive layout */}
           <div className="md:absolute md:inset-0">
-            <div className="md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:h-full flex flex-col items-center justify-center md:block gap-6">
+            {/* Use flex-col and gap for mobile, block for desktop */}
+            <div className="flex flex-col items-center gap-6 md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:h-full md:block">
               {features.map((feature, index) => {
                 const position = getCardPosition(index, features.length);
-                
+
                 return (
                   <div
                     key={index}
@@ -219,9 +220,18 @@ const WhyUsSection: React.FC = () => {
                       isVisible ? 'opacity-100' : 'opacity-0'
                     } ${position.position === 'absolute' ? 'md:absolute md:left-1/2 md:top-1/2 md:max-w-none' : ''}`}
                     style={{
-                      ...position,
+                      // Only apply transform and width for desktop
+                      ...(position.position === 'absolute'
+                        ? {
+                            transform: position.transform,
+                            width: '240px',
+                          }
+                        : {
+                            // For mobile, reset transform and use full width
+                            transform: 'none',
+                            width: '100%',
+                          }),
                       transitionDelay: `${400 + index * 150}ms`,
-                      width: position.position === 'absolute' ? '240px' : 'auto'
                     }}
                     onMouseEnter={() => setHoverIndex(index)}
                     onMouseLeave={() => setHoverIndex(null)}
