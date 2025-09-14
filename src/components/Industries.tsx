@@ -116,7 +116,12 @@ const Industries: React.FC = () => {
                 style={{
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
-                  color: 'var(--text-primary)'
+                  color: 'var(--text-primary)',
+                  boxShadow:
+                    // Blue shadow in dark mode, subtle black in light mode
+                    typeof window !== 'undefined' && document.documentElement.classList.contains('dark')
+                      ? '0 4px 24px 0 rgba(37,99,235,0.18), 0 1.5px 8px 0 #2563eb'
+                      : '0 4px 24px 0 rgba(0,0,0,0.08), 0 1.5px 8px 0 #222',
                 }}
                 onClick={() => navigate(`/industries/${industry.slug}`)}
                 role="button"
