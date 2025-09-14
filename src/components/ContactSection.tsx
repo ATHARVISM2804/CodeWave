@@ -230,7 +230,7 @@ const ContactSection: React.FC = () => {
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 gap-6">
                 <div className="group">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Name</label>
                   <input
                     type="text"
                     name="name"
@@ -243,7 +243,7 @@ const ContactSection: React.FC = () => {
                 </div>
 
                 <div className="group">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Email</label>
                   <input
                     type="email"
                     name="email"
@@ -256,7 +256,7 @@ const ContactSection: React.FC = () => {
                 </div>
 
                 <div className="group">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Company/Organization</label>
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Company/Organization</label>
                   <input
                     type="text"
                     name="company"
@@ -269,7 +269,7 @@ const ContactSection: React.FC = () => {
                 </div>
 
                 <div className="group">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Services Needed</label>
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Services Needed</label>
                   <select
                     name="service"
                     value={formData.service}
@@ -288,7 +288,7 @@ const ContactSection: React.FC = () => {
                 </div>
 
                 <div className="group">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Message</label>
                   <textarea
                     name="message"
                     value={formData.message}
