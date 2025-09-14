@@ -35,14 +35,28 @@ const Header: React.FC = () => {
           {/* layout: 2 columns on small, 3 on md+:
               left: logo, center: nav (hidden on small), right: CTA/menu */}
           <div className="grid grid-cols-2 md:grid-cols-3 items-center w-full">
-            {/* Logo Section - left */}
+            {/* Logo Section - left (rectangular) */}
             <div className="flex items-center justify-start col-start-1">
-              <a href="/" className="flex items-center">
-                <div className="p-1.5 rounded-full bg-black/50 border border-[var(--card-border)]">
+              <a href="/" className="flex items-center" aria-label="CodeWave home">
+                <div
+                  className="relative flex items-center gap-3 px-3 py-2 rounded-lg transition-transform duration-300 hover:scale-105"
+                  style={{
+                    border: '1.5px solid var(--card-border)',
+                    background: 'linear-gradient(90deg, rgba(var(--accent-primary-rgb),0.04), rgba(var(--accent-secondary-rgb),0.02))',
+                    backdropFilter: 'blur(6px)',
+                    boxShadow: '0 6px 20px rgba(2,6,23,0.45)',
+                  }}
+                >
+                  {/* animated rectangular gradient overlay (matches WhyUsSection) */}
+                  <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
+                    <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/20 to-transparent animate-pulse-premium" />
+                  </div>
+
                   <img
                     src={Codewavelogo}
                     alt="CodeWave"
-                    className="h-10 w-auto rounded transition-transform duration-300 hover:scale-105"
+                    className="h-8 w-auto object-contain relative z-10"
+                    style={{ display: 'block' }}
                   />
                 </div>
               </a>

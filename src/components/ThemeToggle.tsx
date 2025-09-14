@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Sun, Moon } from 'lucide-react';
 
 interface LoadingAnimationProps {
   duration?: number; // in milliseconds
@@ -140,3 +141,39 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
 };
 
 export default LoadingAnimation;
+
+// New: lightweight ThemeToggleButton for header
+export const ThemeToggleButton: React.FC = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() =>
+    typeof window !== 'undefined' && document.documentElement.classList.contains('light') ? 'light' : 'dark'
+  );
+
+  useEffect(() => {
+    // apply initial theme
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(theme);
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) {
+      // ignore
+    }
+  }, [theme]);
+
+  const toggle = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+
+  return (
+    <button
+      aria-label="Toggle theme"
+      onClick={toggle}
+      className="p-2 rounded-full transition-colors duration-200 flex items-center justify-center"
+      style={{
+        background: 'var(--card-bg)',
+        border: '1px solid var(--card-border)',
+        color: 'var(--text-primary)'
+      }}
+      title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+    >
+      {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+    </button>
+  );
+};
