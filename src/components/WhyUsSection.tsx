@@ -70,25 +70,29 @@ const WhyUsSection: React.FC = () => {
     }
   ];
 
-  // Calculate card positions in a perfect circle
+  // Updated getCardPosition function with mobile support
   const getCardPosition = (index: number, totalItems: number) => {
-    // Calculate angle in radians (start from top, move clockwise)
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+      // For mobile, return centered position with no offset
+      return {
+        transform: 'translate(-50%, 0)',
+        position: 'relative',
+        opacity: 1
+      };
+    }
+
+    // Desktop circular layout
     const angleInRadians = (2 * Math.PI * index) / totalItems - Math.PI / 2;
-
-    // Base radius calculation - adjust these values as needed
     const radius = Math.min(containerSize.width, containerSize.height) * 0.35;
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    const finalRadius = isMobile ? radius * 0.8 : radius;
-
-    // Calculate x and y coordinates
-    const x = Math.cos(angleInRadians) * finalRadius;
-    const y = Math.sin(angleInRadians) * finalRadius;
+    const x = Math.cos(angleInRadians) * radius;
+    const y = Math.sin(angleInRadians) * radius;
 
     return {
-      // Offset each card by its own width/height for better positioning
-      // This moves each card outward from its center point
       transform: `translate(calc(${x}px - 50%), calc(${y}px - 50%))`,
-      angle: angleInRadians
+      angle: angleInRadians,
+      position: 'absolute'
     };
   };
 
@@ -125,11 +129,10 @@ const WhyUsSection: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <h2
-            className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 transition-all duration-700 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
-            style={{
-              color: 'var(--text-primary)'
-            }}
+            className="text-3xl md:text-5xl mb-2 font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"
+            // style={{
+            //   color: 'var(--text-primary)'
+            // }}
           >
             Why CodeWave.it?
           </h2>
@@ -142,16 +145,13 @@ const WhyUsSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Network Visualization - Improved circular layout */}
+        {/* Updated Network Visualization with responsive layout */}
         <div
           ref={containerRef}
-          className="relative w-full max-w-4xl mx-auto aspect-square"
+          className="relative w-full max-w-4xl mx-auto md:aspect-square"
         >
-          {/* Central Circle - Enhanced Design */}
-          <div
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-out delay-300 z-20 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-              }`}
-          >
+          {/* Central Circle - Hidden on mobile */}
+          <div className="hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-out delay-300 z-20">
             <div className="relative">
               <div
                 className="w-32 h-32 lg:w-48 lg:h-48 border-2 rounded-full flex items-center justify-center"
@@ -186,23 +186,42 @@ const WhyUsSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Feature Nodes - Repositioned in perfect circle */}
-          <div className="absolute inset-0">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
+          {/* Mobile Logo - Shown only on mobile */}
+          {/* <div className="md:hidden flex justify-center mb-8">
+            <div className="relative w-24 h-24">
+              <div
+                className="w-full h-full border-2 rounded-full flex items-center justify-center"
+                style={{
+                  borderColor: 'var(--accent-primary)',
+                  background: 'rgba(var(--accent-primary-rgb), 0.08)',
+                  backdropFilter: 'blur(8px)'
+                }}
+              >
+                <img
+                  src="https://res.cloudinary.com/dikisauij/image/upload_v1756993391/logo_ycihzq.png"
+                  alt="CodeWave logo"
+                  className="w-16 h-16 object-contain"
+                />
+              </div>
+            </div>
+          </div> */}
+
+          {/* Feature Nodes - Updated for responsive layout */}
+          <div className="md:absolute md:inset-0">
+            <div className="md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:h-full flex flex-col items-center justify-center md:block gap-6">
               {features.map((feature, index) => {
                 const position = getCardPosition(index, features.length);
-
+                
                 return (
                   <div
                     key={index}
-                    className={`absolute transition-all duration-700 ease-out ${isVisible ? 'opacity-100' : 'opacity-0'
-                      }`}
+                    className={`transition-all duration-700 ease-out w-full max-w-md mx-auto ${
+                      isVisible ? 'opacity-100' : 'opacity-0'
+                    } ${position.position === 'absolute' ? 'md:absolute md:left-1/2 md:top-1/2 md:max-w-none' : ''}`}
                     style={{
-                      left: '50%',
-                      top: '50%',
                       ...position,
                       transitionDelay: `${400 + index * 150}ms`,
-                      width: '240px' // Fixed width for consistency
+                      width: position.position === 'absolute' ? '240px' : 'auto'
                     }}
                     onMouseEnter={() => setHoverIndex(index)}
                     onMouseLeave={() => setHoverIndex(null)}
@@ -217,10 +236,7 @@ const WhyUsSection: React.FC = () => {
                           borderColor: hoverIndex === index
                             ? 'var(--accent-primary)'
                             : 'var(--glass-border)',
-                          transform: hoverIndex === index ? 'translateY(-10px) scale(1.05)' : 'translateY(0) scale(1)',
-                          boxShadow: hoverIndex === index
-                            ? '0 15px 30px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(var(--accent-primary-rgb), 0.2)'
-                            : '0 4px 6px rgba(0, 0, 0, 0.1)'
+                          transform: hoverIndex === index ? 'translateY(-10px)' : 'translateY(0)',
                         }}
                       >
                         <div
@@ -258,8 +274,8 @@ const WhyUsSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Lines connecting nodes to center */}
-          <div className="absolute inset-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
+          {/* Lines connecting nodes - Hidden on mobile */}
+          <div className="hidden md:block absolute inset-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
             {features.map((_, index) => {
               const position = getCardPosition(index, features.length);
               const angle = (position.angle * 180) / Math.PI;

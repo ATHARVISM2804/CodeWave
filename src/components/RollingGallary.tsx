@@ -151,7 +151,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
   };
 
   return (
-    <div className={`relative  w-full  overflow-x-hidden overflow-y-hidden`}
+    <div className={`relative mt-  w-full  overflow-x-hidden overflow-y-hidden`}
       style={{
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
@@ -159,7 +159,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
           display: 'none'
         }
       }}>
-      <h1 className='text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-4' style={{ color: 'var(--text-primary)' }}>Techstack We use</h1>
+      <h1 className='text-3xl md:text-5xl text-center mb-5 font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]' >Techstack We use</h1>
 
 
       <div className="flex items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">

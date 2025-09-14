@@ -3,7 +3,7 @@ import { Globe, Zap, Brain, Palette, Smartphone, Shield } from "lucide-react";
 
 const ServicesSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [flippedIndex, setFlippedIndex] = useState<number | null>(null); // used for mobile tap
+  const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const ServicesSection: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) setIsVisible(true);
       },
-      { threshold: 0.2 }
+      { threshold: 0.2, rootMargin: "50px" }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
@@ -124,30 +124,31 @@ const ServicesSection: React.FC = () => {
               >
                 {/* inner card that actually flips */}
                 <div
-                  className={`card-inner relative w-full h-full transform-style-preserve-3d ${
+                  className={`card-inner relative w-full h-full transform-style-preserve-3d transition-transform duration-700 ${
                     isFlipped ? "is-flipped" : ""
                   }`}
                 >
                   {/* FRONT */}
                   <div
-                    className="card-face card-front absolute inset-0 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6"
-                    style={{
-                      background: 'var(--card-bg)',
-                      color: 'var(--text-primary)',
-                      border: '1px solid var(--card-border)'
-                    }}
+                    className="card-face card-front absolute inset-0 rounded-2xl shadow-sleek dark:shadow-sleek-dark flex flex-col items-center justify-center p-6 bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark border border-primary-light/10 dark:border-primary-dark/10"
                   >
-                    <Icon className="w-10 h-10 mb-3" style={{ color: 'var(--accent-primary)' }} />
-                    <h3 className="text-xl font-bold">{service.title}</h3>
+                    <Icon className="w-12 h-12 mb-4 text-primary-light dark:text-primary-dark" />
+                    <h3 className="text-2xl font-display font-bold">{service.title}</h3>
                   </div>
 
                   {/* BACK */}
                   <div
-                    className="card-face card-back absolute inset-0 rounded-2xl shadow-lg p-6 text-left flex flex-col justify-start"
-                    style={{
-                      background: 'var(--glass-bg)',
-                      color: 'var(--text-primary)',
-                      border: '1px solid var(--glass-border)'
+                    className="card-face card-back absolute inset-0 rounded-2xl shadow-sleek dark:shadow-sleek-dark p-6 text-left flex flex-col justify-start bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-sm text-text-light dark:text-text-dark border border-accent-light/20 dark:border-accent-dark/20">
+                    <p className="text-lg mb-4">{service.description}</p>
+                    <ul className="space-y-2">
+                      {service.features.map((feature, i) => (
+                        <li key={i} className="flex items-center">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary-light dark:bg-primary-dark mr-2" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                     }}
                   >
                     <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>

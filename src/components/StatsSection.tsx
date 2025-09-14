@@ -5,12 +5,54 @@ import RollingGallery from './RollingGallary';
 
 
 const services = [
-  { icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png', label: 'Custom ERP & CRM Development' },
-  { icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB7mgTzfml9-fyRSDxIFT0GiGK1loPmUxNeA0p_ZuMA5hwO1Gxg3X5otZim6Mivh9e8Gw&usqp=CAU', label: 'AI-Powered SaaS Applications' },
-  { icon: 'https://cdn-icons-png.flaticon.com/512/5968/5968292.png', label: 'API-First & Microservices Architecture' },
-  { icon: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png', label: 'MVP Development For Startups' },
-  { icon: 'https://landing.bismart.com/hubfs/genAI%20logo.jpg', label: 'Generative AI Integration' },
-  { icon: 'https://cdn-icons-png.flaticon.com/512/3523/3523887.png', label: 'Legacy System Maintenance & Modernization' },
+  {
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png',
+    label: 'Web Development',
+    description: 'Fast, scalable, and AI-friendly websites designed for tomorrow\'s digital landscape',
+    gradient: 'from-blue-500 to-cyan-500'
+  },
+  {
+    icon: 'https://cdn-icons-png.flaticon.com/512/5968/5968292.png',
+    label: 'Custom Software Solutions',
+    description: 'Tailored solutions that adapt to your workflows and scale with your growth',
+    gradient: 'from-purple-500 to-pink-500'
+  },
+  {
+    icon: 'https://landing.bismart.com/hubfs/genAI%20logo.jpg',
+    label: 'AI-Powered Automation',
+    description: 'Smart tools and workflows that automate routine tasks and boost efficiency',
+    gradient: 'from-green-500 to-emerald-500'
+  },
+  {
+    icon: 'https://cdn-icons-png.flaticon.com/512/3523/3523887.png',
+    label: 'GovTech Applications',
+    description: 'Secure, compliant solutions for government and public sector services',
+    gradient: 'from-teal-500 to-blue-500'
+  },
+  {
+    icon: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png',
+    label: 'Mobile Development',
+    description: 'Cross-platform and native apps that deliver exceptional user experiences',
+    gradient: 'from-indigo-500 to-purple-500'
+  },
+  {
+    icon: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png',
+    label: 'UI/UX Design',
+    description: 'User-centered design that combines aesthetics with functionality',
+    gradient: 'from-orange-500 to-red-500'
+  },
+  {
+    icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB7mgTzfml9-fyRSDxIFT0GiGK1loPmUxNeA0p_ZuMA5hwO1Gxg3X5otZim6Mivh9e8Gw&usqp=CAU',
+    label: 'API Integration',
+    description: 'Seamless system integrations that connect your business tools',
+    gradient: 'from-cyan-500 to-teal-500'
+  },
+  {
+    icon: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png',
+    label: 'Digital Marketing',
+    description: 'Data-driven strategies that grow your online presence and ROI',
+    gradient: 'from-pink-500 to-rose-500'
+  }
 ];
 
 
@@ -67,116 +109,120 @@ const StatsSection: React.FC = () => {
 
       {/* Headline and Description */}
       <motion.div 
-        className="w-full max-w-3xl mx-auto text-center mt-2 z-10"
+        className="w-full max-w-4xl mx-auto text-center mt-2 z-10"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
-        <motion.h1 
-          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight tracking-tighter"
-          variants={itemVariants}
-        >
-          <span 
-          style={{ color: 'var(--text-primary)' }}
-          className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-gray-300">
-            At Codewave, we're a technology-driven
-          </span>{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 animate-pulse-premium">
-            Intelligence Studio
-          </span>
-        </motion.h1>
-        
-        <motion.p 
-          className="text-lg md:text-xl mb-8 font-medium" 
-          style={{ color: 'var(--text-primary)' }}
-          variants={itemVariants}
-        >
-          We love solving the hardest problems with smart engineering and AI.<br className="hidden md:block" />
-          Bring us a challenge — whether it's building a fast, scalable website, designing a secure GovTech platform, creating AI-powered automation, or launching a digital marketing strategy — we'll deliver solutions that are intelligent, reliable, and built for impact.
-        </motion.p>
-        
+        {/* Main Headline */}
         <motion.div 
-          className="mt-6 space-y-4"
-          variants={containerVariants}
+          className="mb-8"
+          variants={itemVariants}
         >
-          <motion.p 
-            className="text-base md:text-lg mb-4" 
-            style={{ color: 'var(--text-primary)' }}
-            variants={itemVariants}
-          >
-            We work with startups, enterprises, and government teams across the globe — helping founders scale faster, organizations automate smarter, and public-sector projects go digital with confidence.
-          </motion.p>
-          
-          <motion.p 
-            className="text-base md:text-lg mb-8" 
-            style={{ color: 'var(--text-primary)' }}
-            variants={itemVariants}
-          >
-            Our mindset is geeky, our process is precise, and our mission is simple: <br className="hidden md:block" />
-            <span className="font-semibold "
-            style={{ color: 'var(--text-primary)' }}
-            >to turn complexity into clarity and make technology think for you.</span>
-          </motion.p>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight tracking-tight">
+            <span className="block" style={{ color: 'var(--text-primary)' }}>
+              Where Intelligence Meets
+            </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] animate-pulse-slow">
+              Engineering Excellence
+            </span>
+          </h1>
+          <p className="text-xl md:text-2xl font-medium mt-4 bg-gradient-to-r from-gray-200 to-gray-400 bg-clip-text text-transparent">
+            A Technology-Driven Intelligence Studio
+          </p>
         </motion.div>
         
-        {/* CTA Buttons */}
+        {/* Main Description */}
         <motion.div 
-          className="flex flex-wrap gap-4 justify-center mt-10 mb-16"
+          className="space-y-6 md:space-y-8"
           variants={containerVariants}
         >
-          <motion.button
-            className="font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          <motion.div variants={itemVariants} className="relative">
+            <p className="text-lg md:text-xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              We thrive on transforming complex challenges into elegant solutions through the perfect blend of 
+              <span className="relative inline-block px-2">
+                <span className="relative z-10 font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+                  smart engineering
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)]/10 to-[var(--accent-secondary)]/10 blur-sm"></span>
+              </span>
+              and
+              <span className="relative inline-block px-2">
+                <span className="relative z-10 font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+                  artificial intelligence
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)]/10 to-[var(--accent-secondary)]/10 blur-sm"></span>
+              </span>
+            </p>
+          </motion.div>
+
+          {/* Core Capabilities */}
+          <motion.div 
             variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            style={{
-              background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-              color: 'white'
-            }}
+            className="flex flex-wrap justify-center gap-4 my-8"
           >
-            Get Started
-          </motion.button>
+            {['Web Innovation', 'GovTech Solutions', 'AI Automation', 'Digital Growth'].map((item, index) => (
+              <div 
+                key={index}
+                className="px-4 py-2 rounded-full text-sm border"
+                style={{ 
+                  background: 'var(--card-bg)',
+                  borderColor: 'var(--card-border)',
+                  color: 'var(--text-secondary)'
+                }}
+              >
+                {item}
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Mission Statement */}
+          <motion.div 
+            variants={itemVariants}
+            className="max-w-3xl mx-auto bg-gradient-to-r from-[var(--accent-primary)]/5 to-[var(--accent-secondary)]/5 rounded-2xl p-6 backdrop-blur-sm border border-[var(--card-border)]"
+          >
+            <p className="text-lg md:text-xl font-medium leading-relaxed" style={{ color: 'var(--text-primary)' }}>
+              From startup vision to enterprise scale, we partner with innovators globally — 
+              <span className="font-bold" style={{ color: 'var(--accent-primary)' }}>
+                helping teams move faster, work smarter, and build for tomorrow
+              </span>
+            </p>
+            <div className="w-16 h-1 mx-auto mt-4 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></div>
+          </motion.div>
           
-          <motion.button
-            className="font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          {/* Final Statement */}
+          <motion.p 
             variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            style={{
-              background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-              color: 'white'
-            }}
+            className="text-base md:text-lg font-medium"
+            style={{ color: 'var(--text-primary)' }}
           >
-            Schedule a Meeting
-          </motion.button>
-          
-          <motion.button
-            className="font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            style={{
-              background: 'linear-gradient(135deg, #ff7a4e, #ff4e4e)',
-              color: 'white'
-            }}
-          >
-            Video Demo
-          </motion.button>
+            Our mission is clear: 
+            <span className="block mt-2 text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+              Turning Complexity into Clarity, Making Technology Think for You
+            </span>
+          </motion.p>
         </motion.div>
       </motion.div>
 
       {/* Services Section with Enhanced Cards */}
       <motion.div 
-        className="w-full max-w-6xl mx-auto"
+        className="w-full mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <h2 className="text-3xl font-bold text-center mb-10">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">Our Services</span>
-        </h2>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+              Our Services
+            </span>
+          </h2>
+          <p className="text-lg md:text-xl" style={{ color: 'var(--text-secondary)' }}>
+            Comprehensive solutions powered by intelligence
+          </p>
+        </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {services.map((service, idx) => (
             <motion.div 
               key={idx}
@@ -186,36 +232,49 @@ const StatsSection: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: idx * 0.1 + 0.3 }}
-              whileHover={{ y: -10 }}
+              whileHover={{ y: -5 }}
             >
-              <div className={`morph-card h-full p-6 flex flex-col items-center text-center transition-all duration-300 ${hoveredService === idx ? 'border-cyan-500 shadow-lg shadow-cyan-500/20' : ''}`}>
-                <div className="relative mb-6">
-                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 ${hoveredService === idx ? 'scale-110' : ''}`}
-                    style={{ 
-                      background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                      boxShadow: hoveredService === idx ? '0 20px 25px -5px rgba(var(--accent-primary-rgb), 0.3), 0 10px 10px -5px rgba(var(--accent-primary-rgb), 0.2)' : 'none'
-                    }}>
+              <div className={`morph-card h-full p-6 flex flex-col transition-all duration-300 overflow-hidden
+                ${hoveredService === idx ? 'shadow-lg shadow-[var(--accent-primary)]/20' : ''}
+                hover:border-[var(--accent-primary)]`}
+              >
+                <div className="relative mb-6 flex items-center gap-4">
+                  <div 
+                    className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 
+                      bg-gradient-to-r ${service.gradient} group-hover:scale-110`}
+                  >
                     <img 
                       src={service.icon} 
-                      alt="" 
-                      className={`w-8 h-8 object-contain transition-all duration-500 ${hoveredService === idx ? 'scale-110' : ''}`}
+                      alt={service.label} 
+                      className="w-6 h-6 object-contain"
                     />
                   </div>
-                  {hoveredService === idx && (
-                    <motion.div
-                      className="absolute -inset-1 rounded-2xl"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      style={{ 
-                        background: 'linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.2), rgba(var(--accent-secondary-rgb), 0.2))',
-                        filter: 'blur(8px)',
-                        zIndex: -1
-                      }}
-                    />
-                  )}
+                  <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+                    {service.label}
+                  </h3>
                 </div>
-                <h3 className="text-lg font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>{service.label}</h3>
-                <div className={`w-12 h-1 mx-auto rounded transition-all duration-500 ${hoveredService === idx ? 'w-24 bg-gradient-to-r from-cyan-400 to-blue-500' : 'bg-gray-600'}`}></div>
+                
+                <p className="text-sm leading-relaxed flex-grow" style={{ color: 'var(--text-secondary)' }}>
+                  {service.description}
+                </p>
+                
+                <div className="mt-4 flex items-center gap-2 text-sm font-medium">
+                  <span style={{ color: 'var(--accent-primary)' }}>Learn More</span>
+                  <svg 
+                    className="w-4 h-4 transition-transform group-hover:translate-x-1" 
+                    style={{ color: 'var(--accent-primary)' }}
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+
+                {hoveredService === idx && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)]/5 to-transparent 
+                    pointer-events-none opacity-60" />
+                )}
               </div>
             </motion.div>
           ))}
