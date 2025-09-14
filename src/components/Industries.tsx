@@ -70,7 +70,7 @@ const Industries: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div
-            className={`inline-block text-sm font-semibold mb-4 transition-all duration-700 ease-out ${
+            className={`inline-block text-3xl font-bold mb-4 transition-all duration-700 ease-out ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
             style={{ color: 'var(--accent-primary)' }}
@@ -78,7 +78,7 @@ const Industries: React.FC = () => {
             INDUSTRIES WE SERVE
           </div>
           <h2
-            className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 transition-all duration-700 ease-out delay-150 ${
+            className={`text-xl sm:text-xl lg:text-xl font-bold mb-3 transition-all duration-700 ease-out delay-150 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
             style={{ color: 'var(--text-primary)' }}
