@@ -7,6 +7,9 @@ const HeroSection: React.FC = () => {
     setIsVisible(true);
   }, []);
 
+  // detect current theme class on <html> to switch snippet shadow colors
+  const isDarkTheme = typeof window !== 'undefined' && document.documentElement.classList.contains('dark');
+
   const codeSnippets = [
     {
       code: 'const ai = new Intelligence();',
@@ -140,6 +143,10 @@ const HeroSection: React.FC = () => {
               zIndex: 30,
               width: '180px',
               maxWidth: '60vw',
+              // theme-aware shadow: blue glow in dark, subtle black in light
+              boxShadow: isDarkTheme
+                ? `0 20px 60px rgba(var(--accent-primary-rgb), 0.18), 0 6px 20px rgba(2,6,23,0.35)`
+                : `0 18px 40px rgba(0,0,0,0.12), 0 6px 18px rgba(0,0,0,0.08)`
             }}
           >
             <div className="relative w-full sm:w-[220px] md:w-[260px] xl:w-[320px] morph-card glare-card shadow-xl rounded-2xl overflow-visible backdrop-blur-lg"
