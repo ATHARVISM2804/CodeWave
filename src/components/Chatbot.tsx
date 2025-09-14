@@ -80,7 +80,7 @@ const Chatbot: React.FC = () => {
         parts: [{ text: msg.text }]
       }));
 
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +99,6 @@ const Chatbot: React.FC = () => {
       let botText = "Sorry, I couldn't get a response from the server.";
       if (response.ok) {
         const data = await response.json();
-        // The Gemini API response is slightly different.
         botText = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, I am unable to respond at the moment.';
       }
 
@@ -182,8 +181,8 @@ const Chatbot: React.FC = () => {
               >
                 <div
                   className={`px-4 py-3 rounded-2xl text-sm max-w-[80%] drop-shadow-sm ${msg.sender === "user"
-                      ? "rounded-br-none"
-                      : "rounded-bl-none"
+                    ? "rounded-br-none"
+                    : "rounded-bl-none"
                     }`}
                   style={{
                     background: msg.sender === 'user' ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' : 'var(--card-bg)',

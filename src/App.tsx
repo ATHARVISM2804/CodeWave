@@ -21,6 +21,7 @@ import LoadingAnimation from './components/LoadingAnimation';
 import MovingData from './components/MovingData';
 import Chatbot from './components/Chatbot';
 import ScrollToTop from './components/ScrollToTop';
+import Industries from './components/Industries';
 
 const HomePage = () => (
   <>
@@ -29,6 +30,7 @@ const HomePage = () => (
     <StatsSection />
     <WhyUsSection />
     <PortfolioSection />
+    <Industries />
     <ParticleBackground />
     <BlogSection />
     <ContactSection />
