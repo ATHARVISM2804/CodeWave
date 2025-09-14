@@ -30,6 +30,7 @@ import MobileDevelopmentPage from './pages/services/MobileDevelopmentPage';
 import UIUXDesignPage from './pages/services/UIUXDesignPage';
 import APIIntegrationPage from './pages/services/APIIntegrationPage';
 import DigitalMarketingPage from './pages/services/DigitalMarketingPage';
+import SitemapPage from './pages/SitemapPage';
 
 const HomePage = () => (
   <>
@@ -113,6 +114,7 @@ function App() {
                 <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/portfolio" element={<PortfolioPage />} />
                 <Route path="/contact" element={<ContactPage />} />
+                <Route path="/sitemap" element={<SitemapPage />} />
               </Routes>
             </main>
           )}

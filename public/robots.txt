@@ -2,10 +2,12 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://codewave.it.com.com/sitemap.xml
+# Sitemaps
+Sitemap: https://codewave.it.com/sitemap.xml
 
-# Block sensitive areas
-Disallow: /admin/
-Disallow: /private/
-Disallow: /api/
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow certain paths (if any)
+# Disallow: /admin/
+# Disallow: /private/
