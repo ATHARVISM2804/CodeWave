@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Globe, Zap, Brain, Palette, Smartphone, Shield, Code, Database, Cloud, Lock, Cpu, Layers, ArrowRight, Sparkles, Target, CheckCircle } from 'lucide-react';
+import { Globe, Zap, Brain, Palette, Smartphone, Shield, Database, TrendingUp, ArrowRight, Sparkles, Target, CheckCircle, Code, Cloud, Lock, Cpu, Layers } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const ServicesPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,50 +27,90 @@ const ServicesPage: React.FC = () => {
     {
       icon: Globe,
       title: 'Web Development',
-      description: 'Modern, responsive web applications built with cutting-edge frameworks and intelligent features.',
-      features: ['React/Next.js Applications', 'Progressive Web Apps', 'E-commerce Platforms', 'Content Management Systems'],
+      headline: 'Websites That Perform. Platforms That Think.',
+      description: 'Your website is more than a digital presence — it\'s where trust begins. We build fast, scalable, and AI-friendly websites designed for today\'s search engines and tomorrow\'s AI agents.',
+      features: ['High-conversion landing pages', 'Business websites with speed & security', 'Enterprise-ready platforms', 'Secure citizen-facing portals'],
       technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'GraphQL'],
-      color: 'from-blue-500 to-cyan-500'
+      color: 'from-blue-500 to-cyan-500',
+      ctaText: 'Launch My Website',
+      slug: 'web-development'
     },
     {
       icon: Zap,
-      title: 'Custom Software',
-      description: 'Tailored software solutions designed to solve your unique business challenges with intelligence built-in.',
-      features: ['Enterprise Applications', 'Workflow Automation', 'API Development', 'System Integration'],
+      title: 'Custom Software Solutions',
+      headline: 'Software Built Around You — Not the Other Way Around',
+      description: 'Every organization has its own rhythm. We create custom software that adapts to your workflows, scales with your growth, and makes complexity feel simple.',
+      features: ['Internal tools for HR, finance & operations', 'Enterprise dashboards', 'Secure client portals', 'Automated workflow systems'],
       technologies: ['Python', 'Java', 'C#', 'Microservices', 'Docker'],
-      color: 'from-purple-500 to-pink-500'
+      color: 'from-purple-500 to-pink-500',
+      ctaText: 'Explore Software Solutions',
+      slug: 'custom-software'
     },
     {
       icon: Brain,
-      title: 'AI & ML Solutions',
-      description: 'Intelligent systems that learn, adapt, and provide actionable insights for your business.',
-      features: ['Machine Learning Models', 'Natural Language Processing', 'Computer Vision', 'Predictive Analytics'],
+      title: 'AI-Powered Automation & Smart Tools',
+      headline: 'Smarter Workflows. Faster Results.',
+      description: 'Repetitive tasks drain time. We design AI-powered assistants, bots, and workflows that automate the routine so people can focus on the meaningful.',
+      features: ['24/7 chatbots for support', 'Document summarization tools', 'Automated reporting systems', 'Smart workflow integrations'],
       technologies: ['TensorFlow', 'PyTorch', 'OpenAI', 'Hugging Face', 'AWS ML'],
-      color: 'from-green-500 to-emerald-500'
+      color: 'from-green-500 to-emerald-500',
+      ctaText: 'Automate My Workflow',
+      slug: 'ai-automation'
+    },
+    {
+      icon: Shield,
+      title: 'GovTech Applications',
+      headline: 'Secure Tech for Public Impact',
+      description: 'Public service demands tools that are secure, reliable, and easy to use. We build GovTech applications that make citizen services faster and workflows smoother.',
+      features: ['Complaint & grievance portals', 'Field-force dashboards', 'Citizen communication tools', 'Digital case management'],
+      technologies: ['FISMA Compliance', 'Section 508', 'Cloud.gov', 'FedRAMP', 'NIST'],
+      color: 'from-teal-500 to-blue-500',
+      ctaText: 'Explore GovTech Projects',
+      slug: 'govtech'
+    },
+    {
+      icon: Smartphone,
+      title: 'Mobile App Development',
+      headline: 'Apps Built for People, Not Just Screens',
+      description: 'Your users are mobile. Your product should be too. We design intuitive, scalable mobile apps that perform under real-world conditions.',
+      features: ['Cross-platform iOS & Android apps', 'Native performance-driven apps', 'Real-time GPS & notifications', 'End-to-end launch support'],
+      technologies: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Xamarin'],
+      color: 'from-indigo-500 to-purple-500',
+      ctaText: 'Explore Mobile Apps',
+      slug: 'mobile-development'
     },
     {
       icon: Palette,
       title: 'UI/UX Design',
-      description: 'User-centered design that combines aesthetics with functionality and intelligent user experiences.',
-      features: ['User Research & Testing', 'Wireframing & Prototyping', 'Design Systems', 'Accessibility Optimization'],
+      headline: 'Design That Thinks Before It Looks',
+      description: 'Good design isn\'t decoration — it\'s decision-making. We create user experiences that guide action, reduce friction, and delight users.',
+      features: ['Brand-aligned interfaces', 'User-tested wireframes', 'Interactive prototypes', 'Scalable design systems'],
       technologies: ['Figma', 'Adobe Creative Suite', 'Framer', 'Principle', 'InVision'],
-      color: 'from-orange-500 to-red-500'
+      color: 'from-orange-500 to-red-500',
+      ctaText: 'Explore UI/UX Services',
+      slug: 'ui-ux-design'
     },
     {
-      icon: Smartphone,
-      title: 'Mobile Development',
-      description: 'Native and cross-platform mobile applications with intelligent features and seamless performance.',
-      features: ['iOS & Android Apps', 'Cross-platform Solutions', 'App Store Optimization', 'Mobile-first Design'],
-      technologies: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Xamarin'],
-      color: 'from-indigo-500 to-purple-500'
+      icon: Database,
+      title: 'API Integration & Data Intelligence',
+      headline: 'When Systems Talk, Businesses Move Faster',
+      description: 'Disconnected tools slow teams down. We build secure API integrations and intelligent dashboards that connect systems and eliminate silos.',
+      features: ['Custom API development', 'CRM & ERP integrations', 'Data syncing & cleaning', 'Intelligent dashboards'],
+      technologies: ['REST', 'GraphQL', 'AWS', 'Google Cloud', 'MongoDB'],
+      color: 'from-cyan-500 to-teal-500',
+      ctaText: 'Explore API & Data Services',
+      slug: 'api-integration'
     },
     {
-      icon: Shield,
-      title: 'GovTech Solutions',
-      description: 'Secure, compliant, and scalable solutions for government and public sector organizations.',
-      features: ['Compliance & Security', 'Citizen Portals', 'Data Management', 'Digital Transformation'],
-      technologies: ['FISMA Compliance', 'Section 508', 'Cloud.gov', 'FedRAMP', 'NIST'],
-      color: 'from-teal-500 to-blue-500'
+      icon: TrendingUp,
+      title: 'Digital Marketing',
+      headline: 'Marketing That\'s Data-Driven and AI-Backed',
+      description: 'Even the smartest product won\'t shine if no one sees it. Our digital marketing combines strategy, creativity, and AI insights to grow visibility and revenue.',
+      features: ['SEO & discoverability optimization', 'Content marketing strategy', 'Performance campaigns', 'Automated email workflows'],
+      technologies: ['Google Analytics', 'HubSpot', 'Mailchimp', 'Facebook Ads', 'Google Ads'],
+      color: 'from-pink-500 to-rose-500',
+      ctaText: 'Grow My Audience',
+      slug: 'digital-marketing'
     }
   ];
 
@@ -171,7 +212,7 @@ const ServicesPage: React.FC = () => {
                     <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm"
                       style={{ borderColor: 'var(--accent-primary)', background: 'var(--card-bg)' }}>
                       <Sparkles className="w-3 h-3" style={{ color: 'var(--accent-primary)' }} />
-                      <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Premium Services</span>
+                      <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Intelligence-Driven Services</span>
                     </div>
                   </div>
                   
@@ -184,7 +225,7 @@ const ServicesPage: React.FC = () => {
                   </h1>
                   
                   <p className="text-lg lg:text-xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                    We craft intelligent, scalable, and future-ready digital experiences that transform businesses and delight users.
+                    We craft intelligent, scalable, and future-ready digital experiences that transform businesses and delight users across every industry.
                   </p>
                 </div>
 
@@ -318,12 +359,14 @@ const ServicesPage: React.FC = () => {
                     <service.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-3 neon-glow" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
+                    <h3 className="text-xl font-bold mb-2 neon-glow" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
+                    <h4 className="text-sm font-semibold mb-3" style={{ color: 'var(--accent-primary)' }}>{service.headline}</h4>
                     <p className="mb-4 leading-relaxed text-sm" style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
-                    <div className="space-y-3">
+                    
+                    <div className="space-y-3 mb-4">
                       <div>
-                        <h4 className="text-xs font-semibold mb-2" style={{ color: 'var(--accent-primary)' }}>KEY FEATURES</h4>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-1">
+                        <h5 className="text-xs font-semibold mb-2" style={{ color: 'var(--accent-primary)' }}>WHAT WE DO</h5>
+                        <div className="space-y-1">
                           {service.features.map((feature, featureIndex) => (
                             <div key={featureIndex} className="flex items-center text-xs" style={{ color: 'var(--text-secondary)' }}>
                               <div className="w-1 h-1 rounded-full mr-2" style={{ background: 'var(--accent-primary)' }}></div>
@@ -332,25 +375,19 @@ const ServicesPage: React.FC = () => {
                           ))}
                         </div>
                       </div>
-                      <div>
-                        <h4 className="text-xs font-semibold mb-2" style={{ color: 'var(--accent-primary)' }}>TECHNOLOGIES</h4>
-                        <div className="flex flex-wrap gap-1">
-                          {service.technologies.map((tech, techIndex) => (
-                            <span
-                              key={techIndex}
-                              className="px-2 py-1 rounded-full text-xs font-medium transition-colors duration-300"
-                              style={{
-                                background: 'var(--glass-bg)',
-                                border: '1px solid var(--glass-border)',
-                                color: 'var(--text-secondary)'
-                              }}
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
                     </div>
+
+                    <Link
+                      to={`/services/${service.slug}`}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105"
+                      style={{
+                        background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                        color: 'var(--text-primary)'
+                      }}
+                    >
+                      {service.ctaText}
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
                   </div>
                 </div>
               </div>

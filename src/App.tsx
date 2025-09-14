@@ -22,6 +22,14 @@ import MovingData from './components/MovingData';
 import Chatbot from './components/Chatbot';
 import ScrollToTop from './components/ScrollToTop';
 import Industries from './components/Industries';
+import WebDevelopmentPage from './pages/services/WebDevelopmentPage';
+import CustomSoftwarePage from './pages/services/CustomSoftwarePage';
+import AIAutomationPage from './pages/services/AIAutomationPage';
+import GovTechPage from './pages/services/GovTechPage';
+import MobileDevelopmentPage from './pages/services/MobileDevelopmentPage';
+import UIUXDesignPage from './pages/services/UIUXDesignPage';
+import APIIntegrationPage from './pages/services/APIIntegrationPage';
+import DigitalMarketingPage from './pages/services/DigitalMarketingPage';
 
 const HomePage = () => (
   <>
@@ -102,6 +110,14 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/services" element={<ServicesPage />} />
+                <Route path="/services/web-development" element={<WebDevelopmentPage />} />
+                <Route path="/services/custom-software" element={<CustomSoftwarePage />} />
+                <Route path="/services/ai-automation" element={<AIAutomationPage />} />
+                <Route path="/services/govtech" element={<GovTechPage />} />
+                <Route path="/services/mobile-development" element={<MobileDevelopmentPage />} />
+                <Route path="/services/ui-ux-design" element={<UIUXDesignPage />} />
+                <Route path="/services/api-integration" element={<APIIntegrationPage />} />
+                <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/portfolio" element={<PortfolioPage />} />
                 <Route path="/contact" element={<ContactPage />} />
