@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { TrendingUp, Shield, Zap, Award, GraduationCap, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Industries: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -28,35 +30,40 @@ const Industries: React.FC = () => {
       title: 'Startups & Scaleups',
       description: 'We help founders launch faster and scale smarter with MVPs, dashboards, automation, and AI-driven insights.',
       features: ['MVP Development', 'Growth Dashboards', 'Process Automation', 'AI Analytics'],
-      color: 'from-blue-500 to-cyan-500'
+      color: 'from-blue-500 to-cyan-500',
+      slug: 'startups-scaleups'
     },
     {
       icon: Shield,
       title: 'Government & Law Enforcement',
       description: 'We design secure GovTech platforms for complaint handling, citizen services, and internal workflows — built for trust and compliance.',
       features: ['Complaint Portals', 'Citizen Services', 'Security Compliance', 'Audit-Ready Systems'],
-      color: 'from-green-500 to-emerald-500'
+      color: 'from-green-500 to-emerald-500',
+      slug: 'government-law'
     },
     {
       icon: Zap,
       title: 'Logistics & Delivery',
       description: 'Real-time GPS, AI-powered ETAs, and apps that keep deliveries on time and optimized.',
       features: ['Real-time Tracking', 'Route Optimization', 'AI-powered ETAs', 'Fleet Management'],
-      color: 'from-purple-500 to-pink-500'
+      color: 'from-purple-500 to-pink-500',
+      slug: 'logistics-delivery'
     },
     {
       icon: Award,
       title: 'Fintech & Professional Services',
       description: 'Data-secure platforms, client dashboards, and responsive apps for high-trust industries like finance, consulting, and legal.',
       features: ['Secure Platforms', 'Client Dashboards', 'Compliance Tools', 'Risk Management'],
-      color: 'from-orange-500 to-red-500'
+      color: 'from-orange-500 to-red-500',
+      slug: 'fintech-professional'
     },
     {
       icon: GraduationCap,
       title: 'Education & eLearning',
       description: 'Mobile-first learning platforms, LMS, and interactive student portals that keep education engaging and accessible.',
       features: ['Learning Management', 'Student Portals', 'Interactive Content', 'Mobile Learning'],
-      color: 'from-indigo-500 to-blue-500'
+      color: 'from-indigo-500 to-blue-500',
+      slug: 'education-elearning'
     }
   ];
 
@@ -110,6 +117,12 @@ const Industries: React.FC = () => {
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
                   color: 'var(--text-primary)'
+                }}
+                onClick={() => navigate(`/industries/${industry.slug}`)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' || e.key === ' ') navigate(`/industries/${industry.slug}`);
                 }}
               >
                 <div className="flex items-start space-x-4 mb-6">

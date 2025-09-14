@@ -149,22 +149,6 @@ const ServicesSection: React.FC = () => {
                       ))}
                     </ul>
                   </div>
-                    }}
-                  >
-                    <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-                      {service.title}
-                    </h3>
-                    <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
-
-                    <ul className="space-y-2 text-sm">
-                      {service.features.map((f, fi) => (
-                        <li key={fi} className="flex items-center" style={{ color: 'var(--text-secondary)' }}>
-                          <span className="w-2 h-2 rounded-full mr-2" style={{ background: 'var(--accent-primary)' }}></span>
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
                 </div>
               </div>
             );
@@ -176,3 +160,4 @@ const ServicesSection: React.FC = () => {
 };
 
 export default ServicesSection;
+                        

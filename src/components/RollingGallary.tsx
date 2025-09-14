@@ -151,7 +151,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
   };
 
   return (
-    <div className={`relative mt-  w-full  overflow-x-hidden overflow-y-hidden`}
+    <div className={`relative mt-20  w-full  overflow-x-hidden overflow-y-hidden`}
       style={{
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',

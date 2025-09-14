@@ -30,7 +30,8 @@ import MobileDevelopmentPage from './pages/services/MobileDevelopmentPage';
 import UIUXDesignPage from './pages/services/UIUXDesignPage';
 import APIIntegrationPage from './pages/services/APIIntegrationPage';
 import DigitalMarketingPage from './pages/services/DigitalMarketingPage';
-// import ToolsPage from './pages/Tools';
+import IndustryDetailPage from './pages/IndustryDetailPage';
+import NotFound from './pages/NotFound';
 
 const HomePage = () => (
   <>
@@ -85,7 +86,7 @@ function App() {
   };
 
   return (
-    <HelmetProvider> {/* Add this provider */}
+    <HelmetProvider>
       <Router>
         <div
           className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}>
@@ -114,7 +115,8 @@ function App() {
                 <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/portfolio" element={<PortfolioPage />} />
                 <Route path="/contact" element={<ContactPage />} />
-                {/* <Route path="/tools" element={<ToolsPage />} /> */}
+                <Route path="/industries/:slug" element={<IndustryDetailPage />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
           )}

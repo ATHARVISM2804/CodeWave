@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import RollingGallery from './RollingGallary';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -9,55 +10,64 @@ const services = [
     icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png',
     label: 'Web Development',
     description: 'Fast, scalable, and AI-friendly websites designed for tomorrow\'s digital landscape',
-    gradient: 'from-blue-500 to-cyan-500'
+    gradient: 'from-blue-500 to-cyan-500',
+    slug: '/services/web-development'
   },
   {
     icon: 'https://cdn-icons-png.flaticon.com/512/5968/5968292.png',
     label: 'Custom Software Solutions',
     description: 'Tailored solutions that adapt to your workflows and scale with your growth',
-    gradient: 'from-purple-500 to-pink-500'
+    gradient: 'from-purple-500 to-pink-500',
+    slug: '/services/custom-software'
   },
   {
     icon: 'https://landing.bismart.com/hubfs/genAI%20logo.jpg',
     label: 'AI-Powered Automation',
     description: 'Smart tools and workflows that automate routine tasks and boost efficiency',
-    gradient: 'from-green-500 to-emerald-500'
+    gradient: 'from-green-500 to-emerald-500',
+    slug: '/services/ai-automation'
   },
   {
     icon: 'https://cdn-icons-png.flaticon.com/512/3523/3523887.png',
     label: 'GovTech Applications',
     description: 'Secure, compliant solutions for government and public sector services',
-    gradient: 'from-teal-500 to-blue-500'
+    gradient: 'from-teal-500 to-blue-500',
+    slug: '/services/govtech'
   },
   {
     icon: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png',
     label: 'Mobile Development',
     description: 'Cross-platform and native apps that deliver exceptional user experiences',
-    gradient: 'from-indigo-500 to-purple-500'
+    gradient: 'from-indigo-500 to-purple-500',
+    slug: '/services/mobile-development'
   },
   {
     icon: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png',
     label: 'UI/UX Design',
     description: 'User-centered design that combines aesthetics with functionality',
-    gradient: 'from-orange-500 to-red-500'
+    gradient: 'from-orange-500 to-red-500',
+    slug: '/services/ui-ux-design'
   },
   {
     icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB7mgTzfml9-fyRSDxIFT0GiGK1loPmUxNeA0p_ZuMA5hwO1Gxg3X5otZim6Mivh9e8Gw&usqp=CAU',
     label: 'API Integration',
     description: 'Seamless system integrations that connect your business tools',
-    gradient: 'from-cyan-500 to-teal-500'
+    gradient: 'from-cyan-500 to-teal-500',
+    slug: '/services/api-integration'
   },
   {
     icon: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png',
     label: 'Digital Marketing',
     description: 'Data-driven strategies that grow your online presence and ROI',
-    gradient: 'from-pink-500 to-rose-500'
+    gradient: 'from-pink-500 to-rose-500',
+    slug: '/services/digital-marketing'
   }
 ];
 
 
 const StatsSection: React.FC = () => {
   const [hoveredService, setHoveredService] = useState<number | null>(null);
+  const navigate = useNavigate();
   
   // Animation variants
   const containerVariants = {
@@ -226,13 +236,19 @@ const StatsSection: React.FC = () => {
           {services.map((service, idx) => (
             <motion.div 
               key={idx}
-              className="group relative"
+              className="group relative cursor-pointer"
               onMouseEnter={() => setHoveredService(idx)}
               onMouseLeave={() => setHoveredService(null)}
+              onClick={() => navigate(service.slug)}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: idx * 0.1 + 0.3 }}
               whileHover={{ y: -5 }}
+              tabIndex={0}
+              onKeyDown={e => {
+                if (e.key === 'Enter' || e.key === ' ') navigate(service.slug);
+              }}
+              role="button"
             >
               <div className={`morph-card h-full p-6 flex flex-col transition-all duration-300 overflow-hidden
                 ${hoveredService === idx ? 'shadow-lg shadow-[var(--accent-primary)]/20' : ''}
