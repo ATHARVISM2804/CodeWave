@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async'; // Add this import
+import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import StatsSection from './components/StatsSection';
@@ -42,7 +42,6 @@ const HomePage = () => (
     <ParticleBackground />
     <BlogSection />
     <ContactSection />
-
   </>
 );
 
@@ -88,22 +87,15 @@ function App() {
     <HelmetProvider> {/* Add this provider */}
       <Router>
         <div
-          className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}
-        // style={{ 
-        //   background: 'var(--bg-primary)',
-        //   color: 'var(--text-primary)'
-        // }}
-        >
-          {/* <ParticleBackground /> */}
+          className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}>
           <MouseFollower />
           <Chatbot />
           <Header />
           <ParticleBackground />
           <ThemeToggle />
           <ScrollToTop />
-
-          {isLoading ? (
-            <LoadingAnimation duration={1000} onComplete={handleLoadingComplete} />
+          {isLoading ? (  
+            <LoadingAnimation duration={500} onComplete={handleLoadingComplete} />
           ) : (
             <main>
               <Routes>
