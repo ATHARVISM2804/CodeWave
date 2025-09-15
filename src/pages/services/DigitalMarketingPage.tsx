@@ -95,6 +95,13 @@ const DigitalMarketingPage: React.FC = () => {
               </div>
 
               <div className="relative">
+                {/* Add image here */}
+                <img
+                  src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
+                  alt="Digital Marketing Illustration"
+                  className="rounded-2xl shadow-xl mb-8 w-full object-cover"
+                  style={{ maxHeight: 320 }}
+                />
                 <div className="morph-card glare-card p-8"
                   style={{
                     background: 'var(--card-bg)',

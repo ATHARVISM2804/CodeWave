@@ -16,7 +16,6 @@ import PortfolioPage from './pages/PortfolioPage';
 import ContactPage from './pages/ContactPage';
 import BlogPost from './pages/BlogPost';
 import MouseFollower from './components/CursorFollower';
-import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 import LoadingAnimation from './components/LoadingAnimation';
 import MovingData from './components/MovingData';
 import Chatbot from './components/Chatbot';
@@ -33,12 +32,14 @@ import DigitalMarketingPage from './pages/services/DigitalMarketingPage';
 import IndustryDetailPage from './pages/IndustryDetailPage';
 import NotFound from './pages/NotFound';
 import ToolsPage from './pages/Tools';
+import Testimonial from './components/Testimonial';
 
 const HomePage = () => (
   <>
     <HeroSection />
     <MovingData />
     <StatsSection />
+    <Testimonial />
     <WhyUsSection />
     <PortfolioSection />
     <Industries />

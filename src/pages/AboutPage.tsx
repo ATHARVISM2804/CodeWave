@@ -135,7 +135,7 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className="pt-16"
-      style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
+      style={{color: 'var(--text-primary)' }}
     >
       {/* Hero Section */}
       <section className="relative mt-10 min-h-[70vh] flex items-center justify-center">

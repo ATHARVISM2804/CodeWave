@@ -104,7 +104,6 @@ const BlogSection: React.FC = () => {
             </span>
           </div>
           <div className="flex items-center justify-center gap-3 mb-2">
-            <BookOpen className="w-8 h-8 text-[var(--accent-primary)] animate-pulse" />
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
               Insights & Ideas
             </h2>
