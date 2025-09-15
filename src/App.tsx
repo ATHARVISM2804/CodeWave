@@ -90,7 +90,7 @@ function App() {
     <HelmetProvider>
       <Router>
         <div
-          className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}>
+          className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`} style={{ background: 'var(--bg-primary)' }}>
           <MouseFollower />
           <Chatbot />
           <Header />

@@ -40,29 +40,32 @@ const HeroSection: React.FC = () => {
   return (
     <section
       className="relative h-[50vh] md:h-[90vh] px-4 sm:px-6 lg:px-8 flex items-center md:pt-20"
-      style={{ minHeight: '80vh' }}
+      style={{ 
+        minHeight: '80vh',
+        background: 'var(--bg-secondary)' // Match AboutPage background
+      }}
     >
 
-      {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] opacity-10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-[var(--accent-secondary)] to-[var(--accent-primary)] opacity-10 rounded-full blur-3xl"></div>
+      {/* Background Elements - Updated gradients */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div 
+          className="absolute top-20 left-10 w-96 h-96 rounded-full blur-3xl opacity-10"
+          style={{ background: 'var(--accent-primary)' }}
+        />
+        <div 
+          className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-10"
+          style={{ background: 'var(--accent-secondary)' }}
+        />
       </div>
 
       <div className="container mx-auto px-0 sm:px-4 lg:px-8 z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className={`space-y-8 ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
             <div className="space-y-4">
-              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight break-words" style={{ color: 'var(--text-primary)' }}>
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight" 
+                style={{ color: 'var(--text-primary)' }}>
                 We Speak Fluent Code.
-                <span
-                  style={{
-                    color: 'var(--accent-primary)',
-                    textShadow: document.documentElement.classList.contains('dark')
-                      ? `0 0 8px rgba(var(--accent-primary-rgb), 0.4)`
-                      : `0 0 8px rgba(16, 185, 129, 0.3)` // Emerald glow for light theme
-                  }}
-                >
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
                   {' '}And AI Has Joined the Team.
                 </span>
               </h1>
@@ -74,10 +77,10 @@ const HeroSection: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
-                className="group px-8 py-4 rounded-full font-semibold text-lg flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
+                className="px-8 py-4 rounded-full font-semibold text-lg flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
                 style={{
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                  color: 'var(--text-primary)',
+                  color: 'white',
                   boxShadow: '0 10px 30px rgba(var(--accent-primary-rgb), 0.3)'
                 }}
               >
@@ -88,10 +91,10 @@ const HeroSection: React.FC = () => {
               </button>
 
               <button
-                className="group px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg"
+                className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300 hover:bg-[var(--accent-primary)] hover:text-white"
                 style={{
                   borderColor: 'var(--accent-primary)',
-                  color: 'var(--text-primary)',
+                  color: 'var(--accent-primary)',
                   background: 'transparent'
                 }}
               >
@@ -142,15 +145,22 @@ const HeroSection: React.FC = () => {
               animationDuration: `${4 + index * 0.8}s`,
               zIndex: 30,
               width: '180px',
-              maxWidth: '60vw',
-              // theme-aware shadow: blue glow in dark, subtle black in light
-              boxShadow: isDarkTheme
-                ? `0 20px 60px rgba(var(--accent-primary-rgb), 0.18), 0 6px 20px rgba(2,6,23,0.35)`
-                : `0 18px 40px rgba(0,0,0,0.12), 0 6px 18px rgba(0,0,0,0.08)`
+              maxWidth: '60vw'
             }}
           >
-            <div className="relative w-full sm:w-[220px] md:w-[260px] xl:w-[320px] morph-card glare-card shadow-xl rounded-2xl overflow-visible backdrop-blur-lg"
-              style={{ border: '1px solid var(--card-border)' }}>
+            <div 
+              className="relative w-full sm:w-[220px] md:w-[260px] xl:w-[320px] rounded-2xl overflow-visible backdrop-blur-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl group"
+              style={{
+                background: 'var(--card-bg)',
+                border: '1px solid var(--card-border)',
+                boxShadow: '0 15px 30px rgba(var(--accent-primary-rgb), 0.08)'
+              }}
+            >
+              {/* Animated gradient overlay */}
+              <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-2" style={{ background: 'var(--glass-bg)' }}>
                 <div className="flex space-x-1">
