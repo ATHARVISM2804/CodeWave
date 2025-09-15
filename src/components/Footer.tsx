@@ -39,20 +39,9 @@ const Footer: React.FC = () => {
           <div className="md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">
             <div className="mb-8">
               <a href="/" className="inline-block" aria-label="CodeWave home">
-                <div
-                  className="relative flex items-center gap-3 px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-105"
-                  style={{
-                    border: '1.5px solid var(--card-border)',
-                    background: 'linear-gradient(90deg, rgba(var(--accent-primary-rgb),0.04), rgba(var(--accent-secondary-rgb),0.02))',
-                    backdropFilter: 'blur(6px)',
-                    boxShadow: '0 6px 20px rgba(2,6,23,0.45)',
-                    maxWidth: '14rem'
-                  }}
-                >
-                  {/* animated rectangular gradient overlay (matches WhyUsSection) */}
-                  <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
-                    <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/20 to-transparent animate-pulse-premium" />
-                  </div>
+                <div className="relative flex items-center gap-3 px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-105 logo-container">
+                  {/* animated gradient overlay */}
+                  <div className="logo-gradient"></div>
 
                   <img
                     src={codeWaveLogo}
@@ -60,8 +49,6 @@ const Footer: React.FC = () => {
                     className="h-16 w-auto object-contain relative z-10"
                     style={{ display: 'block' }}
                   />
-
-                  
                 </div>
               </a>
             </div>

@@ -46,8 +46,9 @@
   --glass-border: rgba(29, 71, 114, 0.2);
   
   /* Add logo-specific background for light theme */
-  --logo-bg: rgba(2, 6, 23, 0.9);
+  --logo-bg: rgba(29, 71, 114, 0.95); /* Dark blue background for light theme */
   --logo-border: rgba(255, 255, 255, 0.1);
+  --logo-shadow: rgba(29, 71, 114, 0.2);
 }
 
 /* Dark theme overrides */
@@ -55,20 +56,46 @@
   /* ...existing dark theme variables... */
   
   /* Add logo-specific background for dark theme */
-  --logo-bg: rgba(255, 255, 255, 0.1);
+  --logo-bg: rgba(255, 255, 255, 0.03); /* Subtle light background for dark theme */
   --logo-border: rgba(255, 255, 255, 0.1);
+  --logo-shadow: rgba(2, 6, 23, 0.45);
 }
 
 /* Logo-specific styles */
 .logo-container {
+  position: relative;
+  border: 1.5px solid var(--card-border);
+  backdrop-filter: blur(6px);
   background: var(--logo-bg);
-  border: 1px solid var(--logo-border);
-  backdrop-filter: blur(8px);
   box-shadow: 0 8px 32px rgba(2, 6, 23, 0.28);
+  overflow: hidden;
 }
 
+/* Animated logo gradient */
+.logo-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    transparent,
+    rgba(var(--accent-primary-rgb), 0.1),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.logo-container:hover .logo-gradient {
+  opacity: 1;
+}
+
+/* Light theme specific logo styles */
 .light .logo-container {
-  box-shadow: 0 8px 32px rgba(29, 71, 114, 0.15);
+  box-shadow: 0 8px 32px var(--logo-shadow);
+}
+
+.light .logo-container img {
+  filter: brightness(1.2) contrast(1.1);
 }
 
 /* Custom Scrollbar */
