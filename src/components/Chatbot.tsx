@@ -131,7 +131,8 @@ const Chatbot: React.FC = () => {
         className="fixed bottom-24 md:bottom-6 right-4 md:right-6 z-50 rounded-full shadow-2xl w-16 h-16 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
         style={{
           background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-          color: 'var(--text-primary)',
+          color: 'white',
+          // color: 'var(--text-primary)',
           boxShadow: '0 8px 30px rgba(var(--accent-primary-rgb))'
         }}
         onClick={() => setOpen((v) => !v)}

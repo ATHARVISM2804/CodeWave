@@ -122,6 +122,13 @@ const WebDevelopmentPage: React.FC = () => {
               </div>
 
               <div className="relative">
+                {/* Add image here */}
+                <img
+                  src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg   "
+                  alt="Web Development Illustration"
+                  className="rounded-2xl shadow-xl mb-8 w-full object-cover"
+                  style={{ maxHeight: 320 }}
+                />
                 <div className="morph-card glare-card p-8"
                   style={{
                     background: 'var(--card-bg)',
@@ -251,4 +258,3 @@ const WebDevelopmentPage: React.FC = () => {
 };
 
 export default WebDevelopmentPage;
-            
