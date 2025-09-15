@@ -96,7 +96,6 @@ function App() {
           <Chatbot />
           <Header />
           <ParticleBackground />
-          {/* <ThemeToggle /> */}
           <ScrollToTop />
           {isLoading ? (  
             <LoadingAnimation duration={500} onComplete={handleLoadingComplete} />
