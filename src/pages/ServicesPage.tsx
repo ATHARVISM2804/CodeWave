@@ -171,32 +171,44 @@ const ServicesPage: React.FC = () => {
   ];
 
   return (
-    <div style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)', color: 'var(--text-primary)' }}>
+    <div style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
       {/* Hero Section */}
-      <section className="pt-16 py-12 md:py-20 relative overflow-hidden" style={{ background: 'transparent' }}>
+      <section className="pt-16 py-12 md:py-20 relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
         {/* Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] opacity-10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-72 h-72 bg-gradient-to-r from-[var(--accent-secondary)] to-[var(--accent-primary)] opacity-10 rounded-full blur-3xl"></div>
+          <div className="absolute top-20 left-10 w-72 h-72 opacity-15 rounded-full blur-3xl" style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}></div>
+          <div className="absolute bottom-20 right-10 w-72 h-72 opacity-10 rounded-full blur-3xl" style={{ background: 'linear-gradient(135deg, var(--accent-secondary), var(--accent-primary))' }}></div>
         </div>
 
         {/* Floating Service Icons - Hidden on mobile */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden hidden lg:block">
           <div className="absolute top-20 right-20 animate-float" style={{ animationDelay: '0s' }}>
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg backdrop-blur-sm"
-              style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-xl backdrop-blur-sm"
+              style={{ 
+                background: 'var(--card-bg)', 
+                border: '1px solid var(--card-border)',
+                boxShadow: '0 10px 25px rgba(var(--accent-primary-rgb), 0.1)'
+              }}>
               <Globe className="w-6 h-6" style={{ color: 'var(--accent-primary)' }} />
             </div>
           </div>
           <div className="absolute top-40 left-20 animate-float" style={{ animationDelay: '1s' }}>
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center shadow-lg backdrop-blur-sm"
-              style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shadow-xl backdrop-blur-sm"
+              style={{ 
+                background: 'var(--card-bg)', 
+                border: '1px solid var(--card-border)',
+                boxShadow: '0 8px 20px rgba(var(--accent-primary-rgb), 0.08)'
+              }}>
               <Brain className="w-5 h-5" style={{ color: 'var(--accent-secondary)' }} />
             </div>
           </div>
           <div className="absolute bottom-40 right-32 animate-float" style={{ animationDelay: '2s' }}>
-            <div className="w-11 h-11 rounded-lg flex items-center justify-center shadow-lg backdrop-blur-sm"
-              style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+            <div className="w-11 h-11 rounded-lg flex items-center justify-center shadow-xl backdrop-blur-sm"
+              style={{ 
+                background: 'var(--card-bg)', 
+                border: '1px solid var(--card-border)',
+                boxShadow: '0 9px 22px rgba(var(--accent-primary-rgb), 0.09)'
+              }}>
               <Smartphone className="w-5 h-5" style={{ color: 'var(--accent-primary)' }} />
             </div>
           </div>
@@ -209,8 +221,12 @@ const ServicesPage: React.FC = () => {
               <div className="space-y-6 animate-fade-in-left">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm"
-                      style={{ borderColor: 'var(--accent-primary)', background: 'var(--card-bg)' }}>
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-full border text-sm shadow-lg"
+                      style={{ 
+                        borderColor: 'var(--accent-primary)', 
+                        background: 'var(--card-bg)',
+                        boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.15)'
+                      }}>
                       <Sparkles className="w-3 h-3" style={{ color: 'var(--accent-primary)' }} />
                       <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Intelligence-Driven Services</span>
                     </div>
@@ -230,16 +246,16 @@ const ServicesPage: React.FC = () => {
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 py-4">
-                  <div className="text-center">
+                <div className="grid grid-cols-3 gap-4 py-6">
+                  <div className="text-center p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
                     <div className="text-2xl lg:text-3xl font-bold mb-1" style={{ color: 'var(--accent-primary)' }}>150+</div>
                     <div className="text-xs lg:text-sm" style={{ color: 'var(--text-secondary)' }}>Projects Delivered</div>
                   </div>
-                  <div className="text-center">
+                  <div className="text-center p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
                     <div className="text-2xl lg:text-3xl font-bold mb-1" style={{ color: 'var(--accent-primary)' }}>99%</div>
                     <div className="text-xs lg:text-sm" style={{ color: 'var(--text-secondary)' }}>Client Satisfaction</div>
                   </div>
-                  <div className="text-center">
+                  <div className="text-center p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
                     <div className="text-2xl lg:text-3xl font-bold mb-1" style={{ color: 'var(--accent-primary)' }}>5+</div>
                     <div className="text-xs lg:text-sm" style={{ color: 'var(--text-secondary)' }}>Years Experience</div>
                   </div>
@@ -247,16 +263,16 @@ const ServicesPage: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <button className="group px-6 py-3 rounded-full font-semibold text-base flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                  <button className="group px-8 py-4 rounded-full font-semibold text-base flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
                     style={{
                       background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                       color: 'var(--text-primary)',
-                      boxShadow: '0 8px 25px rgba(var(--accent-primary-rgb), 0.3)'
+                      boxShadow: '0 10px 30px rgba(var(--accent-primary-rgb), 0.3)'
                     }}>
                     <span>Start Your Project</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
-                  <button className="px-6 py-3 rounded-full font-semibold text-base border-2 transform hover:scale-105 transition-all duration-300"
+                  <button className="px-8 py-4 rounded-full font-semibold text-base border-2 transform hover:scale-105 transition-all duration-300 hover:bg-[var(--accent-primary)] hover:text-white"
                     style={{
                       borderColor: 'var(--accent-primary)',
                       color: 'var(--text-primary)',
@@ -271,8 +287,18 @@ const ServicesPage: React.FC = () => {
               <div className={`relative hidden lg:block animate-fade-in-right`} style={{ animationDelay: '200ms' }}>
                 <div className="relative">
                   {/* Main Service Card */}
-                  <div className="rounded-2xl p-6 shadow-xl backdrop-blur-lg transform hover:scale-105 transition-all duration-500"
-                    style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                  <div className="rounded-2xl p-6 shadow-2xl backdrop-blur-lg transform hover:scale-105 transition-all duration-500 relative overflow-hidden"
+                    style={{ 
+                      background: 'var(--card-bg)', 
+                      border: '1px solid var(--card-border)',
+                      boxShadow: '0 25px 50px rgba(var(--accent-primary-rgb), 0.15)'
+                    }}>
+                    {/* Animated gradient overlay */}
+                    <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                      <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/10 to-transparent opacity-50" />
+                    </div>
+                    
+                    <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center"
                         style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}>
@@ -315,13 +341,21 @@ const ServicesPage: React.FC = () => {
                   </div>
 
                   {/* Floating Mini Cards */}
-                  <div className="absolute -top-4 -right-4 w-16 h-16 rounded-xl flex items-center justify-center shadow-lg animate-bounce backdrop-blur-sm"
-                    style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                  <div className="absolute -top-4 -right-4 w-16 h-16 rounded-xl flex items-center justify-center shadow-xl animate-bounce backdrop-blur-sm"
+                    style={{ 
+                      background: 'var(--card-bg)', 
+                      border: '1px solid var(--card-border)',
+                      boxShadow: '0 15px 30px rgba(var(--accent-primary-rgb), 0.2)'
+                    }}>
                     <Target className="w-6 h-6" style={{ color: 'var(--accent-secondary)' }} />
                   </div>
 
-                  <div className="absolute -bottom-4 -left-4 w-14 h-14 rounded-lg flex items-center justify-center shadow-lg animate-pulse backdrop-blur-sm"
-                    style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                  <div className="absolute -bottom-4 -left-4 w-14 h-14 rounded-lg flex items-center justify-center shadow-xl animate-pulse backdrop-blur-sm"
+                    style={{ 
+                      background: 'var(--card-bg)', 
+                      border: '1px solid var(--card-border)',
+                      boxShadow: '0 12px 25px rgba(var(--accent-primary-rgb), 0.15)'
+                    }}>
                     <Layers className="w-5 h-5" style={{ color: 'var(--accent-primary)' }} />
                   </div>
                 </div>
@@ -332,12 +366,13 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Main Services */}
-      <section ref={sectionRef} className="py-12 md:py-16 relative">
+      <section ref={sectionRef} className="py-12 md:py-16 relative" style={{ background: 'var(--bg-primary)' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Our Core Services
             </h2>
+            <div className="w-24 h-1 mx-auto mb-6 rounded-full" style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))' }} />
             <p className={`text-lg max-w-2xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
               Comprehensive solutions designed to transform your digital presence with intelligence at the core.
             </p>
@@ -347,19 +382,26 @@ const ServicesPage: React.FC = () => {
             {mainServices.map((service, index) => (
               <div
                 key={index}
-                className={`morph-card glare-card p-6 hover-lift-premium magnetic-effect ripple-effect ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                className={`rounded-2xl p-6 border shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-105 hover:shadow-2xl group relative overflow-hidden ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
                 style={{
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
-                  color: 'var(--text-primary)'
+                  color: 'var(--text-primary)',
+                  boxShadow: '0 20px 40px rgba(var(--accent-primary-rgb), 0.08)'
                 }}
               >
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                  <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+                
+                <div className="relative z-10">
                 <div className="flex items-start space-x-4">
                   <div className={`w-12 h-12 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center flex-shrink-0 magnetic-effect`}>
                     <service.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2 neon-glow" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--accent-primary)] transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
                     <h4 className="text-sm font-semibold mb-3" style={{ color: 'var(--accent-primary)' }}>{service.headline}</h4>
                     <p className="mb-4 leading-relaxed text-sm" style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
                     
@@ -390,6 +432,7 @@ const ServicesPage: React.FC = () => {
                     </Link>
                   </div>
                 </div>
+                </div>
               </div>
             ))}
           </div>
@@ -397,12 +440,13 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Additional Services */}
-      <section className="py-12 md:py-16 relative">
+      <section className="py-12 md:py-16 relative" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className={`text-2xl sm:text-3xl font-bold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Additional Expertise
             </h2>
+            <div className="w-20 h-1 mx-auto mb-6 rounded-full" style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))' }} />
             <p className={`text-lg max-w-2xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
               Specialized services to complement your core development needs.
             </p>
@@ -412,19 +456,27 @@ const ServicesPage: React.FC = () => {
             {additionalServices.map((service, index) => (
               <div
                 key={index}
-                className={`morph-card glare-card p-4 hover-lift-premium magnetic-effect text-center ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                className={`rounded-2xl p-4 border shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-105 hover:shadow-2xl group relative overflow-hidden text-center ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
                 style={{
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
-                  color: 'var(--text-primary)'
+                  color: 'var(--text-primary)',
+                  boxShadow: '0 15px 30px rgba(var(--accent-primary-rgb), 0.06)'
                 }}
               >
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                  <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+                
+                <div className="relative z-10">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-3 magnetic-effect"
                   style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}>
                   <service.icon className="w-5 h-5" style={{ color: 'var(--text-primary)' }} />
                 </div>
-                <h3 className="text-base font-bold mb-2 neon-glow" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
+                <h3 className="text-base font-bold mb-2 group-hover:text-[var(--accent-primary)] transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -432,12 +484,13 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-12 md:py-16 relative">
+      <section className="py-12 md:py-16 relative" style={{ background: 'var(--bg-primary)' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Our Development Process
             </h2>
+            <div className="w-28 h-1 mx-auto mb-6 rounded-full" style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))' }} />
             <p className={`text-lg max-w-2xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
               A proven methodology that ensures quality, transparency, and intelligent solutions.
             </p>
@@ -450,21 +503,29 @@ const ServicesPage: React.FC = () => {
                   key={index}
                   className={`relative ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
                 >
-                  <div className="morph-card glare-card p-4 hover-lift-premium magnetic-effect h-full"
+                  <div className="rounded-2xl p-4 border shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-105 hover:shadow-2xl group relative overflow-hidden h-full"
                     style={{
                       background: 'var(--card-bg)',
                       border: '1px solid var(--card-border)',
-                      color: 'var(--text-primary)'
+                      color: 'var(--text-primary)',
+                      boxShadow: '0 12px 25px rgba(var(--accent-primary-rgb), 0.06)'
                     }}
                   >
+                    {/* Animated gradient overlay */}
+                    <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                      <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </div>
+                    
+                    <div className="relative z-10">
                     <div className="text-center">
                       <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-sm magnetic-effect"
                         style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
                         {step.step}
                       </div>
-                      <h3 className="text-base font-bold mb-2 neon-glow" style={{ color: 'var(--text-primary)' }}>{step.title}</h3>
+                      <h3 className="text-base font-bold mb-2 group-hover:text-[var(--accent-primary)] transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>{step.title}</h3>
                       <p className="text-sm mb-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{step.description}</p>
                       <div className="text-xs font-semibold" style={{ color: 'var(--accent-primary)' }}>{step.duration}</div>
+                    </div>
                     </div>
                   </div>
                   {index < process.length - 1 && (
@@ -479,15 +540,22 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 md:py-16 relative">
+      <section className="py-12 md:py-16 relative" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="morph-card glare-card p-8 text-center hover-lift-premium"
+          <div className="rounded-2xl p-8 border shadow-2xl backdrop-blur-md transform transition-all duration-500 hover:scale-105 hover:shadow-3xl group relative overflow-hidden text-center"
             style={{
               background: 'var(--card-bg)',
               border: '1px solid var(--card-border)',
-              color: 'var(--text-primary)'
+              color: 'var(--text-primary)',
+              boxShadow: '0 25px 50px rgba(var(--accent-primary-rgb), 0.12)'
             }}
           >
+            {/* Animated gradient overlay */}
+            <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+              <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/8 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+            
+            <div className="relative z-10">
             <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Ready to Build Something{' '}
               <span style={{ color: 'var(--accent-primary)' }}>Intelligent?</span>
@@ -496,21 +564,21 @@ const ServicesPage: React.FC = () => {
               Let's discuss your project and explore how we can bring intelligence to your digital solutions.
             </p>
             <div className={`flex flex-col sm:flex-row gap-3 justify-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
-              <button className="liquid-button px-6 py-3 font-semibold glare-effect text-base magnetic-effect"
+              <button className="px-8 py-4 rounded-full font-semibold text-base shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                 style={{
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                  color: 'var(--text-primary)'
+                  color: 'white'
                 }}>
                 Start Your Project
               </button>
-              <button className="morph-card px-6 py-3 rounded-full font-semibold hover-lift-premium glare-card text-base ripple-effect"
+              <button className="px-8 py-4 rounded-full font-semibold text-base border-2 transition-all duration-300 hover:scale-105 hover:bg-[var(--accent-primary)] hover:text-white"
                 style={{
-                  background: 'var(--card-bg)',
-                  border: '1px solid var(--card-border)',
+                  borderColor: 'var(--accent-primary)',
                   color: 'var(--text-primary)'
                 }}>
                 View Our Portfolio
               </button>
+            </div>
             </div>
           </div>
         </div>

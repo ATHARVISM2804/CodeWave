@@ -74,7 +74,7 @@ const Header: React.FC = () => {
                     className="relative font-medium px-4 py-2 rounded-full transition-all duration-300 hover:bg-gradient-to-r hover:from-[var(--accent-primary)] hover:to-[var(--accent-secondary)] hover:text-white group"
                     style={{ color: 'var(--text-secondary)' }}
                   >
-                    <span className="relative z-10">{item.label}</span>
+                    <span className="relative z-10 text-nowrap">{item.label}</span>
                     <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
                   </a>
                 ))}
