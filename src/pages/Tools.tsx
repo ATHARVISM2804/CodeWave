@@ -189,6 +189,7 @@ const ToolsPage: React.FC = () => {
                     background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                     color: 'white'
                   }}
+                  onClick={() => window.location.href = '/contact'}
                 >
                   Contact Us
                 </button>

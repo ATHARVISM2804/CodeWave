@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageCircle, Phone, Mail, Calendar, Send, MapPin, Clock, Users, CheckCircle, Twitter, Linkedin, Github } from 'lucide-react';
+import { color } from 'framer-motion';
 
 const ContactPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -374,6 +375,7 @@ const ContactPage: React.FC = () => {
                   className="w-full liquid-button  px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
                   disabled={isSubmitting}
                   aria-busy={isSubmitting}
+                  style={{ color: isSubmitting ? 'var(--text-muted)' : 'var(--bg-secondary)', background: isSubmitting ? 'var(--card-border)' : 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message →'}
                 </button>
@@ -398,7 +400,7 @@ const ContactPage: React.FC = () => {
                     <div key={index} className="flex items-start space-x-4">
                       <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 magnetic-effect"
                         style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}>
-                        <info.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
+                        <info.icon className="w-6 h-6" style={{ color: 'var(--bg-secondary)' }} />
                       </div>
                       <div>
                         <h4 className="font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{info.title}</h4>
