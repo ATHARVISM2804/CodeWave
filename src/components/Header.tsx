@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, Info, Calendar, Users, Mail } from 'lucide-react';
 import Codewavelogo from '../assets/Logo_Orginal.png';
+import { ThemeToggleButton } from './ThemeToggle';
 
 const navItems = [
   { label: 'Home', href: '/', icon: <Home size={22} /> },
@@ -14,6 +15,7 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,6 +83,11 @@ const Header: React.FC = () => {
 
             {/* CTA Button - right (on small this is col 2; on md it's col 3) */}
             <div className="flex items-center justify-end gap-4 col-start-2 md:col-start-3">
+              {/* Theme toggle placed before CTA/menu */}
+              <div className="flex items-center justify-center">
+                <ThemeToggleButton />
+              </div>
+
               <button
                 onClick={handleCalendlyClick}
                 className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full font-medium transition-all duration-300 hover:scale-105"
@@ -167,7 +174,6 @@ const Header: React.FC = () => {
         </nav>
       )}
 
-      {/* ✅ Calendly iframe popup */}
       {showCalendly && (
         <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
           <div className="relative w-full max-w-3xl h-[600px] bg-white rounded-lg overflow-hidden">

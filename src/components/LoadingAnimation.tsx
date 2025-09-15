@@ -50,36 +50,43 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
       <div className="relative mb-8">
         {/* Main circular container with logo centered */}
         <div className="w-32 h-32 relative flex items-center justify-center mx-auto">
+          {/* animated gradient overlay (matches WhyUsSection) */}
+          <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none" style={{ zIndex: 12 }}>
+            <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/20 to-transparent animate-pulse-premium" />
+          </div>
+
           <img
             src="https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png"
             alt="CodeWave logo"
-            className="w-24 h-24 object-contain z-10 animate-pulse-premium"
+            className="w-24 h-24 object-contain z-20 animate-pulse-premium"
             style={{ display: 'block' }}
           />
           
-          {/* Animated rings around logo with accent colors */}
+          {/* Animated rings around logo with accent colors (reduced opacity) */}
           <div className="absolute inset-0 rounded-full animate-spin-slow"
             style={{
-              border: '3px solid transparent',
+              border: '2px solid transparent',
               borderTopColor: 'var(--accent-primary)',
               borderLeftColor: 'var(--accent-secondary)',
               width: '110%',
               height: '110%',
               top: '-5%',
-              left: '-5%'
+              left: '-5%',
+              opacity: 0.85
             }}
           ></div>
           
-          {/* Second ring rotating in opposite direction */}
+          {/* Second ring rotating in opposite direction (subtle) */}
           <div className="absolute inset-0 rounded-full animate-spin-reverse"
             style={{
-              border: '2px solid transparent',
+              border: '1px solid transparent',
               borderRightColor: 'var(--accent-secondary)',
               borderBottomColor: 'var(--accent-primary)',
               width: '120%',
               height: '120%',
               top: '-10%',
-              left: '-10%'
+              left: '-10%',
+              opacity: 0.7
             }}
           ></div>
         </div>

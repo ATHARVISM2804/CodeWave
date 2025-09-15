@@ -1,5 +1,6 @@
 import React from 'react';
 import { Twitter, Linkedin, Github, Mail, ChevronRight, Phone } from 'lucide-react';
+import codeWaveLogo from "../assets/Logo_Orginal.png"
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 32 32" width={20} height={20} fill="currentColor" {...props}>
@@ -36,11 +37,34 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 px-2 sm:px-6 lg:px-28 items-start">
           {/* Logo and Tagline Column */}
           <div className="md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">
-            <img
-              src="https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png"
-              alt="CodeWave Logo"
-              className="w-40 sm:w-56 h-12 sm:h-14 mb-8 sm:mb-12 bg-black rounded-lg object-cover"
-            />
+            <div className="mb-8">
+              <a href="/" className="inline-block" aria-label="CodeWave home">
+                <div
+                  className="relative flex items-center gap-3 px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-105"
+                  style={{
+                    border: '1.5px solid var(--card-border)',
+                    background: 'linear-gradient(90deg, rgba(var(--accent-primary-rgb),0.04), rgba(var(--accent-secondary-rgb),0.02))',
+                    backdropFilter: 'blur(6px)',
+                    boxShadow: '0 6px 20px rgba(2,6,23,0.45)',
+                    maxWidth: '14rem'
+                  }}
+                >
+                  {/* animated rectangular gradient overlay (matches WhyUsSection) */}
+                  <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
+                    <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/20 to-transparent animate-pulse-premium" />
+                  </div>
+
+                  <img
+                    src={codeWaveLogo}
+                    alt="CodeWave Logo"
+                    className="h-16 w-auto object-contain relative z-10"
+                    style={{ display: 'block' }}
+                  />
+
+                  
+                </div>
+              </a>
+            </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
               <span style={{ color: 'var(--text-primary)' }}>We don't just write code.</span> <br />
               <span style={{ color: 'var(--accent-primary)' }}>We make it think.</span>

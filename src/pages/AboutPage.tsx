@@ -241,7 +241,7 @@ const AboutPage: React.FC = () => {
           <h2 className="text-center text-3xl font-extrabold mb-12 tracking-tight" style={{ color: 'var(--text-primary)' }}>Industries We Serve</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-14">
             {industries.map((industry, idx) => (
-              <div key={idx}
+              <SpotlightCard key={idx}
                 className="rounded-3xl p-8 border flex flex-col items-start shadow-lg bg-opacity-80 backdrop-blur-md transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl group"
                 style={{
                   background: 'var(--card-bg)',
@@ -254,7 +254,7 @@ const AboutPage: React.FC = () => {
                 </div>
                 <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--accent-primary)] transition-colors duration-300">{industry.title}</h3>
                 <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{industry.description}</p>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         </div>
