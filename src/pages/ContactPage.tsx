@@ -241,7 +241,7 @@ const ContactPage: React.FC = () => {
                 <p className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>{method.detail}</p>
                 <a href={method.href} target="_blank" rel="noopener noreferrer">
                   <button className="liquid-button px-6 py-2 font-semibold glare-effect text-sm magnetic-effect"
-                    style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
+                    style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}>
                     {method.action}
                   </button>
                 </a>
@@ -519,7 +519,7 @@ const ContactPage: React.FC = () => {
             <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
               <a href="https://calendly.com/codewave/30min" target="_blank" rel="noopener noreferrer">
                 <button className="liquid-button px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
-                  style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
+                  style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}>
                   Book Free Consultation
                 </button>
               </a>
