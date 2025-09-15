@@ -91,7 +91,7 @@ const HeroSection: React.FC = () => {
               </button>
 
               <button
-                className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300 hover:bg-[var(--accent-primary)] hover:text-white"
+                className="px-8 py-4 rounded-full text-nowrap flex justify-center gap-4 font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300 hover:bg-[var(--accent-primary)] hover:text-white"
                 style={{
                   borderColor: 'var(--accent-primary)',
                   color: 'var(--accent-primary)',

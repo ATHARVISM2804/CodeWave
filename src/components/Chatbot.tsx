@@ -128,7 +128,7 @@ const Chatbot: React.FC = () => {
       {/* Floating Chat Button */}
       <button
         aria-label="Open chat"
-        className="fixed bottom-6 right-6 z-50 rounded-full shadow-2xl w-16 h-16 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+        className="fixed bottom-20 md:bottom-6 right-6 z-50 rounded-full shadow-2xl w-16 h-16 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
         style={{
           background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
           color: 'var(--text-primary)',
