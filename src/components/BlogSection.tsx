@@ -92,12 +92,25 @@ const BlogSection: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
+          {/* Badge */}
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs shadow-lg"
+              style={{
+                borderColor: 'var(--accent-primary)',
+                background: 'var(--card-bg)',
+                boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.10)'
+              }}>
+              <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Blog</span>
+            </span>
+          </div>
+          <div className="flex items-center justify-center gap-3 mb-2">
             <BookOpen className="w-8 h-8 text-[var(--accent-primary)] animate-pulse" />
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
               Insights & Ideas
             </h2>
           </div>
+          {/* Underline */}
+          <div className="w-24 h-1 mx-auto rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
           <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
             Fresh perspectives on technology, design, and digital transformation from our team.
           </p>
@@ -108,7 +121,7 @@ const BlogSection: React.FC = () => {
           initial={{ opacity: 0, y: 60 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mb-16"
+          className=""
         >
           <div className="relative rounded-3xl overflow-hidden shadow-2xl group cursor-pointer"
             onClick={() => handleBlogClick(featuredPost.id)}>

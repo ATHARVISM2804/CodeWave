@@ -151,16 +151,36 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
   };
 
   return (
-    <div className={`relative mt-20  w-full  overflow-x-hidden overflow-y-hidden`}
-      style={{
-        scrollbarWidth: 'none',
-        msOverflowStyle: 'none',
-        '&::-webkit-scrollbar': {
-          display: 'none'
-        }
-      }}>
-      <h1 className='text-3xl md:text-5xl text-center mb-5 font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]' >Techstack We use</h1>
+    <section
+      className="relative py-16 px-4 flex flex-col items-center justify-start overflow-hidden"
+      style={{ background: 'var(--bg-primary)' }}
+    >
+      {/* Decorative background gradient */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-40 opacity-10 rounded-full blur-3xl"
+          style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))' }}></div>
+      </div>
 
+      {/* Badge */}
+      <div className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs shadow-lg mb-4"
+        style={{
+          borderColor: 'var(--accent-primary)',
+          background: 'var(--card-bg)',
+          boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.10)'
+        }}>
+        <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Tech Stack</span>
+      </div>
+
+      {/* Heading */}
+      <h2 className="text-2xl sm:text-4xl md:text-5xl text-center font-extrabold tracking-tight mb-3 bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+        Technologies We Use
+      </h2>
+      {/* Underline */}
+      <div className="w-24 h-1 mx-auto mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
+      {/* Subheading */}
+      <p className="text-base md:text-lg text-center mb-8" style={{ color: 'var(--text-secondary)' }}>
+        Our solutions are built on the most modern, scalable, and robust technologies in the industry.
+      </p>
 
       <div className="flex items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">
         <motion.div
@@ -216,7 +236,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
           })}
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

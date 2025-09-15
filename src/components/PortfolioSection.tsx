@@ -90,7 +90,18 @@ const PortfolioSection: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
+          {/* Badge */}
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs shadow-lg"
+              style={{
+                borderColor: 'var(--accent-primary)',
+                background: 'var(--card-bg)',
+                boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.10)'
+              }}>
+              <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Our Work</span>
+            </span>
+          </div>
+          <div className="flex items-center justify-center gap-3 mb-2">
             <svg className="w-8 h-8 text-[var(--accent-primary)] animate-pulse" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
@@ -98,6 +109,8 @@ const PortfolioSection: React.FC = () => {
               Our Portfolio
             </h2>
           </div>
+          {/* Underline */}
+          <div className="w-24 h-1 mx-auto rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
           <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
             Intelligence-driven solutions that transform how businesses work and connect.
           </p>
@@ -108,7 +121,7 @@ const PortfolioSection: React.FC = () => {
           initial={{ opacity: 0, y: 60 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mb-20"
+          className=""
         >
           <div className="relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500 group">
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] p-1">

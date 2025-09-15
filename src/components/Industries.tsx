@@ -76,14 +76,26 @@ const Industries: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
+          {/* Badge */}
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs shadow-lg"
+              style={{
+                borderColor: 'var(--accent-primary)',
+                background: 'var(--card-bg)',
+                boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.10)'
+              }}>
+              <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Industries</span>
+            </span>
+          </div>
           <div
-            className={`inline-block text-3xl font-bold mb-4 transition-all duration-700 ease-out ${
+            className={`inline-block text-3xl font-bold mb-2 transition-all duration-700 ease-out ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
-            style={{ color: 'var(--accent-primary)' }}
+            } bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]`}
           >
             INDUSTRIES WE SERVE
           </div>
+          {/* Underline */}
+          <div className="w-24 h-1 mx-auto mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
           <h2
             className={`text-xl sm:text-xl lg:text-xl font-bold mb-3 transition-all duration-700 ease-out delay-150 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
