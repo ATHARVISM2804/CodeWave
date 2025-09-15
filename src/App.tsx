@@ -35,12 +35,12 @@ import ToolsPage from './pages/Tools';
 import Testimonial from './components/Testimonial';
 import Whatsapp from './components/Whatsapp';
 
-const HomePage = () => (
+const HomePage = ({ onChatbotClick }: { onChatbotClick: () => void }) => (
   <>
     <HeroSection />
     <MovingData />
     <StatsSection />
-    <Whatsapp />
+    <Whatsapp onChatbotClick={onChatbotClick} />
     <WhyUsSection />
     <PortfolioSection />
     <Industries />
@@ -57,6 +57,7 @@ function App() {
     return window.performance && performance.navigation.type === 1;
   });
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [chatbotOpen, setChatbotOpen] = useState(false);
 
   useEffect(() => {
     // Check for stored theme preference or system preference
@@ -95,16 +96,16 @@ function App() {
         <div
           className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`} style={{ background: 'var(--bg-primary)' }}>
           <MouseFollower />
-          <Chatbot />
+          <Chatbot open={chatbotOpen} onClose={() => setChatbotOpen(false)} />
           <Header />
           <ParticleBackground />
           <ScrollToTop />
-          {isLoading ? (  
+          {isLoading ? (
             <LoadingAnimation duration={500} onComplete={handleLoadingComplete} />
           ) : (
             <main>
               <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<HomePage onChatbotClick={() => setChatbotOpen(true)} />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/services/web-development" element={<WebDevelopmentPage />} />

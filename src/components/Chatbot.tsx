@@ -49,8 +49,7 @@ We're an Intelligence Studio that builds AI-powered digital solutions for startu
 
 When users ask about specific services, provide detailed information about capabilities, benefits, and next steps. Always offer to connect them with the team for deeper discussions.`;
 
-const Chatbot: React.FC = () => {
-  const [open, setOpen] = useState(false);
+const Chatbot: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
   const [messages, setMessages] = useState<Message[]>([
     { sender: "bot", text: WELCOME_MESSAGE }
   ]);
@@ -125,21 +124,6 @@ const Chatbot: React.FC = () => {
 
   return (
     <>
-      {/* Floating Chat Button */}
-      <button
-        aria-label="Open chat"
-        className="fixed bottom-24 md:bottom-6 right-4 md:right-6 z-50 rounded-full shadow-2xl w-16 h-16 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
-        style={{
-          background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-          color: 'white',
-          // color: 'var(--text-primary)',
-          boxShadow: '0 8px 30px rgba(var(--accent-primary-rgb))'
-        }}
-        onClick={() => setOpen((v) => !v)}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-square-text"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /><line x1="10" x2="14" y1="10" y2="10" /><line x1="10" x2="14" y1="14" y2="14" /></svg>
-      </button>
-
       {/* Chat Window */}
       {open && (
         <div className="fixed bottom-24 right-6 z-50 w-96 max-w-[95vw] h-[550px] rounded-xl shadow-2xl border flex flex-col overflow-hidden animate-fade-in-up"
@@ -166,7 +150,7 @@ const Chatbot: React.FC = () => {
             <button
               aria-label="Close chat"
               className="text-white hover:text-gray-200 text-2xl transition-colors"
-              onClick={() => setOpen(false)}
+              onClick={onClose}
             >
               ×
             </button>
@@ -266,3 +250,4 @@ const Chatbot: React.FC = () => {
 };
 
 export default Chatbot;
+            
