@@ -7,7 +7,8 @@ const navItems = [
   { label: 'Home', href: '/', icon: <Home size={22} /> },
   { label: 'About Us', href: '/about', icon: <Info size={22} /> },
   { label: 'Services', href: '/services', icon: <Calendar size={22} /> },
-  { label: 'Portfolio', href: '/portfolio', icon: <Users size={22} /> },
+  { label: 'Tools', href: '/tools', icon: <Users size={22} /> },
+  // { label: 'Portfolio', href: '/portfolio', icon: <Users size={22} /> },
   { label: 'Contact', href: '/contact', icon: <Mail size={22} /> },
 ];
 
