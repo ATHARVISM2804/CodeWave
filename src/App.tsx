@@ -33,12 +33,14 @@ import IndustryDetailPage from './pages/IndustryDetailPage';
 import NotFound from './pages/NotFound';
 import ToolsPage from './pages/Tools';
 import Testimonial from './components/Testimonial';
+import Whatsapp from './components/Whatsapp';
 
 const HomePage = () => (
   <>
     <HeroSection />
     <MovingData />
     <StatsSection />
+    <Whatsapp />
     <WhyUsSection />
     <PortfolioSection />
     <Industries />
