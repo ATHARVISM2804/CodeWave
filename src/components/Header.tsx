@@ -41,12 +41,11 @@ const Header: React.FC = () => {
             <div className="flex items-center justify-start col-start-1">
               <a href="/" className="flex items-center" aria-label="CodeWave home">
                 <div
-                  className="relative flex items-center gap-3 px-3 py-2 rounded-lg transition-transform duration-300 hover:scale-105"
+                  className="relative flex items-center gap-3 px-3 py-2 rounded-lg transition-transform duration-300 hover:scale-105 logo-container"
                   style={{
-                    border: '1.5px solid var(--card-border)',
-                    background: 'linear-gradient(90deg, rgba(var(--accent-primary-rgb),0.04), rgba(var(--accent-secondary-rgb),0.02))',
+                    border: '1.5px solid var(--logo-border)',
+                    background: 'var(--logo-bg)',
                     backdropFilter: 'blur(6px)',
-                    boxShadow: '0 6px 20px rgba(2,6,23,0.45)',
                   }}
                 >
                   {/* animated rectangular gradient overlay (matches WhyUsSection) */}
@@ -197,4 +196,5 @@ const Header: React.FC = () => {
   );
 };
 
+export default Header;
 export default Header;

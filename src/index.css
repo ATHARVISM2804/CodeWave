@@ -44,22 +44,31 @@
   --card-border: rgba(29, 71, 114, 0.15);
   --glass-bg: rgba(255, 255, 255, 0.85);
   --glass-border: rgba(29, 71, 114, 0.2);
+  
+  /* Add logo-specific background for light theme */
+  --logo-bg: rgba(2, 6, 23, 0.9);
+  --logo-border: rgba(255, 255, 255, 0.1);
 }
 
-* {
-  box-sizing: border-box;
+/* Dark theme overrides */
+:root {
+  /* ...existing dark theme variables... */
+  
+  /* Add logo-specific background for dark theme */
+  --logo-bg: rgba(255, 255, 255, 0.1);
+  --logo-border: rgba(255, 255, 255, 0.1);
 }
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* Logo-specific styles */
+.logo-container {
+  background: var(--logo-bg);
+  border: 1px solid var(--logo-border);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px rgba(2, 6, 23, 0.28);
+}
+
+.light .logo-container {
+  box-shadow: 0 8px 32px rgba(29, 71, 114, 0.15);
 }
 
 /* Custom Scrollbar */

@@ -32,6 +32,7 @@ import APIIntegrationPage from './pages/services/APIIntegrationPage';
 import DigitalMarketingPage from './pages/services/DigitalMarketingPage';
 import IndustryDetailPage from './pages/IndustryDetailPage';
 import NotFound from './pages/NotFound';
+import ToolsPage from './pages/Tools';
 
 const HomePage = () => (
   <>
@@ -115,6 +116,7 @@ function App() {
                 <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/portfolio" element={<PortfolioPage />} />
                 <Route path="/contact" element={<ContactPage />} />
+                <Route path="/tools" element={<ToolsPage />} />
                 <Route path="/industries/:slug" element={<IndustryDetailPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
