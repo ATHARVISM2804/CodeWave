@@ -338,6 +338,7 @@ const WhyUsSection: React.FC = () => {
             background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))',
             boxShadow: '0 10px 25px rgba(var(--accent-primary-rgb), 0.3)'
           }}
+          onClick={() => window.location.href = '/contact'}
         >
           Start Your Project
         </button>

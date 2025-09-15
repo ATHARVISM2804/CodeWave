@@ -381,8 +381,10 @@ const PortfolioPage: React.FC = () => {
                   style={{
                     background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                     color: 'var(--text-primary)',
-                    boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.3)'
-                  }}>
+                    boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.3)',
+                  }}
+                  onClick={() => window.location.href = '/contact'}
+                >
                   Start Your Project
                 </button>
                 <button className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-md"

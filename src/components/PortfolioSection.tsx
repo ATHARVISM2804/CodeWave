@@ -270,7 +270,9 @@ const PortfolioSection: React.FC = () => {
               Let's discuss your project and create intelligent solutions together.
             </p>
             <button className="px-8 py-3 rounded-full font-semibold transform hover:scale-105 transition-transform duration-200"
-              style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
+              style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}
+              onClick={() => window.location.href = '/contact'}
+            >
               Start Your Project
             </button>
           </div>

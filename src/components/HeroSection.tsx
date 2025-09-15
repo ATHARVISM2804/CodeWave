@@ -83,6 +83,7 @@ const HeroSection: React.FC = () => {
                   color: 'white',
                   boxShadow: '0 10px 30px rgba(var(--accent-primary-rgb), 0.3)'
                 }}
+                onClick={() => window.location.href = '/contact'}
               >
                 <span>Start Your Project</span>
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

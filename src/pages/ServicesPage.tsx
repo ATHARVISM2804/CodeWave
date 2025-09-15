@@ -268,7 +268,9 @@ const ServicesPage: React.FC = () => {
                       background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                       color: 'var(--text-primary)',
                       boxShadow: '0 10px 30px rgba(var(--accent-primary-rgb), 0.3)'
-                    }}>
+                    }}
+                    onClick={() => window.location.href = '/contact'}
+                  >
                     <span>Start Your Project</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -569,7 +571,9 @@ const ServicesPage: React.FC = () => {
                 style={{
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                   color: 'white'
-                }}>
+                }}
+                onClick={() => window.location.href = '/contact'}
+              >
                 Start Your Project
               </button>
               <button className="px-8 py-4 rounded-full font-semibold text-base border-2 transition-all duration-300 hover:scale-105 hover:bg-[var(--accent-primary)] hover:text-white"
