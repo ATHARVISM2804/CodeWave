@@ -363,6 +363,7 @@ const ServicesPage: React.FC = () => {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* Main Services */}
@@ -396,42 +397,42 @@ const ServicesPage: React.FC = () => {
                 </div>
                 
                 <div className="relative z-10">
-                <div className="flex items-start space-x-4">
-                  <div className={`w-12 h-12 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center flex-shrink-0 magnetic-effect`}>
-                    <service.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--accent-primary)] transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
-                    <h4 className="text-sm font-semibold mb-3" style={{ color: 'var(--accent-primary)' }}>{service.headline}</h4>
-                    <p className="mb-4 leading-relaxed text-sm" style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
-                    
-                    <div className="space-y-3 mb-4">
-                      <div>
-                        <h5 className="text-xs font-semibold mb-2" style={{ color: 'var(--accent-primary)' }}>WHAT WE DO</h5>
-                        <div className="space-y-1">
-                          {service.features.map((feature, featureIndex) => (
-                            <div key={featureIndex} className="flex items-center text-xs" style={{ color: 'var(--text-secondary)' }}>
-                              <div className="w-1 h-1 rounded-full mr-2" style={{ background: 'var(--accent-primary)' }}></div>
-                              {feature}
-                            </div>
-                          ))}
+                  <div className="flex items-start space-x-4">
+                    <div className={`w-12 h-12 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center flex-shrink-0 magnetic-effect`}>
+                      <service.icon className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--accent-primary)] transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
+                      <h4 className="text-sm font-semibold mb-3" style={{ color: 'var(--accent-primary)' }}>{service.headline}</h4>
+                      <p className="mb-4 leading-relaxed text-sm" style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
+                      
+                      <div className="space-y-3 mb-4">
+                        <div>
+                          <h5 className="text-xs font-semibold mb-2" style={{ color: 'var(--accent-primary)' }}>WHAT WE DO</h5>
+                          <div className="space-y-1">
+                            {service.features.map((feature, featureIndex) => (
+                              <div key={featureIndex} className="flex items-center text-xs" style={{ color: 'var(--text-secondary)' }}>
+                                <div className="w-1 h-1 rounded-full mr-2" style={{ background: 'var(--accent-primary)' }}></div>
+                                {feature}
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <Link
-                      to={`/services/${service.slug}`}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105"
-                      style={{
-                        background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                        color: 'var(--text-primary)'
-                      }}
-                    >
-                      {service.ctaText}
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
+                      <Link
+                        to={`/services/${service.slug}`}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                          color: 'var(--text-primary)'
+                        }}
+                      >
+                        {service.ctaText}
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
                   </div>
-                </div>
                 </div>
               </div>
             ))}
