@@ -90,15 +90,15 @@ const Header: React.FC = () => {
 
               <button
                 onClick={handleCalendlyClick}
-                className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full font-medium transition-all duration-300 hover:scale-105"
+                className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 hover:scale-105"
                 style={{
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                   color: 'white',
                   boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.3)',
                 }}
               >
-                <span className="px-1.5">Book a Call</span>
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/20">
+                <span className="px-1">Book a Call</span>
+                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/20">
                   →
                 </span>
               </button>
