@@ -15,7 +15,6 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
-  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,15 +76,17 @@ const Header: React.FC = () => {
                     <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
                   </a>
                 ))}
+                {/* Theme toggle button in navigation */}
+                <span className="ml-2">
+                  <ThemeToggleButton />
+                </span>
               </div>
             </nav>
 
             {/* CTA Button - right (on small this is col 2; on md it's col 3) */}
             <div className="flex items-center justify-end gap-4 col-start-2 md:col-start-3">
               {/* Theme toggle placed before CTA/menu */}
-              <div className="flex items-center justify-center">
-                <ThemeToggleButton />
-              </div>
+              
 
               <button
                 onClick={handleCalendlyClick}
@@ -102,59 +103,46 @@ const Header: React.FC = () => {
                 </span>
               </button>
 
-              <button
-                className="md:hidden p-2 rounded-xl bg-[var(--card-bg)] border border-[var(--card-border)] transition-colors duration-300"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle menu"
-                style={{ color: 'var(--text-primary)' }}
-              >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+              
             </div>
           </div>
         </div>
 
         {/* Mobile Menu - Updated for clean design */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden animate-fade-in-down">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="rounded-2xl mt-2 p-4 backdrop-blur-md bg-[var(--card-bg)] border border-[var(--card-border)]">
-                <div className="space-y-2">
-                  {navItems.map((item, index) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      className="flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-[var(--accent-primary)] hover:bg-opacity-10"
-                      style={{ color: 'var(--text-secondary)' }}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {item.icon}
-                      <span className="font-medium">{item.label}</span>
-                    </a>
-                  ))}
-                  <button
-                    onClick={(e) => {
-                      setIsMobileMenuOpen(false);
-                      handleCalendlyClick(e);
-                    }}
-                    className="w-full mt-4 p-3 rounded-xl font-medium text-white transition-all duration-300 hover:scale-105"
-                    style={{
-                      background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                    }}
-                  >
-                    Book a Call
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+       
       </header>
 
-      {/* Floating Navigation - Simplified design */}
+      {/* Bottom Navigation Bar (mobile only, always visible) */}
+      <nav
+        className="fixed bottom-0 left-1/2 z-50 -translate-x-1/2 rounded-t-2xl md:hidden w-full max-w-md mx-auto backdrop-blur-md p-1.5 border border-[var(--card-border)] bg-[var(--card-bg)]"
+        style={{ boxShadow: '0 -2px 16px rgba(0,0,0,0.08)' }}
+      >
+        <div className="flex items-center justify-between gap-1">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="flex-1 flex flex-col items-center justify-center p-2 rounded-full transition-all duration-300 hover:bg-gradient-to-r hover:from-[var(--accent-primary)] hover:to-[var(--accent-secondary)] group"
+              title={item.label}
+            >
+              <span className="text-[var(--text-secondary)] group-hover:text-white transition-colors duration-300">
+                {item.icon}
+              </span>
+              <span className="text-[10px] mt-0.5" style={{ color: 'var(--text-primary)' }}>{item.label}</span>
+            </a>
+          ))}
+          {/* Theme toggle button in bottom navbar */}
+          <span className="flex flex-col items-center justify-center p-2">
+            <ThemeToggleButton />
+            <span className="text-[10px] mt-0.5" style={{ color: 'var(--text-primary)' }}>Theme</span>
+          </span>
+        </div>
+      </nav>
+
+      {/* Floating Navigation - Simplified design (desktop only, on scroll) */}
       {isScrolled && (
         <nav
-          className="fixed bottom-8 left-1/2 z-50 -translate-x-1/2 rounded-full backdrop-blur-md p-1.5 animate-fade-in-up border border-[var(--card-border)] bg-[var(--card-bg)]"
+          className="hidden md:block fixed bottom-8 left-1/2 z-50 -translate-x-1/2 rounded-full backdrop-blur-md p-1.5 animate-fade-in-up border border-[var(--card-border)] bg-[var(--card-bg)]"
         >
           <div className="flex items-center gap-1">
             {navItems.map((item) => (
@@ -169,6 +157,10 @@ const Header: React.FC = () => {
                 </span>
               </a>
             ))}
+            {/* Theme toggle button in floating nav */}
+            <span className="ml-2">
+              <ThemeToggleButton />
+            </span>
           </div>
         </nav>
       )}
