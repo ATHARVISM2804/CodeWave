@@ -29,21 +29,21 @@
 
 /* Light theme: tuned to complementary blues for accents */
 .light {
-  --bg-primary: #e1e1e1;
-  --bg-secondary: #f8fafc;
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
   --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --text-muted: #94a3b8;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
 
-  --accent-primary: #0ea5e9;
-  --accent-secondary: #0284c7;
-  --accent-primary-rgb: 14, 165, 233;
-  --accent-secondary-rgb: 2, 132, 199;
+  --accent-primary: #1D4772;
+  --accent-secondary: #2563eb;
+  --accent-primary-rgb: 29, 71, 114;
+  --accent-secondary-rgb: 37, 99, 235;
 
-  --card-bg: rgba(255, 255, 255, 0.95);
-  --card-border: rgba(0, 0, 0, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(0, 0, 0, 0.12);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(29, 71, 114, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(29, 71, 114, 0.2);
 }
 
 * {
