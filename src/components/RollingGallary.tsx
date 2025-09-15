@@ -152,8 +152,8 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
 
   return (
     <section
-      className="relative py-16 px-4 flex flex-col items-center justify-start overflow-hidden"
-      style={{ background: 'var(--bg-primary)' }}
+      className="relative py-16 px-4 flex flex-col items-center justify-start"
+      // style={{ background: 'var(--bg-primary)' }}
     >
       {/* Decorative background gradient */}
       <div className="absolute inset-0 pointer-events-none">

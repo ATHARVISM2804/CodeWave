@@ -71,7 +71,7 @@ const Industries: React.FC = () => {
     <section
       ref={sectionRef}
       className="py-20 relative"
-      style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
+      style={{ color: 'var(--text-primary)' }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}

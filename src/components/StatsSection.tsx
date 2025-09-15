@@ -94,8 +94,8 @@ const StatsSection: React.FC = () => {
 
   return (
     <section
-      className="relative py-20 px-4 flex flex-col items-center justify-start overflow-hidden"
-      style={{ background: 'var(--bg-secondary)' }}
+      className="relative py-20 px-4  flex flex-col items-center justify-start"
+      // style={{ background: 'var(--bg-secondary)' }}
     >
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 pointer-events-none">

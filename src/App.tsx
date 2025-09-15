@@ -39,10 +39,10 @@ const HomePage = () => (
     <HeroSection />
     <MovingData />
     <StatsSection />
-    <Testimonial />
     <WhyUsSection />
     <PortfolioSection />
     <Industries />
+    <Testimonial />
     <ParticleBackground />
     <BlogSection />
     <ContactSection />
