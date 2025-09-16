@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Palette, ArrowRight, Eye, Users, Layers, Zap } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // updated import
 
 const UIUXDesignPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const navigate = useNavigate(); // add this line
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -76,21 +77,27 @@ const UIUXDesignPage: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="px-8 py-4 font-semibold text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg"
+                  <button
+                    className="px-8 py-4 font-semibold text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg"
                     style={{
                       background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                       color: 'var(--text-primary)'
-                    }}>
+                    }}
+                    onClick={() => navigate('/contact')}
+                  >
                     Explore UI/UX Services →
                   </button>
-                  <Link to="/portfolio" className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300"
+                  <button
+                    className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300"
                     style={{
                       borderColor: 'var(--accent-primary)',
                       color: 'var(--accent-primary)',
                       background: 'transparent'
-                    }}>
+                    }}
+                    onClick={() => navigate('/portfolio')}
+                  >
                     View Design Work
-                  </Link>
+                  </button>
                 </div>
               </div>
 
@@ -171,21 +178,29 @@ const UIUXDesignPage: React.FC = () => {
               Let's create designs that not only look great but drive real results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 font-semibold text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg"
+              <button
+                className="px-8 py-4 font-semibold text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg"
                 style={{
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                   color: 'var(--text-primary)'
-                }}>
+                }}
+                onClick={() => navigate('/contact')}
+              >
                 Start Design Project
               </button>
-              <Link to="/contact" className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300"
+              <a
+                href="https://calendly.com/codewave/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300"
                 style={{
                   borderColor: 'var(--accent-primary)',
                   color: 'var(--accent-primary)',
                   background: 'transparent'
-                }}>
+                }}
+              >
                 UX Consultation
-              </Link>
+              </a>
             </div>
           </div>
         </div>

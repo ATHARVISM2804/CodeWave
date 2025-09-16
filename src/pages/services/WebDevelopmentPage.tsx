@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Globe, ArrowRight, CheckCircle, Search, Zap, Shield, Smartphone, Users, Code, TrendingUp } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const WebDevelopmentPage: React.FC = () => {
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -103,21 +104,29 @@ const WebDevelopmentPage: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="px-8 py-4 font-semibold text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg"
+                  <button
+                    className="px-8 py-4 font-semibold text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg"
                     style={{
                       background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                       color: 'var(--text-primary)'
-                    }}>
-                    Launch My Website →
+                    }}
+                    onClick={() => navigate('/contact')}
+                  >
+                    Launch My Website
                   </button>
-                  <Link to="/portfolio" className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300"
+                  <a
+                    href="https://calendly.com/codewave/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300"
                     style={{
                       borderColor: 'var(--accent-primary)',
                       color: 'var(--accent-primary)',
                       background: 'transparent'
-                    }}>
-                    View Examples
-                  </Link>
+                    }}
+                  >
+                    Book a Call
+                  </a>
                 </div>
               </div>
 
@@ -234,21 +243,29 @@ const WebDevelopmentPage: React.FC = () => {
               Let's discuss your project and create a website that's built for tomorrow's digital landscape.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 font-semibold text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg"
+              <button
+                className="px-8 py-4 font-semibold text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg"
                 style={{
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                   color: 'var(--text-primary)'
-                }}>
+                }}
+                onClick={() => navigate('/contact')}
+              >
                 Start My Project
               </button>
-              <Link to="/contact" className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300"
+              <a
+                href="https://calendly.com/codewave/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 rounded-full font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300"
                 style={{
                   borderColor: 'var(--accent-primary)',
                   color: 'var(--accent-primary)',
                   background: 'transparent'
-                }}>
+                }}
+              >
                 Schedule Consultation
-              </Link>
+              </a>
             </div>
           </div>
         </div>

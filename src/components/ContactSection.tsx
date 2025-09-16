@@ -174,7 +174,7 @@ const ContactSection: React.FC = () => {
                   target={option.href.startsWith('http') ? '_blank' : undefined}
                   rel={option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className="group card-premium glass-premium p-6 cursor-pointer transition-all duration-300 hover:scale-105 block"
-                >
+                 >
                   <div className={`w-14 h-14 bg-gradient-to-r ${option.color} rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
                     <option.icon className="w-6 h-6 text-white" />
                   </div>
