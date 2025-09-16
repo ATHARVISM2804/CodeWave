@@ -168,11 +168,14 @@ const ContactSection: React.FC = () => {
           <div className="space-y-8">
             <div className="grid grid-cols-2 gap-4">
               {contactOptions.map((option, index) => (
-                <div
+                <a
                   key={index}
-                  className="group card-premium glass-premium p-6 cursor-pointer"
+                  href={option.href}
+                  target={option.href.startsWith('http') ? '_blank' : undefined}
+                  rel={option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="group card-premium glass-premium p-6 cursor-pointer transition-all duration-300 hover:scale-105 block"
                 >
-                  <div className={`w-14 h-14 bg-gradient-to-r ${option.color} rounded-lg flex items-center justify-center mb-4`}>
+                  <div className={`w-14 h-14 bg-gradient-to-r ${option.color} rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
                     <option.icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-lg font-bold mb-2">
@@ -181,18 +184,10 @@ const ContactSection: React.FC = () => {
                   <p className={`text-sm ${option.color} mb-3 font-medium`}>
                     {option.description}
                   </p>
-
-                  {/* replaced button with anchor so actions are functional */}
-                  <a
-                    href={option.href}
-                    target={option.href && option.href.startsWith('http') ? '_blank' : undefined}
-                    rel={option.href && option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="font-semibold inline-flex items-center gap-2"
-                  // preserve keyboard focus styles
-                  >
+                  <span className="font-semibold inline-flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
                     {option.action}
-                  </a>
-                </div>
+                  </span>
+                </a>
               ))}
             </div>
 
