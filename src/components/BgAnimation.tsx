@@ -1,274 +1,217 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
-interface Dot {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  radius: number;
-  opacity: number;
-  baseOpacity: number;
-  pulse: number;
-  color: [number, number, number];
+interface BgAnimationProps {
+  intensity?: 'low' | 'medium' | 'high';
+  className?: string;
 }
 
-interface GridLine {
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
-  opacity: number;
-  isVertical: boolean;
-}
-
-const ParticleBackground: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationId: number;
-    let time = 0;
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resize();
-
-    const dots: Dot[] = [];
-    const gridLines: GridLine[] = [];
-    const maxDots = 25; // Reduced for subtlety
-    const gridSpacing = 100;
-
-    // Get theme-aware colors
-    const getThemeColors = () => {
-      const isDark = document.documentElement.classList.contains('dark');
-
-      if (isDark) {
-        return {
-          primary: [100, 149, 237] as [number, number, number], // CornflowerBlue
-          secondary: [147, 112, 219] as [number, number, number], // MediumPurple
-          accent: [64, 224, 208] as [number, number, number], // Turquoise
-          grid: [70, 85, 110] as [number, number, number], // Muted blue-gray
-        };
-      } else {
-        return {
-          primary: [99, 102, 241] as [number, number, number], // Indigo
-          secondary: [139, 92, 246] as [number, number, number], // Violet
-          accent: [34, 197, 94] as [number, number, number], // Green
-          grid: [148, 163, 184] as [number, number, number], // Slate
-        };
-      }
-    };
-
-    // Create subtle grid
-    const createGrid = () => {
-      gridLines.length = 0;
-
-      // Vertical lines
-      for (let x = 0; x <= canvas.width; x += gridSpacing) {
-        gridLines.push({
-          x1: x,
-          y1: 0,
-          x2: x,
-          y2: canvas.height,
-          opacity: 0.02, // Even more subtle
-          isVertical: true
-        });
-      }
-
-      // Horizontal lines
-      for (let y = 0; y <= canvas.height; y += gridSpacing) {
-        gridLines.push({
-          x1: 0,
-          y1: y,
-          x2: canvas.width,
-          y2: y,
-          opacity: 0.02,
-          isVertical: false
-        });
-      }
-    };
-
-    // Create floating dots
-    const createDot = (): Dot => {
-      const colors = getThemeColors();
-      const colorOptions = [colors.primary, colors.secondary, colors.accent];
-
-      return {
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.2, // Slower movement
-        vy: (Math.random() - 0.5) * 0.2,
-        radius: Math.random() * 2 + 1,
-        opacity: 0,
-        baseOpacity: Math.random() * 0.3 + 0.1, // Lower opacity
-        pulse: Math.random() * Math.PI * 2,
-        color: colorOptions[Math.floor(Math.random() * colorOptions.length)]
-      };
-    };
-
-    // Initialize elements
-    for (let i = 0; i < maxDots; i++) {
-      dots.push(createDot());
-    }
-    createGrid();
-
-    // Draw subtle grid
-    const drawGrid = () => {
-      const colors = getThemeColors();
-
-      gridLines.forEach(line => {
-        ctx.strokeStyle = `rgba(${colors.grid.join(',')}, ${line.opacity})`;
-        ctx.lineWidth = 0.5;
-        ctx.beginPath();
-        ctx.moveTo(line.x1, line.y1);
-        ctx.lineTo(line.x2, line.y2);
-        ctx.stroke();
-      });
-    };
-
-    // Draw floating dot with subtle glow
-    const drawDot = (dot: Dot, globalTime: number) => {
-      // Gentle pulse animation
-      const pulse = Math.sin(globalTime * 1.5 + dot.pulse) * 0.3 + 0.7;
-      dot.opacity = dot.baseOpacity * pulse;
-
-      // Draw dot with subtle gradient
-      const gradient = ctx.createRadialGradient(
-        dot.x, dot.y, 0,
-        dot.x, dot.y, dot.radius * 4
-      );
-      gradient.addColorStop(0, `rgba(${dot.color.join(',')}, ${dot.opacity})`);
-      gradient.addColorStop(0.5, `rgba(${dot.color.join(',')}, ${dot.opacity * 0.3})`);
-      gradient.addColorStop(1, `rgba(${dot.color.join(',')}, 0)`);
-
-      ctx.fillStyle = gradient;
-      ctx.beginPath();
-      ctx.arc(dot.x, dot.y, dot.radius * 2, 0, Math.PI * 2);
-      ctx.fill();
-    };
-
-    // Draw subtle connections between nearby dots
-    const drawConnections = () => {
-      const colors = getThemeColors();
-      const connectionDistance = 150;
-
-      dots.forEach((dot, i) => {
-        dots.slice(i + 1).forEach((otherDot) => {
-          const dx = dot.x - otherDot.x;
-          const dy = dot.y - otherDot.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < connectionDistance) {
-            const opacity = (1 - distance / connectionDistance) * 0.05; // Very subtle
-
-            ctx.strokeStyle = `rgba(${colors.primary.join(',')}, ${opacity})`;
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(dot.x, dot.y);
-            ctx.lineTo(otherDot.x, otherDot.y);
-            ctx.stroke();
-          }
-        });
-      });
-    };
-
-    // Draw flowing data streams occasionally
-    const drawDataStreams = (globalTime: number) => {
-      const colors = getThemeColors();
-      const streamCount = 3;
-
-      for (let i = 0; i < streamCount; i++) {
-        const streamY = (canvas.height / (streamCount + 1)) * (i + 1);
-        const streamX = (globalTime * 30 + i * 200) % (canvas.width + 100) - 50;
-
-        // Draw subtle moving line
-        const gradient = ctx.createLinearGradient(streamX - 50, streamY, streamX + 50, streamY);
-        gradient.addColorStop(0, `rgba(${colors.accent.join(',')}, 0)`);
-        gradient.addColorStop(0.5, `rgba(${colors.accent.join(',')}, 0.15)`);
-        gradient.addColorStop(1, `rgba(${colors.accent.join(',')}, 0)`);
-
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(streamX - 30, streamY);
-        ctx.lineTo(streamX + 30, streamY);
-        ctx.stroke();
-      }
-    };
-
-    const animate = () => {
-      time += 0.008; // Slower animation
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw grid first (background)
-      drawGrid();
-
-      // Draw data streams
-      drawDataStreams(time);
-
-      // Update and draw dots
-      dots.forEach((dot) => {
-        // Slow, gentle movement
-        dot.x += dot.vx;
-        dot.y += dot.vy;
-
-        // Add subtle drift
-        dot.x += Math.sin(time + dot.pulse) * 0.1;
-        dot.y += Math.cos(time * 0.7 + dot.pulse) * 0.08;
-
-        // Boundary wrapping
-        if (dot.x < -20) dot.x = canvas.width + 20;
-        if (dot.x > canvas.width + 20) dot.x = -20;
-        if (dot.y < -20) dot.y = canvas.height + 20;
-        if (dot.y > canvas.height + 20) dot.y = -20;
-
-        drawDot(dot, time);
-      });
-
-      // Draw subtle connections
-      drawConnections();
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    const handleResize = () => {
-      resize();
-      createGrid();
-
-      // Adjust dot positions for new canvas size
-      dots.forEach(dot => {
-        if (dot.x > canvas.width) dot.x = canvas.width;
-        if (dot.y > canvas.height) dot.y = canvas.height;
-      });
-    };
-
-    animate();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+const BgAnimation: React.FC<BgAnimationProps> = ({ 
+  intensity = 'medium', 
+  className = '' 
+}) => {
+  const particleCount = intensity === 'low' ? 15 : intensity === 'medium' ? 25 : 40;
+  const geometricCount = intensity === 'low' ? 3 : intensity === 'medium' ? 5 : 8;
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-      style={{
-        opacity: document.documentElement.classList.contains('dark') ? 0.3 : 0.2,
-        mixBlendMode: 'multiply'
-      }}
-    />
+    <div className={`fixed inset-0 pointer-events-none overflow-hidden ${className}`} style={{ zIndex: 1 }}>
+      {/* Gradient Background Waves */}
+      <div className="absolute inset-0">
+        {/* Primary gradient wave */}
+        <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-20 animate-wave-slow">
+          <div 
+            className="w-full h-full rounded-[50%]"
+            style={{
+              background: `radial-gradient(ellipse at center, rgba(var(--accent-primary-rgb), 0.15) 0%, rgba(var(--accent-primary-rgb), 0.05) 40%, transparent 70%)`
+            }}
+          />
+        </div>
+        
+        {/* Secondary gradient wave */}
+        <div className="absolute -bottom-1/2 -right-1/2 w-[200%] h-[200%] opacity-15 animate-wave-medium">
+          <div 
+            className="w-full h-full rounded-[50%]"
+            style={{
+              background: `radial-gradient(ellipse at center, rgba(var(--accent-secondary-rgb), 0.12) 0%, rgba(var(--accent-secondary-rgb), 0.04) 50%, transparent 80%)`
+            }}
+          />
+        </div>
+
+        {/* Tertiary accent wave */}
+        <div className="absolute top-1/4 left-1/4 w-[150%] h-[150%] opacity-10 animate-wave-fast">
+          <div 
+            className="w-full h-full rounded-[50%]"
+            style={{
+              background: `conic-gradient(from 0deg, rgba(var(--accent-primary-rgb), 0.08), rgba(var(--accent-secondary-rgb), 0.06), rgba(var(--accent-primary-rgb), 0.08))`
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Floating Particles */}
+      <div className="absolute inset-0">
+        {Array.from({ length: particleCount }, (_, i) => (
+          <div
+            key={`particle-${i}`}
+            className="absolute animate-float-random opacity-30"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 8}s`,
+              animationDuration: `${8 + Math.random() * 12}s`,
+            }}
+          >
+            <div
+              className="w-1 h-1 rounded-full animate-pulse-glow"
+              style={{
+                background: Math.random() > 0.5 
+                  ? 'var(--accent-primary)' 
+                  : 'var(--accent-secondary)',
+                boxShadow: `0 0 ${4 + Math.random() * 8}px currentColor`,
+              }}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Geometric Shapes */}
+      <div className="absolute inset-0">
+        {Array.from({ length: geometricCount }, (_, i) => {
+          const shapes = ['circle', 'square', 'triangle', 'hexagon'];
+          const shape = shapes[Math.floor(Math.random() * shapes.length)];
+          const size = 20 + Math.random() * 40;
+          
+          return (
+            <div
+              key={`geo-${i}`}
+              className={`absolute animate-drift opacity-20 ${shape}-shape`}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${size}px`,
+                height: `${size}px`,
+                animationDelay: `${Math.random() * 10}s`,
+                animationDuration: `${15 + Math.random() * 20}s`,
+              }}
+            >
+              {shape === 'circle' && (
+                <div 
+                  className="w-full h-full rounded-full border animate-rotate-slow"
+                  style={{
+                    borderColor: Math.random() > 0.5 ? 'var(--accent-primary)' : 'var(--accent-secondary)',
+                    borderWidth: '1px',
+                  }}
+                />
+              )}
+              {shape === 'square' && (
+                <div 
+                  className="w-full h-full border animate-rotate-reverse"
+                  style={{
+                    borderColor: Math.random() > 0.5 ? 'var(--accent-primary)' : 'var(--accent-secondary)',
+                    borderWidth: '1px',
+                  }}
+                />
+              )}
+              {shape === 'triangle' && (
+                <div 
+                  className="w-full h-full animate-rotate-slow"
+                  style={{
+                    clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
+                    background: `linear-gradient(45deg, rgba(var(--accent-primary-rgb), 0.3), rgba(var(--accent-secondary-rgb), 0.3))`,
+                  }}
+                />
+              )}
+              {shape === 'hexagon' && (
+                <div 
+                  className="w-full h-full animate-rotate-reverse"
+                  style={{
+                    clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
+                    background: `linear-gradient(60deg, rgba(var(--accent-primary-rgb), 0.2), rgba(var(--accent-secondary-rgb), 0.2))`,
+                  }}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 opacity-5">
+        <div 
+          className="w-full h-full animate-grid-pulse"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(var(--accent-primary-rgb), 0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(var(--accent-primary-rgb), 0.3) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+          }}
+        />
+      </div>
+
+      {/* Code-like Matrix Rain Effect */}
+      <div className="absolute inset-0 opacity-10">
+        {Array.from({ length: 8 }, (_, i) => (
+          <div
+            key={`matrix-${i}`}
+            className="absolute animate-matrix-rain"
+            style={{
+              left: `${i * 12.5}%`,
+              animationDelay: `${i * 2}s`,
+              animationDuration: `${10 + Math.random() * 5}s`,
+            }}
+          >
+            <div className="text-xs font-mono space-y-2" style={{ color: 'var(--accent-primary)' }}>
+              {['01', '10', '11', '00', '01', '10'].map((code, idx) => (
+                <div key={idx} className="animate-fade-in-out" style={{ animationDelay: `${idx * 0.5}s` }}>
+                  {code}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Neural Network Lines */}
+      <svg className="absolute inset-0 w-full h-full opacity-15" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="neural-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: 'var(--accent-primary)', stopOpacity: 0.6 }} />
+            <stop offset="100%" style={{ stopColor: 'var(--accent-secondary)', stopOpacity: 0.3 }} />
+          </linearGradient>
+        </defs>
+        
+        {/* Animated neural network paths */}
+        <g className="animate-neural-pulse">
+          <path
+            d="M50,50 Q200,150 400,100 T800,200"
+            stroke="url(#neural-gradient)"
+            strokeWidth="2"
+            fill="none"
+            className="animate-dash-flow"
+            strokeDasharray="10,5"
+          />
+          <path
+            d="M100,300 Q300,200 500,250 T900,150"
+            stroke="url(#neural-gradient)"
+            strokeWidth="1.5"
+            fill="none"
+            className="animate-dash-flow-reverse"
+            strokeDasharray="8,4"
+            style={{ animationDelay: '2s' }}
+          />
+          <path
+            d="M0,400 Q250,300 450,350 T750,400"
+            stroke="url(#neural-gradient)"
+            strokeWidth="1"
+            fill="none"
+            className="animate-dash-flow"
+            strokeDasharray="6,3"
+            style={{ animationDelay: '4s' }}
+          />
+        </g>
+      </svg>
+    </div>
   );
 };
 
-export default ParticleBackground;
+export default BgAnimation;

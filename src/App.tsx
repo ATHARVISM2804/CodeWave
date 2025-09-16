@@ -9,7 +9,6 @@ import PortfolioSection from './components/PortfolioSection';
 import BlogSection from './components/BlogSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import ParticleBackground from './components/BgAnimation';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import PortfolioPage from './pages/PortfolioPage';
@@ -34,6 +33,7 @@ import NotFound from './pages/NotFound';
 import ToolsPage from './pages/Tools';
 import Testimonial from './components/Testimonial';
 import Whatsapp from './components/Whatsapp';
+import BgAnimation from './components/BgAnimation';
 
 const HomePage = ({ onChatbotClick }: { onChatbotClick: () => void }) => (
   <>
@@ -45,7 +45,6 @@ const HomePage = ({ onChatbotClick }: { onChatbotClick: () => void }) => (
     <PortfolioSection />
     <Industries />
     <Testimonial />
-    <ParticleBackground />
     <BlogSection />
     <ContactSection />
   </>
@@ -94,11 +93,11 @@ function App() {
     <HelmetProvider>
       <Router>
         <div
-          className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`} style={{ background: 'var(--bg-primary)' }}>
+          className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}  style={{ background: 'var(--bg-primary)' }}>
           <MouseFollower />
           <Chatbot open={chatbotOpen} onClose={() => setChatbotOpen(false)} />
           <Header />
-          <ParticleBackground />
+          <BgAnimation intensity="medium" className="opacity-100" />
           <ScrollToTop />
           {isLoading ? (
             <LoadingAnimation duration={500} onComplete={handleLoadingComplete} />
