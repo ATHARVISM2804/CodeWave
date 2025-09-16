@@ -93,11 +93,11 @@ function App() {
     <HelmetProvider>
       <Router>
         <div
-          className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}  style={{ background: 'var(--bg-primary)' }}>
+          className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}  style={{ background: 'var(--bg-primary)' }}  >
           <MouseFollower />
           <Chatbot open={chatbotOpen} onClose={() => setChatbotOpen(false)} />
           <Header />
-          <BgAnimation intensity="medium" className="opacity-100" />
+          <BgAnimation intensity="high" className="opacity-100" />
           <ScrollToTop />
           {isLoading ? (
             <LoadingAnimation duration={500} onComplete={handleLoadingComplete} />
