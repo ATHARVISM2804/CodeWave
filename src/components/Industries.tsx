@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { TrendingUp, Shield, Zap, Award, GraduationCap, ArrowRight } from 'lucide-react';
+import { TrendingUp, Shield, Zap, Award, GraduationCap, HeartPulse, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Industries: React.FC = () => {
@@ -64,6 +64,14 @@ const Industries: React.FC = () => {
       features: ['Learning Management', 'Student Portals', 'Interactive Content', 'Mobile Learning'],
       color: 'from-indigo-500 to-blue-500',
       slug: 'education-elearning'
+    },
+    {
+      icon: HeartPulse,
+      title: 'Healthcare & Wellness',
+      description: 'Secure healthcare platforms that streamline patient care, protect sensitive data, and enhance operational efficiency.',
+      features: ['Patient Portals', 'Appointment Systems', 'Health Analytics', 'HIPAA Compliance'],
+      color: 'from-rose-500 to-pink-500',
+      slug: 'healthcare-wellness'
     }
   ];
 
