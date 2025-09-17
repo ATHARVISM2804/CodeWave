@@ -198,7 +198,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
             width: cylinderWidth,
             transformStyle: 'preserve-3d'
           }}
-          className="flex h-[200px] sm:min-h-[200px] cursor-grab items-center justify-center [transform-style:preserve-3d]"
+          className="flex h-[200px] sm:min-h-[300px] cursor-grab items-center justify-center [transform-style:preserve-3d]"
         >
           {galleryImages.map((url, i) => {
             const blurTransform = createBlurTransform(i);

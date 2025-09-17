@@ -62,7 +62,7 @@ const UIUXDesignPage: React.FC = () => {
                     </div>
                     <span className="text-sm font-semibold" style={{ color: 'var(--accent-primary)' }}>UI/UX DESIGN</span>
                   </div>
-                  
+
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                     <span style={{ color: 'var(--text-primary)' }}>Design That Thinks</span>
                     <br />
@@ -70,7 +70,7 @@ const UIUXDesignPage: React.FC = () => {
                       Before It Looks
                     </span>
                   </h1>
-                  
+
                   <p className="text-xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     Good design isn't decoration — it's decision-making. At Codewave, we create user experiences that guide action, reduce friction, and delight across industries.
                   </p>

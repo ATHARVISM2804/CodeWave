@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Shield, Award, TrendingUp, Zap, Users, Code, Brain, Palette, Smartphone } from 'lucide-react';
-import SpotlightCard from '../components/SpotlightCard';
-
+import HeroBG from '../assets/AboutBG.png'
 const AboutPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -134,47 +133,49 @@ const AboutPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="pt-16"
-      style={{color: 'var(--text-primary)' }}
-    >
+    <div className="pt-16" style={{color: 'var(--text-primary)' }}>
       {/* Hero Section */}
-      <section className="relative mt-10 min-h-[70vh] flex items-center justify-center">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12 z-10">
-          {/* Left: Image */}
-          <div className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
-            <div className="relative">
-              <img
-                src="https://images.pexels.com/photos/2422280/pexels-photo-2422280.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="About CodeWave"
-                className="rounded-2xl shadow-2xl w-full max-w-lg object-cover"
-                style={{ 
-                  minHeight: 320, 
-                  minWidth: 320, 
-                  background: 'var(--bg-primary)',
-                  boxShadow: '0 25px 50px rgba(var(--accent-primary-rgb), 0.2)'
-                }}
-              />
-              {/* Decorative accent */}
-              <div 
-                className="absolute -bottom-4 -right-4 w-24 h-24 rounded-xl opacity-20 -z-10"
-                style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}
-              />
-            </div>
-          </div>
-          {/* Right: Text */}
-          <div className="w-full md:w-1/2 flex flex-col items-start justify-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-8"
-              style={{ color: 'var(--text-primary)', lineHeight: 1.1 }}>
-              We're not just another tech company —<br className="hidden md:block" />
-              <span style={{ color: 'var(--accent-primary)' }}>we're your innovation partner</span>
+      <section className="relative mt-10 min-h-[70vh] flex items-center justify-center overflow-hidden">
+        {/* Background image with overlay container */}
+        <div className="absolute inset-0">
+          {/* Main background image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-right bg-no-repeat"
+            style={{ backgroundImage: HeroBG ? `url(${HeroBG})` : 'none' }}
+          />
+          
+          {/* Gradient overlays - uncomment and adjust as needed */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[rgba(7,20,39,0.8)] via-[rgba(7,20,39,0.85)] to-[rgba(0,174,239,0.35)]" />
+          {/* <div className="absolute inset-0 bg-gradient-to-t from-[rgba(7,20,39,0.95)] via-transparent to-[rgba(7,20,39,0.75)]" /> */}
+          
+          {/* Accent glow effects */}
+          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-30 blur-3xl"
+            style={{ background: 'linear-gradient(135deg, var(--accent-primary), transparent)' }}
+          />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl"
+            style={{ background: 'linear-gradient(135deg, transparent, var(--accent-secondary))' }}
+          />
+        </div>
+
+        {/* Content container */}
+        <div className="container relative z-[2] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-8">
+              <span className="text-white drop-shadow-lg block mb-4">
+                We're not just another tech company —
+              </span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] drop-shadow-lg">
+                we're your innovation partner
+              </span>
             </h1>
-            <p className="text-xl mb-10 max-w-xl font-medium"
-              style={{ color: 'var(--text-secondary)' }}>
+            
+            <p className="text-xl mb-10 max-w-2xl font-medium text-gray-200">
               At CodeWave.it, we build smart, scalable, and meaningful digital solutions that power startups, scale-ups, and public-sector teams alike. Whether it's a sleek product for a growing SaaS startup or a secure platform for law enforcement — we treat every line of code like it matters. Because it does.
             </p>
-            <div className="flex gap-6">
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <button
-                className="px-8 py-4 rounded-full font-semibold text-lg shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="px-8 py-4 rounded-full font-semibold text-lg shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl backdrop-blur-sm"
                 style={{
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                   color: 'white',
@@ -184,11 +185,11 @@ const AboutPage: React.FC = () => {
                 Our Mission
               </button>
               <button
-                className="px-8 py-4 rounded-full font-semibold text-lg border-2 transition-all duration-300 hover:scale-105 hover:bg-[var(--accent-primary)] hover:text-white"
+                className="px-8 py-4 rounded-full font-semibold text-lg border-2 transition-all duration-300 hover:scale-105 hover:shadow-2xl backdrop-blur-sm"
                 style={{
                   borderColor: 'var(--accent-primary)',
-                  color: 'var(--accent-primary)',
-                  background: 'transparent'
+                  color: 'white',
+                  background: 'rgba(255, 255, 255, 0.1)'
                 }}
               >
                 See Our Work
