@@ -121,18 +121,44 @@ const PortfolioSection: React.FC = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className=""
         >
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500 group">
+          <div className="relative rounded-3xl overflow-hidden transition-all duration-500 group hover:shadow-[0_5px_30px_-10px_rgba(var(--accent-primary-rgb),0.7)]">
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] p-1">
-              <div className="w-full h-full rounded-3xl" style={{ background: 'var(--card-bg)' }}>
-                <div className="grid lg:grid-cols-2 gap-8 items-center p-8 lg:p-12">
+              <div className="w-full h-full rounded-3xl overflow-hidden" style={{ background: 'var(--card-bg)' }}>
+                {/* Sleek glowing border effect on hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" 
+                  style={{
+                    background: 'linear-gradient(135deg, var(--accent-primary)20, transparent 30%, var(--accent-secondary)20, transparent 70%, var(--accent-primary)20)',
+                    backgroundSize: '300% 300%',
+                    animation: 'subtleFlow 4s ease infinite'
+                  }}
+                ></div>
+                
+                {/* Corner accents */}
+                <div className="absolute top-0 left-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1" 
+                  style={{ 
+                    background: 'linear-gradient(135deg, var(--accent-primary), transparent)',
+                    clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                    opacity: 0.2
+                  }}>
+                </div>
+                
+                <div className="absolute bottom-0 right-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-1 group-hover:translate-y-1" 
+                  style={{ 
+                    background: 'linear-gradient(315deg, var(--accent-secondary), transparent)',
+                    clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
+                    opacity: 0.2
+                  }}>
+                </div>
+                
+                <div className="grid lg:grid-cols-2 gap-8 items-center p-8 lg:p-12 relative z-10">
                   <div className="relative">
-                    <div className="rounded-2xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-shadow duration-500">
+                    <div className="rounded-2xl overflow-hidden shadow-xl transition-all duration-500 group-hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.3)]">
                       <img 
                         src={featuredProject.image}
                         alt={featuredProject.title}
-                        className="w-full h-64 lg:h-80 object-cover transform group-hover:scale-110 transition-transform duration-700"
+                        className="w-full h-64 lg:h-80 object-cover transition-all duration-700 group-hover:scale-105 group-hover:filter group-hover:contrast-[1.05]"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     </div>
                   </div>
                   <div className="space-y-6">
@@ -196,7 +222,7 @@ const PortfolioSection: React.FC = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-12">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
@@ -207,54 +233,84 @@ const PortfolioSection: React.FC = () => {
                 onMouseEnter={() => setHoveredProject(index)}
                 onMouseLeave={() => setHoveredProject(null)}
               >
-                <div className="rounded-3xl p-6 shadow-lg transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl relative overflow-hidden"
-                  style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                <div className="rounded-3xl p-6 shadow-lg transition-all duration-700 relative overflow-hidden 
+                  backdrop-blur-sm
+                  before:absolute before:inset-0 before:rounded-3xl before:border before:border-transparent before:group-hover:border-[var(--accent-primary)]/20
+                  before:transition-all before:duration-700
+                  hover:shadow-[0_15px_35px_-10px_rgba(var(--accent-primary-rgb),0.25)]"
+                  style={{ background: 'var(--card-bg)' }}
+                >
                   
-                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/10 to-[var(--accent-secondary)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  {/* Sleek background glow effect on hover */}
+                  <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-all duration-700 blur-md"
+                    style={{ 
+                      background: 'radial-gradient(circle at 50% -20%, rgba(var(--accent-primary-rgb), 0.15), transparent 70%)',
+                    }}
+                  ></div>
+                  
+                  {/* Border highlights */}
+                  <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-primary)] to-transparent opacity-0 group-hover:opacity-70 transition-all duration-700 translate-y-1 group-hover:translate-y-0"></div>
+                  <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-secondary)] to-transparent opacity-0 group-hover:opacity-70 transition-all duration-700 -translate-y-1 group-hover:translate-y-0"></div>
                   
                   <div className="relative z-10">
-                    <div className="rounded-2xl overflow-hidden mb-4 shadow-lg">
+                    <div className="rounded-2xl overflow-hidden mb-4 shadow-lg transition-all duration-700">
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 z-10 transition-opacity duration-700 rounded-2xl"
+                        style={{ 
+                          boxShadow: 'inset 0 0 15px rgba(var(--accent-primary-rgb), 0.3)'
+                        }}>
+                      </div>
                       <img 
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-700"
+                        className="w-full h-48 object-cover transition-all duration-700 group-hover:scale-[1.03] group-hover:brightness-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                     </div>
                     
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-semibold px-3 py-1 rounded-full"
+                        <span className="text-sm font-semibold px-3 py-1 rounded-full transition-all duration-300 group-hover:bg-[var(--accent-primary)]/30 group-hover:shadow-sm group-hover:shadow-[var(--accent-primary)]/20"
                           style={{ background: 'var(--accent-primary)/20', color: 'var(--accent-primary)' }}>
                           {project.category}
                         </span>
-                        <span className="text-sm font-bold" style={{ color: 'var(--accent-secondary)' }}>
+                        <span className="text-sm font-bold transition-all duration-300 group-hover:text-[var(--accent-secondary)] group-hover:translate-x-[-2px] group-hover:scale-105" 
+                          style={{ color: 'var(--accent-secondary)' }}>
                           {project.metrics}
                         </span>
                       </div>
                       
-                      <h3 className="text-xl font-bold group-hover:text-[var(--accent-primary)] transition-colors duration-300" 
+                      <h3 className="text-xl font-bold transition-all duration-300 group-hover:text-[var(--accent-primary)] group-hover:translate-y-[-1px]" 
                         style={{ color: 'var(--text-primary)' }}>
                         {project.title}
                       </h3>
                       
-                      <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                      <p className="text-sm leading-relaxed transition-colors duration-300 group-hover:text-[var(--text-primary)]" 
+                        style={{ color: 'var(--text-secondary)' }}>
                         {project.description}
                       </p>
                       
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech, idx) => (
-                          <span key={idx} className="px-2 py-1 rounded-full text-xs font-medium"
-                            style={{ background: 'var(--glass-bg)', color: 'var(--text-secondary)' }}>
+                          <span key={idx} 
+                            className="px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 
+                              group-hover:bg-[var(--accent-primary)]/10 group-hover:border-[var(--accent-primary)]/30
+                              group-hover:translate-y-[-1px] group-hover:shadow-sm"
+                            style={{ 
+                              background: 'var(--glass-bg)', 
+                              color: 'var(--text-secondary)',
+                              border: '1px solid transparent'
+                            }}>
                             {tech}
                           </span>
                         ))}
                       </div>
                       
-                      <div className="flex items-center gap-2 pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <button className="flex items-center gap-1 text-sm font-semibold" style={{ color: 'var(--accent-primary)' }}>
-                          View Details
-                          <ArrowRight className="w-4 h-4" />
+                      <div className="flex items-center gap-2 pt-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-3 group-hover:translate-y-0">
+                        <button className="flex items-center gap-1 text-sm font-semibold relative overflow-hidden group/button" 
+                          style={{ color: 'var(--accent-primary)' }}>
+                          <span className="transition-transform duration-300 group-hover/button:translate-x-1">View Details</span>
+                          <ArrowRight className="w-4 h-4 transition-all duration-300 group-hover/button:translate-x-1 relative" />
+                          <span className="absolute bottom-0 left-0 right-0 h-[1px] bg-current transform scale-x-0 group-hover/button:scale-x-100 origin-left transition-transform duration-300"></span>
                         </button>
                       </div>
                     </div>
@@ -272,23 +328,86 @@ const PortfolioSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-center mt-16"
         >
-          <div className="rounded-3xl p-8 shadow-xl transform hover:scale-105 transition-transform duration-500"
-            style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
-            <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
-              Ready to Build Something Amazing?
-            </h3>
-            <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
-              Let's discuss your project and create intelligent solutions together.
-            </p>
-            <button className="px-8 py-3 rounded-full font-semibold transform hover:scale-105 transition-transform duration-200"
-              style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}
-              onClick={() => window.location.href = '/contact'}
-            >
-              Start Your Project
-            </button>
+          <div className="rounded-3xl p-8 transition-all duration-500 
+            hover:shadow-[0_10px_40px_-15px_rgba(var(--accent-primary-rgb),0.35)] relative overflow-hidden
+            backdrop-blur-sm"
+            style={{ background: 'var(--card-bg)' }}
+          >
+            {/* Border highlight effect */}
+            <div className="absolute inset-0 rounded-3xl opacity-0 hover:opacity-100 transition-all duration-700"
+              style={{
+                background: 'transparent',
+                boxShadow: 'inset 0 0 0 1px rgba(var(--accent-primary-rgb), 0.2)',
+              }}
+            ></div>
+            
+            {/* Sleek background glow effect */}
+            <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-700"
+              style={{ 
+                background: 'radial-gradient(circle at center, rgba(var(--accent-primary-rgb), 0.1) 0%, transparent 60%)',
+              }}
+            ></div>
+            
+            {/* Corner accents */}
+            <div className="absolute top-0 left-0 w-20 h-20 opacity-0 hover:opacity-100 transition-all duration-500" 
+              style={{ 
+                background: 'linear-gradient(135deg, var(--accent-primary)30, transparent)',
+                clipPath: 'polygon(0 0, 40% 0, 0 40%)',
+              }}>
+            </div>
+            <div className="absolute bottom-0 right-0 w-20 h-20 opacity-0 hover:opacity-100 transition-all duration-500" 
+              style={{ 
+                background: 'linear-gradient(315deg, var(--accent-secondary)30, transparent)',
+                clipPath: 'polygon(60% 100%, 100% 100%, 100% 60%)',
+              }}>
+            </div>
+            
+            <div className="relative z-10">
+              <h3 className="text-2xl font-bold mb-4 transition-all duration-300 hover:translate-y-[-1px]" style={{ color: 'var(--text-primary)' }}>
+                Ready to Build Something Amazing?
+              </h3>
+              <p className="mb-6 transition-colors duration-300 hover:text-[var(--text-primary)]" style={{ color: 'var(--text-secondary)' }}>
+                Let's discuss your project and create intelligent solutions together.
+              </p>
+              <button className="px-8 py-3 rounded-full font-semibold relative overflow-hidden group transition-all duration-300
+                hover:shadow-[0_8px_16px_-4px_rgba(var(--accent-primary-rgb),0.5)]"
+                style={{ 
+                  background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', 
+                  color: 'var(--text-primary)' 
+                }}
+                onClick={() => window.location.href = '/contact'}
+              >
+                <span className="relative z-10">Start Your Project</span>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: 'linear-gradient(to right, var(--accent-secondary), var(--accent-primary))',
+                  }}
+                ></div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 group-hover:animate-pulse"
+                  style={{
+                    background: 'radial-gradient(circle at center, white, transparent 70%)',
+                  }}
+                ></div>
+              </button>
+            </div>
           </div>
         </motion.div>
       </div>
+      
+      {/* Keyframe animations */}
+      <style jsx>{`
+        @keyframes shimmer {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes subtleFlow {
+          0% { background-position: 0% 0%; }
+          50% { background-position: 100% 100%; }
+          100% { background-position: 0% 0%; }
+        }
+      `}</style>
     </section>
   );
 };
