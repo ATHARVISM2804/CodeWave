@@ -125,8 +125,20 @@ const BlogSection: React.FC = () => {
           <div className="relative rounded-3xl overflow-hidden shadow-2xl group cursor-pointer"
             onClick={() => handleBlogClick(featuredPost.id)}>
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] p-1">
-              <div className="w-full h-full rounded-3xl" style={{ background: 'var(--card-bg)' }}>
-                <div className="grid lg:grid-cols-2 gap-8 items-center p-8 lg:p-12">
+              <div className="w-full h-full rounded-3xl relative overflow-hidden" style={{ background: 'var(--card-bg)' }}>
+                {/* Metallic glare effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden z-10 pointer-events-none">
+                  <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[metallicGlare_1.5s_ease_forwards] bg-gradient-to-r from-transparent via-white to-transparent"></div>
+                </div>
+                
+                {/* Border glow on hover */}
+                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
+                  style={{ 
+                    boxShadow: `inset 0 0 15px rgba(var(--accent-primary-rgb), 0.3)`,
+                  }}
+                ></div>
+                
+                <div className="grid lg:grid-cols-2 gap-8 items-center p-8 lg:p-12 relative z-20">
                   <div className="relative overflow-hidden rounded-2xl">
                     <img
                       src={featuredPost.image}
@@ -158,6 +170,10 @@ const BlogSection: React.FC = () => {
                           <Calendar className="w-4 h-4" />
                           {featuredPost.date}
                         </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          {featuredPost.readTime}
+                        </div>
                       </div>
                       <h3 className="text-2xl lg:text-3xl font-bold mb-4 group-hover:text-[var(--accent-primary)] transition-colors duration-300"
                         style={{ color: 'var(--text-primary)' }}>
@@ -166,23 +182,6 @@ const BlogSection: React.FC = () => {
                       <p className="text-lg mb-6" style={{ color: 'var(--text-secondary)' }}>
                         {featuredPost.excerpt}
                       </p>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                        <div className="flex items-center gap-1">
-                          <User className="w-4 h-4" />
-                          {featuredPost.author}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Eye className="w-4 h-4" />
-                          {featuredPost.views}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          {featuredPost.readTime}
-                        </div>
-                      </div>
                     </div>
 
                     <button className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold transform hover:scale-105 transition-all duration-200 group/btn"
@@ -207,7 +206,7 @@ const BlogSection: React.FC = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-16 mt-12">
             {blogPosts.map((post, index) => (
               <motion.article
                 key={index}
@@ -219,25 +218,45 @@ const BlogSection: React.FC = () => {
                 onMouseLeave={() => setHoveredPost(null)}
                 onClick={() => handleBlogClick(post.id)}
               >
-                <div className="rounded-3xl overflow-hidden shadow-lg transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl"
-                  style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                <div className="rounded-3xl overflow-hidden shadow-lg transition-all duration-500 
+                  hover:shadow-[0_10px_25px_-5px_rgba(var(--accent-primary-rgb),0.3)]
+                  relative"
+                  style={{ 
+                    background: 'var(--card-bg)', 
+                    border: '1px solid var(--card-border)' 
+                  }}
+                >
+                  {/* Metallic inner highlights */}
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none"
+                    style={{ 
+                      background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, transparent 50%, rgba(0,0,0,0.05) 100%)',
+                    }}
+                  ></div>
+                  
+                  {/* Metallic glare effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden z-10 pointer-events-none">
+                    <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[cardGlare_1.2s_ease_forwards] bg-gradient-to-r from-transparent via-white to-transparent"></div>
+                  </div>
+                  
+                  {/* Top edge accent */}
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[var(--accent-primary)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                   <div className="relative overflow-hidden">
                     <img
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-48 object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 rounded-full text-xs font-semibold"
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold transition-all duration-300 group-hover:bg-[var(--accent-primary)] group-hover:text-white"
                         style={{ background: 'var(--card-bg)', color: 'var(--accent-primary)' }}>
                         {post.category}
                       </span>
                     </div>
                   </div>
 
-                  <div className="p-6">
+                  <div className="p-6 relative z-20">
                     <div className="flex items-center gap-4 mb-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
@@ -258,21 +277,14 @@ const BlogSection: React.FC = () => {
                       {post.excerpt}
                     </p>
 
-                    <div className="flex items-center justify-between pt-4 border-t" style={{ borderColor: 'var(--card-border)' }}>
-                      <div className="flex items-center gap-4 text-xs" style={{ color: 'var(--text-secondary)' }}>
-                        <div className="flex items-center gap-1">
-                          <User className="w-3 h-3" />
-                          {post.author}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Eye className="w-3 h-3" />
-                          {post.views}
-                        </div>
-                      </div>
-                      <button className="flex items-center gap-1 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    <div className="flex items-center justify-end pt-4 border-t" style={{ borderColor: 'var(--card-border)' }}>
+                      <button className="flex items-center gap-1 text-sm font-semibold transition-all duration-300 relative"
                         style={{ color: 'var(--accent-primary)' }}>
-                        Read More
-                        <ArrowRight className="w-4 h-4" />
+                        <span className="relative inline-block">
+                          Read More
+                          <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--accent-primary)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                        </span>
+                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </button>
                     </div>
                   </div>
@@ -289,33 +301,98 @@ const BlogSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-center"
         >
-          <div className="rounded-3xl p-8 shadow-xl max-w-2xl mx-auto transform hover:scale-105 transition-transform duration-500"
-            style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
-            <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
-              Stay Updated with Our Latest Insights
-            </h3>
-            <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
-              Get weekly updates on technology trends, development tips, and industry insights.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-full border focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
-                style={{
-                  background: 'var(--bg-secondary)',
-                  borderColor: 'var(--card-border)',
-                  color: 'var(--text-primary)'
-                }}
-              />
-              <button className="px-6 py-3 rounded-full font-semibold whitespace-nowrap transform hover:scale-105 transition-transform duration-200"
-                style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
-                Subscribe
-              </button>
+          <div className="rounded-3xl p-8 shadow-xl max-w-2xl mx-auto transition-all duration-500 
+            hover:shadow-[0_10px_25px_-5px_rgba(var(--accent-primary-rgb),0.3)] 
+            group relative overflow-hidden"
+            style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}
+          >
+            {/* Metallic glare effect */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden pointer-events-none">
+              <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[metallicGlare_1.5s_ease_forwards] bg-gradient-to-r from-transparent via-white to-transparent"></div>
+            </div>
+            
+            {/* Border glow on hover */}
+            <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
+              style={{ 
+                boxShadow: `inset 0 0 15px rgba(var(--accent-primary-rgb), 0.2)`,
+              }}
+            ></div>
+            
+            {/* Subtle corner accents */}
+            <div className="absolute top-0 left-0 w-16 h-16 opacity-0 group-hover:opacity-20 transition-all duration-500" 
+              style={{ 
+                background: 'linear-gradient(135deg, var(--accent-primary), transparent)',
+                clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+              }}>
+            </div>
+            
+            <div className="absolute bottom-0 right-0 w-16 h-16 opacity-0 group-hover:opacity-20 transition-all duration-500" 
+              style={{ 
+                background: 'linear-gradient(315deg, var(--accent-secondary), transparent)',
+                clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
+              }}>
+            </div>
+            
+            <div className="relative z-10">
+              <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+                Stay Updated with Our Latest Insights
+              </h3>
+              <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
+                Get weekly updates on technology trends, development tips, and industry insights.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 px-4 py-3 rounded-full border focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] transition-all duration-300"
+                  style={{
+                    background: 'var(--bg-secondary)',
+                    borderColor: 'var(--card-border)',
+                    color: 'var(--text-primary)'
+                  }}
+                />
+                <button className="px-6 py-3 rounded-full font-semibold whitespace-nowrap transform hover:shadow-lg transition-all duration-300 relative overflow-hidden group/btn"
+                  style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
+                  <span className="relative z-10">Subscribe</span>
+                  <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500"
+                    style={{
+                      background: 'linear-gradient(to right, var(--accent-secondary), var(--accent-primary))',
+                    }}
+                  ></div>
+                </button>
+              </div>
             </div>
           </div>
         </motion.div>
       </div>
+      
+      {/* Keyframe animations for metallic glare effects */}
+      <style jsx>{`
+        @keyframes metallicGlare {
+          0% {
+            transform: translateX(-100%) rotate(45deg);
+            opacity: 0.7;
+          }
+          100% {
+            transform: translateX(100%) rotate(45deg);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes cardGlare {
+          0% {
+            transform: translateX(-100%) rotate(45deg);
+            opacity: 0.5;
+          }
+          70% {
+            opacity: 0.7;
+          }
+          100% {
+            transform: translateX(100%) rotate(45deg);
+            opacity: 0;
+          }
+        }
+      `}</style>
     </section>
   );
 };
