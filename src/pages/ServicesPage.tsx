@@ -289,16 +289,36 @@ const ServicesPage: React.FC = () => {
               <div className={`relative hidden lg:block animate-fade-in-right`} style={{ animationDelay: '200ms' }}>
                 <div className="relative">
                   {/* Main Service Card */}
-                  <div className="rounded-2xl p-6 shadow-2xl backdrop-blur-lg transform hover:scale-105 transition-all duration-500 relative overflow-hidden"
+                  <div className="rounded-2xl p-6 shadow-2xl backdrop-blur-lg transform hover:scale-[1.02] transition-all duration-500 relative overflow-hidden group"
                     style={{ 
                       background: 'var(--card-bg)', 
                       border: '1px solid var(--card-border)',
                       boxShadow: '0 25px 50px rgba(var(--accent-primary-rgb), 0.15)'
                     }}>
-                    {/* Animated gradient overlay */}
-                    <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-                      <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/10 to-transparent opacity-50" />
+                    {/* Blue shine overlay effect */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-2xl pointer-events-none"
+                      style={{
+                        background: 'radial-gradient(circle at 50% 50%, rgba(var(--accent-primary-rgb), 0.15), transparent 70%)',
+                      }}
+                    ></div>
+                    
+                    {/* Enhanced blue glare effect - double layer for more shine */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none">
+                      <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[enhancedGlare_1.7s_ease_forwards] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/30 to-transparent"></div>
                     </div>
+                    
+                    {/* Second glare effect with delay for enhanced effect */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none"
+                      style={{ animationDelay: "0.2s" }}>
+                      <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[secondaryGlare_2s_ease_0.3s_forwards] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                    </div>
+                    
+                    {/* Subtle border effect */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
+                      style={{
+                        boxShadow: 'inset 0 0 0 1px rgba(var(--accent-primary-rgb), 0.2)',
+                      }}
+                    ></div>
                     
                     <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-4">
@@ -385,7 +405,7 @@ const ServicesPage: React.FC = () => {
             {mainServices.map((service, index) => (
               <div
                 key={index}
-                className={`rounded-2xl p-6 border shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-105 hover:shadow-2xl group relative overflow-hidden ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                className={`rounded-2xl p-6 border shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl group relative overflow-hidden ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
                 style={{
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
@@ -393,11 +413,31 @@ const ServicesPage: React.FC = () => {
                   boxShadow: '0 20px 40px rgba(var(--accent-primary-rgb), 0.08)'
                 }}
               >
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-                  <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Blue shine effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-2xl pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle at 30% 30%, rgba(var(--accent-primary-rgb), 0.12), transparent 70%)',
+                  }}
+                ></div>
+                
+                {/* Main blue glare effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none">
+                  <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[enhancedServiceGlare_2s_ease_forwards] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/35 to-transparent"></div>
                 </div>
                 
+                {/* Secondary subtle glare effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none">
+                  <div className="absolute -inset-full h-[200%] w-[200%] rotate-[135deg] translate-x-[-100%] group-hover:animate-[subtleServiceGlare_2.3s_ease_0.4s_forwards] bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
+                </div>
+                
+                {/* Subtle edge highlight on hover with improved effect */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
+                  style={{ 
+                    boxShadow: `inset 0 0 0 1px rgba(var(--accent-primary-rgb), 0.25), 0 0 15px rgba(var(--accent-primary-rgb), 0.15)`,
+                  }}
+                ></div>
+                
+                {/* Content */}
                 <div className="relative z-10">
                   <div className="flex items-start space-x-4">
                     <div className={`w-12 h-12 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center flex-shrink-0 magnetic-effect`}>
@@ -459,7 +499,7 @@ const ServicesPage: React.FC = () => {
             {additionalServices.map((service, index) => (
               <div
                 key={index}
-                className={`rounded-2xl p-4 border shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-105 hover:shadow-2xl group relative overflow-hidden text-center ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                className={`rounded-2xl p-4 border shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl group relative overflow-hidden text-center ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
                 style={{
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
@@ -467,11 +507,29 @@ const ServicesPage: React.FC = () => {
                   boxShadow: '0 15px 30px rgba(var(--accent-primary-rgb), 0.06)'
                 }}
               >
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-                  <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Blue shine effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-2xl pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle at 50% 0%, rgba(var(--accent-primary-rgb), 0.15), transparent 70%)',
+                  }}
+                ></div>
+                
+                {/* Enhanced glare effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none">
+                  <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[miniEnhancedGlare_1.5s_ease_forwards] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/40 to-transparent"></div>
                 </div>
                 
+                {/* Subtle edge highlight on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
+                  style={{ 
+                    boxShadow: `inset 0 0 0 1px rgba(var(--accent-primary-rgb), 0.2)`,
+                  }}
+                ></div>
+                
+                {/* Top accent line */}
+                <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-primary)] to-transparent opacity-0 group-hover:opacity-60 transition-all duration-700"></div>
+                
+                {/* Content */}
                 <div className="relative z-10">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-3 magnetic-effect"
                   style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}>
@@ -506,7 +564,7 @@ const ServicesPage: React.FC = () => {
                   key={index}
                   className={`relative ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
                 >
-                  <div className="rounded-2xl p-4 border shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-105 hover:shadow-2xl group relative overflow-hidden h-full"
+                  <div className="rounded-2xl p-4 border shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl group relative overflow-hidden h-full"
                     style={{
                       background: 'var(--card-bg)',
                       border: '1px solid var(--card-border)',
@@ -514,11 +572,26 @@ const ServicesPage: React.FC = () => {
                       boxShadow: '0 12px 25px rgba(var(--accent-primary-rgb), 0.06)'
                     }}
                   >
-                    {/* Animated gradient overlay */}
-                    <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-                      <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Blue shine effect */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-2xl pointer-events-none"
+                      style={{
+                        background: 'radial-gradient(circle at 50% 30%, rgba(var(--accent-primary-rgb), 0.12), transparent 70%)',
+                      }}
+                    ></div>
+                    
+                    {/* Enhanced blue glare effect */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none">
+                      <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[processEnhancedGlare_1.8s_ease_forwards] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/30 to-transparent"></div>
                     </div>
                     
+                    {/* Subtle edge highlight on hover */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
+                      style={{ 
+                        boxShadow: `inset 0 0 0 1px rgba(var(--accent-primary-rgb), 0.15)`,
+                      }}
+                    ></div>
+                    
+                    {/* Content */}
                     <div className="relative z-10">
                     <div className="text-center">
                       <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-sm magnetic-effect"
@@ -545,7 +618,7 @@ const ServicesPage: React.FC = () => {
       {/* CTA Section */}
       <section className="py-12 md:py-16 relative" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl p-8 border shadow-2xl backdrop-blur-md transform transition-all duration-500 hover:scale-105 hover:shadow-3xl group relative overflow-hidden text-center"
+          <div className="rounded-2xl p-8 border shadow-2xl backdrop-blur-md transform transition-all duration-500 hover:scale-[1.02] hover:shadow-3xl group relative overflow-hidden text-center"
             style={{
               background: 'var(--card-bg)',
               border: '1px solid var(--card-border)',
@@ -553,11 +626,32 @@ const ServicesPage: React.FC = () => {
               boxShadow: '0 25px 50px rgba(var(--accent-primary-rgb), 0.12)'
             }}
           >
-            {/* Animated gradient overlay */}
-            <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-              <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/8 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            {/* Blue shine effect */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-2xl pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle at 50% 50%, rgba(var(--accent-primary-rgb), 0.1), transparent 70%)',
+              }}
+            ></div>
+            
+            {/* Enhanced blue glare effect - with multiple glares */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none">
+              <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[ctaEnhancedGlare_2.2s_ease_forwards] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/40 to-transparent"></div>
             </div>
             
+            {/* Second glare effect with delay for enhanced effect */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none"
+              style={{ animationDelay: "0.3s" }}>
+              <div className="absolute -inset-full h-[200%] w-[200%] rotate-[225deg] translate-y-[-100%] group-hover:animate-[secondaryCTAGlare_2s_ease_0.6s_forwards] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/20 to-transparent"></div>
+            </div>
+            
+            {/* Subtle edge highlight on hover with improved effect */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
+              style={{ 
+                boxShadow: `inset 0 0 0 1px rgba(var(--accent-primary-rgb), 0.2), 0 0 20px rgba(var(--accent-primary-rgb), 0.15)`,
+              }}
+            ></div>
+            
+            {/* Content */}
             <div className="relative z-10">
             <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Ready to Build Something{' '}
@@ -588,6 +682,121 @@ const ServicesPage: React.FC = () => {
           </div>
         </div>
       </section>
+      
+      {/* Enhanced keyframe animations for blue glare effects */}
+      <style jsx>{`
+        @keyframes enhancedGlare {
+          0% {
+            transform: translateX(-100%) rotate(45deg);
+            opacity: 0;
+          }
+          20% {
+            opacity: 0.7;
+          }
+          100% {
+            transform: translateX(100%) rotate(45deg);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes secondaryGlare {
+          0% {
+            transform: translateX(-100%) rotate(45deg);
+            opacity: 0;
+          }
+          30% {
+            opacity: 0.5;
+          }
+          100% {
+            transform: translateX(100%) rotate(45deg);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes enhancedServiceGlare {
+          0% {
+            transform: translateX(-100%) rotate(45deg);
+            opacity: 0.1;
+          }
+          25% {
+            opacity: 0.8;
+          }
+          100% {
+            transform: translateX(100%) rotate(45deg);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes subtleServiceGlare {
+          0% {
+            transform: translateX(-100%) rotate(135deg);
+            opacity: 0;
+          }
+          50% {
+            opacity: 0.5;
+          }
+          100% {
+            transform: translateX(100%) rotate(135deg);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes miniEnhancedGlare {
+          0% {
+            transform: translateX(-100%) rotate(45deg);
+            opacity: 0.2;
+          }
+          30% {
+            opacity: 0.7;
+          }
+          100% {
+            transform: translateX(100%) rotate(45deg);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes processEnhancedGlare {
+          0% {
+            transform: translateX(-100%) rotate(45deg);
+            opacity: 0;
+          }
+          40% {
+            opacity: 0.6;
+          }
+          100% {
+            transform: translateX(100%) rotate(45deg);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes ctaEnhancedGlare {
+          0% {
+            transform: translateX(-100%) rotate(45deg);
+            opacity: 0;
+          }
+          30% {
+            opacity: 0.8;
+          }
+          100% {
+            transform: translateX(100%) rotate(45deg);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes secondaryCTAGlare {
+          0% {
+            transform: translateY(-100%) rotate(225deg);
+            opacity: 0;
+          }
+          40% {
+            opacity: 0.5;
+          }
+          100% {
+            transform: translateY(100%) rotate(225deg);
+            opacity: 0;
+          }
+        }
+      `}</style>
     </div>
   );
 };
