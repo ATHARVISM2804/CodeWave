@@ -10,10 +10,6 @@ interface BlogPostData {
   excerpt: string;
   content: string;
   category: string;
-  readTime: string;
-  date: string;
-  author: string;
-  views: string;
   image: string;
   trending?: boolean;
 }
@@ -34,10 +30,6 @@ const BlogPost: React.FC = () => {
         title: 'The Future of Intelligent Software Development',
         excerpt: 'How AI is revolutionizing the way we build, test, and deploy software solutions. A deep dive into practical applications that are changing the industry right now.',
         category: 'AI & Development',
-        readTime: '8 min read',
-        date: 'Dec 15, 2024',
-        author: 'CodeWave Team',
-        views: '2.4K',
         image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1200',
         trending: true,
         content: `
@@ -74,10 +66,6 @@ const BlogPost: React.FC = () => {
         title: 'Why Startups Fail at Digital Transformation',
         excerpt: 'Most startups think they need to digitize everything. Here\'s why strategic digital transformation is different and more effective.',
         category: 'Strategy',
-        readTime: '5 min read',
-        date: 'Dec 12, 2024',
-        author: 'Sarah Chen',
-        views: '1.8K',
         image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
         content: `
           <h2>The Digital Transformation Misconception</h2>
@@ -103,10 +91,6 @@ const BlogPost: React.FC = () => {
         title: 'GovTech Security: Beyond Compliance',
         excerpt: 'Building secure government solutions requires more than checking compliance boxes. Here\'s our approach to real security.',
         category: 'Security',
-        readTime: '7 min read',
-        date: 'Dec 10, 2024',
-        author: 'Alex Kumar',
-        views: '1.2K',
         image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800',
         content: `
           <h2>Security in GovTech</h2>
@@ -125,10 +109,6 @@ const BlogPost: React.FC = () => {
         title: 'The Psychology of User Interface Design',
         excerpt: 'Great UX isn\'t just about pretty interfaces. It\'s about understanding human psychology and behavior patterns.',
         category: 'Design',
-        readTime: '6 min read',
-        date: 'Dec 8, 2024',
-        author: 'Maya Patel',
-        views: '2.1K',
         image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
         content: `
           <h2>Designing for the Mind</h2>
@@ -147,10 +127,6 @@ const BlogPost: React.FC = () => {
         title: 'API Design for the Next Decade',
         excerpt: 'APIs are the backbone of modern applications. Here\'s how to design APIs that will scale and evolve with your business.',
         category: 'Development',
-        readTime: '9 min read',
-        date: 'Dec 5, 2024',
-        author: 'Dev Team',
-        views: '1.7K',
         image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
         content: `
           <h2>Future-Proof API Design</h2>
@@ -220,49 +196,39 @@ const BlogPost: React.FC = () => {
               alt={post.title}
               className="w-full h-64 md:h-96 object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            {/* Enhanced gradient overlay for better text visibility on mobile */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20"></div>
             
-            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="px-3 py-1 rounded-full text-xs font-semibold"
-                  style={{ background: 'var(--accent-primary)', color: 'var(--text-primary)' }}>
+            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-12">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <span className="px-3 py-1 rounded-full text-xs font-semibold shadow-sm"
+                  style={{ 
+                    background: 'var(--accent-primary)', 
+                    color: 'white',
+                    textShadow: '0 1px 2px rgba(0,0,0,0.3)'
+                  }}>
                   {post.category}
                 </span>
                 {post.trending && (
-                  <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold"
-                    style={{ background: 'var(--accent-secondary)', color: 'var(--text-primary)' }}>
+                  <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold shadow-sm"
+                    style={{ 
+                      background: 'var(--accent-secondary)', 
+                      color: 'white',
+                      textShadow: '0 1px 2px rgba(0,0,0,0.3)'
+                    }}>
                     <TrendingUp className="w-3 h-3" />
                     Trending
                   </span>
                 )}
               </div>
               
-              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 text-white drop-shadow-lg">
                 {post.title}
               </h1>
               
-              <p className="text-lg md:text-xl text-gray-200 mb-6 max-w-3xl">
+              <p className="text-base sm:text-lg md:text-xl text-gray-100 mb-4 sm:mb-6 max-w-3xl drop-shadow-md">
                 {post.excerpt}
               </p>
-              
-              <div className="flex flex-wrap items-center gap-6 text-sm text-gray-300">
-                <div className="flex items-center gap-2">
-                  <User className="w-4 h-4" />
-                  {post.author}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
-                  {post.date}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  {post.readTime}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Eye className="w-4 h-4" />
-                  {post.views}
-                </div>
-              </div>
             </div>
           </div>
         </motion.div>
@@ -280,7 +246,10 @@ const BlogPost: React.FC = () => {
               
               <div 
                 className="prose prose-lg max-w-none blog-content"
-                style={{ color: 'var(--text-primary)' }}
+                style={{ 
+                  color: 'var(--text-primary)',
+                  textAlign: 'justify'
+                }}
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
               
@@ -309,27 +278,6 @@ const BlogPost: React.FC = () => {
             className="lg:col-span-1"
           >
             <div className="sticky top-24 space-y-8">
-              {/* Author Card */}
-              <div className="rounded-2xl p-6 shadow-lg"
-                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
-                <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
-                  About the Author
-                </h3>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center"
-                    style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}>
-                    <User className="w-6 h-6" style={{ color: 'var(--text-primary)' }} />
-                  </div>
-                  <div>
-                    <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>{post.author}</div>
-                    <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>Senior Developer</div>
-                  </div>
-                </div>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  Passionate about creating intelligent software solutions and sharing knowledge with the developer community.
-                </p>
-              </div>
-
               {/* Newsletter Signup */}
               <div className="rounded-2xl p-6 shadow-lg"
                 style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
