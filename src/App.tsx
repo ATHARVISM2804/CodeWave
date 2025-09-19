@@ -51,14 +51,22 @@ const HomePage = ({ onChatbotClick }: { onChatbotClick: () => void }) => (
 );
 
 function App() {
-  const [isLoading, setIsLoading] = useState(() => {
-    // Only show loading animation on first load, not on route change
-    return window.performance && performance.navigation.type === 1;
-  });
+  const [isLoading, setIsLoading] = useState(true); // Show loading animation initially
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [chatbotOpen, setChatbotOpen] = useState(false);
 
   useEffect(() => {
+    // Check if the user has visited the site before
+    const hasVisitedBefore = localStorage.getItem('hasVisitedSite') === 'true';
+    
+    // If they've visited before, skip loading animation
+    if (hasVisitedBefore) {
+      setIsLoading(false);
+    } else {
+      // Set the flag for future visits
+      localStorage.setItem('hasVisitedSite', 'true');
+    }
+
     // Check for stored theme preference or system preference
     const storedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
     const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
@@ -100,7 +108,7 @@ function App() {
           <BgAnimation intensity="high" className="opacity-100" />
           <ScrollToTop />
           {isLoading ? (
-            <LoadingAnimation duration={500} onComplete={handleLoadingComplete} />
+            <LoadingAnimation duration={1500} onComplete={handleLoadingComplete} />
           ) : (
             <main>
               <Routes>

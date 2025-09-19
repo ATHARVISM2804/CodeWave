@@ -14,6 +14,7 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
 
   useEffect(() => {
     const startTime = Date.now();
+    let animationFrameId: number;
     
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
@@ -21,29 +22,39 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
       setProgress(newProgress);
       
       if (newProgress < 100) {
-        requestAnimationFrame(updateProgress);
+        animationFrameId = requestAnimationFrame(updateProgress);
       } else {
         // Add a small delay before fading out
         setTimeout(() => {
           setIsVisible(false);
           setTimeout(() => {
             if (onComplete) onComplete();
-          }, 400); // Faster fade out animation
-        }, 200);
+          }, 600); // Slower fade out for smoother transition
+        }, 300); // Longer display of completed state
       }
     };
     
-    requestAnimationFrame(updateProgress);
+    // Ensure DOM is fully loaded before starting animation
+    setTimeout(() => {
+      animationFrameId = requestAnimationFrame(updateProgress);
+    }, 100);
+
+    // Clean up animation frame on unmount
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, [duration, onComplete]);
 
   return (
     <div 
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-400 ${
-        isVisible ? 'opacity-100' : 'opacity-0'
+      className={`fixed inset-0 z-50 flex flex-col items-center justify-center ${
+        isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       style={{ 
         background: 'var(--bg-primary)',
-        transition: 'opacity 0.4s ease-out'
+        transition: 'opacity 0.6s ease-out'
       }}
     >
       {/* Logo container with animations */}
@@ -56,10 +67,14 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
           </div>
 
           <img
-            src="https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png"
+            src="/src/assets/logo.png" 
             alt="CodeWave logo"
             className="w-24 h-24 object-contain z-20 animate-pulse-premium"
             style={{ display: 'block' }}
+            onError={(e) => {
+              // Fallback to the cloudinary URL if local image fails
+              e.currentTarget.src = "https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png";
+            }}
           />
           
           {/* Animated rings around logo with accent colors (reduced opacity) */}
@@ -93,7 +108,7 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
         
         {/* Outer pulsing ring */}
         <div
-          className="absolute inset-0 rounded-full animate-ping"
+          className="absolute inset-0 rounded-full animate-pulse"
           style={{ 
             border: '2px solid var(--accent-primary)',
             opacity: 0.3,
