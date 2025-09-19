@@ -52,7 +52,6 @@ const HomePage = ({ onChatbotClick }: { onChatbotClick: () => void }) => (
 
 function App() {
   const [isLoading, setIsLoading] = useState(true); // Show loading animation initially
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [chatbotOpen, setChatbotOpen] = useState(false);
 
   useEffect(() => {
@@ -66,30 +65,6 @@ function App() {
       // Set the flag for future visits
       localStorage.setItem('hasVisitedSite', 'true');
     }
-
-    // Check for stored theme preference or system preference
-    const storedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    const initialTheme = storedTheme || systemTheme;
-
-    setTheme(initialTheme);
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(initialTheme);
-
-    // Listen for theme changes
-    const handleThemeChange = () => {
-      const currentTheme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
-      setTheme(currentTheme);
-    };
-
-    // Create a MutationObserver to watch for class changes on html element
-    const observer = new MutationObserver(handleThemeChange);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-
-    return () => observer.disconnect();
   }, []);
 
   // Handle completion of loading animation
@@ -101,7 +76,7 @@ function App() {
     <HelmetProvider>
       <Router>
         <div
-          className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}  style={{ background: 'var(--bg-primary)' }}  >
+          className="relative min-h-screen overflow-x-hidden transition-colors duration-300"  style={{ background: 'var(--bg-primary)' }}  >
           <MouseFollower />
           <Chatbot open={chatbotOpen} onClose={() => setChatbotOpen(false)} />
           <Header />

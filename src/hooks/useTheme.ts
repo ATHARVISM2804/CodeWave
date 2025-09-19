@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 
 type Theme = 'light' | 'dark';
 
+// This key will be used for localStorage
+const THEME_STORAGE_KEY = 'theme';
+
 const useTheme = (): [Theme, () => void] => {
   // Check for stored theme or system preference
   const getInitialTheme = (): Theme => {
     // Check if we're on the client side
     if (typeof window !== 'undefined') {
       // First check localStorage
-      const storedTheme = localStorage.getItem('theme') as Theme | null;
+      const storedTheme = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
       if (storedTheme && (storedTheme === 'dark' || storedTheme === 'light')) {
         return storedTheme;
       }
@@ -31,7 +34,7 @@ const useTheme = (): [Theme, () => void] => {
     if (typeof window === 'undefined') return;
 
     // Set theme in localStorage
-    localStorage.setItem('theme', theme);
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
 
     // Apply to document
     if (theme === 'dark') {
@@ -45,7 +48,11 @@ const useTheme = (): [Theme, () => void] => {
 
   // Toggle theme function
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === 'dark' ? 'light' : 'dark';
+      console.log('Theme toggled to:', newTheme);
+      return newTheme;
+    });
   };
 
   return [theme, toggleTheme];

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
+import useTheme from '../hooks/useTheme';
 
 interface LoadingAnimationProps {
   duration?: number; // in milliseconds
@@ -144,27 +145,23 @@ export default LoadingAnimation;
 
 // New: lightweight ThemeToggleButton for header
 export const ThemeToggleButton: React.FC = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() =>
-    typeof window !== 'undefined' && document.documentElement.classList.contains('light') ? 'light' : 'dark'
-  );
-
+  // Import useTheme from our hook
+  const [theme, toggleTheme] = useTheme();
+  // Add mount state to prevent hydration mismatch
+  const [mounted, setMounted] = useState(false);
+  
+  // Only mount after initial render
   useEffect(() => {
-    // apply initial theme
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(theme);
-    try {
-      localStorage.setItem('theme', theme);
-    } catch (e) {
-      // ignore
-    }
-  }, [theme]);
-
-  const toggle = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+    setMounted(true);
+  }, []);
+  
+  // Don't render anything until mounted
+  if (!mounted) return null;
 
   return (
     <button
       aria-label="Toggle theme"
-      onClick={toggle}
+      onClick={toggleTheme}
       className="p-2 rounded-full transition-colors duration-200 flex items-center justify-center"
       style={{
         background: 'var(--card-bg)',
