@@ -6,7 +6,7 @@ interface LoadingAnimationProps {
 }
 
 const LoadingAnimation: React.FC<LoadingAnimationProps> = ({ 
-  duration = 800, // Even faster loading (was 100ms)
+  duration = 800, // Even faster loading
   onComplete 
 }) => {
   const [progress, setProgress] = useState(0);
@@ -29,15 +29,13 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
           setIsVisible(false);
           setTimeout(() => {
             if (onComplete) onComplete();
-          }, 600); // Slower fade out for smoother transition
-        }, 300); // Longer display of completed state
+          }, 300); // Faster fade out
+        }, 200); // Shorter display of completed state
       }
     };
     
-    // Ensure DOM is fully loaded before starting animation
-    setTimeout(() => {
-      animationFrameId = requestAnimationFrame(updateProgress);
-    }, 100);
+    // Start animation immediately
+    animationFrameId = requestAnimationFrame(updateProgress);
 
     // Clean up animation frame on unmount
     return () => {
