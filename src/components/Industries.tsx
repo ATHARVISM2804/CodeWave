@@ -96,11 +96,11 @@ const Industries: React.FC = () => {
             </span>
           </div>
           <div
-            className={`inline-block text-3xl font-bold mb-2 transition-all duration-700 ease-out ${
+            className={`inline-block text-4xl md:text-5xl font-bold mb-2 transition-all duration-700 ease-out ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             } bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]`}
           >
-            INDUSTRIES WE SERVE
+            Industries We Serve
           </div>
           {/* Underline */}
           <div className="w-24 h-1 mx-auto mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
@@ -204,20 +204,26 @@ const Industries: React.FC = () => {
             Every industry has its own needs — and we build accordingly.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="liquid-button px-8 py-3 font-semibold glare-effect text-lg magnetic-effect"
+            <button 
+              className="liquid-button px-8 py-3 font-semibold glare-effect text-lg magnetic-effect"
               style={{
                 background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                 color: 'var(--text-primary)'
-              }}>
+              }}
+              onClick={() => navigate('/contact')}
+            >
               Discuss Your Industry
             </button>
-            <button className="morph-card px-8 py-3 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect"
+            <button 
+              className="morph-card px-8 py-3 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect"
               style={{
                 background: 'var(--card-bg)',
                 border: '1px solid var(--card-border)',
                 color: 'var(--text-primary)'
-              }}>
-              View Case Studies
+              }}
+              onClick={() => navigate('/contact')}
+            >
+              Explore More 
             </button>
           </div>
         </div>

@@ -191,6 +191,7 @@ const AboutPage: React.FC = () => {
                   color: 'white',
                   background: 'rgba(255, 255, 255, 0.1)'
                 }}
+                onClick={() => window.location.href = '/contact'}
               >
                 See Our Work
               </button>

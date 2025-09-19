@@ -34,10 +34,10 @@ const Footer: React.FC = () => {
       }}
     >
       <div className="container mx-auto px-4 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 px-2 sm:px-6 lg:px-28 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 px-2 sm:px-6 lg:px-16 xl:px-28">
           {/* Logo and Tagline Column */}
           <div className="md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">
-            <div className="mb-8">
+            <div className="mb-6">
               <a href="/" className="inline-block" aria-label="CodeWave home">
                 <div className="relative flex items-center gap-3 px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-105 logo-container">
                   {/* animated gradient overlay */}
@@ -46,39 +46,80 @@ const Footer: React.FC = () => {
                   <img
                     src={codeWaveLogo}
                     alt="CodeWave Logo"
-                    className="h-16 w-auto object-contain relative z-10"
+                    className="h-12 sm:h-16 w-auto object-contain relative z-10"
                     style={{ display: 'block' }}
                   />
                 </div>
               </a>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-6">
               <span style={{ color: 'var(--text-primary)' }}>We don't just write code.</span> <br />
               <span style={{ color: 'var(--accent-primary)' }}>We make it think.</span>
             </h2>
             <p className="text-sm sm:text-base mb-6 sm:mb-8 max-w-md" style={{ color: 'var(--text-secondary)' }}>
               Join hundreds of innovators who've partnered with CodeWave to build the future of digital experiences.
             </p>
+            
+            {/* Social Links for Mobile - Moved from bottom to top for better visibility */}
+            <div className="flex items-center justify-center md:justify-start space-x-3 mb-8 md:hidden">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  aria-label={social.name}
+                  className="transition-all duration-300 hover:-translate-y-1"
+                  style={{
+                    color: 'var(--text-secondary)',
+                    background: 'var(--card-bg)',
+                    border: '1px solid var(--card-border)',
+                    borderRadius: '50%',
+                    padding: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.color = 'var(--accent-primary)';
+                    e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(var(--accent-primary-rgb), 0.2)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                    e.currentTarget.style.borderColor = 'var(--card-border)';
+                    e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                  }}
+                >
+                  <social.icon size={18} />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Navigation Links */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6" style={{ color: 'var(--text-primary)' }}>Navigation</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-4 pb-1 relative" 
+              style={{ color: 'var(--text-primary)' }}>
+              <span className="relative">
+                Navigation
+                <span className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></span>
+              </span>
+            </h3>
             <ul className="space-y-2 sm:space-y-3">
               {navigationLinks.map((link, index) => (
-                <li key={index} className="group flex items-center justify-center md:justify-start">
-                  <ChevronRight
-                    size={16}
-                    className="mr-2 transform transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ color: 'var(--accent-primary)' }}
-                  />
+                <li key={index} className="group">
                   <a
                     href={link.href}
-                    className="transition-colors text-sm sm:text-base"
+                    className="flex items-center justify-center md:justify-start transition-colors text-sm sm:text-base"
                     style={{ color: 'var(--text-secondary)' }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
                     onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                   >
+                    <ChevronRight
+                      size={16}
+                      className="mr-2 transform transition-transform duration-300 group-hover:translate-x-1"
+                      style={{ color: 'var(--accent-primary)' }}
+                    />
                     {link.title}
                   </a>
                 </li>
@@ -88,22 +129,42 @@ const Footer: React.FC = () => {
 
           {/* Contact Column */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6" style={{ color: 'var(--text-primary)' }}>Contact Us</h3>
-            <ul className="space-y-3 sm:space-y-4">
+            <h3 className="text-base sm:text-lg font-bold mb-4 pb-1 relative" 
+              style={{ color: 'var(--text-primary)' }}>
+              <span className="relative">
+                Contact Us
+                <span className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></span>
+              </span>
+            </h3>
+            <ul className="space-y-3">
               <li style={{ color: 'var(--text-secondary)' }}>
                 <a
                   href="mailto:careersparushapandey@gmail.com"
                   className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
                 >
-                  <Mail size={18} /> careersparushapandey@gmail.com
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
+                    style={{ 
+                      background: 'rgba(var(--accent-primary-rgb), 0.1)', 
+                      color: 'var(--accent-primary)' 
+                    }}>
+                    <Mail size={16} />
+                  </div>
+                  <span className="truncate">careersparushapandey@gmail.com</span>
                 </a>
               </li>
               <li style={{ color: 'var(--text-secondary)' }}>
                 <a
-                  href="tel:+1234567890"
+                  href="tel:+918929942819"
                   className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
                 >
-                  <Phone size={18} /> +91 89299 42819
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
+                    style={{ 
+                      background: 'rgba(var(--accent-primary-rgb), 0.1)', 
+                      color: 'var(--accent-primary)' 
+                    }}>
+                    <Phone size={16} />
+                  </div>
+                  +91 89299 42819
                 </a>
               </li>
               <li style={{ color: 'var(--text-secondary)' }}>
@@ -113,28 +174,39 @@ const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
                 >
-                  <WhatsAppIcon /> +91 89299 42819
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
+                    style={{ 
+                      background: 'rgba(var(--accent-primary-rgb), 0.1)', 
+                      color: 'var(--accent-primary)' 
+                    }}>
+                    <WhatsAppIcon />
+                  </div>
+                  WhatsApp Chat
                 </a>
               </li>
-              <li>
+              <li className="pt-2">
                 <a
-                  href="#schedule"
-                  className="px-4 py-2 rounded-lg inline-flex items-center justify-center transition-all duration-300 hover:-translate-y-1 text-sm sm:text-base"
+                  href="https://calendly.com/codewave/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 rounded-lg inline-flex items-center justify-center transition-all duration-300 hover:-translate-y-1 shadow-lg text-sm sm:text-base w-full sm:w-auto"
                   style={{
                     background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                    color: 'white'
+                    color: 'white',
+                    boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.3)'
                   }}
                 >
-                  <a target='_blank' href="https://calendly.com/codewave/30min">
-                    Schedule a consult
-                  </a>
+                  Schedule a consult
                 </a>
               </li>
-              <li className="flex flex-wrap items-center justify-center md:justify-start space-x-4 mt-4 sm:mt-6">
+              
+              {/* Social Links for larger screens */}
+              <li className="hidden md:flex flex-wrap items-center justify-center md:justify-start space-x-3 mt-4 sm:mt-6">
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
                     href={social.href}
+                    aria-label={social.name}
                     className="transition-all duration-300 hover:-translate-y-1 mb-2"
                     style={{
                       color: 'var(--text-secondary)',
@@ -144,15 +216,18 @@ const Footer: React.FC = () => {
                       padding: '8px',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center'
+                      justifyContent: 'center',
+                      boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
                     }}
                     onMouseEnter={e => {
                       e.currentTarget.style.color = 'var(--accent-primary)';
                       e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                      e.currentTarget.style.boxShadow = '0 4px 15px rgba(var(--accent-primary-rgb), 0.2)';
                     }}
                     onMouseLeave={e => {
                       e.currentTarget.style.color = 'var(--text-secondary)';
                       e.currentTarget.style.borderColor = 'var(--card-border)';
+                      e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
                     }}
                   >
                     <social.icon size={18} />
@@ -164,7 +239,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-10 sm:mt-16 pt-6 sm:pt-8 border-t px-2 sm:px-6 lg:px-28"
+        <div className="mt-10 pt-6 border-t px-2 sm:px-6 lg:px-16 xl:px-28"
           style={{ borderTop: '1px solid var(--glass-border)' }}>
           <div className="flex flex-col md:flex-row justify-center md:justify-between items-center space-y-3 md:space-y-0 text-center">
             <p className="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
