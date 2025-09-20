@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Bot, Brain, Code, Database, Terminal, Zap, Sparkles } from 'lucide-react';
+import { ArrowRight, Bot, Brain, Code, Database, Terminal, Zap, Sparkles, CheckCircle, Layers } from 'lucide-react';
 
 const tools = [
   {
@@ -10,7 +10,8 @@ const tools = [
     icon: Brain,
     category: 'Development',
     stats: '200K+ Lines Optimized',
-    gradient: 'from-blue-500 to-cyan-500'
+    gradient: 'from-blue-500 to-cyan-500',
+    features: ['Smart code completion', 'Bug detection', 'Syntax optimization']
   },
   {
     name: 'API Tester',
@@ -18,7 +19,8 @@ const tools = [
     icon: Terminal,
     category: 'Testing',
     stats: '1M+ API Calls',
-    gradient: 'from-purple-500 to-pink-500'
+    gradient: 'from-purple-500 to-pink-500',
+    features: ['Request builder', 'Response analysis', 'Authentication testing']
   },
   {
     name: 'Database Manager',
@@ -26,7 +28,8 @@ const tools = [
     icon: Database,
     category: 'Database',
     stats: '50K+ Queries Optimized',
-    gradient: 'from-green-500 to-emerald-500'
+    gradient: 'from-green-500 to-emerald-500',
+    features: ['Schema visualization', 'Query optimizer', 'Backup automation']
   },
   {
     name: 'Code Generator',
@@ -34,7 +37,8 @@ const tools = [
     icon: Code,
     category: 'Development',
     stats: '100K+ Components',
-    gradient: 'from-orange-500 to-red-500'
+    gradient: 'from-orange-500 to-red-500',
+    features: ['Template customization', 'Multi-language support', 'Framework integration']
   },
   {
     name: 'Performance Monitor',
@@ -42,7 +46,8 @@ const tools = [
     icon: Zap,
     category: 'Monitoring',
     stats: '1B+ Data Points',
-    gradient: 'from-indigo-500 to-purple-500'
+    gradient: 'from-indigo-500 to-purple-500',
+    features: ['Load testing', 'Memory profiling', 'Bottleneck detection']
   },
   {
     name: 'ChatBot Builder',
@@ -50,7 +55,8 @@ const tools = [
     icon: Bot,
     category: 'AI',
     stats: '10K+ Chatbots',
-    gradient: 'from-pink-500 to-rose-500'
+    gradient: 'from-pink-500 to-rose-500',
+    features: ['Conversation designer', 'NLP integration', 'Multi-platform deployment']
   }
 ];
 
@@ -59,82 +65,154 @@ const categories = ['All', 'Development', 'Testing', 'Database', 'Monitoring', '
 const ToolsPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [hoveredTool, setHoveredTool] = useState<number | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const filteredTools = selectedCategory === 'All' 
     ? tools 
     : tools.filter(tool => tool.category === selectedCategory);
 
   return (
-    <div className="min-h-screen pt-20" style={{ background: 'var(--bg-secondary)' }}>
-      {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-32 left-10 w-96 h-96 rounded-full blur-3xl opacity-10"
-          style={{ background: 'var(--accent-primary)' }}
-        />
-        <div className="absolute bottom-32 right-10 w-96 h-96 rounded-full blur-3xl opacity-10"
-          style={{ background: 'var(--accent-secondary)' }}
-        />
-      </div>
-      
+    <div className="min-h-screen pt-16" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28 relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
+        {/* Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 left-10 w-96 h-96 opacity-15 rounded-full blur-3xl" 
+            style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 opacity-10 rounded-full blur-3xl" 
+            style={{ background: 'linear-gradient(135deg, var(--accent-secondary), var(--accent-primary))' }}></div>
+        </div>
+        
+        {/* Floating Tool Icons - Hidden on mobile */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden hidden lg:block">
+          <div className="absolute top-32 right-24 animate-float" style={{ animationDelay: '0s' }}>
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-xl backdrop-blur-sm"
+              style={{ 
+                background: 'var(--card-bg)', 
+                border: '1px solid var(--card-border)',
+                boxShadow: '0 10px 25px rgba(var(--accent-primary-rgb), 0.1)'
+              }}>
+              <Brain className="w-6 h-6" style={{ color: 'var(--accent-primary)' }} />
+            </div>
+          </div>
+          <div className="absolute top-48 left-32 animate-float" style={{ animationDelay: '1.2s' }}>
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shadow-xl backdrop-blur-sm"
+              style={{ 
+                background: 'var(--card-bg)', 
+                border: '1px solid var(--card-border)',
+                boxShadow: '0 8px 20px rgba(var(--accent-primary-rgb), 0.08)'
+              }}>
+              <Database className="w-5 h-5" style={{ color: 'var(--accent-secondary)' }} />
+            </div>
+          </div>
+          <div className="absolute bottom-32 right-48 animate-float" style={{ animationDelay: '0.6s' }}>
+            <div className="w-11 h-11 rounded-lg flex items-center justify-center shadow-xl backdrop-blur-sm"
+              style={{ 
+                background: 'var(--card-bg)', 
+                border: '1px solid var(--card-border)',
+                boxShadow: '0 9px 22px rgba(var(--accent-primary-rgb), 0.09)'
+              }}>
+              <Code className="w-5 h-5" style={{ color: 'var(--accent-primary)' }} />
+            </div>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-10"
+              transition={{ duration: 0.7 }}
+              className="mb-8"
             >
               {/* Badge */}
               <div className="flex items-center justify-center gap-2 mb-6">
-                <span className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs shadow-lg"
+                <span className="flex items-center gap-2 px-4 py-2 rounded-full border text-sm shadow-lg"
                   style={{
                     borderColor: 'var(--accent-primary)',
                     background: 'var(--card-bg)',
-                    boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.10)'
+                    boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.15)'
                   }}>
                   <Sparkles className="w-3 h-3" style={{ color: 'var(--accent-primary)' }} />
-                  <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Developer Productivity</span>
+                  <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Accelerate Your Workflow</span>
                 </span>
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                <span style={{ color: 'var(--text-primary)' }}>Powerful Developer</span>{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                <span style={{ color: 'var(--text-primary)' }}>Intelligent Developer</span>{' '}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
                   Tools & Utilities
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl mb-8" style={{ color: 'var(--text-secondary)' }}>
-                Enhance your development workflow with our suite of intelligent tools
+              <p className="text-lg md:text-xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                Supercharge your development workflow with our suite of AI-powered tools designed for the modern developer
               </p>
+            </motion.div>
+
+            {/* Stats */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="grid grid-cols-3 gap-4 py-8 max-w-3xl mx-auto mb-8"
+            >
+              <div className="text-center p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                <div className="text-2xl lg:text-3xl font-bold mb-1" style={{ color: 'var(--accent-primary)' }}>25+</div>
+                <div className="text-xs lg:text-sm" style={{ color: 'var(--text-secondary)' }}>Productivity Tools</div>
+              </div>
+              <div className="text-center p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                <div className="text-2xl lg:text-3xl font-bold mb-1" style={{ color: 'var(--accent-primary)' }}>50K+</div>
+                <div className="text-xs lg:text-sm" style={{ color: 'var(--text-secondary)' }}>Daily Users</div>
+              </div>
+              <div className="text-center p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                <div className="text-2xl lg:text-3xl font-bold mb-1" style={{ color: 'var(--accent-primary)' }}>99%</div>
+                <div className="text-xs lg:text-sm" style={{ color: 'var(--text-secondary)' }}>Time Saved</div>
+              </div>
             </motion.div>
 
             {/* Category Filter */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-wrap justify-center gap-4 mb-12"
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="flex flex-wrap justify-center gap-4 mb-6"
             >
               {categories.map((category, index) => (
                 <motion.button
                   key={category}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
+                  transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    selectedCategory === category 
-                      ? 'bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white shadow-lg'
-                      : 'hover:border-[var(--accent-primary)] hover:shadow-md'
+                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
+                    selectedCategory === category ? 'shadow-lg' : 'hover:shadow-md'
                   }`}
                   style={{
-                    background: selectedCategory === category ? '' : 'var(--card-bg)',
+                    background: selectedCategory === category ? 
+                      'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' : 
+                      'var(--card-bg)',
                     border: `1px solid ${selectedCategory === category ? 'transparent' : 'var(--card-border)'}`,
                     color: selectedCategory === category ? 'white' : 'var(--text-primary)',
                     boxShadow: selectedCategory === category ? 
-                      '0 10px 20px rgba(var(--accent-primary-rgb), 0.2)' : 'none'
+                      '0 10px 25px rgba(var(--accent-primary-rgb), 0.2)' : ''
                   }}
                 >
                   {category}
@@ -146,191 +224,197 @@ const ToolsPage: React.FC = () => {
       </section>
 
       {/* Tools Grid */}
-      <section className="py-12 md:py-16 relative">
-        <div className="container mx-auto px-4">
+      <section ref={sectionRef} className="py-16 md:py-24 relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredTools.map((tool, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="group relative"
+                className={`rounded-2xl border shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl group relative overflow-hidden ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${idx + 1}`}
+                style={{
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  color: 'var(--text-primary)',
+                  boxShadow: '0 20px 40px rgba(var(--accent-primary-rgb), 0.08)'
+                }}
                 onMouseEnter={() => setHoveredTool(idx)}
                 onMouseLeave={() => setHoveredTool(null)}
               >
-                <div 
-                  className="rounded-2xl p-6 border transition-all duration-500 relative overflow-hidden h-full
-                    group-hover:shadow-[0_10px_25px_-5px_rgba(var(--accent-primary-rgb),0.3)]
-                    group-hover:border-[var(--accent-primary)]/40"
-                  style={{ 
-                    background: 'var(--card-bg)', 
-                    border: '1px solid var(--card-border)'
+                {/* Blue shine effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-2xl pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle at 30% 30%, rgba(var(--accent-primary-rgb), 0.12), transparent 70%)',
                   }}
-                >
-                  {/* Blue shine effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-2xl pointer-events-none"
-                    style={{
-                      background: 'radial-gradient(circle at 30% 30%, rgba(var(--accent-primary-rgb), 0.12), transparent 70%)',
-                    }}
-                  ></div>
-                  
-                  {/* Glare effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none">
-                    <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[toolGlare_2s_ease_forwards] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/25 to-transparent"></div>
-                  </div>
-                  
-                  {/* Top edge accent */}
-                  <div className="absolute top-0 left-[5%] right-[5%] h-[2px] bg-gradient-to-r from-transparent via-[var(--accent-primary)] to-transparent opacity-0 group-hover:opacity-40 transition-all duration-700"></div>
-                  
-                  <div className="flex items-center gap-4 mb-6 relative z-10">
-                    <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-500 
-                      bg-gradient-to-r ${tool.gradient} group-hover:scale-110 group-hover:shadow-lg`}
-                    >
-                      <tool.icon className="w-7 h-7 text-white" />
+                ></div>
+                
+                {/* Main glare effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none">
+                  <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[enhancedToolGlare_2s_ease_forwards] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/35 to-transparent"></div>
+                </div>
+                
+                {/* Secondary subtle glare effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none">
+                  <div className="absolute -inset-full h-[200%] w-[200%] rotate-[135deg] translate-x-[-100%] group-hover:animate-[subtleToolGlare_2.3s_ease_0.4s_forwards] bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
+                </div>
+                
+                {/* Edge highlight on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
+                  style={{ 
+                    boxShadow: `inset 0 0 0 1px rgba(var(--accent-primary-rgb), 0.25), 0 0 15px rgba(var(--accent-primary-rgb), 0.15)`,
+                  }}
+                ></div>
+                
+                {/* Content */}
+                <div className="p-6 relative z-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className={`w-16 h-16 bg-gradient-to-r ${tool.gradient} rounded-xl flex items-center justify-center magnetic-effect`}>
+                      <tool.icon className="w-8 h-8 text-white" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold group-hover:text-[var(--accent-primary)] transition-colors duration-300" 
                         style={{ color: 'var(--text-primary)' }}>
                         {tool.name}
                       </h3>
-                      <span className="text-sm px-3 py-1 rounded-full inline-block mt-1 transition-all duration-300 group-hover:bg-[var(--accent-primary)]/10" 
+                      <span className="text-sm px-3 py-1 rounded-full inline-block mt-1" 
                         style={{ 
-                          background: 'var(--glass-bg)', 
-                          color: 'var(--text-secondary)' 
+                          background: 'var(--bg-secondary)', 
+                          color: 'var(--text-secondary)',
+                          border: '1px solid var(--card-border)'
                         }}>
                         {tool.category}
                       </span>
                     </div>
                   </div>
 
-                  <p className="text-base mb-6" style={{ color: 'var(--text-secondary)' }}>
+                  <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     {tool.description}
                   </p>
+                  
+                  <div className="space-y-3 mb-6">
+                    <div>
+                      <h5 className="text-xs font-semibold mb-3" style={{ color: 'var(--accent-primary)' }}>KEY FEATURES</h5>
+                      <div className="space-y-2">
+                        {tool.features.map((feature, featureIndex) => (
+                          <div key={featureIndex} className="flex items-center text-xs" style={{ color: 'var(--text-secondary)' }}>
+                            <CheckCircle className="w-3 h-3 mr-2 flex-shrink-0" style={{ color: 'var(--accent-primary)' }} />
+                            {feature}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
 
-                  <div className="flex items-center justify-between mt-6 pt-4 border-t relative z-10" 
+                  <div className="flex items-center justify-between pt-4 border-t relative z-10" 
                     style={{ borderColor: 'var(--card-border)' }}>
                     <span className="text-sm font-medium bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] bg-clip-text text-transparent">
                       {tool.stats}
                     </span>
                     <Link
                       to={`/tools/${tool.name.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="flex items-center gap-2 text-sm font-medium relative group/button overflow-hidden px-4 py-2 rounded-lg"
-                      style={{ 
-                        background: 'var(--glass-bg)', 
-                        color: 'var(--accent-primary)' 
+                      className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 group-hover:scale-105"
+                      style={{
+                        background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                        color: 'var(--text-primary)'
                       }}
                     >
-                      <span className="relative z-10 transition-transform duration-300 group-hover/button:translate-x-1">Try Now</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover/button:translate-x-1 relative z-10" />
-                      <div className="absolute inset-0 opacity-0 group-hover/button:opacity-100 transition-opacity duration-300"
-                        style={{ 
-                          background: 'linear-gradient(to right, var(--accent-primary)/10, var(--accent-secondary)/10)' 
-                        }}
-                      ></div>
+                      Try Now
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="rounded-3xl p-10 relative overflow-hidden group transition-all duration-500 
-                hover:shadow-[0_20px_50px_-15px_rgba(var(--accent-primary-rgb),0.3)]"
-              style={{ 
-                background: 'var(--card-bg)',
-                border: '1px solid var(--card-border)'
+      <section className="py-16 md:py-24 relative" style={{ background: 'var(--bg-secondary)' }}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl p-10 border shadow-2xl backdrop-blur-md transform transition-all duration-500 hover:scale-[1.02] hover:shadow-3xl group relative overflow-hidden text-center"
+            style={{
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              color: 'var(--text-primary)',
+              boxShadow: '0 25px 50px rgba(var(--accent-primary-rgb), 0.12)'
+            }}
+          >
+            {/* Blue shine effect */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-2xl pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle at 50% 50%, rgba(var(--accent-primary-rgb), 0.1), transparent 70%)',
               }}
-            >
-              {/* Gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/5 to-[var(--accent-secondary)]/5 transition-opacity duration-500 opacity-40 group-hover:opacity-70"></div>
-              
-              {/* Blue shine effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-3xl pointer-events-none"
-                style={{
-                  background: 'radial-gradient(circle at 50% 50%, rgba(var(--accent-primary-rgb), 0.15), transparent 70%)',
-                }}
-              ></div>
-              
-              {/* Glare effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-3xl pointer-events-none">
-                <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[ctaToolGlare_2.5s_ease_forwards] bg-gradient-to-r from-transparent via-white/25 to-transparent"></div>
+            ></div>
+            
+            {/* Enhanced blue glare effect */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none">
+              <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[ctaToolEnhancedGlare_2.2s_ease_forwards] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/40 to-transparent"></div>
+            </div>
+            
+            {/* Second glare effect */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden rounded-2xl pointer-events-none"
+              style={{ animationDelay: "0.3s" }}>
+              <div className="absolute -inset-full h-[200%] w-[200%] rotate-[225deg] translate-y-[-100%] group-hover:animate-[secondaryToolGlare_2s_ease_0.6s_forwards] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/20 to-transparent"></div>
+            </div>
+            
+            {/* Edge highlight */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
+              style={{ 
+                boxShadow: `inset 0 0 0 1px rgba(var(--accent-primary-rgb), 0.2), 0 0 20px rgba(var(--accent-primary-rgb), 0.15)`,
+              }}
+            ></div>
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="w-20 h-20 rounded-2xl mx-auto mb-8 flex items-center justify-center"
+                style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}>
+                <Layers className="w-10 h-10 text-white" />
               </div>
-              
-              {/* Corner accents */}
-              <div className="absolute top-0 left-0 w-24 h-24 opacity-0 group-hover:opacity-20 transition-all duration-500" 
-                style={{ 
-                  background: 'linear-gradient(135deg, var(--accent-primary), transparent)',
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                }}>
-              </div>
-              
-              <div className="absolute bottom-0 right-0 w-24 h-24 opacity-0 group-hover:opacity-20 transition-all duration-500" 
-                style={{ 
-                  background: 'linear-gradient(315deg, var(--accent-secondary), transparent)',
-                  clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
-                }}>
-              </div>
-              
-              <div className="relative z-10">
-                <div className="w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform group-hover:rotate-12 transition-all duration-700"
-                  style={{ 
-                    background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' 
-                  }}
-                >
-                  <Code className="w-10 h-10 text-white" />
-                </div>
-                <h2 className="text-3xl font-bold mb-4 group-hover:text-[var(--accent-primary)] transition-colors duration-300" 
-                  style={{ color: 'var(--text-primary)' }}>
-                  Need a Custom Tool?
-                </h2>
-                <p className="text-lg mb-8 max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-                  We can build specialized tools tailored to your specific workflow and requirements.
-                  Our team of experts will work with you to create solutions that enhance your productivity.
-                </p>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+                Need a Custom Tool Solution?
+              </h2>
+              <p className="text-lg max-w-2xl mx-auto mb-8" style={{ color: 'var(--text-secondary)' }}>
+                We can build specialized tools tailored to your specific workflow and requirements.
+                Let's create a solution that perfectly fits your development needs.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
-                  className="px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg relative overflow-hidden group/btn"
+                  className="group px-8 py-4 rounded-full font-semibold text-base flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
                   style={{
                     background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                    color: 'white',
-                    boxShadow: '0 10px 20px rgba(var(--accent-primary-rgb), 0.2)'
+                    color: 'var(--text-primary)',
+                    boxShadow: '0 10px 30px rgba(var(--accent-primary-rgb), 0.3)'
                   }}
                   onClick={() => window.location.href = '/contact'}
                 >
-                  <span className="relative z-10 flex items-center gap-2">
-                    Contact Us
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                  </span>
-                  <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
-                    style={{
-                      background: 'linear-gradient(135deg, var(--accent-secondary), var(--accent-primary))',
-                    }}
-                  ></div>
+                  <span>Contact Our Team</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <button
+                  className="px-8 py-4 rounded-full font-semibold text-base border-2 transform hover:scale-105 transition-all duration-300 hover:bg-[var(--accent-primary)] hover:text-white"
+                  style={{
+                    borderColor: 'var(--accent-primary)',
+                    color: 'var(--text-primary)',
+                    background: 'transparent'
+                  }}
+                  onClick={() => window.location.href = '/services'}
+                >
+                  Explore Services
                 </button>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
       
       {/* Keyframe animations */}
       <style jsx>{`
-        @keyframes toolGlare {
+        @keyframes enhancedToolGlare {
           0% {
             transform: translateX(-100%) rotate(45deg);
-            opacity: 0;
+            opacity: 0.1;
           }
-          20% {
+          25% {
             opacity: 0.6;
           }
           100% {
@@ -339,18 +423,102 @@ const ToolsPage: React.FC = () => {
           }
         }
         
-        @keyframes ctaToolGlare {
+        @keyframes subtleToolGlare {
+          0% {
+            transform: translateX(-100%) rotate(135deg);
+            opacity: 0;
+          }
+          50% {
+            opacity: 0.4;
+          }
+          100% {
+            transform: translateX(100%) rotate(135deg);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes ctaToolEnhancedGlare {
           0% {
             transform: translateX(-100%) rotate(45deg);
             opacity: 0;
           }
           30% {
-            opacity: 0.7;
+            opacity: 0.8;
           }
           100% {
             transform: translateX(100%) rotate(45deg);
             opacity: 0;
           }
+        }
+        
+        @keyframes secondaryToolGlare {
+          0% {
+            transform: translateY(-100%) rotate(225deg);
+            opacity: 0;
+          }
+          40% {
+            opacity: 0.5;
+          }
+          100% {
+            transform: translateY(100%) rotate(225deg);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes float {
+          0% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+          100% {
+            transform: translateY(0px);
+          }
+        }
+        
+        .stagger-animation {
+          animation: fadeInUp 0.6s ease forwards;
+          opacity: 0;
+        }
+        
+        .stagger-1 {
+          animation-delay: 0.1s;
+        }
+        .stagger-2 {
+          animation-delay: 0.2s;
+        }
+        .stagger-3 {
+          animation-delay: 0.3s;
+        }
+        .stagger-4 {
+          animation-delay: 0.4s;
+        }
+        .stagger-5 {
+          animation-delay: 0.5s;
+        }
+        .stagger-6 {
+          animation-delay: 0.6s;
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        .magnetic-effect:hover {
+          transform: scale(1.1);
+          transition: transform 0.3s ease;
         }
       `}</style>
     </div>

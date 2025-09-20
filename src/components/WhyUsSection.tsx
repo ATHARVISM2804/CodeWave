@@ -237,7 +237,7 @@ const WhyUsSection: React.FC = () => {
                   >
                     <div className="group h-full">
                       <div
-                        className="backdrop-blur-md border rounded-xl p-6 h-full flex flex-col items-center transition-all duration-300"
+                        className="backdrop-blur-md border rounded-xl p-6 h-full flex flex-col items-center text-center transition-all duration-300"
                         style={{
                           background: hoverIndex === index
                             ? 'linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.15), rgba(var(--accent-secondary-rgb), 0.05))'
@@ -261,18 +261,18 @@ const WhyUsSection: React.FC = () => {
                           <feature.icon className="w-7 h-7" style={{ color: 'var(--text-primary)' }} />
                         </div>
                         <h3
-                          className="text-lg font-bold mb-2 transition-colors duration-300"
+                          className="text-lg font-bold mb-2 transition-colors duration-300 text-center"
                           style={{ color: 'var(--accent-primary)' }}
                         >
                           {feature.title}
                         </h3>
-                        <p className="text-sm leading-relaxed flex-grow" style={{ color: 'var(--text-secondary)' }}>
+                        <p className="text-sm leading-relaxed flex-grow text-center" style={{ color: 'var(--text-secondary)' }}>
                           {feature.description}
                         </p>
 
-                        {/* Animated underline */}
+                        {/* Animated underline - centered */}
                         <div
-                          className="h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 mt-4 rounded-full transition-all duration-300"
+                          className="h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 mt-4 rounded-full transition-all duration-300 mx-auto"
                           style={{ width: hoverIndex === index ? '100%' : '30%' }}
                         ></div>
                       </div>
