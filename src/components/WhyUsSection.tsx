@@ -128,10 +128,11 @@ const WhyUsSection: React.FC = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <h2
-            className="text-3xl md:text-5xl mb-2 font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"
-          >
-            Why CodeWave.it?
+          <h2 className="text-4xl md:text-5xl mb-2 font-extrabold tracking-tight">
+            <span style={{ color: 'var(--text-primary)' }}>Why</span>{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+              CodeWave.it?
+            </span>
           </h2>
           {/* Underline */}
           <div className="w-24 h-1 mx-auto mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />

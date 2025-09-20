@@ -91,7 +91,7 @@ const PortfolioSection: React.FC = () => {
           className="text-center mb-16"
         >
           {/* Badge */}
-          <div className="flex items-center justify-center gap-2 mb-3">
+          <div className="flex items-center justify-center gap-2 mb-5">
             <span className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs shadow-lg"
               style={{
                 borderColor: 'var(--accent-primary)',
@@ -101,15 +101,20 @@ const PortfolioSection: React.FC = () => {
               <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Our Work</span>
             </span>
           </div>
-          <div className="flex items-center justify-center gap-3 mb-2">
-            
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
-              Our Portfolio
+
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <h2 className="text-3xl md:text-6xl font-extrabold tracking-tight">
+              <span style={{ color: 'var(--text-primary)' }}>Our</span>{' '}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+                Portfolio
+              </span>
             </h2>
           </div>
+          
           {/* Underline */}
-          <div className="w-24 h-1 mx-auto rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
-          <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+          <div className="w-24 h-1 mx-auto rounded-full mb-6 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
+          
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-6" style={{ color: 'var(--text-secondary)' }}>
             Intelligence-driven solutions that transform how businesses work and connect.
           </p>
         </motion.div>
