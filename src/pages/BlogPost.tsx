@@ -252,21 +252,6 @@ const BlogPost: React.FC = () => {
                 }}
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
-              
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 mt-12 pt-8 border-t" 
-                style={{ borderColor: 'var(--card-border)' }}>
-                <button className="flex items-center gap-2 px-4 py-2 rounded-full border transition-colors duration-300 hover:scale-105"
-                  style={{ borderColor: 'var(--card-border)', color: 'var(--text-primary)' }}>
-                  <Share2 className="w-4 h-4" />
-                  Share
-                </button>
-                <button className="flex items-center gap-2 px-4 py-2 rounded-full border transition-colors duration-300 hover:scale-105"
-                  style={{ borderColor: 'var(--card-border)', color: 'var(--text-primary)' }}>
-                  <BookmarkPlus className="w-4 h-4" />
-                  Save
-                </button>
-              </div>
             </div>
           </motion.div>
 
@@ -278,6 +263,26 @@ const BlogPost: React.FC = () => {
             className="lg:col-span-1"
           >
             <div className="sticky top-24 space-y-8">
+              {/* About the Author */}
+              <div className="rounded-2xl p-6 shadow-lg"
+                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+                  About the Author
+                </h3>
+                <div className="flex items-center space-x-4 mb-4">
+                  <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                    <User className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>Shivam Jand</h4>
+                    <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Senior Developer</p>
+                  </div>
+                </div>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  Passionate about creating intelligent software solutions and sharing knowledge with the developer community.
+                </p>
+              </div>
+              
               {/* Newsletter Signup */}
               <div className="rounded-2xl p-6 shadow-lg"
                 style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>

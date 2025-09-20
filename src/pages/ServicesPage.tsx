@@ -279,7 +279,7 @@ const ServicesPage: React.FC = () => {
                       borderColor: 'var(--accent-primary)',
                       color: 'var(--text-primary)',
                       background: 'transparent'
-                    }}>
+                    }}onClick={() => window.location.href = '/tools'}>
                     View Our Work
                   </button>
                 </div>
@@ -674,7 +674,7 @@ const ServicesPage: React.FC = () => {
                 style={{
                   borderColor: 'var(--accent-primary)',
                   color: 'var(--text-primary)'
-                }}>
+                }} onClick={() => window.location.href = '/tools'}>
                 View Our Portfolio
               </button>
             </div>

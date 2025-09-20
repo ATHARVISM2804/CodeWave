@@ -129,8 +129,8 @@ const ContactPage: React.FC = () => {
   const officeInfo = [
     {
       icon: MapPin,
-      title: 'Headquarters',
-      details: ['123 Innovation Drive', 'Tech Valley, CA 94025', 'United States']
+      title: 'Service Locations',
+      details: ['Worldwide Service Coverage', 'Serving Clients Across the Globe']
     },
     {
       icon: Clock,
@@ -258,13 +258,18 @@ const ContactPage: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
             <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}
-              style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
+              style={{ 
+                background: 'var(--card-bg)', 
+                border: '2px solid var(--card-border)', 
+                boxShadow: '0 0 0 1px rgba(var(--accent-primary-rgb), 0.2), 0 8px 20px rgba(var(--accent-primary-rgb), 0.15)', 
+                color: 'var(--text-primary)' 
+              }}>
               <h3 className="text-3xl font-bold mb-8 neon-glow" style={{ color: 'var(--text-primary)' }}>Tell Us About Your Vision</h3>
               
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ color: 'var(--text-primary)' }}>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Name *</label>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Name *</label>
                     <input
                       type="text"
                       name="name"
@@ -272,12 +277,19 @@ const ContactPage: React.FC = () => {
                       onChange={handleInputChange}
                       placeholder="Your full name"
                       className="w-full input-premium"
+                      style={{
+                        border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                        background: 'var(--bg-secondary)',
+                        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                        padding: '0.75rem',
+                        borderRadius: '0.5rem'
+                      }}
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Email *</label>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Email *</label>
                     <input
                       type="email"
                       name="email"
@@ -285,13 +297,20 @@ const ContactPage: React.FC = () => {
                       onChange={handleInputChange}
                       placeholder="your@email.com"
                       className="w-full input-premium"
+                      style={{
+                        border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                        background: 'var(--bg-secondary)',
+                        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                        padding: '0.75rem',
+                        borderRadius: '0.5rem'
+                      }}
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Company/Organization</label>
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Company/Organization</label>
                   <input
                     type="text"
                     name="company"
@@ -299,17 +318,32 @@ const ContactPage: React.FC = () => {
                     onChange={handleInputChange}
                     placeholder="Your company name"
                     className="w-full input-premium"
+                    style={{
+                      border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                      background: 'var(--bg-secondary)',
+                      boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                      padding: '0.75rem',
+                      borderRadius: '0.5rem'
+                    }}
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Service Needed</label>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Service Needed</label>
                     <select
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
                       className="w-full input-premium"
+                      style={{
+                        border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                        background: 'var(--bg-secondary)',
+                        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                        padding: '0.75rem',
+                        borderRadius: '0.5rem',
+                        appearance: 'auto'
+                      }}
                     >
                       <option value="">Select service</option>
                       <option value="web">Web Development</option>
@@ -323,12 +357,20 @@ const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Budget Range</label>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Budget Range</label>
                     <select
                       name="budget"
                       value={formData.budget}
                       onChange={handleInputChange}
                       className="w-full input-premium"
+                      style={{
+                        border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                        background: 'var(--bg-secondary)',
+                        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                        padding: '0.75rem',
+                        borderRadius: '0.5rem',
+                        appearance: 'auto'
+                      }}
                     >
                       <option value="">Select budget</option>
                       <option value="10k-25k">$10k - $25k</option>
@@ -341,12 +383,20 @@ const ContactPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Timeline</label>
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Timeline</label>
                   <select
                     name="timeline"
                     value={formData.timeline}
                     onChange={handleInputChange}
                     className="w-full input-premium"
+                    style={{
+                      border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                      background: 'var(--bg-secondary)',
+                      boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                      padding: '0.75rem',
+                      borderRadius: '0.5rem',
+                      appearance: 'auto'
+                    }}
                   >
                     <option value="">Select timeline</option>
                     <option value="asap">ASAP</option>
@@ -358,7 +408,7 @@ const ContactPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Project Details *</label>
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Project Details *</label>
                   <textarea
                     name="message"
                     value={formData.message}
@@ -366,6 +416,13 @@ const ContactPage: React.FC = () => {
                     rows={6}
                     placeholder="Tell us about your project, goals, and any specific requirements..."
                     className="w-full input-premium resize-none"
+                    style={{
+                      border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                      background: 'var(--bg-secondary)',
+                      boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                      padding: '0.75rem',
+                      borderRadius: '0.5rem'
+                    }}
                     required
                   ></textarea>
                 </div>

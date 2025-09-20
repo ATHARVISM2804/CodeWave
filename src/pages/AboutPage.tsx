@@ -182,7 +182,7 @@ const AboutPage: React.FC = () => {
                   boxShadow: '0 10px 30px rgba(var(--accent-primary-rgb), 0.3)'
                 }}
               >
-                Our Mission
+                Partner With Us
               </button>
               <button
                 className="px-8 py-4 rounded-full font-semibold text-lg border-2 transition-all duration-300 hover:scale-105 hover:shadow-2xl backdrop-blur-sm"
@@ -193,7 +193,7 @@ const AboutPage: React.FC = () => {
                 }}
                 onClick={() => window.location.href = '/contact'}
               >
-                See Our Work
+                See The Impact
               </button>
             </div>
           </div>
@@ -207,7 +207,7 @@ const AboutPage: React.FC = () => {
           className={`container mx-auto px-4 sm:px-8 lg:px-16 transition-all duration-1000 ${missionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <h2 className="text-center text-3xl font-extrabold mb-4 tracking-tight" style={{ color: 'var(--text-primary)' }}>
-            OUR MISSION & VISION
+            Driving Innovation: Our Pursuit & Purpose
           </h2>
           <div className="w-24 h-1 mx-auto mb-12 rounded-full" style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))' }} />
           
