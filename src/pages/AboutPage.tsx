@@ -201,7 +201,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="py-16 md:py-24" style={{ background: 'var(--bg-primary)' }}>
+      <section className="py-16 md:py-24">
         <div
           ref={missionVisionRef}
           className={`container mx-auto px-4 sm:px-8 lg:px-16 transition-all duration-1000 ${missionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
@@ -238,7 +238,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* What We Value Section */}
-      <section className="py-16 md:py-24" style={{ background: 'var(--bg-secondary)' }}>
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-8 lg:px-16">
           <h2 className="text-center text-3xl font-extrabold mb-4 tracking-tight" style={{ color: 'var(--text-primary)' }}>What We Value</h2>
           <div className="w-24 h-1 mx-auto mb-12 rounded-full" style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))' }} />
@@ -276,7 +276,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Industries We Serve Section */}
-      <section className="py-16 md:py-24" style={{ background: 'var(--bg-primary)' }}>
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-8 lg:px-16">
           <h2 className="text-center text-3xl font-extrabold mb-4 tracking-tight" style={{ color: 'var(--text-primary)' }}>Industries We Serve</h2>
           <div className="w-24 h-1 mx-auto mb-12 rounded-full" style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))' }} />
@@ -314,7 +314,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Technologies We Work With Section */}
-      <section className="py-20 md:py-28 relative" style={{ background: 'var(--bg-secondary)' }}>
+      <section className="py-20 md:py-28 relative">
         <div className="container mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
           <div className="flex flex-col items-center mb-12">
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-center mb-4" style={{ color: 'var(--text-primary)' }}>

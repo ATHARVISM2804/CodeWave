@@ -40,9 +40,6 @@ const HeroSection: React.FC = () => {
   return (
     <section
       className="relative min-h-[90vh] px-4 sm:px-6 lg:px-8 flex items-center justify-center md:pt-20"
-      style={{ 
-        background: 'var(--bg-secondary)' // Match AboutPage background
-      }}
     >
 
       {/* Background Elements - Updated gradients */}

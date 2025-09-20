@@ -13,7 +13,7 @@ const MovingData: React.FC<{ speed?: number }> = ({ speed = 30 }) => {
 	const duration = `${Math.max(12, speed)}s`;
 
 	return (
-		<section aria-label="Company statistics" className="py-10" style={{ background: 'var(--bg-primary)' }}>
+		<section aria-label="Company statistics" className="py-10">
 			{/* Remove the fixed height bg-red-500 container that's causing clipping */}
 			<div className="container mx-auto px-4 sm:px-6 lg:px-20">
 				<div

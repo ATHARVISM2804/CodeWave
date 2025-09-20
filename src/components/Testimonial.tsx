@@ -43,7 +43,7 @@ const Testimonial = () => {
   };
 
   return (
-    <section className="py-24 relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
+    <section className="py-24 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div 

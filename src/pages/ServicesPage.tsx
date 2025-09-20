@@ -171,9 +171,9 @@ const ServicesPage: React.FC = () => {
   ];
 
   return (
-    <div style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+    <div style={{ color: 'var(--text-primary)' }}>
       {/* Hero Section */}
-      <section className="pt-16 py-12 md:py-20 relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
+      <section className="pt-16 py-12 md:py-20 relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 opacity-15 rounded-full blur-3xl" style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}></div>
@@ -389,7 +389,7 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Main Services */}
-      <section ref={sectionRef} className="py-12 md:py-16 relative" style={{ background: 'var(--bg-primary)' }}>
+      <section ref={sectionRef} className="py-12 md:py-16 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
@@ -483,7 +483,7 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Additional Services */}
-      <section className="py-12 md:py-16 relative" style={{ background: 'var(--bg-secondary)' }}>
+      <section className="py-12 md:py-16 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className={`text-2xl sm:text-3xl font-bold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
@@ -545,7 +545,7 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-12 md:py-16 relative" style={{ background: 'var(--bg-primary)' }}>
+      <section className="py-12 md:py-16 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
@@ -616,7 +616,7 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 md:py-16 relative" style={{ background: 'var(--bg-secondary)' }}>
+      <section className="py-12 md:py-16 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-2xl p-8 border shadow-2xl backdrop-blur-md transform transition-all duration-500 hover:scale-[1.02] hover:shadow-3xl group relative overflow-hidden text-center"
             style={{

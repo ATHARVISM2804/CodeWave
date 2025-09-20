@@ -92,12 +92,24 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
-        <div
-          className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}  style={{ background: 'var(--bg-primary)' }}  >
+        <div className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}>
+          {/* Fixed background div that stays within viewport */}
+          <div
+            className="fixed top-0 left-0 w-full h-screen -z-10"
+            style={{ 
+              background: theme === 'light' 
+                ? 'radial-gradient(circle at center, #ffffff 0%, #e2e2e2 40%, #d1d1d1 100%), linear-gradient(45deg, #f5f5f5 25%, #e8e8e8 50%, #f5f5f5 75%)' 
+                : 'var(--bg-primary)',
+              backgroundBlendMode: theme === 'light' ? 'soft-light' : 'normal'
+            }}
+          />
+          
           <MouseFollower />
           <Chatbot open={chatbotOpen} onClose={() => setChatbotOpen(false)} />
           <Header />
-          <BgAnimation intensity="high" className="opacity-100" />
+          {theme === 'dark' && (
+            <BgAnimation intensity="high" className="opacity-100" />
+          )}
           <ScrollToTop />
           {isLoading ? (
             <LoadingAnimation duration={500} onComplete={handleLoadingComplete} />

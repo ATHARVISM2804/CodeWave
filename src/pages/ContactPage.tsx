@@ -191,7 +191,7 @@ const ContactPage: React.FC = () => {
     <div
       className="pt-12"
       style={{
-        background: 'var(--bg-secondary)',
+        // background: 'var(--bg-secondary)',
         color: 'var(--text-primary)',
         fontSize: '0.97rem', // Slightly scale down font size
         letterSpacing: '0.01em'
