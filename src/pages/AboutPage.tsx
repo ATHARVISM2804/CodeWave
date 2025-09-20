@@ -180,7 +180,7 @@ const AboutPage: React.FC = () => {
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                   color: 'white',
                   boxShadow: '0 10px 30px rgba(var(--accent-primary-rgb), 0.3)'
-                }}
+                }} onClick={() => window.location.href = '/contact'}
               >
                 Partner With Us
               </button>
