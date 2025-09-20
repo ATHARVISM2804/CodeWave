@@ -321,18 +321,10 @@ const ContactSection: React.FC = () => {
                 {isSubmitting ? 'Sending...' : 'Send Message →'}
               </button>
 
-              {/* submission result */}
-              {submitResult && (
-                <div className="mt-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  {submitResult}
-                </div>
-              )}
-            </form>
-
-            <div className="mt-8 pt-8 border-t border-white/10">
+              <div className="mt-8 pt-8 border-t border-white/10">
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-lg font-semibold mb-2">Meet your design partners</h4>
+                  <h4 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Meet your design partners</h4>
                   <div className="flex -space-x-3">
                     {teamMembers.map((avatar, index) => (
                       <div
@@ -345,22 +337,30 @@ const ContactSection: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="text-right text-sm text-gray-400">
+                <div className="text-right text-sm" style={{ color: 'var(--text-primary)' }}>
                   <p>We respond within 24 hours on business days</p>
                   <p className="mt-1">Your data is secure and never shared.</p>
                 </div>
               </div>
 
               <div className="mt-6 space-y-2">
-                <h5 className="font-semibold mb-3">Why clients choose us</h5>
+                <h5 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Why clients choose us</h5>
                 {whyChooseUs.map((reason, index) => (
-                  <div key={index} className="flex items-center text-sm text-gray-300">
+                  <div key={index} className="flex items-center text-sm" style={{ color: 'var(--text-secondary)' }}>
                     <div className="w-2 h-2 bg-[#ff6a3d] rounded-full mr-3"></div>
                     {reason}
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* submission result - making it more visible */}
+            {submitResult && (
+              <div className="mt-3 text-sm font-medium" style={{ color: 'var(--accent-primary)' }}>
+                {submitResult}
+              </div>
+            )}
+            </form>
           </div>
         </div>
       </div>
