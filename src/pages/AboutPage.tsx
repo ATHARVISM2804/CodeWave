@@ -317,14 +317,9 @@ const AboutPage: React.FC = () => {
       <section className="py-20 md:py-28 relative" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
           <div className="flex flex-col items-center mb-12">
-            <div className="flex items-center gap-3 justify-center mb-4">
-              <svg className="w-8 h-8 animate-pulse" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" style={{ color: 'var(--accent-primary)' }}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16.88 3.549A9 9 0 1021 12.001M19.07 4.93A9 9 0 0112 21a9 9 0 01-7.07-16.07" />
-              </svg>
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-center bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] select-none">
-                Technologies We Work With
-              </h2>
-            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-center mb-4" style={{ color: 'var(--text-primary)' }}>
+              Technologies We Work With
+            </h2>
             <div className="w-32 h-1 mx-auto mb-6 rounded-full" style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))' }} />
             <p className="text-center text-lg max-w-2xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               Modern tools for modern problems. We stay current with the latest tech to deliver high-performing, scalable, and secure digital solutions.
