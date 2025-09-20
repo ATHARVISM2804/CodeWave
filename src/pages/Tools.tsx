@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Bot, Brain, Code, Database, Terminal, Zap, Sparkles, CheckCircle, Layers } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Bot, Brain, Code, Database, Terminal, Zap, Sparkles, CheckCircle, Layers, X, Clock } from 'lucide-react';
 
 const tools = [
 	{
@@ -100,7 +99,10 @@ const ToolsPage: React.FC = () => {
 	const [selectedCategory, setSelectedCategory] = useState('All');
 	const [hoveredTool, setHoveredTool] = useState<number | null>(null);
 	const [isVisible, setIsVisible] = useState(false);
+	const [showModal, setShowModal] = useState(false);
+	const [selectedTool, setSelectedTool] = useState<string | null>(null);
 	const sectionRef = useRef<HTMLElement>(null);
+	const modalRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
@@ -118,6 +120,48 @@ const ToolsPage: React.FC = () => {
 
 		return () => observer.disconnect();
 	}, []);
+
+	useEffect(() => {
+		// Close modal when clicking outside
+		const handleClickOutside = (event: MouseEvent) => {
+			if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+				setShowModal(false);
+			}
+		};
+
+		if (showModal) {
+			document.addEventListener('mousedown', handleClickOutside);
+		} else {
+			document.removeEventListener('mousedown', handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [showModal]);
+
+	// Handle escape key to close modal
+	useEffect(() => {
+		const handleEscKey = (event: KeyboardEvent) => {
+			if (event.key === 'Escape') {
+				setShowModal(false);
+			}
+		};
+
+		if (showModal) {
+			document.addEventListener('keydown', handleEscKey);
+		}
+
+		return () => {
+			document.removeEventListener('keydown', handleEscKey);
+		};
+	}, [showModal]);
+
+	const handleTryNowClick = (toolName: string, e: React.MouseEvent) => {
+		e.preventDefault();
+		setSelectedTool(toolName);
+		setShowModal(true);
+	};
 
 	const filteredTools =
 		selectedCategory === 'All'
@@ -483,10 +527,8 @@ const ToolsPage: React.FC = () => {
 										>
 											{tool.stats}
 										</span>
-										<Link
-											to={`/tools/${tool.name
-												.toLowerCase()
-												.replace(/\s+/g, '-')}`}
+										<button
+											onClick={(e) => handleTryNowClick(tool.name, e)}
 											className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 group-hover:scale-105"
 											style={{
 												background:
@@ -496,7 +538,7 @@ const ToolsPage: React.FC = () => {
 										>
 											Try Now
 											<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-										</Link>
+										</button>
 									</div>
 								</div>
 							</div>
@@ -606,6 +648,121 @@ const ToolsPage: React.FC = () => {
 					</div>
 				</div>
 			</section>
+
+			{/* Coming Soon Modal */}
+			<AnimatePresence>
+				{showModal && (
+					<>
+						{/* Modal Backdrop */}
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.2 }}
+							className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+						>
+							{/* Modal Content */}
+							<motion.div
+								ref={modalRef}
+								initial={{ scale: 0.9, opacity: 0, y: 20 }}
+								animate={{ scale: 1, opacity: 1, y: 0 }}
+								exit={{ scale: 0.9, opacity: 0, y: 20 }}
+								transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+								className="relative w-full max-w-md rounded-2xl shadow-2xl overflow-hidden"
+								style={{
+									background: 'var(--card-bg)',
+									border: '1px solid var(--card-border)',
+									boxShadow: '0 25px 50px rgba(var(--accent-primary-rgb), 0.2)',
+								}}
+							>
+								{/* Glowing background effect */}
+								<div
+									className="absolute inset-0 pointer-events-none"
+									style={{
+										background:
+											'radial-gradient(circle at center, rgba(var(--accent-primary-rgb), 0.1), transparent 70%)',
+									}}
+								></div>
+
+								{/* Animated border glow */}
+								<div
+									className="absolute inset-0 opacity-70 pointer-events-none"
+									style={{
+										boxShadow: 'inset 0 0 0 1px rgba(var(--accent-primary-rgb), 0.3)',
+										borderRadius: 'inherit',
+									}}
+								></div>
+
+								{/* Close button */}
+								<button
+									type="button"
+									onClick={() => setShowModal(false)}
+									className="absolute top-4 right-4 z-10 p-2 rounded-full transition-all hover:bg-black/10"
+									style={{
+										color: 'var(--text-primary)',
+									}}
+									aria-label="Close"
+								>
+									<X className="w-5 h-5" />
+								</button>
+
+								<div className="p-8 text-center relative z-10">
+									{/* Icon */}
+									<div className="mx-auto mb-6 w-16 h-16 rounded-full flex items-center justify-center"
+										style={{
+											background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+											boxShadow: '0 10px 25px rgba(var(--accent-primary-rgb), 0.3)',
+										}}
+									>
+										<Clock className="w-8 h-8 text-white" />
+									</div>
+
+									{/* Content */}
+									<h3
+										className="text-2xl font-bold mb-2"
+										style={{ color: 'var(--text-primary)' }}
+									>
+										Coming Soon!
+									</h3>
+									<p
+										className="mb-6"
+										style={{ color: 'var(--text-secondary)' }}
+									>
+										{selectedTool} will be available soon.
+									</p>
+
+									{/* Progress bar */}
+									<div
+										className="w-full h-2 rounded-full mb-8"
+										style={{ background: 'var(--bg-secondary)' }}
+									>
+										<div
+											className="h-full rounded-full animate-pulse"
+											style={{
+												width: '75%',
+												background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))',
+											}}
+										></div>
+									</div>
+
+									{/* Action button */}
+									<button
+										onClick={() => setShowModal(false)}
+										className="w-full py-3 rounded-full font-medium transition-all hover:opacity-90"
+										style={{
+											background: 'var(--bg-secondary)',
+											color: 'var(--text-primary)',
+											border: '1px solid var(--card-border)',
+										}}
+									>
+										Back to Tools
+									</button>
+								</div>
+							</motion.div>
+						</motion.div>
+					</>
+				)}
+			</AnimatePresence>
 
 			{/* Keyframe animations */}
 			<style jsx>{`
@@ -726,3 +883,6 @@ const ToolsPage: React.FC = () => {
 };
 
 export default ToolsPage;
+
+
+
