@@ -1,4 +1,4 @@
-  import { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Quote } from 'lucide-react';
 
@@ -57,8 +57,11 @@ const Testimonial = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
-          <h2 className="text-3xl sm:text-5xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
-            What Our Clients Say
+          <h2 className="text-3xl sm:text-5xl font-bold mb-6">
+            <span style={{ color: 'var(--text-primary)' }}>What Our</span>{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+              Clients Say
+            </span>
           </h2>
           <div className="w-32 h-1 mx-auto rounded-full" 
             style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))' }} 

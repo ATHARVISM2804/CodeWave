@@ -143,9 +143,12 @@ const ContactSection: React.FC = () => {
             </span>
           </div>
           <div
-            className="inline-block text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"
+            className="inline-block text-5xl font-bold mb-2"
           >
-            CONTACT US
+            <span style={{ color: 'var(--text-primary)' }}>CONTACT</span>{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+              US
+            </span>
           </div>
           {/* Underline */}
           <div className="w-24 h-1 mx-auto mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />

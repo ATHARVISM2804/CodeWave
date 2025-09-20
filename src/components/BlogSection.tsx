@@ -93,7 +93,7 @@ const BlogSection: React.FC = () => {
           className="text-center mb-16"
         >
           {/* Badge */}
-          <div className="flex items-center justify-center gap-2 mb-3">
+          <div className="flex items-center justify-center gap-2 mb-4">
             <span className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs shadow-lg"
               style={{
                 borderColor: 'var(--accent-primary)',
@@ -103,14 +103,17 @@ const BlogSection: React.FC = () => {
               <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Blog</span>
             </span>
           </div>
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
-              Insights & Ideas
+          <div className="flex items-center justify-center mb-4">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+              <span style={{ color: 'var(--text-primary)' }}>Insights</span>{' '}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+                & Ideas
+              </span>
             </h2>
           </div>
           {/* Underline */}
-          <div className="w-24 h-1 mx-auto rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
-          <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+          <div className="w-24 h-1 mx-auto mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
+          <p className="text-lg sm:text-xl max-w-3xl mx-auto mt-4" style={{ color: 'var(--text-secondary)' }}>
             Fresh perspectives on technology, design, and digital transformation from our team.
           </p>
         </motion.div>

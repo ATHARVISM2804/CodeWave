@@ -96,11 +96,14 @@ const Industries: React.FC = () => {
             </span>
           </div>
           <div
-            className={`inline-block text-4xl md:text-5xl font-bold mb-2 transition-all duration-700 ease-out ${
+            className={`inline-block text-4xl md:text-6xl font-bold mb-2 transition-all duration-700 ease-out ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            } bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]`}
+            }`}
           >
-            Industries We Serve
+            <span style={{ color: 'var(--text-primary)' }}>Industries</span>{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+              We Serve
+            </span>
           </div>
           {/* Underline */}
           <div className="w-24 h-1 mx-auto mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
