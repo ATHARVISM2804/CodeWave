@@ -28,13 +28,13 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Responsive cylinder and image sizes
-  const cylinderWidth: number = isScreenSizeSm ? 600 : 1800;
+  // Responsive cylinder and image sizes - increased for better mobile appearance
+  const cylinderWidth: number = isScreenSizeSm ? 800 : 1800; // Increased from 600 to 800 for mobile
   const faceCount: number = galleryImages.length;
-  const faceWidth: number = isScreenSizeSm ? 120 : (cylinderWidth / faceCount) * 1.5;
+  const faceWidth: number = isScreenSizeSm ? 140 : (cylinderWidth / faceCount) * 1.5; // Increased from 120 to 140
   const radius: number = cylinderWidth / (2 * Math.PI);
-  const imageWidth = isScreenSizeSm ? 90 : 220;
-  const imageHeight = isScreenSizeSm ? 50 : 100;
+  const imageWidth = isScreenSizeSm ? 110 : 220; // Increased from 90 to 110 for mobile
+  const imageHeight = isScreenSizeSm ? 70 : 100; // Increased from 50 to 70 for mobile
   const imagePadding = isScreenSizeSm ? '4%' : '6%';
 
   const dragFactor: number = 0.05;
@@ -152,17 +152,16 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
 
   return (
     <section
-      className="relative py-16 px-4 flex flex-col items-center justify-start"
-      // style={{ background: 'var(--bg-primary)' }}
+      className="relative py-12 sm:py-16 px-4 flex flex-col items-center justify-start overflow-hidden"
     >
       {/* Decorative background gradient */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-40 opacity-10 rounded-full blur-3xl"
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full sm:w-[600px] h-40 opacity-10 rounded-full blur-3xl"
           style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))' }}></div>
       </div>
 
       {/* Badge */}
-      <div className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs shadow-lg mb-4"
+      <div className="flex items-center gap-2 px-4 py-2 rounded-full border text-sm shadow-lg mb-4"
         style={{
           borderColor: 'var(--accent-primary)',
           background: 'var(--card-bg)',
@@ -171,18 +170,25 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
         <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Tech Stack</span>
       </div>
 
-      {/* Heading */}
-      <h2 className="text-2xl sm:text-4xl md:text-5xl text-center font-extrabold tracking-tight mb-3 bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
-        Technologies We Use
+      {/* Enhanced Heading with two different colors - Increased size */}
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center font-extrabold tracking-tight mb-3 px-2 leading-tight">
+        <span style={{ color: 'var(--text-primary)' }}>Technologies</span>{' '}
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+          We Use
+        </span>
       </h2>
-      {/* Underline */}
-      <div className="w-24 h-1 mx-auto mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
-      {/* Subheading */}
-      <p className="text-base md:text-lg text-center mb-8" style={{ color: 'var(--text-secondary)' }}>
+      
+      {/* Underline - made slightly bigger */}
+      <div className="w-20 sm:w-28 h-1.5 mx-auto mb-5 sm:mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
+      
+      {/* Subheading - larger text */}
+      <p className="text-base sm:text-lg md:text-xl text-center mb-8 sm:mb-10 max-w-sm sm:max-w-md md:max-w-2xl mx-auto px-2" 
+         style={{ color: 'var(--text-secondary)' }}>
         Our solutions are built on the most modern, scalable, and robust technologies in the industry.
       </p>
 
-      <div className="flex items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">
+      {/* Improved gallery container with better mobile handling - taller container */}
+      <div className="w-full flex items-center justify-center [perspective:1200px] [transform-style:preserve-3d]">
         <motion.div
           drag="x"
           dragElastic={0}
@@ -198,7 +204,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
             width: cylinderWidth,
             transformStyle: 'preserve-3d'
           }}
-          className="flex h-[200px] sm:min-h-[300px] cursor-grab items-center justify-center [transform-style:preserve-3d]"
+          className="flex h-[180px] xs:h-[200px] sm:h-[220px] md:min-h-[250px] lg:min-h-[300px] cursor-grab items-center justify-center [transform-style:preserve-3d]"
         >
           {galleryImages.map((url, i) => {
             const blurTransform = createBlurTransform(i);
@@ -207,7 +213,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
             return (
               <motion.div
                 key={i}
-                className="group absolute p-10 flex h-fit items-center justify-center"
+                className="group absolute p-4 sm:p-8 md:p-10 flex h-fit items-center justify-center"
                 style={{
                   width: `${faceWidth}px`,
                   padding: imagePadding,
@@ -219,15 +225,15 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
                 <img
                   src={url}
                   alt="gallery"
-                  className="pointer-events-none rounded-[12px] object-contain transition-transform duration-300 ease-out group-hover:scale-105"
+                  className="pointer-events-none rounded-[10px] sm:rounded-[12px] object-contain transition-transform duration-300 ease-out group-hover:scale-105 shadow-md"
                   style={{
                     width: `${imageWidth}px`,
                     height: `${imageHeight}px`,
                     background: 'var(--card-bg)',
                     border: '2px solid var(--card-border)',
-                    padding: '8px',
+                    padding: '10px',
                     minWidth: '60px',
-                    minHeight: '30px'
+                    minHeight: '40px'
                   }}
                 />
 
