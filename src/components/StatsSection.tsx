@@ -217,25 +217,30 @@ const StatsSection: React.FC = () => {
                       border: '1px solid var(--card-border)'
                     }}
                   >
-                    <div className="relative mb-3 flex items-center gap-3">
-                      <div
-                        className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 
-                          bg-gradient-to-r ${service.gradient} group-hover:scale-105`}
-                      >
-                        <img
-                          src={service.icon}
-                          alt={service.label}
-                          className="w-5 h-5 object-contain"
-                        />
-                      </div>
-                      <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
-                        {service.label}
-                      </h3>
+                    <div 
+                      className={`w-16 h-16 rounded-lg flex items-center justify-center mb-4 transition-all duration-300 mx-auto
+                      bg-gradient-to-r ${service.gradient} group-hover:scale-105`}
+                      style={{
+                        boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+                        padding: '0.5rem'
+                      }}
+                    >
+                      <img
+                        src={service.icon}
+                        alt={service.label}
+                        className="w-10 h-10 object-contain"
+                      />
                     </div>
-                    <p className="text-sm leading-relaxed flex-grow" style={{ color: 'var(--text-secondary)' }}>
+                    
+                    <h3 className="text-lg font-bold mb-2 line-clamp-1 text-center" style={{ color: 'var(--text-primary)' }}>
+                      {service.label}
+                    </h3>
+                    
+                    <p className="text-sm leading-relaxed mb-4 flex-grow text-center" style={{ color: 'var(--text-secondary)' }}>
                       {service.description}
                     </p>
-                    <div className="mt-3 flex items-center gap-1 text-sm font-medium">
+                    
+                    <div className="mt-auto flex items-center gap-1 text-sm font-medium justify-center">
                       <span style={{ color: 'var(--accent-primary)' }}>Learn More</span>
                       <svg
                         className="w-4 h-4 transition-transform group-hover:translate-x-1"
@@ -247,6 +252,7 @@ const StatsSection: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
+                    
                     {hoveredService === idx && (
                       <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)]/5 to-transparent 
                         pointer-events-none opacity-50 rounded-xl" />
