@@ -28,14 +28,14 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Responsive cylinder and image sizes - increased for better mobile appearance
-  const cylinderWidth: number = isScreenSizeSm ? 800 : 1800; // Increased from 600 to 800 for mobile
+  // Responsive cylinder and image sizes - further increased for better mobile appearance
+  const cylinderWidth: number = isScreenSizeSm ? 1000 : 1800; // Increased from 800 to 1000 for mobile
   const faceCount: number = galleryImages.length;
-  const faceWidth: number = isScreenSizeSm ? 140 : (cylinderWidth / faceCount) * 1.5; // Increased from 120 to 140
+  const faceWidth: number = isScreenSizeSm ? 180 : (cylinderWidth / faceCount) * 1.5; // Increased from 140 to 180
   const radius: number = cylinderWidth / (2 * Math.PI);
-  const imageWidth = isScreenSizeSm ? 110 : 220; // Increased from 90 to 110 for mobile
-  const imageHeight = isScreenSizeSm ? 70 : 100; // Increased from 50 to 70 for mobile
-  const imagePadding = isScreenSizeSm ? '4%' : '6%';
+  const imageWidth = isScreenSizeSm ? 140 : 220; // Increased from 110 to 140 for mobile
+  const imageHeight = isScreenSizeSm ? 90 : 100; // Increased from 70 to 90 for mobile
+  const imagePadding = isScreenSizeSm ? '3%' : '6%'; // Reduced padding on mobile to show more content
 
   const dragFactor: number = 0.05;
   const rotation = useMotionValue(0);
@@ -152,7 +152,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
 
   return (
     <section
-      className="relative py-12 sm:py-16 px-4 flex flex-col items-center justify-start overflow-hidden"
+      className="relative py-12 sm:py-16 px-2 sm:px-4 w-full max-w-[100vw] flex flex-col items-center justify-start overflow-hidden"
     >
       {/* Decorative background gradient */}
       <div className="absolute inset-0 pointer-events-none">
@@ -171,7 +171,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
       </div>
 
       {/* Enhanced Heading with two different colors - Increased size */}
-      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center font-extrabold tracking-tight mb-3 px-2 leading-tight">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center font-extrabold tracking-tight mb-3 px-1 sm:px-2 leading-tight">
         <span style={{ color: 'var(--text-primary)' }}>Technologies</span>{' '}
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
           We Use
@@ -179,16 +179,16 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
       </h2>
       
       {/* Underline - made slightly bigger */}
-      <div className="w-20 sm:w-28 h-1.5 mx-auto mb-5 sm:mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
+      <div className="w-24 sm:w-28 h-1.5 mx-auto mb-4 sm:mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
       
       {/* Subheading - larger text */}
-      <p className="text-base sm:text-lg md:text-xl text-center mb-8 sm:mb-10 max-w-sm sm:max-w-md md:max-w-2xl mx-auto px-2" 
+      <p className="text-base sm:text-lg md:text-xl text-center mb-6 sm:mb-10 max-w-[95%] sm:max-w-md md:max-w-2xl mx-auto px-1 sm:px-2" 
          style={{ color: 'var(--text-secondary)' }}>
         Our solutions are built on the most modern, scalable, and robust technologies in the industry.
       </p>
 
-      {/* Improved gallery container with better mobile handling - taller container */}
-      <div className="w-full flex items-center justify-center [perspective:1200px] [transform-style:preserve-3d]">
+      {/* Improved gallery container with better mobile handling - taller container and wider perspective */}
+      <div className="w-full flex items-center justify-center [perspective:1400px] [transform-style:preserve-3d]">
         <motion.div
           drag="x"
           dragElastic={0}
@@ -204,7 +204,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
             width: cylinderWidth,
             transformStyle: 'preserve-3d'
           }}
-          className="flex h-[180px] xs:h-[200px] sm:h-[220px] md:min-h-[250px] lg:min-h-[300px] cursor-grab items-center justify-center [transform-style:preserve-3d]"
+          className="flex h-[200px] xs:h-[220px] sm:h-[240px] md:min-h-[260px] lg:min-h-[300px] cursor-grab items-center justify-center [transform-style:preserve-3d]"
         >
           {galleryImages.map((url, i) => {
             const blurTransform = createBlurTransform(i);
@@ -213,7 +213,7 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
             return (
               <motion.div
                 key={i}
-                className="group absolute p-4 sm:p-8 md:p-10 flex h-fit items-center justify-center"
+                className="group absolute p-2 xs:p-3 sm:p-8 md:p-10 flex h-fit items-center justify-center"
                 style={{
                   width: `${faceWidth}px`,
                   padding: imagePadding,
@@ -231,9 +231,9 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({ autoplay = false, pause
                     height: `${imageHeight}px`,
                     background: 'var(--card-bg)',
                     border: '2px solid var(--card-border)',
-                    padding: '10px',
-                    minWidth: '60px',
-                    minHeight: '40px'
+                    padding: '8px',
+                    minWidth: '80px',
+                    minHeight: '60px'
                   }}
                 />
 
