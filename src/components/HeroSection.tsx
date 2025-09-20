@@ -39,9 +39,8 @@ const HeroSection: React.FC = () => {
 
   return (
     <section
-      className="relative h-[50vh] md:h-[90vh] px-4 sm:px-6 lg:px-8 flex items-center md:pt-20"
+      className="relative min-h-[90vh] px-4 sm:px-6 lg:px-8 flex items-center justify-center md:pt-20"
       style={{ 
-        minHeight: '80vh',
         background: 'var(--bg-secondary)' // Match AboutPage background
       }}
     >
@@ -58,26 +57,26 @@ const HeroSection: React.FC = () => {
         />
       </div>
 
-      <div className="container mx-auto px-0 sm:px-4 lg:px-8 z-10">
+      <div className="container mx-auto px-0 sm:px-4 lg:px-8 z-10 py-12 sm:py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className={`space-y-8 ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
-            <div className="space-y-4">
-              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight" 
+            <div className="space-y-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight" 
                 style={{ color: 'var(--text-primary)' }}>
                 We Speak Fluent Code.
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
-                  {' '}And AI Has Joined the Team.
+                <span className="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+                  And AI Has Joined the Team.
                 </span>
               </h1>
-              <p className="text-sm xs:text-base sm:text-lg md:text-xl" style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 We build powerful digital solutions that help startups and businesses work smarter—with custom web, mobile,
                 and AI technology—while supporting government projects with secure, scalable innovation.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-5 pt-6">
               <button
-                className="px-8 py-4 rounded-full font-semibold text-lg flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
+                className="px-6 py-3 sm:px-8 sm:py-4 rounded-full font-semibold text-base sm:text-lg flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
                 style={{
                   background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                   color: 'white',
@@ -92,7 +91,7 @@ const HeroSection: React.FC = () => {
               </button>
 
               <button
-                className="px-8 py-4 rounded-full text-nowrap flex justify-center items-center gap-4 font-semibold text-lg border-2 transform hover:scale-105 transition-all duration-300 hover:bg-[var(--accent-primary)] hover:text-white"
+                className="px-6 py-3 sm:px-8 sm:py-4 rounded-full flex justify-center items-center gap-3 font-semibold text-base sm:text-lg border-2 transform hover:scale-105 transition-all duration-300 hover:bg-[var(--accent-primary)] hover:text-white"
                 style={{
                   borderColor: 'var(--accent-primary)',
                   color: 'var(--accent-primary)',
