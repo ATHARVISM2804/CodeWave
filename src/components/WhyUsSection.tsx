@@ -180,8 +180,8 @@ const WhyUsSection: React.FC = () => {
                 style={{ borderColor: 'var(--accent-primary)', opacity: 0.3, animationDuration: '3s' }}
               ></div>
               <div
-                className="absolute -inset-3 w-38 h-38 lg:w-54 lg:h-54 border border-cyan-400/20 rounded-full"
-                style={{ opacity: 0.6 }}
+                className="absolute -inset-3 w-38 h-38 lg:w-54 lg:h-54 border border-cyan-400/30 rounded-full"
+                style={{ opacity: 0.7 }}
               ></div>
             </div>
           </div>
@@ -244,9 +244,10 @@ const WhyUsSection: React.FC = () => {
                             ? 'linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.15), rgba(var(--accent-secondary-rgb), 0.05))'
                             : 'rgba(var(--glass-bg), 0.8)',
                           borderColor: hoverIndex === index
-                            ? 'var(--accent-primary)'
-                            : 'var(--glass-border)',
+                            ? 'var(--text-primary)'
+                            : 'rgba(var(--accent-primary-rgb), 0.3)',
                           transform: hoverIndex === index ? 'translateY(-10px)' : 'translateY(0)',
+                          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
                         }}
                       >
                         <div
@@ -293,10 +294,10 @@ const WhyUsSection: React.FC = () => {
               return (
                 <div
                   key={`line-${index}`}
-                  className={`absolute top-1/2 left-1/2 h-px transition-all duration-500 ${isVisible ? 'opacity-30 scale-100' : 'opacity-0 scale-0'
+                  className={`absolute top-1/2 left-1/2 h-0.5 transition-all duration-500 ${isVisible ? 'opacity-50 scale-100' : 'opacity-0 scale-0'
                     } ${hoverIndex === index ? '!opacity-80' : ''}`}
                   style={{
-                    background: `linear-gradient(90deg, rgba(var(--accent-primary-rgb), 0.7), rgba(var(--accent-primary-rgb), 0.1))`,
+                    background: `linear-gradient(90deg, rgba(var(--accent-primary-rgb), 0.8), rgba(var(--accent-primary-rgb), 0.2))`,
                     transformOrigin: 'left center',
                     width: Math.min(containerSize.width, containerSize.height) * 0.35,
                     transform: `rotate(${angle}deg)`,
