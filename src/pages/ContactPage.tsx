@@ -53,7 +53,7 @@ const ContactPage: React.FC = () => {
       const payload = new FormData(formEl);
 
       // TODO: replace with your real access key
-      payload.append('access_key', '94eef6d5-373f-4730-b7a1-ac117be18f20');
+      payload.append('access_key', '8cf5247d-b96a-4f34-a3ab-b5990f93409d');
 
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
