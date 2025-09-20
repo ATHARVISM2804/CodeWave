@@ -14,6 +14,7 @@ const ContactPage: React.FC = () => {
     timeline: '',
     message: ''
   });
+  const [showThankYouModal, setShowThankYouModal] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -75,6 +76,8 @@ const ContactPage: React.FC = () => {
           timeline: '',
           message: ''
         });
+        // Show thank you modal
+        setShowThankYouModal(true);
       } else {
         console.error('Submission error', data);
         setSubmitResult(data.message || 'Submission failed');
@@ -251,6 +254,44 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Thank You Modal */}
+      {showThankYouModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
+          <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={() => setShowThankYouModal(false)}></div>
+          <div 
+            className="relative morph-card glare-card p-8 md:p-10 text-center max-w-md w-full animate-fade-in-up"
+            style={{ 
+              background: 'var(--card-bg)', 
+              border: '2px solid var(--card-border)',
+              boxShadow: '0 0 30px rgba(var(--accent-primary-rgb), 0.3)'
+            }}
+          >
+            <div className="w-20 h-20 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 mx-auto flex items-center justify-center mb-6">
+              <CheckCircle className="w-10 h-10 text-white" />
+            </div>
+            
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 neon-glow" style={{ color: 'var(--text-primary)' }}>Thank You!</h3>
+            <p className="text-lg mb-6" style={{ color: 'var(--text-secondary)' }}>
+              Your message has been sent successfully. We appreciate your interest and will be in touch shortly.
+            </p>
+            <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+              Our team reviews all inquiries and typically responds within 4 business hours.
+            </p>
+            
+            <button
+              onClick={() => setShowThankYouModal(false)}
+              className="liquid-button px-8 py-3 font-semibold glare-effect text-base magnetic-effect"
+              style={{ 
+                background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', 
+                color: 'var(--bg-secondary)' 
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Main Contact Form */}
       <section className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
