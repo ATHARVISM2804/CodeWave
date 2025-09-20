@@ -244,10 +244,12 @@ const WhyUsSection: React.FC = () => {
                             ? 'linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.15), rgba(var(--accent-secondary-rgb), 0.05))'
                             : 'rgba(var(--glass-bg), 0.8)',
                           borderColor: hoverIndex === index
-                            ? 'var(--text-primary)'
+                            ? 'var(--acce nt-primary)'
                             : 'rgba(var(--accent-primary-rgb), 0.3)',
                           transform: hoverIndex === index ? 'translateY(-10px)' : 'translateY(0)',
-                          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
+                          boxShadow: hoverIndex === index 
+                            ? '0 10px 20px rgba(var(--accent-primary-rgb), 0.2)'
+                            : '0 4px 12px rgba(0, 0, 0, 0.1)'
                         }}
                       >
                         <div
