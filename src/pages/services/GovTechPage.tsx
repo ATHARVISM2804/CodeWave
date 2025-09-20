@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Shield, ArrowRight, MessageSquare, Users, Phone, Database } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
+
 const GovTechPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);

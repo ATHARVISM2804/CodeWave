@@ -2,7 +2,10 @@ import React, { useRef, useState } from 'react';
 import { ArrowRight, Calendar, Clock, BookOpen, TrendingUp, User, Eye } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-
+import companyLogo from '../assets/company.jpeg';
+import govtech from '../assets/govttech1.jpeg';
+import inter from '../assets/user interface.jpeg';
+import api from '../assets/user interface.jpeg'
 const BlogSection: React.FC = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -36,7 +39,7 @@ const BlogSection: React.FC = () => {
       date: 'Dec 12, 2024',
       author: 'Sarah Chen',
       views: '1.8K',
-      image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800'
+      image: companyLogo
     },
     {
       id: 'govtech-security',
@@ -47,7 +50,7 @@ const BlogSection: React.FC = () => {
       date: 'Dec 10, 2024',
       author: 'Alex Kumar',
       views: '1.2K',
-      image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800'
+      image: govtech
     },
     {
       id: 'psychology-ui-design',
@@ -58,7 +61,7 @@ const BlogSection: React.FC = () => {
       date: 'Dec 8, 2024',
       author: 'Maya Patel',
       views: '2.1K',
-      image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800'
+      image: inter
     },
     {
       id: 'api-design-future',
@@ -69,7 +72,7 @@ const BlogSection: React.FC = () => {
       date: 'Dec 5, 2024',
       author: 'Dev Team',
       views: '1.7K',
-      image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800'
+      image: api
     }
   ];
 
