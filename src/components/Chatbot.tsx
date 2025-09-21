@@ -56,12 +56,16 @@ const Chatbot: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClo
   const [input, setInput] = useState("");
   const [isThinking, setIsThinking] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [lastSender, setLastSender] = useState<"user" | "bot" | null>(null); // Track last sender
 
   useEffect(() => {
-    if (open && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    // Only scroll to bottom if last message was from user or bot is thinking
+    if (!open) return;
+    if (lastSender === "user" || isThinking) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages, open]);
+    // Do NOT scroll after bot's message, so user can read from top
+  }, [messages, open, isThinking, lastSender]);
 
   const handleSend = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -71,6 +75,7 @@ const Chatbot: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClo
     setMessages((msgs) => [...msgs, userMsg]);
     setInput("");
     setIsThinking(true);
+    setLastSender("user"); // Set last sender to user
 
     try {
       // Convert existing chat history to the format required by the API
@@ -108,6 +113,7 @@ const Chatbot: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClo
           text: botText
         }
       ]);
+      setLastSender("bot"); // Set last sender to bot
     } catch (err) {
       console.error("Error fetching from Gemini API:", err);
       setMessages((msgs) => [
@@ -117,6 +123,7 @@ const Chatbot: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClo
           text: "Sorry, there was a problem connecting to the server."
         }
       ]);
+      setLastSender("bot"); // Set last sender to bot
     } finally {
       setIsThinking(false);
     }
@@ -250,4 +257,3 @@ const Chatbot: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClo
 };
 
 export default Chatbot;
-            
