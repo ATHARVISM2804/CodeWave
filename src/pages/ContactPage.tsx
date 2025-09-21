@@ -15,6 +15,9 @@ const ContactPage: React.FC = () => {
   });
   const [showThankYouModal, setShowThankYouModal] = useState(false);
 
+  // Calendly popup state
+  const [showCalendly, setShowCalendly] = useState(false);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -213,6 +216,21 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Calendly Popup Modal */}
+      {showCalendly && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
+          <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={() => setShowCalendly(false)}></div>
+          <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[80vh] flex flex-col">
+            <div className="flex justify-between items-center p-4 border-b">
+              <span className="font-bold text-lg" style={{ color: 'var(--text-primary)' }}>Schedule a Meeting</span>
+              <button onClick={() => setShowCalendly(false)} className="text-xl font-bold px-2" style={{ color: 'var(--accent-primary)' }}>×</button>
+            </div>
+            {/* Loading animation while Calendly iframe loads */}
+            <CalendlyIframeWithLoader />
+          </div>
+        </div>
+      )}
+
       {/* Contact Methods */}
       <section ref={sectionRef} className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -242,12 +260,22 @@ const ContactPage: React.FC = () => {
                 <h3 className="text-xl font-bold mb-3 neon-glow" style={{ color: 'var(--text-primary)' }}>{method.title}</h3>
                 <p className="mb-2 font-medium" style={{ color: 'var(--text-secondary)' }}>{method.description}</p>
                 <p className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>{method.detail}</p>
-                <a href={method.href} target="_blank" rel="noopener noreferrer">
-                  <button className="liquid-button px-6 py-2 font-semibold glare-effect text-sm magnetic-effect"
-                    style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}>
+                {method.title === 'Schedule a Call' ? (
+                  <button
+                    className="liquid-button px-6 py-2 font-semibold glare-effect text-sm magnetic-effect"
+                    style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}
+                    onClick={() => setShowCalendly(true)}
+                  >
                     {method.action}
                   </button>
-                </a>
+                ) : (
+                  <a href={method.href} target="_blank" rel="noopener noreferrer">
+                    <button className="liquid-button px-6 py-2 font-semibold glare-effect text-sm magnetic-effect"
+                      style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}>
+                      {method.action}
+                    </button>
+                  </a>
+                )}
               </div>
             ))}
           </div>
@@ -616,20 +644,52 @@ const ContactPage: React.FC = () => {
               Schedule a free 30-minute consultation to discuss your project and get expert advice.
             </p>
             <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
-              <a href="https://calendly.com/codewave/30min" target="_blank" rel="noopener noreferrer">
-                <button className="liquid-button px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
-                  style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}>
-                  Book Free Consultation
-                </button>
-              </a>
+              <button
+                className="liquid-button px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
+                style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}
+                onClick={() => setShowCalendly(true)}
+                type="button"
+              >
+                Book Free Consultation
+              </button>
               <a href="#portfolio" className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect"
-                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
+                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}
+                onClick={() => window.location.href='/services'}
+                >
                 View Our Work
               </a>
             </div>
           </div>
         </div>
       </section>
+    </div>
+  );
+};
+
+// Add this component at the bottom, before export default ContactPage;
+const CalendlyIframeWithLoader: React.FC = () => {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div className="relative flex-1 w-full">
+      {!loaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
+          <div className="flex flex-col items-center">
+            <svg className="animate-spin h-8 w-8 text-[var(--accent-primary)] mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+            </svg>
+            <span className="text-sm text-[var(--accent-primary)]">Loading calendar...</span>
+          </div>
+        </div>
+      )}
+      <iframe
+        src="https://calendly.com/careersparushapandey/30min"
+        title="Calendly Scheduling"
+        className="flex-1 w-full border-0 h-full"
+        style={{ minHeight: 0 }}
+        allow="camera; microphone; fullscreen"
+        onLoad={() => setLoaded(true)}
+      ></iframe>
     </div>
   );
 };

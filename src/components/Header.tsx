@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, Info, Calendar, Users, Mail } from 'lucide-react';
 import Codewavelogo from '../assets/Logo_Orginal.png';
 import { ThemeToggleButton } from './ThemeToggle';
+import MobileNavbar from './MobileNavbar';
 
 const navItems = [
   { label: 'Home', href: '/', icon: <Home size={22} /> },
@@ -32,10 +33,12 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'pointer-events-none opacity-0' : ''}`}>
+      {/* Mobile Navbar - Always visible */}
+      <MobileNavbar onOpenMenu={() => setIsMobileMenuOpen(true)} />
+
+      {/* Main Header - Desktop only */}
+      <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 hidden md:block ${isScrolled ? 'pointer-events-none opacity-0' : ''}`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          {/* layout: 2 columns on small, 3 on md+:
-              left: logo, center: nav (hidden on small), right: CTA/menu */}
           <div className="grid grid-cols-2 md:grid-cols-3 items-center w-full">
             {/* Logo Section - left (rectangular) */}
             <div className="flex items-center justify-start col-start-1">
@@ -84,7 +87,7 @@ const Header: React.FC = () => {
               </div>
             </nav>
 
-            {/* CTA Button - right (on small this is col 2; on md it's col 3) */}
+            {/* CTA Button and Mobile Menu Icon - right */}
             <div className="flex items-center justify-end gap-4 col-start-2 md:col-start-3">
               {/* Theme toggle placed before CTA/menu */}
               
@@ -103,69 +106,99 @@ const Header: React.FC = () => {
                   →
                 </span>
               </button>
-
-              
+              {/* Add mobile menu icon */}
+              <button
+                className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-[var(--card-bg)] border border-[var(--card-border)]"
+                onClick={() => setIsMobileMenuOpen(true)}
+                aria-label="Open menu"
+              >
+                <Menu size={26} />
+              </button>
             </div>
           </div>
         </div>
-
-        {/* Mobile Menu - Updated for clean design */}
-       
       </header>
-
-      {/* Bottom Navigation Bar (mobile only, always visible) */}
-      <nav
-        className="fixed bottom-0 left-1/2 z-50 -translate-x-1/2 rounded-t-2xl md:hidden w-full max-w-md mx-auto backdrop-blur-md p-1.5 border border-[var(--card-border)] bg-[var(--card-bg)]"
-        style={{ boxShadow: '0 -2px 16px rgba(0,0,0,0.08)' }}
-      >
-        <div className="flex items-center justify-between gap-1">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="flex-1 flex flex-col items-center justify-center p-2 rounded-full transition-all duration-300 hover:bg-gradient-to-r hover:from-[var(--accent-primary)] hover:to-[var(--accent-secondary)] group"
-              title={item.label}
-            >
-              <span className="text-[var(--text-secondary)] group-hover:text-white transition-colors duration-300">
-                {item.icon}
-              </span>
-              <span className="text-[10px] mt-0.5" style={{ color: 'var(--text-primary)' }}>{item.label}</span>
-            </a>
-          ))}
-          {/* Theme toggle button in bottom navbar */}
-          <span className="flex flex-col items-center justify-center p-2">
-            <ThemeToggleButton />
-            <span className="text-[10px] mt-0.5" style={{ color: 'var(--text-primary)' }}>Theme</span>
-          </span>
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[100] flex md:hidden">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
+          <div className="relative w-[85%] max-w-md mx-auto my-20 bg-[var(--card-bg)] shadow-2xl animate-fade-in-up rounded-2xl overflow-hidden">
+            <div className="flex flex-col p-6">
+              <div className="flex items-center justify-between mb-6">
+                <img src={Codewavelogo} alt="CodeWave" className="h-8" />
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 rounded-full hover:bg-[var(--card-border)]"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              <nav className="flex flex-col gap-2 max-h-[60vh] overflow-y-auto">
+                {navItems.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-[var(--text-primary)] hover:bg-gradient-to-r hover:from-[var(--accent-primary)] hover:to-[var(--accent-secondary)] hover:text-white group"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <span className="text-[var(--accent-primary)] group-hover:text-white">
+                      {item.icon}
+                    </span>
+                    <span className="text-lg">{item.label}</span>
+                  </a>
+                ))}
+              </nav>
+              <div className="mt-6 pt-6 border-t border-[var(--card-border)]">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setShowCalendly(true);
+                  }}
+                  className="w-full flex items-center justify-center gap-2 p-4 rounded-xl font-semibold text-white bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"
+                >
+                  <Calendar size={20} />
+                  Schedule a Call
+                </button>
+                <div className="mt-6 text-center">
+                  <p className="text-sm text-[var(--text-secondary)] mb-4">Switch Theme</p>
+                  <ThemeToggleButton />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </nav>
-
-      {/* Floating Navigation - Simplified design (desktop only, on scroll) */}
+      )}
+      {/* Desktop Floating Navigation */}
       {isScrolled && (
-        <nav
-          className="hidden md:block fixed bottom-8 left-1/2 z-50 -translate-x-1/2 rounded-full backdrop-blur-md p-1.5 animate-fade-in-up border border-[var(--card-border)] bg-[var(--card-bg)]"
-        >
-          <div className="flex items-center gap-1">
+        <nav className="hidden md:block fixed bottom-8 left-1/2 z-50 -translate-x-1/2 ">
+          <div className="flex items-center gap-2 p-2 rounded-2xl backdrop-blur-lg border border-[var(--card-border)] bg-[var(--card-bg)] shadow-lg">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="p-2 rounded-full transition-all duration-300 hover:bg-gradient-to-r hover:from-[var(--accent-primary)] hover:to-[var(--accent-secondary)] group"
-                title={item.label}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-[var(--text-secondary)] hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-[var(--accent-primary)] hover:to-[var(--accent-secondary)] group"
               >
-                <span className="text-[var(--text-secondary)] group-hover:text-white transition-colors duration-300">
+                <span className="text-[var(--accent-primary)] group-hover:text-white">
                   {item.icon}
                 </span>
+                <span className='text-nowrap'>{item.label}</span>
               </a>
             ))}
-            {/* Theme toggle button in floating nav */}
-            <span className="ml-2">
+            <div className="w-px h-6 bg-[var(--card-border)]" />
+            <span className="px-2">
               <ThemeToggleButton />
             </span>
+            <button
+              onClick={handleCalendlyClick}
+              className="ml-2 flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-white bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] hover:shadow-lg transition-all duration-200"
+            >
+              <Calendar size={20} />
+              <span className='text-nowrap'>Book a Call</span>
+            </button>
           </div>
         </nav>
       )}
-
+      {/* Calendly Modal */}
       {showCalendly && (
         <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
           <div className="relative w-full max-w-3xl h-[600px] bg-white rounded-lg overflow-hidden">
