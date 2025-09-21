@@ -211,9 +211,16 @@ const Industries: React.FC = () => {
               className="liquid-button px-8 py-3 font-semibold glare-effect text-lg magnetic-effect"
               style={{
                 background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                color: 'var(--text-primary)'
+                color: 'var(--bg-primary)'
               }}
-              onClick={() => navigate('/contact')}
+              onClick={() => {
+                  navigate('/contact#contact-form');
+                  // Optionally, scroll after navigation (if needed)
+                  setTimeout(() => {
+                    const el = document.getElementById('contact-form');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
+                }}
             >
               Discuss Your Industry
             </button>
