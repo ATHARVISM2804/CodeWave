@@ -1,0 +1,1244 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { MessageCircle, Phone, Mail, Calendar, MapPin, Clock, Users, CheckCircle, Twitter, Linkedin, Github } from 'lucide-react';
+import ReCAPTCHA from 'react-google-recaptcha';
+
+const ContactPage: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    service: '',
+    budget: '',
+    timeline: '',
+    message: ''
+  });
+  const [showThankYouModal, setShowThankYouModal] = useState(false);
+
+  // Calendly popup state
+  const [showCalendly, setShowCalendly] = useState(false);
+
+  const [verified, setVerified] = useState(false);
+  const recaptchaRef = useRef<any>(null); // Add ref for reCAPTCHA
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  // new: submission state + handler for web3forms
+  const [submitResult, setSubmitResult] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Get reCAPTCHA value
+    const recaptchaToken = recaptchaRef.current?.getValue();
+    if (!recaptchaToken) {
+      setSubmitResult('Please verify you are human!');
+      return;
+    }
+    setIsSubmitting(true);
+    setSubmitResult('Verifying...');
+    try {
+      const formEl = e.currentTarget;
+      const payload = new FormData(formEl);
+      payload.append('g-recaptcha-response', recaptchaToken); // Append token
+      payload.append('access_key', '94eef6d5-373f-4730-b7a1-ac117be18f20');
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmitResult('Form Submitted Successfully');
+        formEl.reset();
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          service: '',
+          budget: '',
+          timeline: '',
+          message: ''
+        });
+        setShowThankYouModal(true);
+        setVerified(false);
+        recaptchaRef.current?.reset(); // Reset reCAPTCHA
+      } else {
+        setSubmitResult(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      setSubmitResult('Network error, please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const contactMethods = [
+    {
+      icon: MessageCircle,
+      title: 'WhatsApp',
+      description: 'Chat instantly with our team',
+      detail: '+91 89299 42819',
+      action: 'Start Chat',
+      color: 'from-green-500 to-emerald-500',
+      href: 'https://wa.me/+918929942819?text=Hello%20CodeWave%21%20I%20would%20like%20to%20discuss%20a%20project.'
+    },
+    {
+      icon: MessageCircle,
+      title: 'Live Chat',
+      description: 'Our AI wants to chat with you',
+      detail: 'Available 24/7',
+      action: 'Chat Now',
+      color: 'from-blue-500 to-cyan-500',
+      href: '#live-chat'
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      description: 'Write to hello@codewave.it',
+      detail: 'hello@codewave.it',
+      action: 'Send Email',
+      color: 'from-purple-500 to-pink-500',
+      href: 'mailto:hello@codewave.it?subject=Website%20Inquiry'
+    },
+    {
+      icon: Calendar,
+      title: 'Schedule a Call',
+      description: 'Book a time slot for call',
+      detail: '30-min free consultation',
+      action: 'Book Call',
+      color: 'from-orange-500 to-red-500',
+      href: 'https://calendly.com/codewave/30min'
+    }
+  ];
+
+  const officeInfo = [
+    {
+      icon: MapPin,
+      title: 'Service Locations',
+      details: ['Worldwide Service Coverage', 'Serving Clients Across the Globe']
+    },
+    {
+      icon: Clock,
+      title: 'Business Hours',
+      details: ['Monday - Friday: 9:00 AM - 6:00 PM PST', 'Saturday: 10:00 AM - 2:00 PM PST', 'Sunday: Closed']
+    },
+    {
+      icon: Users,
+      title: 'Response Time',
+      details: ['Email: Within 4 hours', 'Phone: Immediate', 'Project inquiries: Same day']
+    }
+  ];
+
+  const teamMembers = [
+    'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150',
+    'https://images.pexels.com/photos/1300402/pexels-photo-1300402.jpeg?auto=compress&cs=tinysrgb&w=150',
+    'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=150',
+    'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=150'
+  ];
+
+  const whyChooseUs = [
+    'Expert team with 10+ years experience',
+    'Cutting-edge tech solutions for modern challenges',
+    'Dedicated support throughout your project'
+  ];
+
+  const faqs = [
+    {
+      question: 'How long does a typical project take?',
+      answer: 'Project timelines vary based on complexity, but most projects range from 4-16 weeks. We provide detailed timelines during our initial consultation.'
+    },
+    {
+      question: 'Do you work with startups?',
+      answer: 'Absolutely! We love working with startups and offer flexible engagement models to fit different budgets and growth stages.'
+    },
+    {
+      question: 'What makes CodeWave different?',
+      answer: 'We integrate AI and intelligence into every solution we build, ensuring your software doesn\'t just work—it thinks and adapts.'
+    },
+    {
+      question: 'Do you provide ongoing support?',
+      answer: 'Yes, we offer comprehensive support packages including maintenance, updates, and continuous optimization of your solutions.'
+    }
+  ];
+
+  const socialLinks = [
+    { icon: Phone, href: 'tel:+1234567890' },
+    { icon: Mail, href: 'mailto:hello@codewave.it' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/codewave-tech/mycompany/' },
+    { icon: Twitter, href: 'https://twitter.com/codewave_tech' },
+    { icon: Github, href: '#' }
+  ];
+
+  return (
+    <div
+      className="pt-12"
+      style={{
+        // background: 'var(--bg-secondary)',
+        color: 'var(--text-primary)',
+        fontSize: '0.97rem', // Slightly scale down font size
+        letterSpacing: '0.01em'
+      }}
+    >
+      {/* Hero Section */}
+      <section className="py-16 relative overflow-hidden" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-8">
+            <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight" style={{ color: 'var(--text-primary)' }}>
+                Let's Create Something{' '}
+                <span className="parallax-text neon-glow" style={{ color: 'var(--accent-primary)' }}>Extraordinary Together</span>
+              </h1>
+              <p className="text-xl max-w-4xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                Where human creativity meets technological innovation. Ready to transform your ideas into intelligent solutions?
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Calendly Popup Modal */}
+      {showCalendly && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
+          <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={() => setShowCalendly(false)}></div>
+          <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[80vh] flex flex-col">
+            <div className="flex justify-between items-center p-4 border-b">
+              <span className="font-bold text-lg" style={{ color: 'var(--text-primary)' }}>Schedule a Meeting</span>
+              <button onClick={() => setShowCalendly(false)} className="text-xl font-bold px-2" style={{ color: 'var(--accent-primary)' }}>×</button>
+            </div>
+            {/* Loading animation while Calendly iframe loads */}
+            <CalendlyIframeWithLoader />
+          </div>
+        </div>
+      )}
+
+      {/* Contact Methods */}
+      <section ref={sectionRef} className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
+              Choose Your Preferred Way to Connect
+            </h2>
+            <p className={`text-xl max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
+              We're here to help you bring your vision to life.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {contactMethods.map((method, index) => (
+              <div
+                key={index}
+                className={`morph-card glare-card p-8 text-center hover-lift-premium magnetic-effect ripple-effect cursor-pointer ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                style={{
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  color: 'var(--text-primary)'
+                }}
+              >
+                <div className={`w-16 h-16 bg-gradient-to-r ${method.color} rounded-xl flex items-center justify-center mx-auto mb-6 magnetic-effect`}>
+                  <method.icon className="w-8 h-8" style={{ color: 'var(--text-primary)' }} />
+                </div>
+                <h3 className="text-xl font-bold mb-3 neon-glow" style={{ color: 'var(--text-primary)' }}>{method.title}</h3>
+                <p className="mb-2 font-medium" style={{ color: 'var(--text-secondary)' }}>{method.description}</p>
+                <p className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>{method.detail}</p>
+                {method.title === 'Schedule a Call' ? (
+                  <button
+                    className="liquid-button px-6 py-2 font-semibold glare-effect text-sm magnetic-effect"
+                    style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}
+                    onClick={() => setShowCalendly(true)}
+                  >
+                    {method.action}
+                  </button>
+                ) : (
+                  <a href={method.href} target="_blank" rel="noopener noreferrer">
+                    <button className="liquid-button px-6 py-2 font-semibold glare-effect text-sm magnetic-effect"
+                      style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}>
+                      {method.action}
+                    </button>
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Thank You Modal */}
+      {showThankYouModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
+          <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={() => setShowThankYouModal(false)}></div>
+          <div 
+            className="relative morph-card glare-card p-8 md:p-10 text-center max-w-md w-full animate-fade-in-up"
+            style={{ 
+              background: 'var(--card-bg)', 
+              border: '2px solid var(--card-border)',
+              boxShadow: '0 0 30px rgba(var(--accent-primary-rgb), 0.3)'
+            }}
+          >
+            <div className="w-20 h-20 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 mx-auto flex items-center justify-center mb-6">
+              <CheckCircle className="w-10 h-10 text-white" />
+            </div>
+            
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 neon-glow" style={{ color: 'var(--text-primary)' }}>Thank You!</h3>
+            <p className="text-lg mb-6" style={{ color: 'var(--text-secondary)' }}>
+              Your message has been sent successfully. We appreciate your interest and will be in touch shortly.
+            </p>
+            <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+              Our team reviews all inquiries and typically responds within 4 business hours.
+            </p>
+            
+            <button
+              onClick={() => setShowThankYouModal(false)}
+              className="liquid-button px-8 py-3 font-semibold glare-effect text-base magnetic-effect"
+              style={{ 
+                background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', 
+                color: 'var(--bg-secondary)' 
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Main Contact Form */}
+      <section id='contact-form' className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16">
+            {/* Contact Form */}
+            <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}
+              style={{ 
+                background: 'var(--card-bg)', 
+                border: '2px solid var(--card-border)', 
+                boxShadow: '0 0 0 1px rgba(var(--accent-primary-rgb), 0.2), 0 8px 20px rgba(var(--accent-primary-rgb), 0.15)', 
+                color: 'var(--text-primary)' 
+              }}>
+              <h3 className="text-3xl font-bold mb-8 neon-glow" style={{ color: 'var(--text-primary)' }}>Tell Us About Your Vision</h3>
+              
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ color: 'var(--text-primary)' }}>
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Name *</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Your full name"
+                      className="w-full input-premium"
+                      style={{
+                        border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                        background: 'var(--bg-secondary)',
+                        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                        padding: '0.75rem',
+                        borderRadius: '0.5rem'
+                      }}
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Email *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="your@email.com"
+                      className="w-full input-premium"
+                      style={{
+                        border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                        background: 'var(--bg-secondary)',
+                        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                        padding: '0.75rem',
+                        borderRadius: '0.5rem'
+                      }}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Company/Organization</label>
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    placeholder="Your company name"
+                    className="w-full input-premium"
+                    style={{
+                      border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                      background: 'var(--bg-secondary)',
+                      boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                      padding: '0.75rem',
+                      borderRadius: '0.5rem'
+                    }}
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Service Needed</label>
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleInputChange}
+                      className="w-full input-premium"
+                      style={{
+                        border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                        background: 'var(--bg-secondary)',
+                        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                        padding: '0.75rem',
+                        borderRadius: '0.5rem',
+                        appearance: 'auto'
+                      }}
+                    >
+                      <option value="">Select service</option>
+                      <option value="web">Web Development</option>
+                      <option value="mobile">Mobile App Development</option>
+                      <option value="ai">AI & ML Solutions</option>
+                      <option value="uiux">UI/UX Design</option>
+                      <option value="govtech">GovTech Solutions</option>
+                      <option value="custom">Custom Software</option>
+                      <option value="consultation">Consultation Only</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Budget Range</label>
+                    <select
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleInputChange}
+                      className="w-full input-premium"
+                      style={{
+                        border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                        background: 'var(--bg-secondary)',
+                        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                        padding: '0.75rem',
+                        borderRadius: '0.5rem',
+                        appearance: 'auto'
+                      }}
+                    >
+                      <option value="">Select budget</option>
+                      <option value="10k-25k">$10k - $25k</option>
+                      <option value="25k-50k">$25k - $50k</option>
+                      <option value="50k-100k">$50k - $100k</option>
+                      <option value="100k+">$100k+</option>
+                      <option value="discuss">Let's discuss</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Timeline</label>
+                  <select
+                    name="timeline"
+                    value={formData.timeline}
+                    onChange={handleInputChange}
+                    className="w-full input-premium"
+                    style={{
+                      border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                      background: 'var(--bg-secondary)',
+                      boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                      padding: '0.75rem',
+                      borderRadius: '0.5rem',
+                      appearance: 'auto'
+                    }}
+                  >
+                    <option value="">Select timeline</option>
+                    <option value="asap">ASAP</option>
+                    <option value="1-3months">1-3 months</option>
+                    <option value="3-6months">3-6 months</option>
+                    <option value="6months+">6+ months</option>
+                    <option value="flexible">Flexible</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Project Details *</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={6}
+                    placeholder="Tell us about your project, goals, and any specific requirements..."
+                    className="w-full input-premium resize-none"
+                    style={{
+                      border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                      background: 'var(--bg-secondary)',
+                      boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                      padding: '0.75rem',
+                      borderRadius: '0.5rem'
+                    }}
+                    required
+                  ></textarea>
+                </div>
+
+                <div className="mb-4">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey="6LcvPc8rAAAAAMzSEaL7SXwy5SYbBvcgLrjyQMqg"
+                    onChange={() => setVerified(true)}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className={`w-full liquid-button px-8 py-4 font-semibold glare-effect text-lg magnetic-effect ${verified ? '' : 'bg-gray-400 cursor-not-allowed'}`}
+                  disabled={!verified || isSubmitting}
+                  aria-busy={isSubmitting}
+                  style={{ color: isSubmitting ? 'var(--text-muted)' : 'var(--bg-secondary)', background: verified && !isSubmitting ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' : 'var(--card-border)' }}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message →'}
+                </button>
+
+                {/* submission result */}
+                {submitResult && (
+                  <div className="mt-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                    {submitResult}
+                  </div>
+                )}
+              </form>
+            </div>
+
+            {/* Contact Info & Team */}
+            <div className="space-y-8">
+              {/* Office Information */}
+              <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '200ms', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
+                <h3 className="text-2xl font-bold mb-6 neon-glow" style={{ color: 'var(--text-primary)' }}>Get in Touch</h3>
+                
+                <div className="space-y-6">
+                  {officeInfo.map((info, index) => (
+                    <div key={index} className="flex items-start space-x-4">
+                      <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 magnetic-effect"
+                        style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}>
+                        <info.icon className="w-6 h-6" style={{ color: 'var(--bg-secondary)' }} />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{info.title}</h4>
+                        <div className="space-y-1">
+                          {info.details.map((detail, detailIndex) => (
+                            <p key={detailIndex} className="text-sm" style={{ color: 'var(--text-secondary)' }}>{detail}</p>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Team Section */}
+              <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '400ms', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
+                <h3 className="text-2xl font-bold mb-6 neon-glow" style={{ color: 'var(--text-primary)' }}>Meet Your Design Partners</h3>
+                <div className="flex -space-x-4 mb-6">
+                  {teamMembers.map((avatar, index) => (
+                    <div
+                      key={index}
+                      className="w-16 h-16 rounded-full border-4 overflow-hidden magnetic-effect"
+                      style={{ borderColor: 'var(--bg-primary)' }}
+                    >
+                      <img src={avatar} alt="Team member" className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                </div>
+                <div className="space-y-4">
+                  <h4 className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Why clients choose us:</h4>
+                  <div className="space-y-3">
+                    {whyChooseUs.map((reason, index) => (
+                      <div key={index} className="flex items-center text-sm" style={{ color: 'var(--text-secondary)' }}>
+                        <CheckCircle className="w-4 h-4" style={{ color: 'var(--accent-secondary)', marginRight: '0.75rem' }} />
+                        {reason}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-6 pt-6 border-t" style={{ borderTop: '1px solid var(--glass-border)' }}>
+                  <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                    <strong>Response guarantee:</strong> We respond within 4 hours on business days. Your data is secure and never shared.
+                  </p>
+                </div>
+                <div className="flex items-center space-x-4 mt-6">
+                  {socialLinks.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.href}
+                      className="transition-all duration-300 hover:-translate-y-1"
+                      style={{
+                        color: 'var(--text-secondary)',
+                        background: 'var(--card-bg)',
+                        border: '1px solid var(--card-border)',
+                        borderRadius: '50%',
+                        padding: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.color = 'var(--accent-primary)';
+                        e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.color = 'var(--text-secondary)';
+                        e.currentTarget.style.borderColor = 'var(--card-border)';
+                      }}
+                    >
+                      <social.icon size={18} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
+              Frequently Asked Questions
+            </h2>
+            <p className={`text-xl max-w-3xl mx-auto ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
+              Quick answers to common questions about working with CodeWave.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-6">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}
+              >
+                <h3 className="text-xl font-bold mb-4 neon-glow" style={{ color: 'var(--text-primary)' }}>{faq.question}</h3>
+                <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="morph-card glare-card p-12 text-center hover-lift-premium"
+            style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
+            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
+              Still Have Questions?
+            </h2>
+            <p className={`text-xl max-w-3xl mx-auto mb-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', color: 'var(--text-secondary)' }}>
+              Schedule a free 30-minute consultation to discuss your project and get expert advice.
+            </p>
+            <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
+              <button
+                className="liquid-button px-8 py-4 font-semibold glare-effect text-lg magnetic-effect"
+                style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}
+                onClick={() => setShowCalendly(true)}
+                type="button"
+              >
+                Book Free Consultation
+              </button>
+              <a href="#portfolio" className="morph-card px-8 py-4 rounded-full font-semibold hover-lift-premium glare-card text-lg ripple-effect"
+                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}
+                onClick={() => window.location.href='/services'}
+                >
+                View Our Work
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+// Add this component at the bottom, before export default ContactPage;
+const CalendlyIframeWithLoader: React.FC = () => {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div className="relative flex-1 w-full">
+      {!loaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
+          <div className="flex flex-col items-center">
+            <svg className="animate-spin h-8 w-8 text-[var(--accent-primary)] mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+            </svg>
+            <span className="text-sm text-[var(--accent-primary)]">Loading calendar...</span>
+          </div>
+        </div>
+      )}
+      <iframe
+        src="https://calendly.com/careersparushapandey/30min"
+        title="Calendly Scheduling"
+        className="flex-1 w-full border-0 h-full"
+        style={{ minHeight: 0 }}
+        allow="camera; microphone; fullscreen"
+        onLoad={() => setLoaded(true)}
+      ></iframe>
+    </div>
+  );
+};
+
+export default ContactPage;
+
+
+
+
+import React, { useEffect, useRef, useState } from 'react';
+import { MessageCircle, Mail, Calendar, Send } from 'lucide-react';
+import ReCAPTCHA from 'react-google-recaptcha';
+
+const ContactSection: React.FC = () => {
+  // const [isVisible, setIsVisible] = useState(false); // Unused
+  const sectionRef = useRef<HTMLElement>(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    service: '',
+    message: ''
+  });
+  const [verified, setVerified] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  // <-- added: submission state + handler
+  const [submitResult, setSubmitResult] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  // Add thank you popup state
+  const [showThankYou, setShowThankYou] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!verified) {
+      setSubmitResult('Please verify you are human!');
+      return;
+    }
+    setIsSubmitting(true);
+    setSubmitResult('Verifying...');
+    try {
+      const formEl = e.currentTarget;
+      const payload = new FormData(formEl);
+      // You may want to get the recaptcha value from the component if needed for backend
+      // payload.append('g-recaptcha-response', ...);
+      payload.append('access_key', '8cf5247d-b96a-4f34-a3ab-b5990f93409d');
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmitResult('');
+        setShowThankYou(true);
+        formEl.reset();
+        setFormData({ name: '', email: '', company: '', service: '', message: '' });
+        setVerified(false);
+      } else {
+        setSubmitResult(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      setSubmitResult('Network error, please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const contactOptions = [
+    {
+      icon: MessageCircle,
+      title: 'WhatsApp',
+      description: 'Chat instantly with our team',
+      action: 'Start Chat',
+      color: 'from-green-500 to-emerald-500',
+      href: 'https://wa.me/+918929942819?text=Hello%20CodeWave%21%20I%20would%20like%20to%20discuss%20a%20project.' // phone from UI, replace if needed
+    },
+    {
+      icon: MessageCircle,
+      title: 'Live Chat',
+      description: 'Our AI wants to chat with you',
+      action: 'Chat Now',
+      color: 'from-blue-500 to-cyan-500',
+      href: '#live-chat'
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      description: 'Write to hello@codewave.it',
+      action: 'Send Email',
+      color: 'from-purple-500 to-pink-500',
+      href: 'mailto:hello@codewave.it?subject=Website%20Inquiry'
+    },
+    {
+      icon: Calendar,
+      title: 'Schedule a Call',
+      description: 'Book a time slot for call',
+      action: 'Book Call',
+      color: 'from-orange-500 to-red-500',
+      href: 'https://calendly.com/codewave/30min' // replace with real scheduling URL
+    }
+  ];
+
+  const teamMembers = [
+    'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150',
+    'https://images.pexels.com/photos/1300402/pexels-photo-1300402.jpeg?auto=compress&cs=tinysrgb&w=150',
+    'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=150',
+    'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=150'
+  ];
+
+  const whyChooseUs = [
+    'Expert team with 10+ years experience',
+    'Cutting-edge tech solutions for modern challenges',
+    'Dedicated support throughout your project'
+  ];
+
+  return (
+    <>
+      {/* Thank You Modal */}
+      {showThankYou && (
+        <div className="fixed inset-0 flex items-center justify-center z-[9999] px-4">
+          <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={() => setShowThankYou(false)}></div>
+          <div className="relative morph-card glare-card p-8 md:p-10 text-center max-w-md w-full animate-fade-in-up"
+            style={{
+              background: 'var(--card-bg)',
+              border: '2px solid var(--card-border)',
+              boxShadow: '0 0 30px rgba(var(--accent-primary-rgb), 0.3)'
+            }}
+          >
+            <div className="w-20 h-20 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 mx-auto flex items-center justify-center mb-6">
+              <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 neon-glow" style={{ color: 'var(--text-primary)' }}>Thank You!</h3>
+            <p className="text-lg mb-6" style={{ color: 'var(--text-secondary)' }}>
+              Your message has been received. We will get back to you soon!
+            </p>
+            <button
+              onClick={() => setShowThankYou(false)}
+              className="liquid-button px-8 py-3 font-semibold glare-effect text-base magnetic-effect"
+              style={{
+                background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                color: 'var(--bg-secondary)'
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      <section
+        ref={sectionRef}
+        className="py-20 relative z-0"
+        style={{ color: 'var(--text-primary)' }}
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            {/* Badge */}
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <span className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs shadow-lg"
+                style={{
+                  borderColor: 'var(--accent-primary)',
+                  background: 'var(--card-bg)',
+                  boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.10)'
+                }}>
+                <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>Contact</span>
+              </span>
+            </div>
+            <div
+              className="inline-block text-5xl font-bold mb-2 "
+            >
+              <span style={{ color: 'var(--text-primary)' }}>CONTACT</span>{' '}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+                US
+              </span>
+            </div>
+            {/* Underline */}
+            <div className="w-24 h-1 mx-auto mb-6 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
+            <h2
+              className="text-xl sm:text-xl lg:text-xl font-bold mb-6"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              Let's Build Something Great Together
+            </h2>
+            {/* <p
+              className="text-xl max-w-3xl mx-auto"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              Reach out for a free consult, project quote, or partnership.
+            </p> */}
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Contact Options */}
+            <div className="space-y-8">
+              <div className="grid grid-cols-2 gap-4">
+                {contactOptions.map((option, index) => (
+                  <a
+                    key={index}
+                    href={option.href}
+                    target={option.href.startsWith('http') ? '_blank' : undefined}
+                    rel={option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="group card-premium glass-premium p-6 cursor-pointer transition-all duration-300 hover:scale-105 block"
+                   >
+                    <div className={`w-14 h-14 bg-gradient-to-r ${option.color} rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                      <option.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-bold mb-2">
+                      {option.title}
+                    </h3>
+                    <p className={`text-sm ${option.color} mb-3 font-medium`}>
+                      {option.description}
+                    </p>
+                    <span className="font-semibold inline-flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
+                      {option.action}
+                    </span>
+                  </a>
+                ))}
+              </div>
+
+              {/* Quick Contact Form */}
+              <div className="card-premium glass-premium p-8">
+                <div className="flex items-center space-x-2 mb-6">
+                  <div className="w-8 h-8 bg-[#ff6a3d] rounded-lg flex items-center justify-center">
+                    <Send className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-lg font-semibold">Find the right fix - try ML integration or general</span>
+                </div>
+
+                {/* Quick Contact Form Implementation */}
+                <QuickContactForm />
+              </div>
+            </div>
+
+            {/* Contact Form */}
+            <div className="card-premium glass-premium p-8 glare-effect">
+              <h3 className="text-2xl font-bold mb-6">Tell us about your vision</h3>
+
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 gap-6">
+                  <div className="group">
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Your name"
+                      className="w-full input-premium"
+                      style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--card-border)' }}
+                    />
+                  </div>
+
+                  <div className="group">
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="your@email.com"
+                      className="w-full input-premium"
+                      style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--card-border)' }}
+                    />
+                  </div>
+
+                  <div className="group">
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Company/Organization</label>
+                    <input
+                      type="text"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      placeholder="Your company"
+                      className="w-full input-premium"
+                      style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--card-border)' }}
+                    />
+                  </div>
+
+                  <div className="group">
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Services Needed</label>
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleInputChange}
+                      className="w-full input-premium"
+                      style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--card-border)' }}
+                    >
+                      <option value="">Select service</option>
+                      <option value="web">Web Development</option>
+                      <option value="mobile">Mobile App</option>
+                      <option value="ai">AI & ML Solutions</option>
+                      <option value="uiux">UI/UX Design</option>
+                      <option value="govtech">GovTech</option>
+                      <option value="custom">Custom Software</option>
+                    </select>
+                  </div>
+
+                  <div className="group">
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Message</label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      rows={4}
+                      placeholder="Tell us about your project"
+                      className="w-full input-premium resize-none"
+                      style={{ background: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--card-border)' }}
+                    ></textarea>
+                  </div>
+                </div>
+
+                {/* Add Google reCAPTCHA */}
+                <div className="space-y-3">
+                 
+                  <ReCAPTCHA
+                    sitekey="6LcvPc8rAAAAAMzSEaL7SXwy5SYbBvcgLrjyQMqg" 
+                    onChange={() => setVerified(true)}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className={`w-full text-lg font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${verified ? '' : 'bg-gray-400 cursor-not-allowed'}`}
+                  style={{ background: verified ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' : undefined, color: 'white' }}
+                  disabled={!verified || isSubmitting}
+                  aria-busy={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message →'}
+                </button>
+
+                {/* submission result - making it more visible */}
+                {submitResult && (
+                  <div className="mt-3 text-sm font-medium" style={{ color: 'var(--accent-primary)' }}>
+                    {submitResult}
+                  </div>
+                )}
+              </form>
+              <div className="mt-8 pt-8 border-t border-white/10">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Meet your design partners</h4>
+                    <div className="flex -space-x-3">
+                      {teamMembers.map((avatar, index) => (
+                        <div
+                          key={index}
+                          className="w-12 h-12 rounded-full border-2 border-[#0b0e17] overflow-hidden"
+                        >
+                          <img src={avatar} alt="Team member" className="w-full h-full object-cover" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="text-right text-sm" style={{ color: 'var(--text-primary)' }}>
+                    <p>We respond within 24 hours on business days</p>
+                    <p className="mt-1">Your data is secure and never shared.</p>
+                  </div>
+                </div>
+                <div className="mt-6 space-y-2">
+                  <h5 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Why clients choose us</h5>
+                  {whyChooseUs.map((reason, index) => (
+                    <div key={index} className="flex items-center text-sm" style={{ color: 'var(--text-secondary)' }}>
+                      <div className="w-2 h-2 bg-[#ff6a3d] rounded-full mr-3"></div>
+                      {reason}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+const QuickContactForm: React.FC = () => {
+  const [query, setQuery] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [result, setResult] = useState('');
+  const [showThankYou, setShowThankYou] = useState(false);
+  const recaptchaRef = useRef<any>(null);
+
+  const handleQuickSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setResult('Verifying...');
+
+    try {
+      // Get reCAPTCHA value
+      const recaptchaToken = recaptchaRef.current?.getValue();
+      if (!recaptchaToken) {
+        setResult('reCAPTCHA verification failed. Please try again.');
+        setIsSubmitting(false);
+        return;
+      }
+
+      const payload = new FormData();
+      payload.append('g-recaptcha-response', recaptchaToken);
+      payload.append('access_key', '8cf5247d-b96a-4f34-a3ab-b5990f93409d');
+      payload.append('subject', 'Quick Contact');
+      payload.append('message', query);
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setResult('');
+        setQuery('');
+        setShowThankYou(true);
+        recaptchaRef.current?.reset();
+      } else {
+        setResult(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      setResult('Network error, please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <>
+      {showThankYou && (
+        <div className="fixed inset-0 flex items-center justify-center z-[9999] px-4">
+          <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={() => setShowThankYou(false)}></div>
+          <div className="relative morph-card glare-card p-8 md:p-10 text-center max-w-md w-full animate-fade-in-up"
+            style={{
+              background: 'var(--card-bg)',
+              border: '2px solid var(--card-border)',
+              boxShadow: '0 0 30px rgba(var(--accent-primary-rgb), 0.3)'
+            }}
+          >
+            <div className="w-20 h-20 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 mx-auto flex items-center justify-center mb-6">
+              <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 neon-glow" style={{ color: 'var(--text-primary)' }}>Thank You!</h3>
+            <p className="text-lg mb-6" style={{ color: 'var(--text-secondary)' }}>
+              Your message has been received. We will get back to you soon!
+            </p>
+            <button
+              onClick={() => setShowThankYou(false)}
+              className="liquid-button px-8 py-3 font-semibold glare-effect text-base magnetic-effect"
+              style={{
+                background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                color: 'var(--bg-secondary)'
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+      <form className="mt-6" onSubmit={handleQuickSubmit}>
+        <div className="flex flex-wrap gap-3 mb-4">
+          {['Discuss a Project', 'Need Support?', 'Explore Ideas'].map((option, index) => (
+            <button
+              key={index}
+              type="button"
+              className="px-4 py-2 glass-premium rounded-full text-sm font-medium"
+              onClick={() => setQuery(option)}
+              tabIndex={-1}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+        <p
+          style={{ color: 'var(--text-secondary)' }}
+          className="text-sm mb-4 font-medium"
+        >
+          Popular: Pricing, Support, Integration
+        </p>
+        <div className="relative mb-4">
+          <input
+            type="text"
+            placeholder="Find the best - try ML integration or general"
+            className="w-full input-premium"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            required
+            disabled={isSubmitting}
+          />
+          <button
+            type="submit"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2"
+            disabled={isSubmitting}
+          >
+            <Send className="w-5 h-5" />
+          </button>
+        </div>
+        {/* Add the ReCAPTCHA widget here */}
+        <div className="mb-4">
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey="6LcvPc8rAAAAAMzSEaL7SXwy5SYbBvcgLrjyQMqg"
+          />
+        </div>
+        {result && (
+          <div className="mt-2 text-sm" style={{ color: 'var(--accent-primary)' }}>
+            {result}
+          </div>
+        )}
+      </form>
+    </>
+  );
+};
+
+export default ContactSection;
