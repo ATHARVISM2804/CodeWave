@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Globe, Zap, Brain, Palette, Smartphone, Shield, Database, TrendingUp, ArrowRight, Sparkles, Target, CheckCircle, Code, Cloud, Lock, Cpu, Layers } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ServicesPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -266,10 +268,17 @@ const ServicesPage: React.FC = () => {
                   <button className="group px-8 py-4 rounded-full font-semibold text-base flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
                     style={{
                       background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                      color: 'var(--text-primary)',
+                      color: 'var(--bg-primary)',
                       boxShadow: '0 10px 30px rgba(var(--accent-primary-rgb), 0.3)'
                     }}
-                    onClick={() => window.location.href = '/contact'}
+                    onClick={() => {
+                  navigate('/contact#contact-form');
+                  // Optionally, scroll after navigation (if needed)
+                  setTimeout(() => {
+                    const el = document.getElementById('contact-form');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
+                }}
                   >
                     <span>Start Your Project</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -467,7 +476,7 @@ const ServicesPage: React.FC = () => {
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105"
                         style={{
                           background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                          color: 'var(--text-primary)'
+                          color: 'var(--bg-primary)'
                         }}
                       >
                         {service.ctaText}
@@ -533,7 +542,7 @@ const ServicesPage: React.FC = () => {
                 <div className="relative z-10">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-3 magnetic-effect"
                   style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))' }}>
-                  <service.icon className="w-5 h-5" style={{ color: 'var(--text-primary)' }} />
+                  <service.icon className="w-5 h-5" style={{ color: 'var(--bg-primary)' }} />
                 </div>
                 <h3 className="text-base font-bold mb-2 group-hover:text-[var(--accent-primary)] transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{service.description}</p>
@@ -595,7 +604,7 @@ const ServicesPage: React.FC = () => {
                     <div className="relative z-10">
                     <div className="text-center">
                       <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-sm magnetic-effect"
-                        style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
+                        style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-primary)' }}>
                         {step.step}
                       </div>
                       <h3 className="text-base font-bold mb-2 group-hover:text-[var(--accent-primary)] transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>{step.title}</h3>
