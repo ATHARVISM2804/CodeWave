@@ -33,7 +33,7 @@ const Whatsapp: React.FC<{ onChatbotClick?: () => void }> = ({ onChatbotClick })
 
   return (
     <div
-      className="fixed bottom-44 right-4 md:bottom-24 md:right-6 z-50 flex flex-col items-center"
+      className="fixed bottom-24 right-4 md:bottom-24 md:right-6 z-50 flex flex-col items-center"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       tabIndex={0}
