@@ -93,14 +93,18 @@ function App() {
     <HelmetProvider>
       <Router>
         <div className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}>
-          {/* Fixed background div that stays within viewport */}
-          <div
+          {/* Fixed background div with metallic effect */}
+          <div 
             className="fixed top-0 left-0 w-full h-screen -z-10"
             style={{ 
               background: theme === 'light' 
-                ? 'radial-gradient(circle at center, #ffffff 0%, #e2e2e2 40%, #d1d1d1 100%), linear-gradient(45deg, #f5f5f5 25%, #e8e8e8 50%, #f5f5f5 75%)' 
+                ? `
+                    radial-gradient(circle at 50% 50%, rgb(255, 255, 255) 0%, rgb(230, 232, 235) 25%, rgb(220, 222, 225) 50%, rgb(210, 212, 215) 75%, rgb(205, 207, 210) 100%),
+                    linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%)
+                  `
                 : 'var(--bg-primary)',
-              backgroundBlendMode: theme === 'light' ? 'soft-light' : 'normal'
+              backgroundBlendMode: theme === 'light' ? 'overlay' : 'normal',
+              backgroundSize: theme === 'light' ? '100% 100%, 20px 20px' : 'auto'
             }}
           />
           
