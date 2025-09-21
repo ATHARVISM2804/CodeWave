@@ -241,33 +241,8 @@ const ContactSection: React.FC = () => {
                   <span className="text-lg font-semibold">Find the right fix - try ML integration or general</span>
                 </div>
 
-                <div className="flex flex-wrap gap-3">
-                  {['Discuss a Project', 'Need Support?', 'Explore Ideas'].map((option, index) => (
-                    <button
-                      key={index}
-                      className="px-4 py-2 glass-premium 
-                       rounded-full text-sm font-medium"
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="mt-6">
-                  <p
-                    style={{ color: 'var(--text-secondary)' }}
-                    className="text-sm mb-4 font-medium">Popular: Pricing, Support, Integration</p>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Find the best - try ML integration or general"
-                      className="w-full input-premium"
-                    />
-                    <button className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                      <Send className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
+                {/* Quick Contact Form Implementation */}
+                <QuickContactForm />
               </div>
             </div>
 
@@ -400,6 +375,125 @@ const ContactSection: React.FC = () => {
           </div>
         </div>
       </section>
+    </>
+  );
+};
+
+const QuickContactForm: React.FC = () => {
+  const [query, setQuery] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [result, setResult] = useState('');
+  const [showThankYou, setShowThankYou] = useState(false);
+
+  const handleQuickSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setResult('Sending...');
+    try {
+      const payload = new FormData();
+      payload.append('access_key', '8cf5247d-b96a-4f34-a3ab-b5990f93409d');
+      payload.append('subject', 'Quick Contact');
+      payload.append('message', query);
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setResult('');
+        setQuery('');
+        setShowThankYou(true);
+      } else {
+        setResult(data.message || 'Submission failed');
+      }
+    } catch {
+      setResult('Network error, please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <>
+      {showThankYou && (
+        <div className="fixed inset-0 flex items-center justify-center z-[9999] px-4">
+          <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={() => setShowThankYou(false)}></div>
+          <div className="relative morph-card glare-card p-8 md:p-10 text-center max-w-md w-full animate-fade-in-up"
+            style={{
+              background: 'var(--card-bg)',
+              border: '2px solid var(--card-border)',
+              boxShadow: '0 0 30px rgba(var(--accent-primary-rgb), 0.3)'
+            }}
+          >
+            <div className="w-20 h-20 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 mx-auto flex items-center justify-center mb-6">
+              <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 neon-glow" style={{ color: 'var(--text-primary)' }}>Thank You!</h3>
+            <p className="text-lg mb-6" style={{ color: 'var(--text-secondary)' }}>
+              Your message has been received. We will get back to you soon!
+            </p>
+            <button
+              onClick={() => setShowThankYou(false)}
+              className="liquid-button px-8 py-3 font-semibold glare-effect text-base magnetic-effect"
+              style={{
+                background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                color: 'var(--bg-secondary)'
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+      <form className="mt-6" onSubmit={handleQuickSubmit}>
+        <div className="flex flex-wrap gap-3 mb-4">
+          {['Discuss a Project', 'Need Support?', 'Explore Ideas'].map((option, index) => (
+            <button
+              key={index}
+              type="button"
+              className="px-4 py-2 glass-premium rounded-full text-sm font-medium"
+              onClick={() => setQuery(option)}
+              tabIndex={-1}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+        <p
+          style={{ color: 'var(--text-secondary)' }}
+          className="text-sm mb-4 font-medium"
+        >
+          Popular: Pricing, Support, Integration
+        </p>
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Find the best - try ML integration or general"
+            className="w-full input-premium"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            required
+            disabled={isSubmitting}
+          />
+          <button
+            type="submit"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2"
+            disabled={isSubmitting}
+          >
+            <Send className="w-5 h-5" />
+          </button>
+        </div>
+        {result && (
+          <div className="mt-2 text-sm" style={{ color: 'var(--accent-primary)' }}>
+            {result}
+          </div>
+        )}
+      </form>
     </>
   );
 };

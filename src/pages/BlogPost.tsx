@@ -25,6 +25,12 @@ const BlogPost: React.FC = () => {
   const [post, setPost] = useState<BlogPostData | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
+  // Newsletter form state
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
+  const [newsletterResult, setNewsletterResult] = useState('');
+  const [showNewsletterThankYou, setShowNewsletterThankYou] = useState(false);
+
   useEffect(() => {
     setIsVisible(true);
     
@@ -219,6 +225,38 @@ const BlogPost: React.FC = () => {
     }
   }, [id]);
 
+  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setNewsletterSubmitting(true);
+    setNewsletterResult('Sending...');
+    try {
+      const payload = new FormData();
+      payload.append('access_key', '8cf5247d-b96a-4f34-a3ab-b5990f93409d'); // Use your real access key
+      payload.append('email', newsletterEmail);
+      payload.append('subject', 'Newsletter Signup');
+      payload.append('message', 'Newsletter signup from blog post page.');
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setNewsletterResult('');
+        setNewsletterEmail('');
+        setShowNewsletterThankYou(true);
+      } else {
+        setNewsletterResult(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      setNewsletterResult('Network error, please try again.');
+    } finally {
+      setNewsletterSubmitting(false);
+    }
+  };
+
   if (!post) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg-secondary)' }}>
@@ -236,155 +274,204 @@ const BlogPost: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pt-20 pb-20" style={{ background: 'var(--bg-secondary)' }}>
-      <div className="container mx-auto px-4 sm:px-8 lg:px-16">
-        {/* Back Button */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={isVisible ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
-        >
-          {/* <button 
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 px-4 py-2 rounded-full border transition-colors duration-300 hover:scale-105"
-            style={{ borderColor: 'var(--card-border)', color: 'var(--text-primary)', background: 'var(--card-bg)' }}>
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home
-          </button> */}
-        </motion.div>
+    <>
+      {/* Thank You Modal for Newsletter */}
+      {showNewsletterThankYou && (
+        <div className="fixed inset-0 flex items-center justify-center z-[9999] px-4">
+          <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={() => setShowNewsletterThankYou(false)}></div>
+          <div className="relative morph-card glare-card p-8 md:p-10 text-center max-w-md w-full animate-fade-in-up"
+            style={{
+              background: 'var(--card-bg)',
+              border: '2px solid var(--card-border)',
+              boxShadow: '0 0 30px rgba(var(--accent-primary-rgb), 0.3)'
+            }}
+          >
+            <div className="w-20 h-20 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 mx-auto flex items-center justify-center mb-6">
+              <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 neon-glow" style={{ color: 'var(--text-primary)' }}>Thank You!</h3>
+            <p className="text-lg mb-6" style={{ color: 'var(--text-secondary)' }}>
+              You have successfully subscribed to our newsletter.
+            </p>
+            <button
+              onClick={() => setShowNewsletterThankYou(false)}
+              className="liquid-button px-8 py-3 font-semibold glare-effect text-base magnetic-effect"
+              style={{
+                background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                color: 'var(--bg-secondary)'
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="mb-12"
-        >
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-            <img 
-              src={post.image}
-              alt={post.title}
-              className="w-full h-64 md:h-96 object-cover"
-            />
-            {/* Enhanced gradient overlay for better text visibility on mobile */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20"></div>
-            
-            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-12">
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                <span className="px-3 py-1 rounded-full text-xs font-semibold shadow-sm"
-                  style={{ 
-                    background: 'var(--accent-primary)', 
-                    color: 'white',
-                    textShadow: '0 1px 2px rgba(0,0,0,0.3)'
-                  }}>
-                  {post.category}
-                </span>
-                {post.trending && (
-                  <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold shadow-sm"
+      <div className="min-h-screen pt-20 pb-20" style={{ background: 'var(--bg-secondary)' }}>
+        <div className="container mx-auto px-4 sm:px-8 lg:px-16">
+          {/* Back Button */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={isVisible ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="mb-8"
+          >
+            {/* <button 
+              onClick={() => navigate('/')}
+              className="flex items-center gap-2 px-4 py-2 rounded-full border transition-colors duration-300 hover:scale-105"
+              style={{ borderColor: 'var(--card-border)', color: 'var(--text-primary)', background: 'var(--card-bg)' }}>
+              <ArrowLeft className="w-4 h-4" />
+              Back to Home
+            </button> */}
+          </motion.div>
+
+          {/* Hero Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="mb-12"
+          >
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+              <img 
+                src={post.image}
+                alt={post.title}
+                className="w-full h-64 md:h-96 object-cover"
+              />
+              {/* Enhanced gradient overlay for better text visibility on mobile */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20"></div>
+              
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-12">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold shadow-sm"
                     style={{ 
-                      background: 'var(--accent-secondary)', 
+                      background: 'var(--accent-primary)', 
                       color: 'white',
                       textShadow: '0 1px 2px rgba(0,0,0,0.3)'
                     }}>
-                    <TrendingUp className="w-3 h-3" />
-                    Trending
+                    {post.category}
                   </span>
-                )}
+                  {post.trending && (
+                    <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold shadow-sm"
+                      style={{ 
+                        background: 'var(--accent-secondary)', 
+                        color: 'white',
+                        textShadow: '0 1px 2px rgba(0,0,0,0.3)'
+                      }}>
+                      <TrendingUp className="w-3 h-3" />
+                      Trending
+                    </span>
+                  )}
+                </div>
+                
+                <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 text-white drop-shadow-lg">
+                  {post.title}
+                </h1>
+                
+                <p className="text-base sm:text-lg md:text-xl text-gray-100 mb-4 sm:mb-6 max-w-3xl drop-shadow-md">
+                  {post.excerpt}
+                </p>
               </div>
-              
-              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 text-white drop-shadow-lg">
-                {post.title}
-              </h1>
-              
-              <p className="text-base sm:text-lg md:text-xl text-gray-100 mb-4 sm:mb-6 max-w-3xl drop-shadow-md">
-                {post.excerpt}
-              </p>
             </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+            {/* Main Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="lg:col-span-3"
+            >
+              <div className="rounded-3xl p-8 md:p-12 shadow-lg"
+                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                
+                <div 
+                  className="prose prose-lg max-w-none blog-content"
+                  style={{ 
+                    color: 'var(--text-primary)',
+                    textAlign: 'justify'
+                  }}
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+              </div>
+            </motion.div>
+
+            {/* Sidebar */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.6 }}
+              className="lg:col-span-1"
+            >
+              <div className="sticky top-24 space-y-8">
+                {/* About the Author */}
+                <div className="rounded-2xl p-6 shadow-lg"
+                  style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                  <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+                    About the Author
+                  </h3>
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                      <User className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>Shivam Jand</h4>
+                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Senior Developer</p>
+                    </div>
+                  </div>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                    Passionate about creating intelligent software solutions and sharing knowledge with the developer community.
+                  </p>
+                </div>
+                
+                {/* Newsletter Signup */}
+                <div className="rounded-2xl p-6 shadow-lg"
+                  style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
+                  <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+                    Stay Updated
+                  </h3>
+                  <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
+                    Get the latest insights delivered to your inbox.
+                  </p>
+                  <form className="space-y-3" onSubmit={handleNewsletterSubmit}>
+                    <input
+                      type="email"
+                      placeholder="Your email"
+                      className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
+                      style={{
+                        background: 'var(--bg-secondary)',
+                        borderColor: 'var(--card-border)',
+                        color: 'var(--text-primary)'
+                      }}
+                      value={newsletterEmail}
+                      onChange={e => setNewsletterEmail(e.target.value)}
+                      required
+                      disabled={newsletterSubmitting}
+                    />
+                    <button
+                      type="submit"
+                      className="w-full px-4 py-2 rounded-lg font-semibold transition-transform duration-200 hover:scale-105"
+                      style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-primary)' }}
+                      disabled={newsletterSubmitting}
+                    >
+                      {newsletterSubmitting ? 'Subscribing...' : 'Subscribe'}
+                    </button>
+                    {newsletterResult && (
+                      <div className="mt-2 text-sm" style={{ color: 'var(--accent-primary)' }}>
+                        {newsletterResult}
+                      </div>
+                    )}
+                  </form>
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-          {/* Main Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="lg:col-span-3"
-          >
-            <div className="rounded-3xl p-8 md:p-12 shadow-lg"
-              style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
-              
-              <div 
-                className="prose prose-lg max-w-none blog-content"
-                style={{ 
-                  color: 'var(--text-primary)',
-                  textAlign: 'justify'
-                }}
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
-            </div>
-          </motion.div>
-
-          {/* Sidebar */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.6 }}
-            className="lg:col-span-1"
-          >
-            <div className="sticky top-24 space-y-8">
-              {/* About the Author */}
-              <div className="rounded-2xl p-6 shadow-lg"
-                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
-                <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
-                  About the Author
-                </h3>
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center text-white">
-                    <User className="w-8 h-8" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>Shivam Jand</h4>
-                    <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Senior Developer</p>
-                  </div>
-                </div>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  Passionate about creating intelligent software solutions and sharing knowledge with the developer community.
-                </p>
-              </div>
-              
-              {/* Newsletter Signup */}
-              <div className="rounded-2xl p-6 shadow-lg"
-                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
-                <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
-                  Stay Updated
-                </h3>
-                <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
-                  Get the latest insights delivered to your inbox.
-                </p>
-                <div className="space-y-3">
-                  <input
-                    type="email"
-                    placeholder="Your email"
-                    className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
-                    style={{ 
-                      background: 'var(--bg-secondary)', 
-                      borderColor: 'var(--card-border)', 
-                      color: 'var(--text-primary)' 
-                    }}
-                  />
-                  <button className="w-full px-4 py-2 rounded-lg font-semibold transition-transform duration-200 hover:scale-105"
-                    style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}>
-                    Subscribe
-                  </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
