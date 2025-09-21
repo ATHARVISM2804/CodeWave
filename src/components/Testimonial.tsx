@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Quote } from 'lucide-react';
 
@@ -41,6 +40,14 @@ const Testimonial = () => {
   const prev = () => {
     setCurrent((current - 1 + testimonials.length) % testimonials.length);
   };
+
+  // Auto-advance every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent(c => (c + 1) % testimonials.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="py-24 relative overflow-hidden">

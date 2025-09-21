@@ -236,7 +236,7 @@ const BlogPost: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pt-20 mb-20" style={{ background: 'var(--bg-secondary)' }}>
+    <div className="min-h-screen pt-20 pb-20" style={{ background: 'var(--bg-secondary)' }}>
       <div className="container mx-auto px-4 sm:px-8 lg:px-16">
         {/* Back Button */}
         <motion.div
@@ -245,13 +245,13 @@ const BlogPost: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <button 
+          {/* <button 
             onClick={() => navigate('/')}
             className="flex items-center gap-2 px-4 py-2 rounded-full border transition-colors duration-300 hover:scale-105"
             style={{ borderColor: 'var(--card-border)', color: 'var(--text-primary)', background: 'var(--card-bg)' }}>
             <ArrowLeft className="w-4 h-4" />
             Back to Home
-          </button>
+          </button> */}
         </motion.div>
 
         {/* Hero Section */}
