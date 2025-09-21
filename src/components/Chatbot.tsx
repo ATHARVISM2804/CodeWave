@@ -133,7 +133,7 @@ const Chatbot: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClo
     <>
       {/* Chat Window */}
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 w-96 max-w-[95vw] h-[550px] rounded-xl shadow-2xl border flex flex-col overflow-hidden animate-fade-in-up"
+        <div className="fixed bottom-5 right-3 md:bottom-6 md:right-24 z-[999] w-96 max-w-[95vw] h-[550px] rounded-xl shadow-2xl border flex flex-col overflow-hidden animate-fade-in-up"
           style={{
             background: 'var(--card-bg)',
             border: '1px solid var(--card-border)',
