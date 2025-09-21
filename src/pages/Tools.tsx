@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Bot, Brain, Code, Database, Terminal, Zap, Sparkles, CheckCircle, Layers, X, Clock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const tools = [
 	{
@@ -103,6 +104,7 @@ const ToolsPage: React.FC = () => {
 	const [selectedTool, setSelectedTool] = useState<string | null>(null);
 	const sectionRef = useRef<HTMLElement>(null);
 	const modalRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
@@ -533,7 +535,7 @@ const ToolsPage: React.FC = () => {
 											style={{
 												background:
 													'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-												color: 'var(--text-primary)',
+												color: 'var(--bg-primary)',
 											}}
 										>
 											Try Now
@@ -624,10 +626,17 @@ const ToolsPage: React.FC = () => {
 									style={{
 										background:
 											'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-										color: 'var(--text-primary)',
+										color: 'var(--bg-primary)',
 										boxShadow: '0 10px 30px rgba(var(--accent-primary-rgb), 0.3)',
 									}}
-									onClick={() => (window.location.href = '/contact')}
+									onClick={() => {
+                  navigate('/contact#contact-form');
+                  // Optionally, scroll after navigation (if needed)
+                  setTimeout(() => {
+                    const el = document.getElementById('contact-form');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
+                }}
 								>
 									<span>Contact Our Team</span>
 									<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
