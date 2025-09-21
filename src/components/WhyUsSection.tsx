@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Zap, Shield, TrendingUp, Award, Target } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const WhyUsSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -7,6 +8,8 @@ const WhyUsSection: React.FC = () => {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -341,7 +344,14 @@ const WhyUsSection: React.FC = () => {
             background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))',
             boxShadow: '0 10px 25px rgba(var(--accent-primary-rgb), 0.3)'
           }}
-          onClick={() => window.location.href = '/contact'}
+          onClick={() => {
+                  navigate('/contact#contact-form');
+                  // Optionally, scroll after navigation (if needed)
+                  setTimeout(() => {
+                    const el = document.getElementById('contact-form');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
+                }}
         >
           Start Your Project
         </button>

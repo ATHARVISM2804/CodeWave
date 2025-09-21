@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { MessageCircle, Phone, Mail, Calendar, Send, MapPin, Clock, Users, CheckCircle, Twitter, Linkedin, Github } from 'lucide-react';
-import { color } from 'framer-motion';
+import { MessageCircle, Phone, Mail, Calendar, MapPin, Clock, Users, CheckCircle, Twitter, Linkedin, Github } from 'lucide-react';
 
 const ContactPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -294,7 +293,7 @@ const ContactPage: React.FC = () => {
       )}
 
       {/* Main Contact Form */}
-      <section className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
+      <section id='contact-form' className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
