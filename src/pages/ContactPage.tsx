@@ -167,20 +167,52 @@ const ContactPage: React.FC = () => {
 
   const faqs = [
     {
-      question: 'How long does a typical project take?',
-      answer: 'Project timelines vary based on complexity, but most projects range from 4-16 weeks. We provide detailed timelines during our initial consultation.'
+      question: 'Who is Codewave.it?',
+      answer: 'Codewave.it is an Intelligence Studio that builds AI-powered websites, custom software, mobile apps, GovTech platforms, and digital marketing solutions for startups, businesses, enterprises, and governments worldwide.'
     },
     {
-      question: 'Do you work with startups?',
-      answer: 'Absolutely! We love working with startups and offer flexible engagement models to fit different budgets and growth stages.'
+      question: 'What services does Codewave.it offer?',
+      answer: 'We offer Web Development, Custom Software Solutions, AI-Powered Automation & Smart Tools, GovTech Applications, Mobile App Development, UI/UX Design, API Integration & Data Intelligence, and Digital Marketing.'
     },
     {
-      question: 'What makes CodeWave different?',
-      answer: 'We integrate AI and intelligence into every solution we build, ensuring your software doesn\'t just work—it thinks and adapts.'
+      question: 'What industries does Codewave.it serve?',
+      answer: 'We partner with startups & scaleups, government & law enforcement, logistics & delivery, fintech & professional services, education & eLearning, and healthcare & wellness to deliver smart, secure, and scalable digital solutions.'
     },
     {
-      question: 'Do you provide ongoing support?',
-      answer: 'Yes, we offer comprehensive support packages including maintenance, updates, and continuous optimization of your solutions.'
+      question: 'Do you build SEO and AI-friendly websites?',
+      answer: 'Yes. We build fast, SEO-optimized, and AI-agent friendly websites that are structured for discoverability, semantic clarity, and high performance.'
+    },
+    {
+      question: 'What is custom software development?',
+      answer: 'Custom software is built to fit your unique workflows. We design internal tools, dashboards, portals, and automation systems that adapt to your organization instead of forcing you to adapt to generic tools.'
+    },
+    {
+      question: 'How does Codewave use AI?',
+      answer: 'We create AI-powered chatbots, knowledge assistants, document summarizers, automated reporting tools, and smart workflows that reduce manual work, improve decision-making, and accelerate growth.'
+    },
+    {
+      question: 'Do you work with governments?',
+      answer: 'Yes. We design secure GovTech applications including complaint portals, citizen communication tools, field dashboards, and case management systems — all built for compliance, accountability, and scale.'
+    },
+    {
+      question: 'Do you build mobile apps?',
+      answer: 'Yes. We build cross-platform and native mobile apps with features like GPS tracking, real-time notifications, secure authentication, and offline-first capability — from MVPs to enterprise-scale apps.'
+    },
+    {
+      question: 'Why is UI/UX design important?',
+      answer: 'Great design guides action, reduces friction, and delights users. Our UX services cover user journeys, wireframes, prototypes, and scalable design systems tested with real users.'
+    },
+    {
+      question: 'Do you provide API integration and data dashboards?',
+      answer: 'Yes. We build secure API integrations with CRMs, ERPs, and internal tools, along with dashboards that transform raw data into actionable insights for smarter business decisions.'
+    },
+    {
+      question: 'Do you offer digital marketing?',
+      answer: 'Yes. Our digital marketing solutions combine SEO, content marketing, social media, paid campaigns, and AI insights to grow your brand visibility, authority, and revenue.'
+    },
+    {
+      question: 'How can I contact Codewave.it?',
+      answer: 'You can contact us at hello@codewave.it, connect via WhatsApp, or schedule a call through our website.'
     }
   ];
 
@@ -620,15 +652,56 @@ const ContactPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-6">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
-                style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}
+                className={`group morph-card hover-lift-premium transition-all duration-300 ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                style={{ 
+                  background: 'var(--card-bg)', 
+                  border: '1px solid var(--card-border)',
+                  borderRadius: '1rem',
+                  overflow: 'hidden'
+                }}
               >
-                <h3 className="text-xl font-bold mb-4 neon-glow" style={{ color: 'var(--text-primary)' }}>{faq.question}</h3>
-                <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{faq.answer}</p>
+                <div 
+                  className="p-6 cursor-pointer"
+                  onClick={() => {
+                    const element = document.getElementById(`faq-answer-${index}`);
+                    const allAnswers = document.querySelectorAll('[id^="faq-answer-"]');
+                    allAnswers.forEach(answer => {
+                      if (answer.id !== `faq-answer-${index}`) {
+                        answer.classList.remove('max-h-96');
+                        answer.classList.add('max-h-0');
+                      }
+                    });
+                    element?.classList.toggle('max-h-0');
+                    element?.classList.toggle('max-h-96');
+                  }}
+                >
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold neon-glow group-hover:text-[var(--accent-primary)] transition-colors duration-300" 
+                      style={{ color: 'var(--text-primary)' }}>
+                      {faq.question}
+                    </h3>
+                    <div 
+                      className="flex-shrink-0 ml-4 transform transition-transform duration-300 group-hover:rotate-180"
+                      style={{ color: 'var(--accent-primary)' }}
+                    >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div 
+                    id={`faq-answer-${index}`}
+                    className="overflow-hidden transition-all duration-300 max-h-0"
+                  >
+                    <p className="mt-4 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

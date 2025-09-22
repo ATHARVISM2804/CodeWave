@@ -19,6 +19,18 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+
+  useEffect(() => {
+    // Get theme from html class
+    const html = document.documentElement;
+    const observer = new MutationObserver(() => {
+      setTheme(html.classList.contains('light') ? 'light' : 'dark');
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ['class'] });
+    setTheme(html.classList.contains('light') ? 'light' : 'dark');
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,22 +58,21 @@ const Header: React.FC = () => {
             <div className="flex items-center justify-start col-start-1">
               <a href="/" className="flex items-center" aria-label="CodeWave home">
                 <div
-                  className="relative flex items-center gap-3 px-3 py-2 rounded-lg transition-transform duration-300 hover:scale-105 logo-container"
+                  className="relative flex items-center gap-3 px-3 py-2 rounded-lg transition-transform duration-300 hover:scale-105 "
                   style={{
-                    border: '1.5px solid var(--logo-border)',
-                    background: 'var(--logo-bg)',
-                    backdropFilter: 'blur(6px)',
+                    // border: '1.5px solid var(--logo-border)',
+                    // background: 'var(--logo-bg)', // Removed background color
+                    // backdropFilter: 'blur(6px)', // Removed blur
                   }}
                 >
                   {/* animated rectangular gradient overlay (matches WhyUsSection) */}
-                  <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
+                  {/* <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
                     <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/20 to-transparent animate-pulse-premium" />
-                  </div>
-
+                  </div> */}
                   <img
-                    src={Codewavelogo}
+                    src={theme === 'dark' ? darkThemeLogo : lightThemeLogo}
                     alt="CodeWave"
-                    className="h-8 w-auto object-contain relative z-10"
+                    className="h-28 w-auto object-contain relative z-10"
                     style={{ display: 'block' }}
                   />
                 </div>
@@ -127,7 +138,7 @@ const Header: React.FC = () => {
           <div className="relative w-[85%] max-w-md mx-auto my-20 bg-[var(--card-bg)] shadow-2xl animate-fade-in-up rounded-2xl overflow-hidden">
             <div className="flex flex-col p-6">
               <div className="flex items-center justify-between mb-6">
-                <img src={Codewavelogo} alt="CodeWave" className="h-8" />
+                <img src={theme === 'dark' ? darkThemeLogo : lightThemeLogo} alt="CodeWave" className="h-8" />
                 <button 
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-2 rounded-full text-[var(--text-secondary)] hover:bg-[var(--card-border)]"
