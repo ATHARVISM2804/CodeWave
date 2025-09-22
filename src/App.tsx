@@ -111,9 +111,11 @@ function App() {
           <MouseFollower />
           <Chatbot open={chatbotOpen} onClose={() => setChatbotOpen(false)} />
           <Header />
-          {theme === 'dark' && (
+          {/* {theme === 'dark' && (
             <BgAnimation intensity="high" className="opacity-100" />
-          )}
+          )} */}
+
+          <BgAnimation />
           <ScrollToTop />
           {isLoading ? (
             <LoadingAnimation duration={500} onComplete={handleLoadingComplete} />

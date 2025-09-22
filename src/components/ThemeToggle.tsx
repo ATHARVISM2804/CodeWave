@@ -145,32 +145,56 @@ export default LoadingAnimation;
 
 // New: lightweight ThemeToggleButton for header
 export const ThemeToggleButton: React.FC = () => {
-  // Import useTheme from our hook
   const [theme, toggleTheme] = useTheme();
-  // Add mount state to prevent hydration mismatch
   const [mounted, setMounted] = useState(false);
-  
-  // Only mount after initial render
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  
-  // Don't render anything until mounted
+  useEffect(() => { setMounted(true); }, []);
   if (!mounted) return null;
+
+  const isDark = theme === 'dark';
 
   return (
     <button
       aria-label="Toggle theme"
       onClick={toggleTheme}
-      className="p-2 rounded-full transition-colors duration-200 flex items-center justify-center"
+      className="relative w-12 h-7 flex items-center rounded-full transition-colors duration-300 focus:outline-none"
       style={{
-        background: 'var(--card-bg)',
-        border: '1px solid var(--card-border)',
-        color: 'var(--text-primary)'
+        background: isDark
+          ? 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))'
+          : 'var(--card-bg)',
+        border: '1.5px solid var(--card-border)',
+        boxShadow: isDark ? '0 0 8px var(--accent-primary)' : 'none',
+        padding: 0
       }}
-      title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+      title={`Switch to ${isDark ? 'light' : 'dark'} theme`}
     >
-      {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+      {/* Track */}
+      <span
+        className="absolute left-2 top-1/2 -translate-y-1/2 text-yellow-400 transition-opacity duration-200"
+        style={{ opacity: isDark ? 0 : 1 }}
+      >
+        <Sun size={16} />
+      </span>
+      <span
+        className="absolute right-2 top-1/2 -translate-y-1/2 text-blue-400 transition-opacity duration-200"
+        style={{ opacity: isDark ? 1 : 0 }}
+      >
+        <Moon size={16} />
+      </span>
+      {/* Thumb */}
+      <span
+        className="absolute top-1/2 -translate-y-1/2 w-6 h-6 rounded-full shadow-md flex items-center justify-center transition-all duration-300"
+        style={{
+          left: isDark ? 'calc(100% - 28px)' : '4px',
+          background: isDark
+            ? 'var(--bg-primary)'
+            : 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+          color: isDark ? 'var(--accent-primary)' : 'white',
+          border: isDark ? '1.5px solid var(--accent-primary)' : 'none',
+          boxShadow: isDark ? '0 0 6px var(--accent-primary)' : '0 1px 4px rgba(0,0,0,0.08)'
+        }}
+      >
+        {isDark ? <Moon size={16} /> : <Sun size={16} />}
+      </span>
     </button>
   );
 };
