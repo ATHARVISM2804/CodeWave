@@ -183,9 +183,9 @@ const ContactSection: React.FC = () => {
             <div
               className="inline-block text-5xl font-bold mb-2 "
             >
-              <span style={{ color: 'var(--text-primary)' }}>CONTACT</span>{' '}
+              <span style={{ color: 'var(--text-primary)' }}>Contact</span>{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
-                US
+                Us
               </span>
             </div>
             {/* Underline */}
