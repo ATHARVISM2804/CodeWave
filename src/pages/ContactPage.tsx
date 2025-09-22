@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageCircle, Phone, Mail, Calendar, MapPin, Clock, Users, CheckCircle, Twitter, Linkedin, Github } from 'lucide-react';
+import CalendlyPopup from '../components/CalendlyPopup';
 
 const ContactPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -252,19 +253,12 @@ const ContactPage: React.FC = () => {
       </section>
 
       {/* Calendly Popup Modal */}
-      {showCalendly && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
-          <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={() => setShowCalendly(false)}></div>
-          <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[80vh] flex flex-col">
-            <div className="flex justify-between items-center p-4 border-b">
-              <span className="font-bold text-lg" style={{ color: 'var(--text-primary)' }}>Schedule a Meeting</span>
-              <button onClick={() => setShowCalendly(false)} className="text-xl font-bold px-2" style={{ color: 'var(--accent-primary)' }}>×</button>
-            </div>
-            {/* Loading animation while Calendly iframe loads */}
-            <CalendlyIframeWithLoader />
-          </div>
-        </div>
-      )}
+      <CalendlyPopup
+        url="https://calendly.com/careersparushapandey/30min"
+        open={showCalendly}
+        onClose={() => setShowCalendly(false)}
+        title="Schedule a Meeting"
+      />
 
       {/* Contact Methods */}
       <section ref={sectionRef} className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
@@ -738,34 +732,6 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
-};
-
-// Add this component at the bottom, before export default ContactPage;
-const CalendlyIframeWithLoader: React.FC = () => {
-  const [loaded, setLoaded] = useState(false);
-  return (
-    <div className="relative flex-1 w-full">
-      {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
-          <div className="flex flex-col items-center">
-            <svg className="animate-spin h-8 w-8 text-[var(--accent-primary)] mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-            </svg>
-            <span className="text-sm text-[var(--accent-primary)]">Loading calendar...</span>
-          </div>
-        </div>
-      )}
-      <iframe
-        src="https://calendly.com/careersparushapandey/30min"
-        title="Calendly Scheduling"
-        className="flex-1 w-full border-0 h-full"
-        style={{ minHeight: 0 }}
-        allow="camera; microphone; fullscreen"
-        onLoad={() => setLoaded(true)}
-      ></iframe>
     </div>
   );
 };

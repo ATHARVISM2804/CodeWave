@@ -1,177 +1,46 @@
-import React, { useEffect, useState } from 'react';
+
+import React, { useState } from 'react';
 
 interface CalendlyPopupProps {
   url: string;
-  isOpen: boolean;
+  open: boolean;
   onClose: () => void;
+  title?: string;
 }
 
-const CalendlyPopup: React.FC<CalendlyPopupProps> = ({ url, isOpen, onClose }) => {
-  const [calendlyLoaded, setCalendlyLoaded] = useState(false);
-  const [loading, setLoading] = useState(true);
+const CalendlyPopup: React.FC<CalendlyPopupProps> = ({ url, open, onClose, title }) => {
+  const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    // Load Calendly script only once
-    if (!document.querySelector('script[src*="calendly.com/assets/external/widget.js"]')) {
-      const script = document.createElement('script');
-      script.src = 'https://assets.calendly.com/assets/external/widget.js';
-      script.async = true;
-      script.onload = () => {
-        console.log('Calendly script loaded');
-        setCalendlyLoaded(true);
-        setLoading(false);
-      };
-      script.onerror = () => {
-        console.error('Failed to load Calendly script');
-        setLoading(false);
-      };
-      document.head.appendChild(script);
-    } else {
-      setCalendlyLoaded(true);
-      setLoading(false);
-    }
-  }, []);
-
-  // Lock scroll when popup is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-    };
-  }, [isOpen]);
-
-  // Initialize Calendly popup when open
-  useEffect(() => {
-    if (isOpen && calendlyLoaded && (window as any).Calendly) {
-      try {
-        (window as any).Calendly.initPopupWidget({
-          url: url,
-          parentElement: document.getElementById('calendly-popup-container')
-        });
-      } catch (error) {
-        console.error('Calendly initialization error:', error);
-      }
-    }
-  }, [isOpen, calendlyLoaded, url]);
-
-  // Handle ESC key to close popup
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        handleClose();
-      }
-    };
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-    }
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen]);
-
-  const handleClose = () => {
-    document.body.style.overflow = '';
-    document.documentElement.style.overflow = '';
-    onClose();
-  };
-
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      handleClose();
-    }
-  };
-
-  if (!isOpen) return null;
+  if (!open) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
-      onClick={handleBackdropClick}
-      style={{ zIndex: 9999 }}
-    >
-      <div
-        className="relative w-full max-w-4xl h-[80vh] bg-white rounded-2xl shadow-2xl overflow-hidden"
-        style={{
-          background: 'var(--bg-primary)',
-          border: '1px solid var(--glass-border)',
-          boxShadow: '0 25px 50px rgba(0,0,0,0.5)'
-        }}
-      >
-        {/* Header */}
-        <div
-          className="flex items-center justify-between p-6 border-b"
-          style={{ borderColor: 'var(--glass-border)' }}
-        >
-          <h2 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
-            Schedule a Consultation
-          </h2>
-          <button
-            onClick={handleClose}
-            className="p-2 rounded-full hover:bg-opacity-20 transition-colors"
-            style={{
-              background: 'rgba(var(--accent-primary-rgb), 0.1)',
-              color: 'var(--accent-primary)'
-            }}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
+      <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={onClose}></div>
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[80vh] flex flex-col">
+        <div className="flex justify-between items-center p-4 border-b">
+          <span className="font-bold text-lg" style={{ color: 'var(--text-primary)' }}>{title || 'Schedule a Meeting'}</span>
+          <button onClick={onClose} className="text-xl font-bold px-2" style={{ color: 'var(--accent-primary)' }}>×</button>
         </div>
-
-        {/* Calendly Container */}
-        <div
-          id="calendly-popup-container"
-          className="flex-1 w-full h-full min-h-[500px]"
-        >
-          {loading && (
-            <div className="flex items-center justify-center h-full">
-              <div className="text-center">
-                <div
-                  className="w-12 h-12 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4"
-                  style={{ borderColor: 'var(--accent-primary)', borderTopColor: 'transparent' }}
-                ></div>
-                <p style={{ color: 'var(--text-secondary)' }}>Loading calendar...</p>
+        <div className="relative flex-1 w-full">
+          {!loaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
+              <div className="flex flex-col items-center">
+                <svg className="animate-spin h-8 w-8 text-[var(--accent-primary)] mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                </svg>
+                <span className="text-sm text-[var(--accent-primary)]">Loading calendar...</span>
               </div>
             </div>
           )}
-
-          {!calendlyLoaded && !loading && (
-            <div className="flex items-center justify-center h-full">
-              <div className="text-center">
-                <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>
-                  Unable to load calendar. Please try again later.
-                </p>
-                <button
-                  onClick={() => window.open(url, '_blank')}
-                  className="px-6 py-3 rounded-lg font-semibold transition-all duration-300"
-                  style={{
-                    background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                    color: 'white'
-                  }}
-                >
-                  Open in New Tab
-                </button>
-              </div>
-            </div>
-          )}
+          <iframe
+            src={url}
+            title="Calendly Scheduling"
+            className="flex-1 w-full border-0 h-full"
+            style={{ minHeight: 0 }}
+            allow="camera; microphone; fullscreen"
+            onLoad={() => setLoaded(true)}
+          ></iframe>
         </div>
       </div>
     </div>
@@ -179,3 +48,12 @@ const CalendlyPopup: React.FC<CalendlyPopupProps> = ({ url, isOpen, onClose }) =
 };
 
 export default CalendlyPopup;
+
+
+// How to use it 
+  // <CalendlyPopup
+  //       url="https://calendly.com/careersparushapandey/30min"
+  //       open={showCalendly}
+  //       onClose={() => setShowCalendly(false)}
+  //       title="Schedule a Meeting"
+  //     />

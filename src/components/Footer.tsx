@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Twitter, Linkedin, Github, Mail, ChevronRight, Phone } from 'lucide-react';
 import codeWaveLogo from "../assets/Logo_Orginal.png"
+import CalendlyPopup from './CalendlyPopup';
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 32 32" width={20} height={20} fill="currentColor" {...props}>
@@ -24,196 +25,66 @@ const Footer: React.FC = () => {
     { icon: Mail, href: 'mailto:hello@codewave.it', name: 'Email' }
   ];
 
+  const [calendlyOpen, setCalendlyOpen] = useState(false);
+
   return (
-    <footer
-      className="pt-10 sm:pt-16 pb-6 sm:pb-8"
-      style={{
-        background: 'var(--bg-secondary)',
-        borderTop: '1px solid var(--glass-border)',
-        color: 'var(--text-primary)'
-      }}
-    >
-      <div className="container mx-auto px-4 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 px-2 sm:px-6 lg:px-16 xl:px-28">
-          {/* Logo and Tagline Column */}
-          <div className="md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">
-            <div className="mb-4 sm:mb-6">
-              <a href="/" className="inline-block" aria-label="CodeWave home">
-                <div className="relative flex items-center gap-3 px-3 sm:px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-105 logo-container">
-                  {/* animated gradient overlay */}
-                  <div className="logo-gradient"></div>
+    <>
+      {/* Calendly Popup */}
+      <CalendlyPopup
+        url="https://calendly.com/careersparushapandey/30min"
+        open={calendlyOpen}
+        onClose={() => setCalendlyOpen(false)}
+        title="Book Free Consultation"
+      />
+      <footer
+        className="pt-10 sm:pt-16 pb-6 sm:pb-8"
+        style={{
+          background: 'var(--bg-secondary)',
+          borderTop: '1px solid var(--glass-border)',
+          color: 'var(--text-primary)'
+        }}
+      >
+        <div className="container mx-auto px-4 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 px-2 sm:px-6 lg:px-16 xl:px-28">
+            {/* Logo and Tagline Column */}
+            <div className="md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">
+              <div className="mb-4 sm:mb-6">
+                <a href="/" className="inline-block" aria-label="CodeWave home">
+                  <div className="relative flex items-center gap-3 px-3 sm:px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-105 logo-container">
+                    {/* animated gradient overlay */}
+                    <div className="logo-gradient"></div>
 
-                  <img
-                    src={codeWaveLogo}
-                    alt="CodeWave Logo"
-                    className="h-10 sm:h-12 md:h-16 w-auto object-contain relative z-10"
-                    style={{ display: 'block' }}
-                  />
-                </div>
-              </a>
-            </div>
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-6 leading-tight">
-              <span style={{ color: 'var(--text-primary)' }}>We don't just write code.</span> <br />
-              <span style={{ color: 'var(--accent-primary)' }}>We make it think.</span>
-            </h2>
-            <p className="text-sm sm:text-base mb-5 sm:mb-8 max-w-md" style={{ color: 'var(--text-secondary)' }}>
-              Join hundreds of innovators who've partnered with CodeWave to build the future of digital experiences.
-            </p>
-            
-            {/* Social Links for Mobile - Enhanced design */}
-            <div className="flex items-center justify-center md:justify-start space-x-4 mb-6 md:hidden">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  aria-label={social.name}
-                  className="transition-all duration-300 hover:-translate-y-1"
-                  style={{
-                    color: 'var(--text-secondary)',
-                    background: 'var(--card-bg)',
-                    border: '1px solid var(--card-border)',
-                    borderRadius: '50%',
-                    padding: '10px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.color = 'var(--accent-primary)';
-                    e.currentTarget.style.borderColor = 'var(--accent-primary)';
-                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(var(--accent-primary-rgb), 0.2)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.color = 'var(--text-secondary)';
-                    e.currentTarget.style.borderColor = 'var(--card-border)';
-                    e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-                  }}
-                >
-                  <social.icon size={20} />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation Links - Improved mobile spacing */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <h3 className="text-lg font-bold mb-4 pb-1 relative" 
-              style={{ color: 'var(--text-primary)' }}>
-              <span className="relative">
-                Navigation
-                <span className="absolute bottom-0 left-0 right-0 mx-auto md:mx-0 md:left-0 md:right-auto w-8 h-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></span>
-              </span>
-            </h3>
-            <ul className="space-y-3">
-              {navigationLinks.map((link, index) => (
-                <li key={index} className="group">
-                  <a
-                    href={link.href}
-                    className="flex items-center justify-center md:justify-start transition-colors text-base"
-                    style={{ color: 'var(--text-secondary)' }}
-                    onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
-                    onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
-                  >
-                    <ChevronRight
-                      size={16}
-                      className="mr-2 transform transition-transform duration-300 group-hover:translate-x-1"
-                      style={{ color: 'var(--accent-primary)' }}
+                    <img
+                      src={codeWaveLogo}
+                      alt="CodeWave Logo"
+                      className="h-10 sm:h-12 md:h-16 w-auto object-contain relative z-10"
+                      style={{ display: 'block' }}
                     />
-                    {link.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Column - Improved mobile design */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <h3 className="text-lg font-bold mb-4 pb-1 relative" 
-              style={{ color: 'var(--text-primary)' }}>
-              <span className="relative">
-                Contact Us
-                <span className="absolute bottom-0 left-0 right-0 mx-auto md:mx-0 md:left-0 md:right-auto w-8 h-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></span>
-              </span>
-            </h3>
-            <ul className="space-y-4 w-full max-w-xs">
-              <li style={{ color: 'var(--text-secondary)' }}>
-                <a
-                  href="mailto:careersparushapandey@gmail.com"
-                  className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
-                >
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center"
-                    style={{ 
-                      background: 'rgba(var(--accent-primary-rgb), 0.1)', 
-                      color: 'var(--accent-primary)' 
-                    }}>
-                    <Mail size={18} />
                   </div>
-                  <span className="truncate">careersparushapandey@gmail.com</span>
                 </a>
-              </li>
-              <li style={{ color: 'var(--text-secondary)' }}>
-                <a
-                  href="tel:+918929942819"
-                  className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
-                >
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center"
-                    style={{ 
-                      background: 'rgba(var(--accent-primary-rgb), 0.1)', 
-                      color: 'var(--accent-primary)' 
-                    }}>
-                    <Phone size={18} />
-                  </div>
-                  +91 89299 42819
-                </a>
-              </li>
-              <li style={{ color: 'var(--text-secondary)' }}>
-                <a
-                  href="https://wa.me/+918929942819"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
-                >
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center"
-                    style={{ 
-                      background: 'rgba(var(--accent-primary-rgb), 0.1)', 
-                      color: 'var(--accent-primary)' 
-                    }}>
-                    <WhatsAppIcon />
-                  </div>
-                  WhatsApp Chat
-                </a>
-              </li>
-              <li className="pt-1">
-                <a
-                  href="https://calendly.com/codewave/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2.5 rounded-lg inline-flex items-center justify-center transition-all duration-300 hover:-translate-y-1 shadow-lg text-base w-full"
-                  style={{
-                    background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                    color: 'white',
-                    boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.3)'
-                  }}
-                >
-                  Schedule a consult
-                </a>
-              </li>
+              </div>
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-6 leading-tight">
+                <span style={{ color: 'var(--text-primary)' }}>We don't just write code.</span> <br />
+                <span style={{ color: 'var(--accent-primary)' }}>We make it think.</span>
+              </h2>
+              <p className="text-sm sm:text-base mb-5 sm:mb-8 max-w-md" style={{ color: 'var(--text-secondary)' }}>
+                Join hundreds of innovators who've partnered with CodeWave to build the future of digital experiences.
+              </p>
               
-              {/* Social Links for larger screens */}
-              <li className="hidden md:flex flex-wrap items-center justify-center md:justify-start space-x-3 mt-4 sm:mt-6">
+              {/* Social Links for Mobile - Enhanced design */}
+              <div className="flex items-center justify-center md:justify-start space-x-4 mb-6 md:hidden">
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
                     href={social.href}
                     aria-label={social.name}
-                    className="transition-all duration-300 hover:-translate-y-1 mb-2"
+                    className="transition-all duration-300 hover:-translate-y-1"
                     style={{
                       color: 'var(--text-secondary)',
                       background: 'var(--card-bg)',
                       border: '1px solid var(--card-border)',
                       borderRadius: '50%',
-                      padding: '8px',
+                      padding: '10px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -230,28 +101,168 @@ const Footer: React.FC = () => {
                       e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
                     }}
                   >
-                    <social.icon size={18} />
+                    <social.icon size={20} />
                   </a>
                 ))}
-              </li>
-            </ul>
-          </div>
-        </div>
+              </div>
+            </div>
 
-        {/* Bottom Bar - Improved spacing for mobile */}
-        <div className="mt-8 sm:mt-10 pt-6 border-t px-2 sm:px-6 lg:px-16 xl:px-28"
-          style={{ borderTop: '1px solid var(--glass-border)' }}>
-          <div className="flex flex-col md:flex-row justify-center md:justify-between items-center space-y-3 md:space-y-0 text-center">
-            <p className="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
-              © 2025 CodeWave.it • <a href="#privacy" className="hover:text-[var(--accent-primary)]">Privacy</a> • <a href="#terms" className="hover:text-[var(--accent-primary)]">Terms</a>
-            </p>
-            <p className="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
-              Trusted by SaaS, GovTech, and Fast-Growing Startups
-            </p>
+            {/* Navigation Links - Improved mobile spacing */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+              <h3 className="text-lg font-bold mb-4 pb-1 relative" 
+                style={{ color: 'var(--text-primary)' }}>
+                <span className="relative">
+                  Navigation
+                  <span className="absolute bottom-0 left-0 right-0 mx-auto md:mx-0 md:left-0 md:right-auto w-8 h-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></span>
+                </span>
+              </h3>
+              <ul className="space-y-3">
+                {navigationLinks.map((link, index) => (
+                  <li key={index} className="group">
+                    <a
+                      href={link.href}
+                      className="flex items-center justify-center md:justify-start transition-colors text-base"
+                      style={{ color: 'var(--text-secondary)' }}
+                      onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
+                      onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                    >
+                      <ChevronRight
+                        size={16}
+                        className="mr-2 transform transition-transform duration-300 group-hover:translate-x-1"
+                        style={{ color: 'var(--accent-primary)' }}
+                      />
+                      {link.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact Column - Improved mobile design */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+              <h3 className="text-lg font-bold mb-4 pb-1 relative" 
+                style={{ color: 'var(--text-primary)' }}>
+                <span className="relative">
+                  Contact Us
+                  <span className="absolute bottom-0 left-0 right-0 mx-auto md:mx-0 md:left-0 md:right-auto w-8 h-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></span>
+                </span>
+              </h3>
+              <ul className="space-y-4 w-full max-w-xs">
+                <li style={{ color: 'var(--text-secondary)' }}>
+                  <a
+                    href="mailto:careersparushapandey@gmail.com"
+                    className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
+                  >
+                    <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center"
+                      style={{ 
+                        background: 'rgba(var(--accent-primary-rgb), 0.1)', 
+                        color: 'var(--accent-primary)' 
+                      }}>
+                      <Mail size={18} />
+                    </div>
+                    <span className="truncate">careersparushapandey@gmail.com</span>
+                  </a>
+                </li>
+                <li style={{ color: 'var(--text-secondary)' }}>
+                  <a
+                    href="tel:+918929942819"
+                    className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
+                  >
+                    <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center"
+                      style={{ 
+                        background: 'rgba(var(--accent-primary-rgb), 0.1)', 
+                        color: 'var(--accent-primary)' 
+                      }}>
+                      <Phone size={18} />
+                    </div>
+                    +91 89299 42819
+                  </a>
+                </li>
+                <li style={{ color: 'var(--text-secondary)' }}>
+                  <a
+                    href="https://wa.me/+918929942819"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
+                  >
+                    <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center"
+                      style={{ 
+                        background: 'rgba(var(--accent-primary-rgb), 0.1)', 
+                        color: 'var(--accent-primary)' 
+                      }}>
+                      <WhatsAppIcon />
+                    </div>
+                    WhatsApp Chat
+                  </a>
+                </li>
+                <li className="pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setCalendlyOpen(true)}
+                    className="px-4 py-2.5 rounded-lg inline-flex items-center justify-center transition-all duration-300 hover:-translate-y-1 shadow-lg text-base w-full"
+                    style={{
+                      background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                      color: 'white',
+                      boxShadow: '0 4px 15px rgba(var(--accent-primary-rgb), 0.3)'
+                    }}
+                  >
+                    Book Free Consultation
+                  </button>
+                </li>
+                
+                {/* Social Links for larger screens */}
+                <li className="hidden md:flex flex-wrap items-center justify-center md:justify-start space-x-3 mt-4 sm:mt-6">
+                  {socialLinks.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.href}
+                      aria-label={social.name}
+                      className="transition-all duration-300 hover:-translate-y-1 mb-2"
+                      style={{
+                        color: 'var(--text-secondary)',
+                        background: 'var(--card-bg)',
+                        border: '1px solid var(--card-border)',
+                        borderRadius: '50%',
+                        padding: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.color = 'var(--accent-primary)';
+                        e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(var(--accent-primary-rgb), 0.2)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.color = 'var(--text-secondary)';
+                        e.currentTarget.style.borderColor = 'var(--card-border)';
+                        e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                      }}
+                    >
+                      <social.icon size={18} />
+                    </a>
+                  ))}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar - Improved spacing for mobile */}
+          <div className="mt-8 sm:mt-10 pt-6 border-t px-2 sm:px-6 lg:px-16 xl:px-28"
+            style={{ borderTop: '1px solid var(--glass-border)' }}>
+            <div className="flex flex-col md:flex-row justify-center md:justify-between items-center space-y-3 md:space-y-0 text-center">
+              <p className="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+                © 2025 CodeWave.it • <a href="#privacy" className="hover:text-[var(--accent-primary)]">Privacy</a> • <a href="#terms" className="hover:text-[var(--accent-primary)]">Terms</a>
+              </p>
+              <p className="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+                Trusted by SaaS, GovTech, and Fast-Growing Startups
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 };
 
