@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageCircle, Mail, Calendar, Send } from 'lucide-react';
+import CalendlyPopup from './CalendlyPopup';
 
 const ContactSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,6 +12,7 @@ const ContactSection: React.FC = () => {
     service: '',
     message: ''
   });
+  const [showCalendly, setShowCalendly] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -109,7 +111,7 @@ const ContactSection: React.FC = () => {
       description: 'Book a time slot for call',
       action: 'Book Call',
       color: 'from-orange-500 to-red-500',
-      href: 'https://calendly.com/codewave/30min' // replace with real scheduling URL
+      href: '' // will handle click for Calendly popup
     }
   ];
 
@@ -128,6 +130,13 @@ const ContactSection: React.FC = () => {
 
   return (
     <>
+      {/* Calendly Popup */}
+      <CalendlyPopup
+        url="https://calendly.com/codewave/30min"
+        open={showCalendly}
+        onClose={() => setShowCalendly(false)}
+        title="Schedule a Call"
+      />
       {/* Thank You Modal */}
       {showThankYou && (
         <div className="fixed inset-0 flex items-center justify-center z-[9999] px-4">
@@ -209,26 +218,48 @@ const ContactSection: React.FC = () => {
             <div className="space-y-8">
               <div className="grid grid-cols-2 gap-4">
                 {contactOptions.map((option, index) => (
-                  <a
-                    key={index}
-                    href={option.href}
-                    target={option.href.startsWith('http') ? '_blank' : undefined}
-                    rel={option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="group card-premium glass-premium p-6 cursor-pointer transition-all duration-300 hover:scale-105 block"
-                   >
-                    <div className={`w-14 h-14 bg-gradient-to-r ${option.color} rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
-                      <option.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-lg font-bold mb-2">
-                      {option.title}
-                    </h3>
-                    <p className={`text-sm ${option.color} mb-3 font-medium`}>
-                      {option.description}
-                    </p>
-                    <span className="font-semibold inline-flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
-                      {option.action}
-                    </span>
-                  </a>
+                  option.title === 'Schedule a Call' ? (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => setShowCalendly(true)}
+                      className="group card-premium glass-premium p-6 cursor-pointer transition-all duration-300 hover:scale-105 block text-left"
+                    >
+                      <div className={`w-14 h-14 bg-gradient-to-r ${option.color} rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                        <option.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-lg font-bold mb-2">
+                        {option.title}
+                      </h3>
+                      <p className={`text-sm ${option.color} mb-3 font-medium`}>
+                        {option.description}
+                      </p>
+                      <span className="font-semibold inline-flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
+                        {option.action}
+                      </span>
+                    </button>
+                  ) : (
+                    <a
+                      key={index}
+                      href={option.href}
+                      target={option.href.startsWith('http') ? '_blank' : undefined}
+                      rel={option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="group card-premium glass-premium p-6 cursor-pointer transition-all duration-300 hover:scale-105 block"
+                    >
+                      <div className={`w-14 h-14 bg-gradient-to-r ${option.color} rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                        <option.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-lg font-bold mb-2">
+                        {option.title}
+                      </h3>
+                      <p className={`text-sm ${option.color} mb-3 font-medium`}>
+                        {option.description}
+                      </p>
+                      <span className="font-semibold inline-flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
+                        {option.action}
+                      </span>
+                    </a>
+                  )
                 ))}
               </div>
 
