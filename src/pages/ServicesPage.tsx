@@ -9,6 +9,11 @@ const ServicesPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // On small screens, trigger isVisible immediately
+    if (window.innerWidth < 640) {
+      setIsVisible(true);
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -17,11 +22,9 @@ const ServicesPage: React.FC = () => {
       },
       { threshold: 0.2 }
     );
-
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
-
     return () => observer.disconnect();
   }, []);
 
