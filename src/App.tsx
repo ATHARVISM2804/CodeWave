@@ -34,6 +34,7 @@ import ToolsPage from './pages/Tools';
 import Testimonial from './components/Testimonial';
 import Whatsapp from './components/Whatsapp';
 import BgAnimation from './components/BgAnimation';
+import { ThemeToggleButton } from './components/ThemeToggle';
 
 const HomePage = ({ onChatbotClick }: { onChatbotClick: () => void }) => (
   <>
@@ -143,6 +144,8 @@ function App() {
             </main>
           )}
           <Footer />
+          {/* Theme toggle button for mobile - fixed bottom left */}
+          
         </div>
       </Router>
     </HelmetProvider>

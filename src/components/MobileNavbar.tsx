@@ -1,6 +1,7 @@
 import React from 'react';
 import { Menu } from 'lucide-react';
 import Codewavelogo from '../assets/Logo_Orginal.png';
+import { ThemeToggleButton } from './ThemeToggle';
 
 interface MobileNavbarProps {
   onOpenMenu: () => void;
@@ -19,16 +20,16 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({ onOpenMenu }) => {
                 className="h-8 w-auto object-contain"
               />
             </div>
-            {/* <span className="font-bold text-lg tracking-tight bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] bg-clip-text text-transparent">
-              CodeWave
-            </span> */}
           </a>
-          <button
-            onClick={onOpenMenu}
-            className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white"
-          >
-            <Menu size={20} />
-          </button>
+          <div className="flex items-center gap-2">
+            <ThemeToggleButton />
+            <button
+              onClick={onOpenMenu}
+              className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white"
+            >
+              <Menu size={20} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
