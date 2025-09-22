@@ -128,7 +128,7 @@ const Header: React.FC = () => {
                 <img src={Codewavelogo} alt="CodeWave" className="h-8" />
                 <button 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 rounded-full hover:bg-[var(--card-border)]"
+                  className="p-2 rounded-full text-[var(--text-secondary)] hover:bg-[var(--card-border)]"
                 >
                   <X size={24} />
                 </button>
