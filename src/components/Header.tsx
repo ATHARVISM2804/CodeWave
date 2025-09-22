@@ -5,6 +5,7 @@ import { ThemeToggleButton } from './ThemeToggle';
 import MobileNavbar from './MobileNavbar';
 import darkThemeLogo from "../assets/DarkThemeLogo.png"
 import lightThemeLogo from "../assets/LightThemeLogo.png"
+import CalendlyPopup from './CalendlyPopup';
 
 const navItems = [
   { label: 'Home', href: '/', icon: <Home size={22} /> },
@@ -37,6 +38,14 @@ const Header: React.FC = () => {
     <>
       {/* Mobile Navbar - Always visible */}
       <MobileNavbar onOpenMenu={() => setIsMobileMenuOpen(true)} />
+
+      {/* Calendly Popup */}
+      <CalendlyPopup
+        url="https://calendly.com/ranjanashish9992/strategy-call?embed_domain=yourdomain.com&embed_type=Inline"
+        open={showCalendly}
+        onClose={() => setShowCalendly(false)}
+        title="Book a Call"
+      />
 
       {/* Main Header - Desktop only */}
       <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 hidden md:block ${isScrolled ? 'pointer-events-none opacity-0' : ''}`}>
@@ -199,26 +208,6 @@ const Header: React.FC = () => {
             </button>
           </div>
         </nav>
-      )}
-      {/* Calendly Modal */}
-      {showCalendly && (
-        <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
-          <div className="relative w-full max-w-3xl h-[600px] bg-white rounded-lg overflow-hidden">
-            <button
-              onClick={() => setShowCalendly(false)}
-              className="absolute top-4 right-4 text-gray-800 hover:text-red-600 text-3xl font-bold"
-            >
-              ×
-            </button>
-            <iframe
-              src="https://calendly.com/ranjanashish9992/strategy-call?embed_domain=yourdomain.com&embed_type=Inline"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              title="Calendly Scheduler"
-            />
-          </div>
-        </div>
       )}
     </>
   );
