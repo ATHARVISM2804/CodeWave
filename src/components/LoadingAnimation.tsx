@@ -1,164 +1,158 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 interface LoadingAnimationProps {
-  duration?: number; // in milliseconds
+  duration?: number; // in ms
   onComplete?: () => void;
 }
 
-const LoadingAnimation: React.FC<LoadingAnimationProps> = ({ 
-  duration = 800, // Even faster loading
-  onComplete 
+const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
+  duration = 800,
+  onComplete,
 }) => {
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const startTime = Date.now();
-    let animationFrameId: number;
-    
-    const updateProgress = () => {
-      const elapsed = Date.now() - startTime;
-      const newProgress = Math.min((elapsed / duration) * 100, 100);
-      setProgress(newProgress);
-      
-      if (newProgress < 100) {
-        animationFrameId = requestAnimationFrame(updateProgress);
+    const start = performance.now();
+    let raf: number;
+
+    const step = (now: number) => {
+      const elapsed = now - start;
+      const pct = Math.min((elapsed / duration) * 100, 100);
+      setProgress(pct);
+
+      if (pct < 100) {
+        raf = requestAnimationFrame(step);
       } else {
-        // Add a small delay before fading out
+        // Fade out + call complete
         setTimeout(() => {
           setIsVisible(false);
-          setTimeout(() => {
-            if (onComplete) onComplete();
-          }, 300); // Faster fade out
-        }, 200); // Shorter display of completed state
+          onComplete?.();
+        }, 400);
       }
     };
-    
-    // Start animation immediately
-    animationFrameId = requestAnimationFrame(updateProgress);
 
-    // Clean up animation frame on unmount
-    return () => {
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
   }, [duration, onComplete]);
 
   return (
-    <div 
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center ${
-        isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
+    <div
+      className={`fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-500 ${
+        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
-      style={{ 
-        background: 'var(--bg-primary)',
-        transition: 'opacity 0.6s ease-out'
-      }}
+      style={{ background: "var(--bg-primary)" }}
     >
-      {/* Logo container with animations */}
+      {/* Logo container */}
       <div className="relative mb-8">
-        {/* Main circular container with logo centered */}
         <div className="w-32 h-32 relative flex items-center justify-center mx-auto">
-          {/* animated gradient overlay (matches WhyUsSection) */}
-          <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none" style={{ zIndex: 12 }}>
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 rounded-full overflow-hidden z-10 pointer-events-none">
             <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/20 to-transparent animate-pulse-premium" />
           </div>
 
+          {/* Background circle for visibility in both themes */}
+          <div className="absolute w-24 h-24 rounded-full z-10 bg-white dark:bg-black shadow-md shadow-black/20 dark:shadow-white/10" />
+
+          {/* Logo */}
           <img
-            src="/src/assets/logo.png" 
+            src="/src/assets/logo.png"
             alt="CodeWave logo"
-            className="w-24 h-24 object-contain z-20 animate-pulse-premium"
-            style={{ display: 'block' }}
+            className="w-20 h-20 object-contain z-20 animate-pulse-premium"
             onError={(e) => {
-              // Fallback to the cloudinary URL if local image fails
-              e.currentTarget.src = "https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png";
+              e.currentTarget.src =
+                "https://res.cloudinary.com/dikisauij/image/upload/v1756993391/logo_ycihzq.png";
             }}
           />
-          
-          {/* Animated rings around logo with accent colors (reduced opacity) */}
-          <div className="absolute inset-0 rounded-full animate-spin-slow"
+
+          {/* Spinning rings */}
+          <div
+            className="absolute inset-0 rounded-full animate-spin-slow"
             style={{
-              border: '2px solid transparent',
-              borderTopColor: 'var(--accent-primary)',
-              borderLeftColor: 'var(--accent-secondary)',
-              width: '110%',
-              height: '110%',
-              top: '-5%',
-              left: '-5%',
-              opacity: 0.85
+              border: "2px solid transparent",
+              borderTopColor: "var(--accent-primary)",
+              borderLeftColor: "var(--accent-secondary)",
+              width: "110%",
+              height: "110%",
+              top: "-5%",
+              left: "-5%",
+              opacity: 0.85,
             }}
-          ></div>
-          
-          {/* Second ring rotating in opposite direction (subtle) */}
-          <div className="absolute inset-0 rounded-full animate-spin-reverse"
+          />
+          <div
+            className="absolute inset-0 rounded-full animate-spin-reverse"
             style={{
-              border: '1px solid transparent',
-              borderRightColor: 'var(--accent-secondary)',
-              borderBottomColor: 'var(--accent-primary)',
-              width: '120%',
-              height: '120%',
-              top: '-10%',
-              left: '-10%',
-              opacity: 0.7
+              border: "1px solid transparent",
+              borderRightColor: "var(--accent-secondary)",
+              borderBottomColor: "var(--accent-primary)",
+              width: "120%",
+              height: "120%",
+              top: "-10%",
+              left: "-10%",
+              opacity: 0.7,
             }}
-          ></div>
+          />
         </div>
-        
+
         {/* Outer pulsing ring */}
         <div
           className="absolute inset-0 rounded-full animate-pulse"
-          style={{ 
-            border: '2px solid var(--accent-primary)',
+          style={{
+            border: "2px solid var(--accent-primary)",
             opacity: 0.3,
-            width: '140%',
-            height: '140%',
-            top: '-20%',
-            left: '-20%'
+            width: "140%",
+            height: "140%",
+            top: "-20%",
+            left: "-20%",
           }}
-        ></div>
+        />
       </div>
-      
+
       {/* Progress bar */}
-      <div className="w-64 h-1.5 bg-opacity-20 rounded-full overflow-hidden mb-2" 
-        style={{ background: 'var(--glass-bg)' }}
+      <div
+        className="w-64 h-1.5 bg-opacity-20 rounded-full overflow-hidden mb-2"
+        style={{ background: "var(--glass-bg)" }}
       >
-        <div 
-          className="h-full rounded-full" 
+        <div
+          className="h-full rounded-full transition-[width] duration-200 ease-out"
           style={{
             width: `${progress}%`,
-            background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))',
-            transition: 'width 0.2s ease-out',
-            boxShadow: '0 0 15px var(--accent-primary)'
+            background:
+              "linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))",
+            boxShadow: "0 0 15px var(--accent-primary)",
           }}
-        ></div>
+        />
       </div>
-      
-      {/* Loading text with accent color */}
-      <div className="text-sm font-medium mb-2" style={{ color: 'var(--accent-primary)' }}>
-        {progress < 100 ? 'Loading...' : 'Ready!'}
+
+      {/* Text */}
+      <div
+        className="text-sm font-medium mb-2"
+        style={{ color: "var(--accent-primary)" }}
+      >
+        {progress < 100 ? "Loading..." : "Ready!"}
       </div>
-      
-      {/* Animated dots with brand colors */}
+
+      {/* Animated dots */}
       <div className="flex space-x-2 mt-1">
-        {[0, 1, 2].map(i => (
-          <div 
-            key={i}
-            className="w-2 h-2 rounded-full animate-pulse" 
-            style={{ 
-              background: i === 0 ? 'var(--accent-primary)' : 
-                        i === 1 ? 'var(--accent-secondary)' : 
-                        'var(--accent-primary)',
-              animationDelay: `${i * 150}ms`,
-              animationDuration: '1s'
-            }}
-          ></div>
-        ))}
+        {["var(--accent-primary)", "var(--accent-secondary)", "var(--accent-primary)"].map(
+          (color, i) => (
+            <div
+              key={i}
+              className="w-2 h-2 rounded-full animate-pulse"
+              style={{
+                background: color,
+                animationDelay: `${i * 150}ms`,
+                animationDuration: "1s",
+              }}
+            />
+          )
+        )}
       </div>
-      
-      {/* Branding element */}
+
+      {/* Branding */}
       <div className="absolute bottom-8 left-0 right-0 text-center">
-        <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-          CODEWAVE<span style={{ color: 'var(--accent-primary)' }}>.it</span>
+        <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
+          CODEWAVE<span style={{ color: "var(--accent-primary)" }}>.it</span>
         </p>
       </div>
     </div>
