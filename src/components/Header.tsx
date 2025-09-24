@@ -3,7 +3,7 @@ import { Menu, X, Home, Info, Calendar, Users, Mail } from 'lucide-react';
 import Codewavelogo from '../assets/Logo_Orginal.png';
 import { ThemeToggleButton } from './ThemeToggle';
 import MobileNavbar from './MobileNavbar';
-import CalendlyPopup from './Calendlypopup';
+import CalendlyPopup from './CalendlyPopup';
 
 const navItems = [
   { label: 'Home', href: '/', icon: <Home size={22} /> },
