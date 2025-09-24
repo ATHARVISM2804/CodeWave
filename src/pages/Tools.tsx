@@ -683,6 +683,7 @@ const ToolsPage: React.FC = () => {
 									border: '1px solid var(--card-border)',
 									boxShadow: '0 25px 50px rgba(var(--accent-primary-rgb), 0.2)',
 								}}
+								onClick={e => e.stopPropagation()}
 							>
 								{/* Glowing background effect */}
 								<div
@@ -706,7 +707,7 @@ const ToolsPage: React.FC = () => {
 								<button
 									type="button"
 									onClick={() => setShowModal(false)}
-									className="absolute top-4 right-4 z-10 p-2 rounded-full transition-all hover:bg-black/10"
+									className="absolute top-4 right-4 z-50 p-2 rounded-full transition-all hover:bg-black/10"
 									style={{
 										color: 'var(--text-primary)',
 									}}
