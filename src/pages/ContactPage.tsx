@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { MessageCircle, Phone, Mail, Calendar, MapPin, Clock, Users, CheckCircle, Twitter, Linkedin, Github } from 'lucide-react';
 import CalendlyPopup from '../components/CalendlyPopup';
-import Chatbot from '../components/Chatbot';
 
 interface ContactPageProps {
   chatbotOpen: boolean;
   setChatbotOpen: (open: boolean) => void;
 }
 
-const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }) => {
+const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
@@ -21,9 +20,9 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
     message: ''
   });
   const [showThankYouModal, setShowThankYouModal] = useState(false);
-
-  // Calendly popup state
   const [showCalendly, setShowCalendly] = useState(false);
+  const [submitResult, setSubmitResult] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
     // On small screens, trigger isVisible immediately
@@ -33,52 +32,40 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
     }
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.2 }
     );
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      setFormData(f => ({
+        ...f,
+        [e.target.name]: e.target.value
+      }));
+    },
+    []
+  );
 
-  // new: submission state + handler for web3forms
-  const [submitResult, setSubmitResult] = useState<string>('');
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitResult('Sending....');
-
     try {
       const formEl = e.currentTarget;
       const payload = new FormData(formEl);
-
-      // TODO: replace with your real access key
       payload.append('access_key', '8cf5247d-b96a-4f34-a3ab-b5990f93409d');
-
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         body: payload
       });
-
       const data = await res.json();
-
       if (data.success) {
         setSubmitResult('Form Submitted Successfully');
         formEl.reset();
-        // clear local controlled form state as well
         setFormData({
           name: '',
           email: '',
@@ -88,21 +75,18 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
           timeline: '',
           message: ''
         });
-        // Show thank you modal
         setShowThankYouModal(true);
       } else {
-        console.error('Submission error', data);
         setSubmitResult(data.message || 'Submission failed');
       }
-    } catch (err) {
-      console.error(err);
+    } catch {
       setSubmitResult('Network error, please try again.');
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, []);
 
-  const contactMethods = [
+  const contactMethods = useMemo(() => [
     {
       icon: MessageCircle,
       title: 'WhatsApp',
@@ -139,9 +123,9 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
       color: 'from-orange-500 to-red-500',
       href: 'https://calendly.com/codewave/30min'
     }
-  ];
+  ], []);
 
-  const officeInfo = [
+  const officeInfo = useMemo(() => [
     {
       icon: MapPin,
       title: 'Service Locations',
@@ -157,22 +141,22 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
       title: 'Response Time',
       details: ['Email: Within 4 hours', 'Phone: Immediate', 'Project inquiries: Same day']
     }
-  ];
+  ], []);
 
-  const teamMembers = [
+  const teamMembers = useMemo(() => [
     'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150',
     'https://images.pexels.com/photos/1300402/pexels-photo-1300402.jpeg?auto=compress&cs=tinysrgb&w=150',
     'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=150',
     'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=150'
-  ];
+  ], []);
 
-  const whyChooseUs = [
+  const whyChooseUs = useMemo(() => [
     'Expert team with 10+ years experience',
     'Cutting-edge tech solutions for modern challenges',
     'Dedicated support throughout your project'
-  ];
+  ], []);
 
-  const faqs = [
+  const faqs = useMemo(() => [
     {
       question: 'Who is Codewave.it?',
       answer: 'Codewave.it is an Intelligence Studio that builds AI-powered websites, custom software, mobile apps, GovTech platforms, and digital marketing solutions for startups, businesses, enterprises, and governments worldwide.'
@@ -221,15 +205,15 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
       question: 'How can I contact Codewave.it?',
       answer: 'You can contact us at hello@codewave.it, connect via WhatsApp, or schedule a call through our website.'
     }
-  ];
+  ], []);
 
-  const socialLinks = [
+  const socialLinks = useMemo(() => [
     { icon: Phone, href: 'tel:+1234567890' },
     { icon: Mail, href: 'mailto:hello@codewave.it' },
     { icon: Linkedin, href: 'https://www.linkedin.com/company/codewave-tech/mycompany/' },
     { icon: Twitter, href: 'https://twitter.com/codewave_tech' },
     { icon: Github, href: '#' }
-  ];
+  ], []);
 
   return (
     <div
@@ -266,9 +250,6 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
         title="Schedule a Meeting"
       />
 
-      {/* Chatbot Popup */}
-      <Chatbot open={chatbotOpen} onClose={() => setChatbotOpen(false)} />
-
       {/* Contact Methods */}
       <section ref={sectionRef} className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -285,7 +266,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
             {contactMethods.map((method, index) => (
               <div
                 key={index}
-                className={`morph-card glare-card p-8 text-center hover-lift-premium magnetic-effect ripple-effect cursor-pointer ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
+                className={`morph-card glare-card p-8 text-center magnetic-effect ripple-effect cursor-pointer ${isVisible ? 'stagger-animation' : 'opacity-0'} stagger-${index + 1}`}
                 style={{
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
@@ -371,7 +352,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
-            <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}
+            <div className={`morph-card glare-card p-8 ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}
               style={{ 
                 background: 'var(--card-bg)', 
                 border: '2px solid var(--card-border)', 
@@ -563,7 +544,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
             {/* Contact Info & Team */}
             <div className="space-y-8">
               {/* Office Information */}
-              <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '200ms', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
+              <div className={`morph-card glare-card p-8 ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '200ms', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
                 <h3 className="text-2xl font-bold mb-6 neon-glow" style={{ color: 'var(--text-primary)' }}>Get in Touch</h3>
                 
                 <div className="space-y-6">
@@ -587,7 +568,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
               </div>
 
               {/* Team Section */}
-              <div className={`morph-card glare-card p-8 hover-lift-premium ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '400ms', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
+              <div className={`morph-card glare-card p-8 ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '400ms', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
                 <h3 className="text-2xl font-bold mb-6 neon-glow" style={{ color: 'var(--text-primary)' }}>Meet Your Design Partners</h3>
                 <div className="flex -space-x-4 mb-6">
                   {teamMembers.map((avatar, index) => (
@@ -732,7 +713,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }
       {/* Final CTA */}
       <section className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="morph-card glare-card p-12 text-center hover-lift-premium"
+          <div className="morph-card glare-card p-12 text-center"
             style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
             <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ color: 'var(--text-primary)' }}>
               Still Have Questions?
