@@ -84,7 +84,7 @@ const CursorFollower: React.FC = () => {
     <>
       <div
         ref={trailRef}
-        className="fixed pointer-events-none z-[9997] rounded-full"
+        className="fixed pointer-events-none z-[9997] rounded-full hidden sm:block"
         style={{
           height: '80px',
           width: '80px',
@@ -97,7 +97,7 @@ const CursorFollower: React.FC = () => {
       />
       <div
         ref={ringRef}
-        className="fixed pointer-events-none z-[9998] rounded-full"
+        className="fixed pointer-events-none z-[9998] rounded-full hidden sm:block"
         style={{
           marginLeft: '-20px',
           marginTop: '-20px',
@@ -107,7 +107,7 @@ const CursorFollower: React.FC = () => {
       />
       <div
         ref={dotRef}
-        className="fixed pointer-events-none z-[9999] rounded-full"
+        className="fixed pointer-events-none z-[9999] rounded-full hidden md:block"
         style={{
           marginLeft: '-4px',
           marginTop: '-4px',
