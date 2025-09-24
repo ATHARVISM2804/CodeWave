@@ -646,7 +646,7 @@ const ContactPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="max-w-4xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
@@ -659,41 +659,51 @@ const ContactPage: React.FC = () => {
                 }}
               >
                 <div 
-                  className="p-6 cursor-pointer"
-                  onClick={() => {
-                    const element = document.getElementById(`faq-answer-${index}`);
-                    const allAnswers = document.querySelectorAll('[id^="faq-answer-"]');
-                    allAnswers.forEach(answer => {
-                      if (answer.id !== `faq-answer-${index}`) {
-                        answer.classList.remove('max-h-96');
-                        answer.classList.add('max-h-0');
-                      }
-                    });
-                    element?.classList.toggle('max-h-0');
-                    element?.classList.toggle('max-h-96');
+                  className="p-6 cursor-pointer hover:bg-opacity-50 transition-all duration-300 group"
+                  style={{
+                    borderLeft: '4px solid transparent',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderLeftColor = 'var(--accent-primary)';
+                    e.currentTarget.style.background = 'rgba(var(--accent-primary-rgb), 0.05)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderLeftColor = 'transparent';
+                    e.currentTarget.style.background = 'transparent';
                   }}
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold neon-glow group-hover:text-[var(--accent-primary)] transition-colors duration-300" 
+                    <h3 className="text-lg font-semibold pr-4 group-hover:text-[var(--accent-primary)] transition-colors duration-300" 
                       style={{ color: 'var(--text-primary)' }}>
                       {faq.question}
                     </h3>
                     <div 
-                      className="flex-shrink-0 ml-4 transform transition-transform duration-300 group-hover:rotate-180"
-                      style={{ color: 'var(--accent-primary)' }}
+                      id={`faq-chevron-${index}`}
+                      className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transform transition-all duration-300 group-hover:rotate-180 group-hover:bg-[var(--accent-primary)] group-hover:bg-opacity-20"
+                      style={{ 
+                        color: 'var(--accent-primary)',
+                        border: '1px solid var(--accent-primary)'
+                      }}
                     >
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M19 9l-7 7-7-7" />
                       </svg>
                     </div>
                   </div>
                   <div 
                     id={`faq-answer-${index}`}
-                    className="overflow-hidden transition-all duration-300 max-h-0"
+                    className="overflow-hidden transition-all duration-500 ease-in-out max-h-0 group-hover:max-h-40"
                   >
-                    <p className="mt-4 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                      {faq.answer}
-                    </p>
+                    <div className="pt-4 pb-2">
+                      <div 
+                        className="w-12 h-0.5 rounded-full mb-3"
+                        style={{ background: 'var(--accent-primary)' }}
+                      ></div>
+                      <p className="leading-relaxed text-base" style={{ color: 'var(--text-secondary)' }}>
+                        {faq.answer}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
