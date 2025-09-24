@@ -253,12 +253,12 @@ const ServicesPage: React.FC = () => {
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-4 py-6">
                   <div className="text-center p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
-                    <div className="text-2xl lg:text-3xl font-bold mb-1" style={{ color: 'var(--accent-primary)' }}>150+</div>
+                    <div className="text-2xl lg:text-3xl font-bold mb-1" style={{ color: 'var(--accent-primary)' }}>50+</div>
                     <div className="text-xs lg:text-sm" style={{ color: 'var(--text-secondary)' }}>Projects Delivered</div>
                   </div>
                   <div className="text-center p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
-                    <div className="text-2xl lg:text-3xl font-bold mb-1" style={{ color: 'var(--accent-primary)' }}>99%</div>
-                    <div className="text-xs lg:text-sm" style={{ color: 'var(--text-secondary)' }}>Client Satisfaction</div>
+                    <div className="text-2xl lg:text-3xl font-bold mb-1" style={{ color: 'var(--accent-primary)' }}>60+</div>
+                    <div className="text-xs lg:text-sm" style={{ color: 'var(--text-secondary)' }}>Happy Clients</div>
                   </div>
                   <div className="text-center p-4 rounded-xl" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
                     <div className="text-2xl lg:text-3xl font-bold mb-1" style={{ color: 'var(--accent-primary)' }}>5+</div>

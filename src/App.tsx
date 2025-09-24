@@ -134,7 +134,8 @@ function App() {
                 <Route path="/services/ui-ux-design" element={<UIUXDesignPage />} />
                 <Route path="/services/api-integration" element={<APIIntegrationPage />} />
                 <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
-                <Route path="/blog/:id" element={<BlogPost />} />
+                <Route path="/blogs" element={<BlogSection limit={4} showAllButton={true} />} />
+                <Route path="/blog/:id" element={<BlogPost/>} />
                 <Route path="/portfolio" element={<PortfolioPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/tools" element={<ToolsPage />} />

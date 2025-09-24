@@ -118,11 +118,11 @@ const ContactPage: React.FC = () => {
     {
       icon: Mail,
       title: 'Email',
-      description: 'Write to hello@codewave.it',
+      description: 'Write to careersparushapandey@gmail.com',
       detail: 'hello@codewave.it',
       action: 'Send Email',
       color: 'from-purple-500 to-pink-500',
-      href: 'mailto:hello@codewave.it?subject=Website%20Inquiry'
+      href: 'mailto:careersparushapandey@gmail.com?subject=Website%20Inquiry'
     },
     {
       icon: Calendar,
@@ -144,7 +144,7 @@ const ContactPage: React.FC = () => {
     {
       icon: Clock,
       title: 'Business Hours',
-      details: ['Monday - Friday: 9:00 AM - 6:00 PM PST', 'Saturday: 10:00 AM - 2:00 PM PST', 'Sunday: Closed']
+      details: ['Monday - Friday: 9:00 AM - 6:00 PM IST', 'Saturday: 10:00 AM - 2:00 PM IST', 'Sunday: Closed']
     },
     {
       icon: Users,

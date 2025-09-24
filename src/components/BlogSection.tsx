@@ -1,12 +1,17 @@
 import React, { useRef, useState } from 'react';
-import { ArrowRight, Calendar, Clock, BookOpen, TrendingUp, User, Eye } from 'lucide-react';
+import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import companyLogo from '../assets/company.jpeg';
 import govtech from '../assets/govttech1.jpeg';
 import inter from '../assets/user interface.jpeg';
 import api from '../assets/user interface.jpeg'
-const BlogSection: React.FC = () => {
+interface BlogSectionProps {
+  limit?: number;
+  showAllButton?: boolean;
+}
+
+const BlogSection: React.FC<BlogSectionProps> = ({ limit = 4, showAllButton = false }) => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [hoveredPost, setHoveredPost] = useState<number | null>(null);
@@ -21,62 +26,62 @@ const BlogSection: React.FC = () => {
   };
 
   const featuredPost = {
-    id: 'future-intelligent-software',
-    title: 'The Future of Intelligent Software Development',
-    excerpt: 'How AI is revolutionizing the way we build, test, and deploy software solutions. A deep dive into practical applications that are changing the industry right now.',
-    category: 'AI & Development',
+    id: 'startup-needs-ai',
+    title: 'Why Your Startup Needs AI — Even If You Think It Doesn’t',
+    excerpt: 'AI isn’t a luxury anymore — it’s a necessity. Here’s why even the youngest startups should embrace AI for growth, efficiency, and investor confidence.',
+    category: 'AI & Startups',
     readTime: '8 min read',
-    date: 'Dec 15, 2024',
+    date: 'Sep 24, 2025',
     author: 'CodeWave Team',
     views: '2.4K',
-    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: companyLogo,
     trending: true
   };
 
   const blogPosts = [
     {
-      id: 'startups-digital-transformation',
-      title: 'Why Startups Fail at Digital Transformation',
-      excerpt: 'Most startups think they need to digitize everything. Here\'s why strategic digital transformation is different and more effective.',
-      category: 'Strategy',
-      readTime: '5 min read',
-      date: 'Dec 12, 2024',
-      author: 'Sarah Chen',
-      views: '1.8K',
-      image: companyLogo
-    },
-    {
-      id: 'govtech-security',
-      title: 'GovTech Security: Beyond Compliance',
-      excerpt: 'Building secure government solutions requires more than checking compliance boxes. Here\'s our approach to real security.',
-      category: 'Security',
+      id: 'govtech-india-3-things',
+      title: 'GovTech in India: 3 Things Nobody’s Talking About',
+      excerpt: 'India’s digital governance journey is remarkable, but there are crucial, less-discussed factors shaping the future of GovTech. Here are three key areas that matter most.',
+      category: 'GovTech',
       readTime: '7 min read',
-      date: 'Dec 10, 2024',
+      date: 'Sep 20, 2025',
       author: 'Alex Kumar',
       views: '1.2K',
       image: govtech
     },
     {
-      id: 'psychology-ui-design',
-      title: 'The Psychology of User Interface Design',
-      excerpt: 'Great UX isn\'t just about pretty interfaces. It\'s about understanding human psychology and behavior patterns.',
-      category: 'Design',
+      id: 'custom-software-mistakes',
+      title: 'What Founders Get Wrong About Custom Software',
+      excerpt: 'Custom software can be a game changer, but founders often make costly mistakes. Here’s how to avoid the most common pitfalls and build for sustainable growth.',
+      category: 'Development',
       readTime: '6 min read',
-      date: 'Dec 8, 2024',
+      date: 'Sep 15, 2025',
+      author: 'Dev Team',
+      views: '1.7K',
+      image: api
+    },
+    {
+      id: 'design-for-action-ux',
+      title: 'Design for Action: How Great UX Drives Better Decisions',
+      excerpt: 'Great UX is about shaping behavior, not just aesthetics. Learn how design can drive better user decisions and business outcomes.',
+      category: 'UX & Design',
+      readTime: '6 min read',
+      date: 'Sep 10, 2025',
       author: 'Maya Patel',
       views: '2.1K',
       image: inter
     },
     {
-      id: 'api-design-future',
-      title: 'API Design for the Next Decade',
-      excerpt: 'APIs are the backbone of modern applications. Here\'s how to design APIs that will scale and evolve with your business.',
-      category: 'Development',
+      id: 'chatbot-era-automation',
+      title: 'The Chatbot Era: Foundations of Automation',
+      excerpt: 'Automation in India is evolving from chatbots to intelligent, embedded systems. Here’s how startups can prepare for the next wave.',
+      category: 'Automation',
       readTime: '9 min read',
-      date: 'Dec 5, 2024',
-      author: 'Dev Team',
-      views: '1.7K',
-      image: api
+      date: 'Sep 5, 2025',
+      author: 'Sarah Chen',
+      views: '1.8K',
+      image: companyLogo
     }
   ];
 
@@ -111,6 +116,9 @@ const BlogSection: React.FC = () => {
       setNewsletterSubmitting(false);
     }
   };
+
+  // Only show up to 'limit' blogs
+  const displayedPosts = blogPosts.slice(0, limit);
 
   return (
     <>
@@ -192,91 +200,6 @@ const BlogSection: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* Featured Article */}
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className=""
-          >
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl group cursor-pointer"
-              onClick={() => handleBlogClick(featuredPost.id)}>
-              <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] p-1">
-                <div className="w-full h-full rounded-3xl relative overflow-hidden" style={{ background: 'var(--card-bg)' }}>
-                  {/* Metallic glare effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 overflow-hidden z-10 pointer-events-none">
-                    <div className="absolute -inset-full h-[200%] w-[200%] rotate-45 translate-x-[-100%] group-hover:animate-[metallicGlare_1.5s_ease_forwards] bg-gradient-to-r from-transparent via-white to-transparent"></div>
-                  </div>
-                  
-                  {/* Border glow on hover */}
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
-                    style={{ 
-                      boxShadow: `inset 0 0 15px rgba(var(--accent-primary-rgb), 0.3)`,
-                    }}
-                  ></div>
-                  
-                  <div className="grid lg:grid-cols-2 gap-8 items-center p-8 lg:p-12 relative z-20">
-                    <div className="relative overflow-hidden rounded-2xl">
-                      <img
-                        src={featuredPost.image}
-                        alt={featuredPost.title}
-                        className="w-full h-64 lg:h-80 object-cover transform group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute top-4 left-4 flex items-center gap-2">
-                        {featuredPost.trending && (
-                          <span className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold"
-                            style={{ background: 'var(--accent-primary)', color: 'var(--text-primary)' }}>
-                            <TrendingUp className="w-3 h-3" />
-                            Trending
-                          </span>
-                        )}
-                        <span className="px-3 py-1 rounded-full text-xs font-semibold"
-                          style={{ background: 'var(--card-bg)', color: 'var(--text-primary)' }}>
-                          Featured
-                        </span>
-                      </div>
-                    </div>
-                    <div className="space-y-6">
-                      <div>
-                        <div className="flex items-center gap-4 mb-4 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                          <span className="font-semibold px-3 py-1 rounded-full"
-                            style={{ background: 'var(--accent-primary)/20', color: 'var(--accent-primary)' }}>
-                            {featuredPost.category}
-                          </span>
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
-                            {featuredPost.date}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            {featuredPost.readTime}
-                          </div>
-                        </div>
-                        <h3 className="text-2xl lg:text-3xl font-bold mb-4 group-hover:text-[var(--accent-primary)] transition-colors duration-300"
-                          style={{ color: 'var(--text-primary)' }}>
-                          {featuredPost.title}
-                        </h3>
-                        <p className="text-lg mb-6" style={{ color: 'var(--text-secondary)' }}>
-                          {featuredPost.excerpt}
-                        </p>
-                      </div>
-
-                      <button className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold transform hover:scale-105 transition-all duration-200 group/btn"
-                        style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleBlogClick(featuredPost.id);
-                        }}>
-                        Read Full Article
-                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
           {/* Blog Posts Grid */}
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -284,7 +207,7 @@ const BlogSection: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.4 }}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-16 mt-12">
-              {blogPosts.map((post, index) => (
+              {displayedPosts.map((post, index) => (
                 <motion.article
                   key={index}
                   initial={{ opacity: 0, y: 40 }}
@@ -368,6 +291,16 @@ const BlogSection: React.FC = () => {
                   </div>
                 </motion.article>
               ))}
+            </div>
+            {/* Always show the Show All Blogs button */}
+            <div className="flex justify-center mt-8">
+              <button
+                className="px-8 py-3 rounded-full font-semibold text-base shadow-lg hover:scale-105 transition-transform"
+                style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}
+                onClick={() => navigate('/blogs')}
+              >
+                Show All Blogs
+              </button>
             </div>
           </motion.div>
 
