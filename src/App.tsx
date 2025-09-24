@@ -36,12 +36,11 @@ import Whatsapp from './components/Whatsapp';
 import BgAnimation from './components/BgAnimation';
 import { ThemeToggleButton } from './components/ThemeToggle';
 
-const HomePage = ({ onChatbotClick }: { onChatbotClick: () => void }) => (
+const HomePage = () => (
   <>
     <HeroSection />
     <MovingData />
     <StatsSection />
-    <Whatsapp onChatbotClick={onChatbotClick} />
     <WhyUsSection />
     <PortfolioSection />
     <Industries />
@@ -108,7 +107,7 @@ function App() {
               backgroundSize: theme === 'light' ? '100% 100%, 20px 20px' : 'auto'
             }}
           />
-          
+          <Whatsapp onChatbotClick={() => setChatbotOpen(true)} />
           <MouseFollower />
           <Chatbot open={chatbotOpen} onClose={() => setChatbotOpen(false)} />
           <Header />
@@ -123,7 +122,7 @@ function App() {
           ) : (
             <main>
               <Routes>
-                <Route path="/" element={<HomePage onChatbotClick={() => setChatbotOpen(true)} />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/services/web-development" element={<WebDevelopmentPage />} />
@@ -137,7 +136,7 @@ function App() {
                 <Route path="/blogs" element={<BlogSection limit={4} showAllButton={true} />} />
                 <Route path="/blog/:id" element={<BlogPost/>} />
                 <Route path="/portfolio" element={<PortfolioPage />} />
-                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/contact" element={<ContactPage chatbotOpen={chatbotOpen} setChatbotOpen={setChatbotOpen} />} />
                 <Route path="/tools" element={<ToolsPage />} />
                 <Route path="/industries/:slug" element={<IndustryDetailPage />} />
                 <Route path="*" element={<NotFound />} />

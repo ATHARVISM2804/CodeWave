@@ -1,8 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageCircle, Phone, Mail, Calendar, MapPin, Clock, Users, CheckCircle, Twitter, Linkedin, Github } from 'lucide-react';
 import CalendlyPopup from '../components/CalendlyPopup';
+import Chatbot from '../components/Chatbot';
 
-const ContactPage: React.FC = () => {
+interface ContactPageProps {
+  chatbotOpen: boolean;
+  setChatbotOpen: (open: boolean) => void;
+}
+
+const ContactPage: React.FC<ContactPageProps> = ({ chatbotOpen, setChatbotOpen }) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
@@ -260,6 +266,9 @@ const ContactPage: React.FC = () => {
         title="Schedule a Meeting"
       />
 
+      {/* Chatbot Popup */}
+      <Chatbot open={chatbotOpen} onClose={() => setChatbotOpen(false)} />
+
       {/* Contact Methods */}
       <section ref={sectionRef} className="py-16 relative" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -294,6 +303,14 @@ const ContactPage: React.FC = () => {
                     className="liquid-button px-6 py-2 font-semibold glare-effect text-sm magnetic-effect"
                     style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}
                     onClick={() => setShowCalendly(true)}
+                  >
+                    {method.action}
+                  </button>
+                ) : method.title === 'Live Chat' ? (
+                  <button
+                    className="liquid-button px-6 py-2 font-semibold glare-effect text-sm magnetic-effect"
+                    style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-secondary)' }}
+                    onClick={() => setChatbotOpen(true)}
                   >
                     {method.action}
                   </button>
