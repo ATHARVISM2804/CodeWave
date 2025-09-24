@@ -610,7 +610,7 @@ const ToolsPage: React.FC = () => {
 								className="text-3xl sm:text-4xl font-bold mb-6"
 								style={{ color: 'var(--text-primary)' }}
 							>
-								Need a Custom Tool Solution?
+								Innovate Your Process with Bespoke Tools
 							</h2>
 							<p
 								className="text-lg max-w-2xl mx-auto mb-8"

@@ -3,8 +3,6 @@ import { Menu, X, Home, Info, Calendar, Users, Mail } from 'lucide-react';
 import Codewavelogo from '../assets/Logo_Orginal.png';
 import { ThemeToggleButton } from './ThemeToggle';
 import MobileNavbar from './MobileNavbar';
-import darkThemeLogo from "../assets/DarkThemeLogo.png"
-import lightThemeLogo from "../assets/LightThemeLogo.png"
 import CalendlyPopup from './CalendlyPopup';
 
 const navItems = [
@@ -13,7 +11,7 @@ const navItems = [
   { label: 'Services', href: '/services', icon: <Calendar size={22} /> },
   { label: 'Tools', href: '/tools', icon: <Users size={22} /> },
   // { label: 'Portfolio', href: '/portfolio', icon: <Users size={22} /> },
-  { label: 'Contact', href: '/contact', icon: <Mail size={22} /> },
+  { label: 'Contact Us', href: '/contact', icon: <Mail size={22} /> },
 ];
 
 const Header: React.FC = () => {

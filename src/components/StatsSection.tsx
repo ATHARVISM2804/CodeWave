@@ -209,7 +209,7 @@ const StatsSection: React.FC = () => {
                   }}
                   role="button"
                 >
-                  <div className={`morph-card h-full p-5 flex flex-col transition-all duration-200 overflow-hidden
+                  <div id='services-provided' className={`morph-card h-full p-5 flex flex-col transition-all duration-200 overflow-hidden
                     ${hoveredService === idx ? 'shadow-md shadow-[var(--accent-primary)]/15' : ''}
                     hover:border-[var(--accent-primary)] rounded-xl`}
                     style={{
