@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageCircle, Mail, Calendar, Send } from 'lucide-react';
-import CalendlyPopup from './CalendlyPopup';
+import CalendlyPopup from './Calendlypopup';
 
 const ContactSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);

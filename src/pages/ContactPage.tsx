@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { MessageCircle, Phone, Mail, Calendar, MapPin, Clock, Users, CheckCircle, Twitter, Linkedin, Github } from 'lucide-react';
-import CalendlyPopup from '../components/CalendlyPopup';
+import CalendlyPopup from '../components/Calendlypopup';
 
 interface ContactPageProps {
   chatbotOpen: boolean;

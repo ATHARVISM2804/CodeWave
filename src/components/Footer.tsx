@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Twitter, Linkedin, Github, Mail, ChevronRight, Phone } from 'lucide-react';
 import codeWaveLogo from "../assets/Logo_Orginal.png"
-import CalendlyPopup from './CalendlyPopup';
+import CalendlyPopup from './Calendlypopup';
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 32 32" width={20} height={20} fill="currentColor" {...props}>
