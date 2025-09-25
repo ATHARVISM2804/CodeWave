@@ -121,7 +121,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
       detail: '30-min free consultation',
       action: 'Book Call',
       color: 'from-orange-500 to-red-500',
-      href: 'https://calendly.com/codewave/30min'
+      href: 'https://calendly.com/careersparushapandey/30min'
     }
   ], []);
 

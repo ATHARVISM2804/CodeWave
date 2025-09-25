@@ -39,7 +39,7 @@ const Header: React.FC = () => {
 
       {/* Calendly Popup */}
       <CalendlyPopup
-        url="https://calendly.com/ranjanashish9992/strategy-call?embed_domain=yourdomain.com&embed_type=Inline"
+        url="https://calendly.com/careersparushapandey/30min"
         open={showCalendly}
         onClose={() => setShowCalendly(false)}
         title="Book a Call"

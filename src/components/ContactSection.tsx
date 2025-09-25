@@ -132,7 +132,7 @@ const ContactSection: React.FC = () => {
     <>
       {/* Calendly Popup */}
       <CalendlyPopup
-        url="https://calendly.com/codewave/30min"
+        url="https://calendly.com/careersparushapandey/30min"
         open={showCalendly}
         onClose={() => setShowCalendly(false)}
         title="Schedule a Call"
