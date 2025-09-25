@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
@@ -50,14 +50,6 @@ const HomePage = () => (
   </>
 );
 
-function ScrollToTopOnRouteChange() {
-  const location = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
-  return null;
-}
-
 function App() {
   const [isLoading, setIsLoading] = useState(() => {
     // Only show loading animation on first load, not on route change
@@ -100,7 +92,6 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
-        <ScrollToTopOnRouteChange />
         <div className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}>
           {/* Fixed background div with metallic effect */}
           <div 
@@ -142,7 +133,7 @@ function App() {
                 <Route path="/services/ui-ux-design" element={<UIUXDesignPage />} />
                 <Route path="/services/api-integration" element={<APIIntegrationPage />} />
                 <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
-                <Route path="/blogs" element={<BlogSection limit={4} showAllButton={true} />} />
+                <Route path="/blogs" element={<BlogSection limit={100} showAllButton={true} />} />
                 <Route path="/blog/:id" element={<BlogPost/>} />
                 <Route path="/portfolio" element={<PortfolioPage />} />
                 <Route path="/contact" element={<ContactPage chatbotOpen={chatbotOpen} setChatbotOpen={setChatbotOpen} />} />
