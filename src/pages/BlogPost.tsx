@@ -42,7 +42,6 @@ const BlogPost: React.FC = () => {
         excerpt: 'AI isn’t a luxury anymore — it’s a necessity. Here’s why even the youngest startups should embrace AI for growth, efficiency, and investor confidence.',
         category: 'AI & Startups',
         image: companyLogo,
-        trending: true,
         content: `
 <h2>Introduction</h2>
 <p>Startups live on speed, focus, and smart execution. But when you’re racing against time with limited resources, it can feel like you’re always one step behind bigger competitors. Many founders think Artificial Intelligence (AI) is something only mature companies can afford to implement.</p>
