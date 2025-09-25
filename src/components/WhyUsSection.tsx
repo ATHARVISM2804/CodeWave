@@ -265,7 +265,7 @@ const WhyUsSection: React.FC = () => {
                             boxShadow: hoverIndex === index ? '0 10px 20px rgba(var(--accent-primary-rgb), 0.3)' : 'none'
                           }}
                         >
-                          <feature.icon className="w-7 h-7" style={{ color: 'var(--text-primary)' }} />
+                          <feature.icon className="w-7 h-7" style={{ color: 'var(--bg-primary)' }} />
                         </div>
                         <h3
                           className="text-lg font-bold mb-2 transition-colors duration-300 text-center"
