@@ -24,7 +24,7 @@ const AboutPage: React.FC = () => {
 
   const missionVision = [
     {
-      title: 'Our Mission',
+      title: 'Our Pursuit',
       description: (
         <>
           To build <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>intelligent, future-ready</span> technology that actively solves real problems—beautifully, securely, and with measurable impact.
@@ -32,7 +32,7 @@ const AboutPage: React.FC = () => {
       ),
     },
     {
-      title: 'Our Vision',
+      title: 'Our Purpose',
       description: (
         <>
           To become the <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>go-to tech team</span> for founders, enterprises, and governments looking to integrate <span className="font-semibold" style={{ color: 'var(--accent-primary)' }}>smart systems</span> into their digital stack.
