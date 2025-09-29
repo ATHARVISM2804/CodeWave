@@ -135,12 +135,12 @@ const Footer: React.FC = () => {
                   </a>
                 </li>
                 <li style={{ color: 'var(--text-secondary)' }}>
-                  <a
-                    href="https://wa.me/+918287941214"
+                    <a
+                    href="https://wa.me/+918287941214?text=Hi%20CodeWave%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
-                  >
+                    >
                     <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center"
                       style={{ 
                         background: 'rgba(var(--accent-primary-rgb), 0.1)', 
