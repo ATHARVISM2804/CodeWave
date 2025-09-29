@@ -66,7 +66,11 @@ function useLenis() {
 // Context to expose scrollToServices function
 export const ServicesScrollContext = React.createContext<{ scrollToServices: () => void }>({ scrollToServices: () => {} });
 
-const HomePage = React.memo(() => {
+interface HomePageProps {
+  setChatbotOpen: (open: boolean) => void;
+}
+
+const HomePage = React.memo<HomePageProps>(({ setChatbotOpen }) => {
   const servicesRef = useRef<HTMLDivElement>(null);
 
   // Expose scroll function
@@ -86,7 +90,7 @@ const HomePage = React.memo(() => {
       <Industries />
       <Testimonial />
       <BlogSection />
-      <ContactSection />
+      <ContactSection setChatbotOpen={setChatbotOpen} />
     </ServicesScrollContext.Provider>
   );
 });
@@ -166,7 +170,7 @@ function AppWithLenis() {
         ) : (
           <main>
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route path="/" element={<HomePage setChatbotOpen={setChatbotOpen} />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/services/web-development" element={<WebDevelopmentPage />} />

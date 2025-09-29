@@ -2,7 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { MessageCircle, Mail, Calendar, Send } from 'lucide-react';
 import CalendlyPopup from './Calendlypopup';
 
-const ContactSection: React.FC = () => {
+interface ContactSectionProps {
+  setChatbotOpen?: (open: boolean) => void;
+}
+
+const ContactSection: React.FC<ContactSectionProps> = ({ setChatbotOpen }) => {
   // const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
@@ -80,7 +84,15 @@ const ContactSection: React.FC = () => {
     }
   };
 
-  const contactOptions = [
+  const contactOptions: {
+    icon: any;
+    title: string;
+    description: string;
+    action: string;
+    color: string;
+    href?: string;
+    onClick?: () => void;
+  }[] = [
     {
       icon: MessageCircle,
       title: 'WhatsApp',
@@ -95,7 +107,7 @@ const ContactSection: React.FC = () => {
       description: 'Our AI wants to chat with you',
       action: 'Chat Now',
       color: 'from-blue-500 to-cyan-500',
-      href: '#live-chat'
+      onClick: () => setChatbotOpen?.(true) // Add onClick handler
     },
     {
       icon: Mail,
@@ -238,12 +250,32 @@ const ContactSection: React.FC = () => {
                         {option.action}
                       </span>
                     </button>
+                  ) : option.title === 'Live Chat' ? (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={option.onClick}
+                      className="group card-premium glass-premium p-6 cursor-pointer transition-all duration-300 hover:scale-105 block text-left"
+                    >
+                      <div className={`w-14 h-14 bg-gradient-to-r ${option.color} rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                        <option.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-lg font-bold mb-2">
+                        {option.title}
+                      </h3>
+                      <p className={`text-sm ${option.color} mb-3 font-medium`}>
+                        {option.description}
+                      </p>
+                      <span className="font-semibold inline-flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
+                        {option.action}
+                      </span>
+                    </button>
                   ) : (
                     <a
                       key={index}
                       href={option.href}
-                      target={option.href.startsWith('http') ? '_blank' : undefined}
-                      rel={option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      target={option.href && option.href.startsWith('http') ? '_blank' : undefined}
+                      rel={option.href && option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="group card-premium glass-premium p-6 cursor-pointer transition-all duration-300 hover:scale-105 block"
                     >
                       <div className={`w-14 h-14 bg-gradient-to-r ${option.color} rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
