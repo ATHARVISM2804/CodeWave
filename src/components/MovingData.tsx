@@ -2,7 +2,9 @@ import React from 'react';
 import { Award, Users, TrendingUp, Calendar } from 'lucide-react';
 
 const stats = [
-	{ icon: Award, label: 'Projects Completed', value: '120+' },
+	{ icon: Award, label: 'Projects Completed', value: '50+' },
+	{ icon: Award, label: 'Company Experience', value: '1 Year' },
+	{ icon: Award, label: 'Clients', value: '60+ Happy Clients' },
 	{ icon: Users, label: 'Happy Clients', value: '85+' },
 	{ icon: TrendingUp, label: 'Success Rate', value: '98%' },
 	{ icon: Calendar, label: 'Years Experience', value: '5+' }

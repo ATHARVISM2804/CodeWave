@@ -25,7 +25,9 @@ const BlogSection: React.FC<BlogSectionProps> = ({ limit = 4, showAllButton = fa
     navigate(`/blog/${blogId}`);
   };
 
-  const featuredPost = {
+
+  const blogPosts = [
+    {
     id: 'startup-needs-ai',
     title: 'Why Your Startup Needs AI — Even If You Think It Doesn’t',
     excerpt: 'AI isn’t a luxury anymore — it’s a necessity. Here’s why even the youngest startups should embrace AI for growth, efficiency, and investor confidence.',
@@ -35,10 +37,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ limit = 4, showAllButton = fa
     author: 'CodeWave Team',
     views: '2.4K',
     image: companyLogo,
-    trending: true
-  };
-
-  const blogPosts = [
+  },
     {
       id: 'govtech-india-3-things',
       title: 'GovTech in India: 3 Things Nobody’s Talking About',
@@ -295,8 +294,8 @@ const BlogSection: React.FC<BlogSectionProps> = ({ limit = 4, showAllButton = fa
             {/* Always show the Show All Blogs button */}
             <div className="flex justify-center mt-8">
               <button
-                className="px-8 py-3 rounded-full font-semibold text-base shadow-lg hover:scale-105 transition-transform"
-                style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--text-primary)' }}
+                className="px-8 py-3 mb-8 rounded-full font-semibold text-base shadow-lg hover:scale-105 transition-transform"
+                style={{ background: 'linear-gradient(to right, var(--accent-primary), var(--accent-secondary))', color: 'var(--bg-primary)' }}
                 onClick={() => navigate('/blogs')}
               >
                 Show All Blogs

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Twitter, Linkedin, Github, Mail, ChevronRight, Phone } from 'lucide-react';
 import codeWaveLogo from "../assets/Logo_Orginal.png"
-import CalendlyPopup from './CalendlyPopup';
+import CalendlyPopup from './Calendlypopup';
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 32 32" width={20} height={20} fill="currentColor" {...props}>
@@ -15,6 +15,7 @@ const Footer: React.FC = () => {
     { title: 'About Us', href: '/about' },
     { title: 'Services', href: '/services' },
     { title: 'Portfolio', href: '/portfolio' },
+    { title: 'Tools', href: '/tools' },
     { title: 'Contact', href: '/contact' }
   ];
 
@@ -22,7 +23,7 @@ const Footer: React.FC = () => {
     { icon: Twitter, href: '#', name: 'Twitter' },
     { icon: Linkedin, href: '#', name: 'LinkedIn' },
     { icon: Github, href: '#', name: 'GitHub' },
-    { icon: Mail, href: 'mailto:hello@codewave.it', name: 'Email' }
+    { icon: Mail, href: 'mailto:careersparushapandey@gmail.com', name: 'Email' }
   ];
 
   const [calendlyOpen, setCalendlyOpen] = useState(false);
@@ -37,7 +38,7 @@ const Footer: React.FC = () => {
         title="Book Free Consultation"
       />
       <footer
-        className="pt-10 sm:pt-16 pb-6 sm:pb-8"
+        className="pt-8 sm:pt-16 pb-4 sm:pb-8"
         style={{
           background: 'var(--bg-secondary)',
           borderTop: '1px solid var(--glass-border)',
@@ -45,92 +46,48 @@ const Footer: React.FC = () => {
         }}
       >
         <div className="container mx-auto px-4 w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 px-2 sm:px-6 lg:px-16 xl:px-28">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 px-2 sm:px-6 lg:px-16">
             {/* Logo and Tagline Column */}
-            <div className="md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">
-              <div className="mb-4 sm:mb-6">
+            <div className="sm:col-span-2 flex flex-col items-center sm:items-start text-center sm:text-left space-y-4">
+              <div className="mb-2 sm:mb-6">
                 <a href="/" className="inline-block" aria-label="CodeWave home">
-                  <div className="relative flex items-center gap-3 px-3 sm:px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-105 logo-container">
-                    {/* animated gradient overlay */}
+                  <div className="relative flex items-center gap-3 px-3 py-2 rounded-lg transition-transform duration-300 hover:scale-105 logo-container">
                     <div className="logo-gradient"></div>
-
                     <img
                       src={codeWaveLogo}
                       alt="CodeWave Logo"
-                      className="h-10 sm:h-12 md:h-16 w-auto object-contain relative z-10"
+                      className="h-8 sm:h-12 md:h-16 w-auto object-contain relative z-10"
                       style={{ display: 'block' }}
                     />
                   </div>
                 </a>
               </div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-6 leading-tight">
+              <h2 className="text-lg sm:text-2xl md:text-3xl font-bold leading-tight">
                 <span style={{ color: 'var(--text-primary)' }}>We don't just write code.</span> <br />
                 <span style={{ color: 'var(--accent-primary)' }}>We make it think.</span>
               </h2>
-              <p className="text-sm sm:text-base mb-5 sm:mb-8 max-w-md" style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-sm sm:text-base max-w-md" style={{ color: 'var(--text-secondary)' }}>
                 Join hundreds of innovators who've partnered with CodeWave to build the future of digital experiences.
               </p>
-              
-              {/* Social Links for Mobile - Enhanced design */}
-              <div className="flex items-center justify-center md:justify-start space-x-4 mb-6 md:hidden">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    aria-label={social.name}
-                    className="transition-all duration-300 hover:-translate-y-1"
-                    style={{
-                      color: 'var(--text-secondary)',
-                      background: 'var(--card-bg)',
-                      border: '1px solid var(--card-border)',
-                      borderRadius: '50%',
-                      padding: '10px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.color = 'var(--accent-primary)';
-                      e.currentTarget.style.borderColor = 'var(--accent-primary)';
-                      e.currentTarget.style.boxShadow = '0 4px 15px rgba(var(--accent-primary-rgb), 0.2)';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.color = 'var(--text-secondary)';
-                      e.currentTarget.style.borderColor = 'var(--card-border)';
-                      e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-                    }}
-                  >
-                    <social.icon size={20} />
-                  </a>
-                ))}
-              </div>
             </div>
 
-            {/* Navigation Links - Improved mobile spacing */}
-            <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <h3 className="text-lg font-bold mb-4 pb-1 relative" 
-                style={{ color: 'var(--text-primary)' }}>
+            {/* Navigation Links - Mobile Optimized */}
+            <div className="flex flex-col items-center sm:items-start space-y-4">
+              <h3 className="text-base sm:text-lg font-bold relative" style={{ color: 'var(--text-primary)' }}>
                 <span className="relative">
                   Navigation
-                  <span className="absolute bottom-0 left-0 right-0 mx-auto md:mx-0 md:left-0 md:right-auto w-8 h-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></span>
+                  <span className="absolute -bottom-2 left-0 right-0 mx-auto sm:mx-0 w-8 h-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></span>
                 </span>
               </h3>
-              <ul className="space-y-3">
+              <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2 sm:gap-3 w-full sm:w-auto">
                 {navigationLinks.map((link, index) => (
                   <li key={index} className="group">
                     <a
                       href={link.href}
-                      className="flex items-center justify-center md:justify-start transition-colors text-base"
+                      className="flex items-center justify-start px-2 py-1.5 sm:py-1 rounded-md transition-colors text-sm sm:text-base hover:bg-[var(--card-bg)]"
                       style={{ color: 'var(--text-secondary)' }}
-                      onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
-                      onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
                     >
-                      <ChevronRight
-                        size={16}
-                        className="mr-2 transform transition-transform duration-300 group-hover:translate-x-1"
-                        style={{ color: 'var(--accent-primary)' }}
-                      />
+                      <ChevronRight size={14} className="mr-1.5 text-[var(--accent-primary)]" />
                       {link.title}
                     </a>
                   </li>
@@ -138,13 +95,12 @@ const Footer: React.FC = () => {
               </ul>
             </div>
 
-            {/* Contact Column - Improved mobile design */}
-            <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <h3 className="text-lg font-bold mb-4 pb-1 relative" 
-                style={{ color: 'var(--text-primary)' }}>
+            {/* Contact Column - Mobile Optimized */}
+            <div className="flex flex-col items-center sm:items-start space-y-4">
+              <h3 className="text-base sm:text-lg font-bold relative" style={{ color: 'var(--text-primary)' }}>
                 <span className="relative">
                   Contact Us
-                  <span className="absolute bottom-0 left-0 right-0 mx-auto md:mx-0 md:left-0 md:right-auto w-8 h-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></span>
+                  <span className="absolute -bottom-2 left-0 right-0 mx-auto sm:mx-0 w-8 h-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></span>
                 </span>
               </h3>
               <ul className="space-y-4 w-full max-w-xs">
@@ -248,14 +204,14 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Bottom Bar - Improved spacing for mobile */}
-          <div className="mt-8 sm:mt-10 pt-6 border-t px-2 sm:px-6 lg:px-16 xl:px-28"
+          {/* Bottom Bar - Mobile Optimized */}
+          <div className="mt-6 sm:mt-10 pt-4 border-t"
             style={{ borderTop: '1px solid var(--glass-border)' }}>
-            <div className="flex flex-col md:flex-row justify-center md:justify-between items-center space-y-3 md:space-y-0 text-center">
-              <p className="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+            <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center space-y-2 sm:space-y-0 text-center">
+              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
                 © 2025 CodeWave.it • <a href="#privacy" className="hover:text-[var(--accent-primary)]">Privacy</a> • <a href="#terms" className="hover:text-[var(--accent-primary)]">Terms</a>
               </p>
-              <p className="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
                 Trusted by SaaS, GovTech, and Fast-Growing Startups
               </p>
             </div>

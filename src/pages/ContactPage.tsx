@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { MessageCircle, Phone, Mail, Calendar, MapPin, Clock, Users, CheckCircle, Twitter, Linkedin, Github } from 'lucide-react';
-import CalendlyPopup from '../components/CalendlyPopup';
+import CalendlyPopup from '../components/Calendlypopup';
 
 interface ContactPageProps {
   chatbotOpen: boolean;
@@ -121,7 +121,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
       detail: '30-min free consultation',
       action: 'Book Call',
       color: 'from-orange-500 to-red-500',
-      href: 'https://calendly.com/codewave/30min'
+      href: 'https://calendly.com/careersparushapandey/30min'
     }
   ], []);
 

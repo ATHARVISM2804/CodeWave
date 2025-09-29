@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageCircle, Mail, Calendar, Send } from 'lucide-react';
-import CalendlyPopup from './CalendlyPopup';
+import CalendlyPopup from './Calendlypopup';
 
 const ContactSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -132,7 +132,7 @@ const ContactSection: React.FC = () => {
     <>
       {/* Calendly Popup */}
       <CalendlyPopup
-        url="https://calendly.com/codewave/30min"
+        url="https://calendly.com/careersparushapandey/30min"
         open={showCalendly}
         onClose={() => setShowCalendly(false)}
         title="Schedule a Call"

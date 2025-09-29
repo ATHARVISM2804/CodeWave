@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import gsap from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import Lenis from '@studio-freight/lenis';
+
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import StatsSection from './components/StatsSection';
@@ -18,7 +22,6 @@ import MouseFollower from './components/CursorFollower';
 import LoadingAnimation from './components/LoadingAnimation';
 import MovingData from './components/MovingData';
 import Chatbot from './components/Chatbot';
-import ScrollToTop from './components/ScrollToTop';
 import Industries from './components/Industries';
 import WebDevelopmentPage from './pages/services/WebDevelopmentPage';
 import CustomSoftwarePage from './pages/services/CustomSoftwarePage';
@@ -35,6 +38,30 @@ import Testimonial from './components/Testimonial';
 import Whatsapp from './components/Whatsapp';
 import BgAnimation from './components/BgAnimation';
 import { ThemeToggleButton } from './components/ThemeToggle';
+import ScrollToTop from './components/ScrollToTop';
+
+gsap.registerPlugin(ScrollToPlugin);
+
+// ✅ Custom hook for Lenis smooth scrolling
+function useLenis() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      lerp: 0.03,          // how much inertia
+      smoothWheel: true,   // enable smooth scroll on wheel
+      orientation: 'vertical',
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+}
 
 const HomePage = () => (
   <>
@@ -52,14 +79,15 @@ const HomePage = () => (
 
 function App() {
   const [isLoading, setIsLoading] = useState(() => {
-    // Only show loading animation on first load, not on route change
     return window.performance && performance.navigation.type === 1;
   });
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [chatbotOpen, setChatbotOpen] = useState(false);
 
+  // ✅ Enable Lenis globally
+  useLenis();
+
   useEffect(() => {
-    // Check for stored theme preference or system preference
     const storedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
     const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     const initialTheme = storedTheme || systemTheme;
@@ -68,23 +96,20 @@ function App() {
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(initialTheme);
 
-    // Listen for theme changes
     const handleThemeChange = () => {
       const currentTheme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
       setTheme(currentTheme);
     };
 
-    // Create a MutationObserver to watch for class changes on html element
     const observer = new MutationObserver(handleThemeChange);
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class']
+      attributeFilter: ['class'],
     });
 
     return () => observer.disconnect();
   }, []);
 
-  // Handle completion of loading animation
   const handleLoadingComplete = () => {
     setIsLoading(false);
   };
@@ -92,31 +117,27 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollToTop />
         <div className={`relative min-h-screen overflow-x-hidden transition-colors duration-300 ${theme}`}>
-          {/* Fixed background div with metallic effect */}
-          <div 
+          <div
             className="fixed top-0 left-0 w-full h-screen -z-10"
-            style={{ 
-              background: theme === 'light' 
-                ? `
+            style={{
+              background:
+                theme === 'light'
+                  ? `
                     radial-gradient(circle at 50% 50%, rgb(255, 255, 255) 0%, rgb(230, 232, 235) 25%, rgb(220, 222, 225) 50%, rgb(210, 212, 215) 75%, rgb(205, 207, 210) 100%),
                     linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%)
                   `
-                : 'var(--bg-primary)',
+                  : 'var(--bg-primary)',
               backgroundBlendMode: theme === 'light' ? 'overlay' : 'normal',
-              backgroundSize: theme === 'light' ? '100% 100%, 20px 20px' : 'auto'
+              backgroundSize: theme === 'light' ? '100% 100%, 20px 20px' : 'auto',
             }}
           />
           <Whatsapp onChatbotClick={() => setChatbotOpen(true)} />
           <MouseFollower />
           <Chatbot open={chatbotOpen} onClose={() => setChatbotOpen(false)} />
           <Header />
-          {/* {theme === 'dark' && (
-            <BgAnimation intensity="high" className="opacity-100" />
-          )} */}
-
           <BgAnimation />
-          <ScrollToTop />
           {isLoading ? (
             <LoadingAnimation duration={500} onComplete={handleLoadingComplete} />
           ) : (
@@ -133,8 +154,8 @@ function App() {
                 <Route path="/services/ui-ux-design" element={<UIUXDesignPage />} />
                 <Route path="/services/api-integration" element={<APIIntegrationPage />} />
                 <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
-                <Route path="/blogs" element={<BlogSection limit={4} showAllButton={true} />} />
-                <Route path="/blog/:id" element={<BlogPost/>} />
+                <Route path="/blogs" element={<BlogSection limit={100} showAllButton={true} />} />
+                <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/portfolio" element={<PortfolioPage />} />
                 <Route path="/contact" element={<ContactPage chatbotOpen={chatbotOpen} setChatbotOpen={setChatbotOpen} />} />
                 <Route path="/tools" element={<ToolsPage />} />
@@ -144,8 +165,6 @@ function App() {
             </main>
           )}
           <Footer />
-          {/* Theme toggle button for mobile - fixed bottom left */}
-          
         </div>
       </Router>
     </HelmetProvider>

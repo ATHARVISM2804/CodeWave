@@ -3,7 +3,7 @@ import { Menu, X, Home, Info, Calendar, Users, Mail } from 'lucide-react';
 import Codewavelogo from '../assets/Logo_Orginal.png';
 import { ThemeToggleButton } from './ThemeToggle';
 import MobileNavbar from './MobileNavbar';
-import CalendlyPopup from './CalendlyPopup';
+import CalendlyPopup from './Calendlypopup';
 
 const navItems = [
   { label: 'Home', href: '/', icon: <Home size={22} /> },
@@ -39,7 +39,7 @@ const Header: React.FC = () => {
 
       {/* Calendly Popup */}
       <CalendlyPopup
-        url="https://calendly.com/ranjanashish9992/strategy-call?embed_domain=yourdomain.com&embed_type=Inline"
+        url="https://calendly.com/careersparushapandey/30min"
         open={showCalendly}
         onClose={() => setShowCalendly(false)}
         title="Book a Call"

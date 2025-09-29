@@ -1,42 +1,48 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 const CursorFollower: React.FC = () => {
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
   const trailRef = useRef<HTMLDivElement>(null)
-  const [isHovering, setIsHovering] = useState(false)
-  const [isClicking, setIsClicking] = useState(false)
+
+  const isHovering = useRef(false)
+  const isClicking = useRef(false)
+  const cursorScale = useRef(1)
 
   useEffect(() => {
     let mouseX = 0, mouseY = 0
     let dotX = 0, dotY = 0
     let ringX = 0, ringY = 0
     let trailX = 0, trailY = 0
-    let cursorScale = 1
 
     const animate = () => {
-      // Fast dot movement for responsiveness
+      // Smooth lerp-like movement
       dotX += (mouseX - dotX) * 0.6
       dotY += (mouseY - dotY) * 0.6
-
-      // Smooth ring movement with slight delay
       ringX += (mouseX - ringX) * 0.15
       ringY += (mouseY - ringY) * 0.15
-
-      // Extra delayed trail effect
       trailX += (mouseX - trailX) * 0.05
       trailY += (mouseY - trailY) * 0.05
 
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) scale(${isClicking ? 0.7 : 1})`
+        dotRef.current.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) scale(${isClicking.current ? 0.7 : 1})`
+        dotRef.current.style.backgroundColor = isHovering.current
+          ? 'var(--accent-secondary)'
+          : 'var(--accent-primary)'
+        dotRef.current.style.height = dotRef.current.style.width = isHovering.current ? '12px' : '8px'
       }
 
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) scale(${cursorScale})`
+        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) scale(${cursorScale.current})`
+        ringRef.current.style.height = ringRef.current.style.width = isHovering.current ? '45px' : '35px'
+        ringRef.current.style.border = `2px solid ${
+          isHovering.current ? 'var(--accent-secondary)' : 'var(--accent-primary)'
+        }`
       }
-      
+
       if (trailRef.current) {
-        trailRef.current.style.transform = `translate3d(${trailX}px, ${trailY}px, 0) scale(${cursorScale * 1.5})`
+        trailRef.current.style.transform = `translate3d(${trailX}px, ${trailY}px, 0) scale(${cursorScale.current * 1.5})`
+        trailRef.current.style.opacity = isHovering.current ? '0.6' : '0.2'
       }
 
       requestAnimationFrame(animate)
@@ -55,20 +61,12 @@ const CursorFollower: React.FC = () => {
         target.closest('a') !== null ||
         target.dataset.cursor === 'pointer'
 
-      // Update hovering state for styling
-      setIsHovering(isPointer)
-
-      // Scale based on hover state
-      cursorScale = isPointer ? 1.4 : 1
+      isHovering.current = isPointer
+      cursorScale.current = isPointer ? 1.4 : 1
     }
 
-    const handleMouseDown = () => {
-      setIsClicking(true)
-    }
-
-    const handleMouseUp = () => {
-      setIsClicking(false)
-    }
+    const handleMouseDown = () => (isClicking.current = true)
+    const handleMouseUp = () => (isClicking.current = false)
 
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('mousedown', handleMouseDown)
@@ -84,10 +82,9 @@ const CursorFollower: React.FC = () => {
 
   return (
     <>
-      {/* Outer glow trail */}
       <div
         ref={trailRef}
-        className="fixed pointer-events-none z-[9997] rounded-full transition-opacity duration-300"
+        className="fixed pointer-events-none z-[9997] rounded-full hidden sm:block"
         style={{
           height: '80px',
           width: '80px',
@@ -95,46 +92,28 @@ const CursorFollower: React.FC = () => {
           marginTop: '-40px',
           background: `radial-gradient(circle, rgba(var(--accent-primary-rgb), 0.4) 0%, rgba(var(--accent-primary-rgb), 0) 80%)`,
           filter: 'blur(15px)',
-          opacity: isHovering ? 0.6 : 0.2
+          transition: 'opacity 0.3s ease'
         }}
       />
-
-      {/* Middle ring */}
       <div
         ref={ringRef}
-        className="fixed pointer-events-none z-[9998] transition-all duration-300"
+        className="fixed pointer-events-none z-[9998] rounded-full hidden sm:block"
         style={{
-          height: isHovering ? '45px' : '35px',
-          width: isHovering ? '45px' : '35px',
-          marginLeft: isHovering ? '-22.5px' : '-17.5px',
-          marginTop: isHovering ? '-22.5px' : '-17.5px',
-          border: `2px solid ${isHovering ? 'var(--accent-secondary)' : 'var(--accent-primary)'}`,
-          borderRadius: '50%',
+          marginLeft: '-20px',
+          marginTop: '-20px',
           mixBlendMode: 'difference',
-          opacity: isClicking ? 1 : 0.8,
-          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-          boxShadow: isHovering 
-            ? '0 0 15px 2px rgba(var(--accent-secondary-rgb), 0.3)' 
-            : '0 0 10px rgba(var(--accent-primary-rgb), 0.2)'
+          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       />
-
-      {/* Center dot/inner circle */}
       <div
         ref={dotRef}
-        className="fixed pointer-events-none z-[9999] rounded-full transition-transform duration-150"
+        className="fixed pointer-events-none z-[9999] rounded-full hidden md:block"
         style={{
-          height: isHovering ? '12px' : '8px',
-          width: isHovering ? '12px' : '8px',
-          marginLeft: isHovering ? '-6px' : '-4px',
-          marginTop: isHovering ? '-6px' : '-4px',
-          backgroundColor: isHovering ? 'var(--accent-secondary)' : 'var(--accent-primary)',
-          opacity: isClicking ? 0.8 : 1,
-          mixBlendMode: 'difference',
-          boxShadow: isHovering 
-            ? '0 0 12px 3px rgba(var(--accent-secondary-rgb), 0.7)' 
-            : '0 0 10px rgba(var(--accent-primary-rgb), 0.5)',
-          transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
+          marginLeft: '-4px',
+          marginTop: '-4px',
+          transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+          boxShadow: '0 0 10px rgba(var(--accent-primary-rgb), 0.5)',
+          mixBlendMode: 'difference'
         }}
       />
     </>
@@ -142,3 +121,54 @@ const CursorFollower: React.FC = () => {
 }
 
 export default CursorFollower
+
+
+// import React, { useEffect, useRef } from "react"
+
+// const BlobCursor: React.FC = () => {
+//   const blobRef = useRef<HTMLDivElement>(null)
+
+//   useEffect(() => {
+//     let mouseX = 0, mouseY = 0
+//     let currentX = 0, currentY = 0
+
+//     const animate = () => {
+//       currentX += (mouseX - currentX) * 0.12
+//       currentY += (mouseY - currentY) * 0.12
+
+//       if (blobRef.current) {
+//         blobRef.current.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`
+//       }
+
+//       requestAnimationFrame(animate)
+//     }
+
+//     const handleMouseMove = (e: MouseEvent) => {
+//       mouseX = e.clientX
+//       mouseY = e.clientY
+//     }
+
+//     window.addEventListener("mousemove", handleMouseMove)
+//     animate()
+
+//     return () => window.removeEventListener("mousemove", handleMouseMove)
+//   }, [])
+
+//   return (
+//     <div
+//       ref={blobRef}
+//       className="fixed pointer-events-none z-[9999] rounded-full mix-blend-difference"
+//       style={{
+//         width: "60px",
+//         height: "60px",
+//         marginLeft: "-30px",
+//         marginTop: "-30px",
+//         background: "radial-gradient(circle at 30% 30%, var(--accent-primary), var(--accent-secondary))",
+//         filter: "blur(12px)",
+//         transition: "transform 0.2s ease"
+//       }}
+//     />
+//   )
+// }
+
+// export default BlobCursor
