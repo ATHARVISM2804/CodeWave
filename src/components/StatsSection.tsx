@@ -198,7 +198,7 @@ const StatsSection: React.FC<StatsSectionProps> = ({ servicesRef }) => {
           <motion.div
             ref={servicesRef}
             id='services-provided'
-            className="w-full h-[100vh] pt-24 mt-12"
+            className="w-full  pt-24 mt-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
