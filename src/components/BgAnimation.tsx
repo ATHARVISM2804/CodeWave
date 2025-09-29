@@ -40,7 +40,7 @@ const BackgroundAnimation: React.FC = () => {
           ctx.lineTo(x, y + i * 30);
         }
 
-        ctx.strokeStyle = color + "80"; // semi-transparent
+        ctx.strokeStyle = color + "30"; // semi-transparent
         ctx.lineWidth = 1.5;
         ctx.stroke();
       });
