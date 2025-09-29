@@ -37,7 +37,6 @@ import ToolsPage from './pages/Tools';
 import Testimonial from './components/Testimonial';
 import Whatsapp from './components/Whatsapp';
 import BgAnimation from './components/BgAnimation';
-import { ThemeToggleButton } from './components/ThemeToggle';
 import ScrollToTop from './components/ScrollToTop';
 
 gsap.registerPlugin(ScrollToPlugin);

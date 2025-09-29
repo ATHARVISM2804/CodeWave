@@ -52,7 +52,7 @@ const WhyUsSection: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      cardsRef.current.forEach((card, i) => {
+      cardsRef.current.forEach((card) => {
         gsap.fromTo(
           card,
           { y: 100, opacity: 0, rotateX: 15, scale: 0.9 },

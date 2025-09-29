@@ -3,7 +3,7 @@ import { MessageCircle, Mail, Calendar, Send } from 'lucide-react';
 import CalendlyPopup from './Calendlypopup';
 
 const ContactSection: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -18,7 +18,7 @@ const ContactSection: React.FC = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          // setIsVisible(true);
         }
       },
       { threshold: 0.2 }
