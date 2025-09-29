@@ -94,7 +94,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
       detail: '+91 89299 42819',
       action: 'Start Chat',
       color: 'from-green-500 to-emerald-500',
-      href: 'https://wa.me/+918929942819?text=Hello%20CodeWave%21%20I%20would%20like%20to%20discuss%20a%20project.'
+      href: 'https://wa.me/+918287941214?text=Hello%20CodeWave%21%20I%20would%20like%20to%20discuss%20a%20project.'
     },
     {
       icon: MessageCircle,

@@ -121,7 +121,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li style={{ color: 'var(--text-secondary)' }}>
                   <a
-                    href="tel:+918929942819"
+                    href="tel:+918287941214"
                     className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
                   >
                     <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center"
@@ -136,7 +136,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li style={{ color: 'var(--text-secondary)' }}>
                   <a
-                    href="https://wa.me/+918929942819"
+                    href="https://wa.me/+918287941214"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
