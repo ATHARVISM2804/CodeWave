@@ -133,9 +133,9 @@ const AboutPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="pt-16" style={{color: 'var(--text-primary)' }}>
+    <div className="pt-16 " style={{color: 'var(--text-primary)' }}>
       {/* Hero Section */}
-      <section className="relative mt-10 min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative mt-10 min-h-[70vh] pb-10 flex items-center justify-center overflow-hidden">
         {/* Background image with overlay container */}
         <div className="absolute inset-0">
           {/* Main background image */}
@@ -321,66 +321,75 @@ const AboutPage: React.FC = () => {
               Technologies We Work With
             </h2>
             <div className="w-32 h-1 mx-auto mb-6 rounded-full" style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))' }} />
-            <p className="text-center text-lg max-w-2xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              Modern tools for modern problems. We stay current with the latest tech to deliver high-performing, scalable, and secure digital solutions.
+            <p className="text-center text-lg max-w-3xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              We leverage cutting-edge technologies to build powerful, scalable, and future-proof digital solutions that drive real business growth.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {technologies.map((tech, idx) => (
               <div key={idx}
-                className="rounded-3xl p-7 border shadow-xl backdrop-blur-lg transition-all duration-500 transform hover:scale-105 hover:shadow-2xl group relative overflow-hidden"
-                style={{
-                  background: 'var(--card-bg)',
-                  border: '1px solid var(--card-border)',
-                  color: 'var(--text-primary)',
-                  boxShadow: '0 15px 30px rgba(var(--accent-primary-rgb), 0.08)'
-                }}
+                className="group relative overflow-hidden rounded-3xl transition-all duration-500 transform hover:scale-105"
               >
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
-                  <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
+                {/* Glass Background */}
+                <div className="absolute inset-0 backdrop-blur-xl bg-opacity-10" 
+                  style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }} 
+                />
                 
-                <div className="relative z-10">
-                  <div className="flex items-center gap-2 mb-4">
-                    <span 
-                      className="inline-block px-3 py-1 rounded-full font-semibold text-xs tracking-wider uppercase"
-                      style={{ 
-                        background: 'rgba(var(--accent-primary-rgb), 0.15)', 
-                        color: 'var(--accent-primary)' 
-                      }}
-                    >
-                      {tech.group}
-                    </span>
-                  </div>
-                  <ul className="space-y-2">
-                    {tech.items.map((item, i) => (
-                      <li key={i} className="text-sm pl-4 relative" style={{ color: 'var(--text-secondary)' }}>
-                        <span 
-                          className="absolute left-0 top-2 w-2 h-2 rounded-full"
-                          style={{ background: 'var(--accent-primary)' }}
-                        />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                {/* Gradient Border */}
+                <div className="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-br from-[var(--accent-primary)] via-transparent to-[var(--accent-secondary)]">
+                  <div className="h-full w-full rounded-3xl" style={{ background: 'var(--card-bg)' }} />
                 </div>
+
+                {/* Content */}
+                <div className="relative p-8">
+                  {/* Header */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="h-10 w-10 rounded-xl flex items-center justify-center"
+                      style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}>
+                      {tech.group === 'Frontend' && <Code className="w-5 h-5 text-white" />}
+                      {tech.group === 'Backend' && <Shield className="w-5 h-5 text-white" />}
+                      {tech.group === 'Mobile' && <Smartphone className="w-5 h-5 text-white" />}
+                      {tech.group === 'AI & Automation' && <Brain className="w-5 h-5 text-white" />}
+                      {tech.group === 'Databases' && <TrendingUp className="w-5 h-5 text-white" />}
+                      {tech.group === 'APIs' && <Zap className="w-5 h-5 text-white" />}
+                      {tech.group === 'CMS & Hosting' && <Award className="w-5 h-5 text-white" />}
+                      {tech.group === 'Design' && <Palette className="w-5 h-5 text-white" />}
+                    </div>
+                    <h3 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>{tech.group}</h3>
+                  </div>
+
+                  {/* Tech Items */}
+                  <div className="flex flex-wrap gap-2">
+                    {tech.items.map((item, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'rgba(var(--accent-primary-rgb), 0.1)',
+                          color: 'var(--accent-primary)',
+                          border: '1px solid rgba(var(--accent-primary-rgb), 0.2)'
+                        }}
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Hover Effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[var(--accent-primary)] to-[var(--accent-secondary)] mix-blend-soft-light" />
               </div>
             ))}
           </div>
         </div>
-        
-        {/* Background decorations */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-          <div 
-            className="absolute -top-20 -left-20 w-96 h-96 rounded-full blur-3xl opacity-10"
-            style={{ background: 'var(--accent-primary)' }}
-          />
-          <div 
-            className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full blur-3xl opacity-10"
-            style={{ background: 'var(--accent-secondary)' }}
-          />
+
+        {/* Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl"
+            style={{ background: 'linear-gradient(135deg, var(--accent-primary), transparent)' }} />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl"
+            style={{ background: 'linear-gradient(135deg, transparent, var(--accent-secondary))' }} />
         </div>
       </section>
 
