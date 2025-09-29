@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, User, Eye, Share2, BookmarkPlus, TrendingUp } from 'lucide-react';
+import { User, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import '../styles/blog.css';
 import companyLogo from '../assets/company.jpeg';
@@ -78,10 +78,10 @@ const BlogPost: React.FC = () => {
 
 <h3>4. Myths That Hold Startups Back From AI</h3>
 <ul>
-<li>❌ “AI is too expensive.” → Affordable SaaS tools and custom solutions make AI accessible for all.</li>
-<li>❌ “AI replaces jobs.” → AI replaces tasks, not people — freeing teams to focus on innovation.</li>
-<li>❌ “We don’t have enough data.” → Pre-trained models like GPT need very little data to start adding value.</li>
-<li>❌ “It’s only for tech companies.” → From logistics to healthcare, startups in any industry can use AI.</li>
+<li>“AI is too expensive.” → Affordable SaaS tools and custom solutions make AI accessible for all.</li>
+<li>“AI replaces jobs.” → AI replaces tasks, not people — freeing teams to focus on innovation.</li>
+<li>“We don’t have enough data.” → Pre-trained models like GPT need very little data to start adding value.</li>
+<li>  “It’s only for tech companies.” → From logistics to healthcare, startups in any industry can use AI.</li>
 </ul>
 <h4>SEO keyword angle:</h4> <em>AI myths for startups, affordable AI tools, small business AI adoption.</em>
 
@@ -503,13 +503,13 @@ const BlogPost: React.FC = () => {
                 style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
                 
                 <div 
-                  className="prose prose-lg max-w-none blog-content"
+                  className="prose prose-lg max-w-none blog-content enhanced-blog-content"
                   style={{ 
                     color: 'var(--text-primary)',
                     textAlign: 'justify'
                   }}
-                  dangerouslySetInnerHTML={{ __html: post.content }}
-                />
+                  dangerouslySetInnerHTML={{ __html: enhanceBlogContent(post.content) }}
+                ></div>
               </div>
             </motion.div>
 
@@ -587,6 +587,33 @@ const BlogPost: React.FC = () => {
       </div>
     </>
   );
-};
+}
 
 export default BlogPost;
+// --- Add this helper at the very end of the file, outside BlogPost ---
+
+function enhanceBlogContent(html: string) {
+  // Highlight important sections and add custom formatting
+  html = html.replace(/(<h3>.*?Actionable Takeaways.*?<\/h3>)/gi, '<div class="callout-box callout-action">$1');
+  html = html.replace(/(<h3>.*?Conclusion.*?<\/h3>)/gi, '<div class="callout-box callout-conclusion">$1');
+  html = html.replace(/(<h2>.*?<\/h2>)/gi, '<span class="highlight-heading">$1</span>');
+  html = html.replace(/(<h3>.*?<\/h3>)/gi, '<span class="highlight-subheading">$1</span>');
+  html = html.replace(/(<h4>SEO keyword angle:<\/h4>)/gi, '<span class="highlight-seo">$1</span>');
+  html = html.replace(/(<em>.*?<\/em>)/gi, '<span class="highlight-seo">$1</span>');
+
+  // Custom bullet icons for <ul>
+  html = html.replace(/<ul>/g, '<ul class="custom-bullets">');
+  html = html.replace(/<li>/g, '<li><span class="bullet-icon">✔️</span> ');
+
+  // Callout box closing after actionable/conclusion sections
+  html = html.replace(/(<\/ul>)/g, '$1</div>');
+
+  // Blockquotes for impactful statements
+  html = html.replace(/<p>([^<]*?\bAI isn’t\b[^<]*?)<\/p>/gi, '<blockquote class="impact-quote">$1</blockquote>');
+
+  // Highlight actionable steps in ordered lists
+  html = html.replace(/<ol>/g, '<ol class="action-steps">');
+  html = html.replace(/<li>/g, '<li><span class="step-icon">👉</span> ');
+
+  return html;
+}
