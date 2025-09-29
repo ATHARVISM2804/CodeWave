@@ -63,7 +63,7 @@ const UIUXDesignPage: React.FC = () => {
       {/* Back Button */}
       <div className="container mx-auto px-4 pt-4">
         <button
-          className="mb-6 px-6 py-2 rounded-full bg-[var(--accent-primary)] text-white font-semibold shadow hover:bg-[var(--accent-secondary)] transition"
+          className="mt-10 md:mt-5 px-6 py-2 rounded-full bg-[var(--accent-primary)] text-white font-semibold shadow hover:bg-[var(--accent-secondary)] transition"
           onClick={handleBack}
         >
           ← Back to Services
