@@ -3,11 +3,10 @@ import { Award, Users, TrendingUp, Calendar } from 'lucide-react';
 
 const stats = [
 	{ icon: Award, label: 'Projects Completed', value: '50+' },
-	{ icon: Award, label: 'Company Experience', value: '1 Year' },
+	{ icon: Calendar, label: 'Company Experience', value: '1 Year' },
 	{ icon: Award, label: 'Clients', value: '60+ Happy Clients' },
 	{ icon: Users, label: 'Happy Clients', value: '85+' },
 	{ icon: TrendingUp, label: 'Success Rate', value: '98%' },
-	{ icon: Calendar, label: 'Years Experience', value: '5+' }
 ];
 
 const MovingData: React.FC<{ speed?: number }> = ({ speed = 30 }) => {
@@ -50,7 +49,7 @@ const MovingData: React.FC<{ speed?: number }> = ({ speed = 30 }) => {
 											<Icon className="w-6 h-6 text-white" />
 										</div>
 										<div className="relative z-10">
-											<div className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>{s.value}</div>
+											<div className="text-lg font-bold text-nowrap" style={{ color: 'var(--text-primary)' }}>{s.value}</div>
 											<div className="text-xs text-nowrap" style={{ color: 'var(--text-secondary)' }}>{s.label}</div>
 										</div>
 									</div>
