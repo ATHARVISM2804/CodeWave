@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import CalendlyPopup from '../components/Calendlypopup';
 import { useParams, useNavigate } from 'react-router-dom';
 import { User, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -20,6 +21,8 @@ interface BlogPostData {
 }
 
 const BlogPost: React.FC = () => {
+  // Calendly popup state
+  const [showCalendly, setShowCalendly] = useState(false);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [post, setPost] = useState<BlogPostData | null>(null);
@@ -104,7 +107,7 @@ const BlogPost: React.FC = () => {
 <p>AI isn’t just for the giants. It’s for the ambitious, the lean, and the bold — exactly what startups are.</p>
 <p>Even though Codewave.it is only one year old, we’ve already seen firsthand how AI can help startups reduce costs, scale faster, and gain investor confidence. Being young has been our strength — we move fast, stay current, and deliver results that matter.</p>
 <p>Ready to make AI your startup’s secret weapon?</p>
-<p><a href="#" style="color:var(--accent-primary);text-decoration:underline;">[Schedule a Call with Codewave.it]</a></p>
+ 
         `
       },
       'govtech-india-3-things': {
@@ -510,6 +513,26 @@ const BlogPost: React.FC = () => {
                   }}
                   dangerouslySetInnerHTML={{ __html: enhanceBlogContent(post.content) }}
                 ></div>
+
+                {/* Separate CTA Button for scheduling a call */}
+                <div className="mt-8 flex justify-center">
+                  <button
+                    className="px-6 py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] shadow-lg hover:scale-105 transition-transform"
+                    onClick={() => setShowCalendly(true)}
+                  >
+                    Schedule a Call
+                  </button>
+                </div>
+
+                {/* Calendly Popup Modal */}
+                {showCalendly && (
+                  <CalendlyPopup
+                    url="https://calendly.com/careersparushapandey/30min"
+                    open={showCalendly}
+                    onClose={() => setShowCalendly(false)}
+                    title="Schedule a Meeting"
+                  />
+                )}
               </div>
             </motion.div>
 
@@ -602,8 +625,8 @@ function enhanceBlogContent(html: string) {
   html = html.replace(/(<em>.*?<\/em>)/gi, '<span class="highlight-seo">$1</span>');
 
   // Custom bullet icons for <ul>
-  html = html.replace(/<ul>/g, '<ul class="custom-bullets">');
-  html = html.replace(/<li>/g, '<li><span class="bullet-icon">✔️</span> ');
+    html = html.replace(/<ul>/g, '<ul class="custom-bullets">');
+    // html = html.replace(/<li>/g, '<li><span class="bullet-icon">&bull;</span> ');
 
   // Callout box closing after actionable/conclusion sections
   html = html.replace(/(<\/ul>)/g, '$1</div>');
@@ -613,7 +636,7 @@ function enhanceBlogContent(html: string) {
 
   // Highlight actionable steps in ordered lists
   html = html.replace(/<ol>/g, '<ol class="action-steps">');
-  html = html.replace(/<li>/g, '<li><span class="step-icon">👉</span> ');
+  html = html.replace(/<li>/g, '<li><span class="bullet-icon">&bull;</span> ');
 
   return html;
 }
