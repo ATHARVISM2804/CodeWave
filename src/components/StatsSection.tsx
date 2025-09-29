@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, easeInOut } from 'framer-motion';
 import RollingGallery from './RollingGallary';
 import { useNavigate } from 'react-router-dom';
 // Add some Lucide icons for floating effect
@@ -93,7 +93,7 @@ const StatsSection: React.FC<StatsSectionProps> = ({ servicesRef }) => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.4, ease: 'easeInOut' }
+      transition: { duration: 0.4, ease: easeInOut }
     }
   };
 
@@ -203,6 +203,14 @@ const StatsSection: React.FC<StatsSectionProps> = ({ servicesRef }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center font-extrabold tracking-tight mb-3 leading-tight">
+            <span style={{ color: "var(--text-primary)" }}>Our</span>{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
+              Services
+            </span>
+          </h2>
+           {/* Underline */}
+          <div className="w-24 h-1 mx-auto rounded-full mb-6 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
               {services.map((service, idx) => (
                 <motion.div

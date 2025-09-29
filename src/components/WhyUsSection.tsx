@@ -88,10 +88,13 @@ const WhyUsSection: React.FC = () => {
               CodeWave?
             </span>
           </h2>
+           {/* Underline */}
+          <div className="w-24 h-1 mx-auto rounded-full mb-6 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]" />
           <p className="text-xl mb-28" style={{ color: 'var(--text-secondary)' }}>
             Building tomorrow's solutions with today's most advanced technology
           </p>
         </div>
+        
 
         {/* Cards */}
         <div className="relative max-w-2xl mx-auto space-y-8">
