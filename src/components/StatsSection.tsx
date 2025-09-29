@@ -177,19 +177,19 @@ const StatsSection: React.FC<StatsSectionProps> = ({ servicesRef }) => {
             </motion.div>
             
             <motion.div variants={itemVariants} className="mt-8">
-              <div className="max-w-4xl mx-auto rounded-xl p-7 backdrop-blur-md border border-opacity-30 shadow-lg"
+              <div  className="max-w-4xl mx-auto rounded-xl p-7 backdrop-blur-md border border-opacity-30 shadow-lg"
                 style={{
                   background: 'linear-gradient(to right, rgba(var(--accent-primary-rgb), 0.08), rgba(var(--accent-secondary-rgb), 0.05))',
                   borderColor: 'rgba(var(--accent-primary-rgb), 0.2)',
                   boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
                 }}>
-                <p className="text-xl font-medium leading-relaxed" style={{ color: 'var(--text-primary)' }}>
+                <p  className="text-xl font-medium leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                   From startup vision to enterprise scale, we partner with innovators globally —
                   <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">
                     {' '}helping teams move faster, work smarter, and build for tomorrow
                   </span>
                 </p>
-                <div className="w-20 h-0.5 mx-auto mt-5 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></div>
+                <div  className="w-20 h-0.5 mx-auto mt-5 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"></div>
               </div>
             </motion.div>
           </motion.div>
@@ -198,7 +198,7 @@ const StatsSection: React.FC<StatsSectionProps> = ({ servicesRef }) => {
           <motion.div
             ref={servicesRef}
             id='services-provided'
-            className="w-full mt-12"
+            className="w-full h-[100vh] pt-24 mt-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
