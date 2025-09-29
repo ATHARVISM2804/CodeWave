@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Database, ArrowRight, Settings, Link2, BarChart, Workflow } from 'lucide-react';
+import { Database, Settings, Link2, BarChart, Workflow } from 'lucide-react';
 
 const APIIntegrationPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);

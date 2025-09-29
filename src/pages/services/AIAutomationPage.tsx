@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Brain, ArrowRight, Bot, FileText, BarChart3, Workflow } from 'lucide-react';
+import { Brain,  Bot, FileText, BarChart3, Workflow } from 'lucide-react';
 
 const AIAutomationPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);

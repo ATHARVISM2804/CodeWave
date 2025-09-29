@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Globe, ArrowRight, CheckCircle, Search, Zap, Shield, Smartphone, Users, Code, TrendingUp } from 'lucide-react';
+import { Globe, Search, Zap, Shield, Smartphone, Users, Code, TrendingUp } from 'lucide-react';
 
 const WebDevelopmentPage: React.FC = () => {
   const navigate = useNavigate();

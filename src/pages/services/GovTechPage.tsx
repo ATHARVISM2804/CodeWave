@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, ArrowRight, MessageSquare, Users, Phone, Database } from 'lucide-react';
+import { Shield,  MessageSquare, Users, Phone, Database } from 'lucide-react';
 
 
 const GovTechPage: React.FC = () => {

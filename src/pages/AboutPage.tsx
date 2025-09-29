@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Shield, Award, TrendingUp, Zap, Users, Code, Brain, Palette, Smartphone } from 'lucide-react';
 import HeroBG from '../assets/AboutBG.png'
 const AboutPage: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          // setIsVisible(true);
         }
       },
       { threshold: 0.2 }

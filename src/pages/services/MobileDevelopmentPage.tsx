@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Smartphone, ArrowRight, Monitor, Zap, MapPin, Bell } from 'lucide-react';
+import { Smartphone,  Monitor, Zap, MapPin, Bell } from 'lucide-react';
 
 const MobileDevelopmentPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);

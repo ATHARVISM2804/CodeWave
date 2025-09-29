@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Zap, ArrowRight, Settings, Users, BarChart, Shield } from 'lucide-react';
+import { Zap,  Settings, Users, BarChart, Shield } from 'lucide-react';
 
 const CustomSoftwarePage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);

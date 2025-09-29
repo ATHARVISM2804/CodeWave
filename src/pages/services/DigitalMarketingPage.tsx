@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TrendingUp, ArrowRight, Search, PenTool, Target, Mail } from 'lucide-react';
+import { TrendingUp,  Search, PenTool, Target, Mail } from 'lucide-react';
 
 const DigitalMarketingPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);

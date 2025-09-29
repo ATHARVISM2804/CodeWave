@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Palette, ArrowRight, Eye, Users, Layers, Zap } from 'lucide-react';
+import { Palette,  Eye, Users, Layers, Zap } from 'lucide-react';
 
 const UIUXDesignPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
