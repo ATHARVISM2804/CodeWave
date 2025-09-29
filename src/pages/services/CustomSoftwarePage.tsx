@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Zap, ArrowRight, Settings, Users, BarChart, Shield } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
 
 const CustomSoftwarePage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -47,8 +47,28 @@ const CustomSoftwarePage: React.FC = () => {
     }
   ];
 
+  // Back button handler
+  const handleBack = () => {
+    navigate('/');
+    setTimeout(() => {
+      const el = document.getElementById('services-provided');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   return (
     <div className="pt-16" style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}>
+      {/* Back Button */}
+      <div className="container mx-auto px-4 pt-4">
+        <button
+          className="mb-6 px-6 py-2 rounded-full bg-[var(--accent-primary)] text-white font-semibold shadow hover:bg-[var(--accent-secondary)] transition"
+          onClick={handleBack}
+        >
+          ← Back to Services
+        </button>
+      </div>
       {/* Hero Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

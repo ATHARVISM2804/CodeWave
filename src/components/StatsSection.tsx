@@ -3,7 +3,12 @@ import { motion } from 'framer-motion';
 import RollingGallery from './RollingGallary';
 import { useNavigate } from 'react-router-dom';
 // Add some Lucide icons for floating effect
-import { Globe, Brain, Smartphone } from 'lucide-react';
+import { Globe } from 'lucide-react';
+// Accept ref from parent for services section
+interface StatsSectionProps {
+  servicesRef?: React.RefObject<HTMLDivElement>;
+}
+
 
 
 
@@ -67,11 +72,11 @@ const services = [
 ];
 
 
-const StatsSection: React.FC = () => {
+const StatsSection: React.FC<StatsSectionProps> = ({ servicesRef }) => {
   const [hoveredService, setHoveredService] = useState<number | null>(null);
   const navigate = useNavigate();
   
-  // Animation variants
+  // Animation variants (fix ease property)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -88,8 +93,13 @@ const StatsSection: React.FC = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
+      transition: { duration: 0.4, ease: 'easeInOut' }
     }
+  };
+
+  // Helper for scroll to top
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -186,6 +196,8 @@ const StatsSection: React.FC = () => {
           
           {/* Services Grid - Now placed below the text content */}
           <motion.div
+            ref={servicesRef}
+            id='services-provided'
             className="w-full mt-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -198,14 +210,20 @@ const StatsSection: React.FC = () => {
                   className="group relative cursor-pointer"
                   onMouseEnter={() => setHoveredService(idx)}
                   onMouseLeave={() => setHoveredService(null)}
-                  onClick={() => navigate(service.slug)}
+                  onClick={() => {
+                    scrollToTop();
+                    navigate(service.slug);
+                  }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: idx * 0.05 + 0.2 }}
                   whileHover={{ y: -3 }}
                   tabIndex={0}
                   onKeyDown={e => {
-                    if (e.key === 'Enter' || e.key === ' ') navigate(service.slug);
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      scrollToTop();
+                      navigate(service.slug);
+                    }
                   }}
                   role="button"
                 >
