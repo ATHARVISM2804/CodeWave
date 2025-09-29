@@ -108,11 +108,11 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
     {
       icon: Mail,
       title: 'Email',
-      description: 'Write to careersparushapandey@gmail.com',
+      description: 'Write to contact.codewave.it@gmail.com',
       detail: 'hello@codewave.it',
       action: 'Send Email',
       color: 'from-purple-500 to-pink-500',
-      href: 'mailto:careersparushapandey@gmail.com?subject=Website%20Inquiry'
+      href: 'mailto:contact.codewave.it@gmail.com?subject=Website%20Inquiry'
     },
     {
       icon: Calendar,

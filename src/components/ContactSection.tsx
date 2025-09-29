@@ -100,10 +100,10 @@ const ContactSection: React.FC = () => {
     {
       icon: Mail,
       title: 'Email',
-      description: 'Write to hello@codewave.it',
+      description: 'Write to contact.codewave.it@gmail.com',
       action: 'Send Email',
       color: 'from-purple-500 to-pink-500',
-      href: 'mailto:hello@codewave.it?subject=Website%20Inquiry'
+      href: 'mailto:contact.codewave.it@gmail.com?subject=Website%20Inquiry'
     },
     {
       icon: Calendar,

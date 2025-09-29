@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
     { icon: Twitter, href: '#', name: 'Twitter' },
     { icon: Linkedin, href: '#', name: 'LinkedIn' },
     { icon: Github, href: '#', name: 'GitHub' },
-    { icon: Mail, href: 'mailto:careersparushapandey@gmail.com', name: 'Email' }
+    { icon: Mail, href: 'mailto:contact.codewave.it@gmail.com', name: 'Email' }
   ];
 
   const [calendlyOpen, setCalendlyOpen] = useState(false);
@@ -106,7 +106,7 @@ const Footer: React.FC = () => {
               <ul className="space-y-4 w-full max-w-xs">
                 <li style={{ color: 'var(--text-secondary)' }}>
                   <a
-                    href="mailto:careersparushapandey@gmail.com"
+                    href="mailto:contact.codewave.it@gmail.com"
                     className="flex items-center gap-2 justify-center md:justify-start hover:text-[var(--accent-primary)] transition-colors duration-300 text-sm sm:text-base"
                   >
                     <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center"
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
                       }}>
                       <Mail size={18} />
                     </div>
-                    <span className="truncate">careersparushapandey@gmail.com</span>
+                    <span className="truncate">contact.codewave.it@gmail.com</span>
                   </a>
                 </li>
                 <li style={{ color: 'var(--text-secondary)' }}>
