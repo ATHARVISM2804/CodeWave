@@ -63,44 +63,7 @@
 
       
     </script>
-    <script>
-import LocomotiveScroll from 'locomotive-scroll';
-
-
-      const scroll = new LocomotiveScroll({
-  el: document.querySelector('#scroll-container'),
-  smooth: true,
-  multiplier: 1, // Adjust scroll speed
-  inertia: 0.75   // Adjust inertia (delay in stopping)
-});
-
-let targetScroll = 0;
-  let currentScroll = 0;
-  let ticking = false;
-
-  window.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    targetScroll += e.deltaY;
-    targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
-
-    if (!ticking) {
-      requestAnimationFrame(updateScroll);
-      ticking = true;
-    }
-  }, { passive: false });
-
-  function updateScroll() {
-    currentScroll += (targetScroll - currentScroll) * 0.1; 
-    window.scrollTo(0, currentScroll);
-
-    if (Math.abs(targetScroll - currentScroll) > 0.5) {
-      requestAnimationFrame(updateScroll);
-    } else {
-      ticking = false;
-    }
-  }
-    </script>
-  </head>
+     </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

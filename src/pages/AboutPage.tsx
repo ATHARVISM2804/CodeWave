@@ -214,7 +214,7 @@ const AboutPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
             {missionVision.map((item, idx) => (
               <div key={idx}
-                className="rounded-3xl p-10 border shadow-2xl backdrop-blur-md transform transition-all duration-500 hover:scale-105 hover:shadow-3xl group relative overflow-hidden"
+                className="rounded-3xl p-10 border shadow-2xl backdrop-blur-md transform transition-all duration-500 hover:scale-105 hover:shadow-3xl group relative overflow-hidden flex flex-col items-center text-center"
                 style={{
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
@@ -222,12 +222,7 @@ const AboutPage: React.FC = () => {
                   boxShadow: '0 20px 40px rgba(var(--accent-primary-rgb), 0.1)'
                 }}
               >
-                {/* Subtle gradient overlay */}
-                <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: 'linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.05), transparent)' }}
-                />
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col items-center">
                   <h3 className="text-2xl font-bold mb-4 group-hover:text-[var(--accent-primary)] transition-colors duration-300">{item.title}</h3>
                   <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{item.description}</p>
                 </div>
@@ -247,27 +242,26 @@ const AboutPage: React.FC = () => {
             {values.map((value, idx) => (
               <div
                 key={idx}
-                className="rounded-3xl p-8 border flex flex-col items-center text-center shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-110 hover:shadow-2xl group relative overflow-hidden"
+                className="rounded-3xl p-8 border flex flex-col items-center justify-center text-center shadow-xl backdrop-blur-md transform transition-all duration-500 hover:scale-110 hover:shadow-2xl group relative overflow-hidden h-full"
                 style={{
                   background: 'var(--card-bg)',
                   border: '1px solid var(--card-border)',
                   boxShadow: '0 15px 30px rgba(var(--accent-primary-rgb), 0.08)'
                 }}
               >
-                {/* Animated gradient overlay */}
-                <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
-                  <div className="w-full h-full bg-gradient-to-br from-transparent via-[var(--accent-primary)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500"
+                  style={{ background: 'linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.1), transparent)' }}
+                />
                 
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col items-center">
                   <div 
-                    className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                    className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
                     style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}
                   >
-                    <value.icon className="w-7 h-7 text-white" />
+                    <value.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--accent-primary)] transition-colors duration-300">{value.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{value.description}</p>
+                  <h3 className="text-xl font-bold mb-4 group-hover:text-[var(--accent-primary)] transition-colors duration-300">{value.title}</h3>
+                  <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{value.description}</p>
                 </div>
               </div>
             ))}
