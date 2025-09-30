@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { Cpu, ShieldCheck, BarChart3, Award, Target } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,39 +13,28 @@ const WhyUsSection: React.FC = () => {
   // Updated icons and theme-matching gradients
   const features = [
     {
-      icon: Cpu,
+      gif: 'https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NGtkMXNjdTlxNmx1bzI5Z2F3MzhwbnBlbGlqd3BpZW0zd2g4dHcyYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/0hv8d4HrDVI6m7w7pF/giphy.gif',
       title: "AI at the Core",
       description: "AI guides our design and development. Every solution designed to learn, adapt, and evolve.",
       color: "from-[var(--accent-primary)] to-[var(--accent-secondary)]",
-      iconBg: "bg-[var(--accent-primary)]"
     },
     {
-      icon: ShieldCheck,
+      gif: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmt2Zmc3azlnaXU4cmRsNGxtYXkzeDY1NmtqeHB0Mm8wdDNrd3YxdiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/RDZo7znAdn2u7sAcWH/giphy.gif',
       title: "Security by Design",
       description: "Every layer engineered with encryption, compliance, and resilience.",
       color: "from-green-500 to-[var(--accent-primary)]",
-      iconBg: "bg-gradient-to-r from-green-500 to-[var(--accent-primary)]"
     },
     {
-      icon: BarChart3,
+      gif: 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHJwbjNmbm9ycnNkNmx1NzYyMTVvZ3pxeTRidjJjazZlaDBlNjN4MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6gbchrcNIt4Ma8Tu/giphy.gif',
       title: "Scale Without Fear",
       description: "From lean startups to government platforms — serving millions — our architecture is built to grow.",
       color: "from-[var(--accent-secondary)] to-cyan-400",
-      iconBg: "bg-gradient-to-r from-[var(--accent-secondary)] to-cyan-400"
     },
     {
-      icon: Award,
+      gif: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2ZmNDlkNzBiNDFkZTUzOTIzOGNkYTU5ZmM5MzAzNjI4ZDUyNTc0ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7qE1YN7aBOFPRw8E/giphy.gif',
       title: "Trusted in High-Stakes",
       description: "Government contractors, high-growth startups, and mission-critical organizations trust us to deliver.",
       color: "from-purple-500 to-[var(--accent-secondary)]",
-      iconBg: "bg-gradient-to-r from-purple-500 to-[var(--accent-secondary)]"
-    },
-    {
-      icon: Target,
-      title: "Real Impact, Measured",
-      description: "We support targets, actionable what matters, and give you real numbers on performance.",
-      color: "from-pink-500 to-[var(--accent-primary)]",
-      iconBg: "bg-gradient-to-r from-pink-500 to-[var(--accent-primary)]"
     }
   ];
 
@@ -97,25 +85,42 @@ const WhyUsSection: React.FC = () => {
         
 
         {/* Cards */}
-        <div className="relative max-w-2xl mx-auto space-y-8">
+        <div className="relative max-w-4xl mx-auto space-y-16">
           {features.map((feature, i) => (
             <div
               key={i}
               ref={(el) => (cardsRef.current[i] = el!)}
-              className="p-8 rounded-3xl"
+              className="p-12 rounded-3xl transform transition-all duration-500 hover:scale-[1.02]"
               style={{
                 background: 'var(--card-bg)',
                 border: '1.5px solid var(--card-border)',
                 boxShadow: '0 8px 32px 0 rgba(0,0,0,0.18), 0 1.5px 8px 0 rgba(var(--accent-primary-rgb),0.08)'
               }}
             >
-              <div className="flex items-start space-x-6">
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg ${feature.iconBg}`}>
-                  <feature.icon className="w-8 h-8 text-white" />
+              {/* Responsive Container */}
+              <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
+                {/* GIF Container - Full width on mobile, left side on desktop */}
+                <div className="w-48 h-48 lg:w-56 lg:h-56 rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-105 flex-shrink-0">
+                  <img 
+                    src={feature.gif} 
+                    alt={feature.title}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold mb-2" style={{ color: 'var(--accent-primary)' }}>{feature.title}</h3>
-                  <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>{feature.description}</p>
+
+                {/* Content - Centered on mobile, right side on desktop */}
+                <div className="flex flex-col text-center lg:text-left lg:justify-center">
+                  <h3 
+                    className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] mb-4"
+                  >
+                    {feature.title}
+                  </h3>
+                  <p 
+                    className="text-xl leading-relaxed"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
+                    {feature.description}
+                  </p>
                 </div>
               </div>
             </div>
