@@ -131,7 +131,7 @@ const Footer: React.FC = () => {
                       }}>
                       <Phone size={18} />
                     </div>
-                    +91 89299 42819
+                    +91 82879 41214
                   </a>
                 </li>
                 <li style={{ color: 'var(--text-secondary)' }}>

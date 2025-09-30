@@ -103,7 +103,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
       icon: MessageCircle,
       title: 'WhatsApp',
       description: 'Chat instantly with our team',
-      detail: '+91 89299 42819',
+      detail: '+91 82879 41214',
       action: 'Start Chat',
       color: 'from-green-500 to-emerald-500',
       href: 'https://wa.me/+918287941214?text=Hello%20CodeWave%21%20I%20would%20like%20to%20discuss%20a%20project.'
@@ -121,7 +121,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
       icon: Mail,
       title: 'Email',
       description: 'Write to contact.codewave.it@gmail.com',
-      detail: 'hello@codewave.it',
+      detail: ' ',
       action: 'Send Email',
       color: 'from-purple-500 to-pink-500',
       href: 'mailto:contact.codewave.it@gmail.com?subject=Website%20Inquiry'
