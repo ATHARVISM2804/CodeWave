@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactMarkdown from 'react-markdown';
+import { GoogleGenAI } from "@google/genai";
 
 
 const BOT_NAME = "CodeWaveBot";
@@ -12,6 +13,8 @@ interface Message {
 
 // Dummy data for context and API key placeholder
 const apiKey = "AIzaSyAdjZkoratnRgTHAloK0PYhp2eOicSRIJI";
+const ai = new GoogleGenAI({ apiKey });
+
 const codeWaveContext = `You are CodeWaveBot, a friendly and professional chatbot for Codewave.it — an Intelligence Studio. You help visitors understand our services, book consultations, and provide detailed information about our capabilities.
 
 ## About Codewave.it
@@ -75,35 +78,21 @@ const Chatbot: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClo
     setMessages((msgs) => [...msgs, userMsg]);
     setInput("");
     setIsThinking(true);
-    setLastSender("user"); // Set last sender to user
+    setLastSender("user");
 
     try {
-      // Convert existing chat history to the format required by the API
-      const history = messages.map(msg => ({
-        role: msg.sender === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.text }]
-      }));
+      // Prepare prompt/context
+      const prompt = `${codeWaveContext}\n\nUser: ${input}`;
 
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          systemInstruction: {
-            parts: [{ text: codeWaveContext }]
-          },
-          contents: [
-            ...history,
-            { role: 'user', parts: [{ text: input }] }
-          ]
-        }),
+      // Use GoogleGenAI client for Gemini API
+      const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: prompt,
       });
 
       let botText = "Sorry, I couldn't get a response from the server.";
-      if (response.ok) {
-        const data = await response.json();
-        botText = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, I am unable to respond at the moment.';
+      if (response && response.text) {
+        botText = response.text;
       }
 
       setMessages((msgs) => [
@@ -113,17 +102,16 @@ const Chatbot: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClo
           text: botText
         }
       ]);
-      setLastSender("bot"); // Set last sender to bot
-    } catch (err) {
-      console.error("Error fetching from Gemini API:", err);
+      setLastSender("bot");
+    } catch (err: any) {
       setMessages((msgs) => [
         ...msgs,
         {
           sender: "bot",
-          text: "Sorry, there was a problem connecting to the server."
+          text: `Network error: ${err?.message || "Please check your connection and try again."}`
         }
       ]);
-      setLastSender("bot"); // Set last sender to bot
+      setLastSender("bot");
     } finally {
       setIsThinking(false);
     }
@@ -257,3 +245,4 @@ const Chatbot: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClo
 };
 
 export default Chatbot;
+         

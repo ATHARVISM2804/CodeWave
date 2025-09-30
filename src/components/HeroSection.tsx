@@ -9,8 +9,6 @@ const HeroSection: React.FC = () => {
     setIsVisible(true);
   }, []);
 
-  // detect current theme class on <html> to switch snippet shadow colors
-  const isDarkTheme = typeof window !== 'undefined' && document.documentElement.classList.contains('dark');
 
   const codeSnippets = [
     {

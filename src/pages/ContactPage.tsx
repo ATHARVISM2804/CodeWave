@@ -62,7 +62,19 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
         method: 'POST',
         body: payload
       });
-      const data = await res.json();
+      if (!res.ok) {
+        setSubmitResult(`Server error (${res.status}). Please try again later.`);
+        setIsSubmitting(false);
+        return;
+      }
+      let data;
+      try {
+        data = await res.json();
+      } catch (jsonErr) {
+        setSubmitResult('Invalid server response. Please try again.');
+        setIsSubmitting(false);
+        return;
+      }
       if (data.success) {
         setSubmitResult('Form Submitted Successfully');
         formEl.reset();
@@ -79,8 +91,8 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
       } else {
         setSubmitResult(data.message || 'Submission failed');
       }
-    } catch {
-      setSubmitResult('Network error, please try again.');
+    } catch (err: any) {
+      setSubmitResult(`Network error: ${err?.message || "Please check your connection and try again."}`);
     } finally {
       setIsSubmitting(false);
     }
