@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-const WHATSAPP_LINK = "https://wa.me/918929942819?text=Hello%20CodeWave!%20I%20would%20like%20to%20discuss%20a%20project.";
+const WHATSAPP_LINK = "https://wa.me/918287941214?text=Hello%20CodeWave!%20I%20would%20like%20to%20discuss%20a%20project.";
 
 const Whatsapp: React.FC<{ onChatbotClick?: () => void }> = ({ onChatbotClick }) => {
   const [hovered, setHovered] = useState(false);
