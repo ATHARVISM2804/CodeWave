@@ -13,6 +13,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '', // <-- add phone
     company: '',
     service: '',
     budget: '',
@@ -81,6 +82,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
         setFormData({
           name: '',
           email: '',
+          phone: '', // <-- reset phone
           company: '',
           service: '',
           budget: '',
@@ -414,6 +416,27 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
                       required
                     />
                   </div>
+
+                  <div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>Phone</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="Your phone number"
+                      className="w-full input-premium"
+                      style={{
+                        border: '1px solid rgba(var(--accent-primary-rgb), 0.3)',
+                        background: 'var(--bg-secondary)',
+                        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)',
+                        padding: '0.75rem',
+                        borderRadius: '0.5rem'
+                      }}
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -433,6 +456,8 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
                       borderRadius: '0.5rem'
                     }}
                   />
+                </div>
+
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -49,24 +49,25 @@ const APIIntegrationPage: React.FC = () => {
 
   // Back button handler
   const handleBack = () => {
-    navigate('/');
+    navigate('/', { replace: false });
     setTimeout(() => {
       const el = document.getElementById('services-provided');
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // Fallback: scroll to top if services section not found
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-    }, 100);
+    }, 300); // Increased timeout to allow page to load
   };
 
   return (
     <div className="pt-16" style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}>
       {/* Back Button */}
-      <div
-      onClick={handleBack}
-      className="container mx-auto px-4 pt-4">
+      <div className="container mx-auto px-4 pt-4">
         <button
+          onClick={handleBack}
           className="mt-10 md:mt-5 px-6 py-2 rounded-full bg-[var(--accent-primary)] text-white font-semibold shadow hover:bg-[var(--accent-secondary)] transition"
-          
         >
           ← Back to Services
         </button>
