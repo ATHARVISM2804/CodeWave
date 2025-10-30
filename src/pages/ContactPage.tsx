@@ -217,7 +217,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
     },
     {
       question: 'How can I contact Codewave.it?',
-      answer: 'You can contact us at hello@codewave.it, connect via WhatsApp, or schedule a call through our website.'
+      answer: 'You can contact us at contact.codewave.it@gmail.com , connect via WhatsApp, or schedule a call through our website.'
     }
   ], []);
 

@@ -19,7 +19,6 @@ const DEFAULT_IMGS: string[] = [
   "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
 ];
 
-
 interface RollingGalleryProps {
   autoplay?: boolean;
   pauseOnHover?: boolean;
@@ -27,8 +26,8 @@ interface RollingGalleryProps {
 }
 
 const RollingGallery: React.FC<RollingGalleryProps> = ({
-  autoplay = false,
-  pauseOnHover = false,
+  autoplay = true, // Changed default to true
+  pauseOnHover = true, // Changed default to true
   images = [],
 }) => {
   const galleryImages = images.length > 0 ? images : DEFAULT_IMGS;
@@ -115,12 +114,17 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({
     if (autoplay) startInfiniteSpin(final);
   };
 
-  // Hover pause
+  // Hover pause - fixed implementation
   const handleMouseEnter = () => {
-    if (autoplay && pauseOnHover) controls.stop();
+    if (pauseOnHover) {
+      controls.stop();
+    }
   };
+  
   const handleMouseLeave = () => {
-    if (autoplay && pauseOnHover) startInfiniteSpin(rotation.get());
+    if (pauseOnHover && autoplay) {
+      startInfiniteSpin(rotation.get());
+    }
   };
 
   return (
@@ -162,14 +166,16 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({
       </p>
 
       {/* Gallery */}
-      <div className="w-full flex items-center justify-center [perspective:1400px] [transform-style:preserve-3d]">
+      <div 
+        className="w-full flex items-center justify-center [perspective:1400px] [transform-style:preserve-3d]"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <motion.div
           drag="x"
           dragElastic={0}
           onDrag={handleDrag}
           onDragEnd={handleDragEnd}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
           animate={controls}
           onUpdate={(latest: ResolvedValues) =>
             typeof latest.rotateY === "number" && rotation.set(latest.rotateY)
