@@ -42,15 +42,15 @@
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
 
-  /* Logo-inspired accents (primary: bright cyan / secondary: deep blue) */
+  
   --accent-primary: #00AEEF;
   --accent-secondary: #0077CC;
 
-  /* RGB forms for use with rgba(...) */
+  
   --accent-primary-rgb: 0, 174, 239;
   --accent-secondary-rgb: 0, 119, 204;
 
-  --card-bg: rgba(20, 28, 44); /* Increased opacity and made it a dark blue for dark theme */
+  --card-bg: rgba(20, 28, 44);
   --card-border: rgba(255, 255, 255, 0.08);
   --glass-bg: rgba(255, 255, 255, 0.06);
   --glass-border: rgba(255, 255, 255, 0.12);
@@ -74,8 +74,8 @@
   --glass-bg: rgba(255, 255, 255, 0.85);
   --glass-border: rgba(29, 71, 114, 0.2);
   
-  /* Add logo-specific background for light theme */
-  --logo-bg: rgba(29, 71, 114, 0.95); /* Dark blue background for light theme */
+  
+  --logo-bg: rgba(29, 71, 114, 0.95); 
   --logo-border: rgba(255, 255, 255, 0.1);
   --logo-shadow: rgba(29, 71, 114, 0.2);
 }
