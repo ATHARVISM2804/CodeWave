@@ -206,7 +206,7 @@ const IndustryDetailPage: React.FC = () => {
 
       {/* Calendly Popup */}
       <CalendlyPopup
-        url="https://calendly.com/careersparushapandey/30min"
+        url="https://calendly.com/contact-codewave-it/new-meeting"
         open={showCalendly}
         onClose={() => setShowCalendly(false)}
         title="Schedule a Consultation"

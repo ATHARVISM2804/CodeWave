@@ -135,7 +135,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
       detail: '30-min free consultation',
       action: 'Book Call',
       color: 'from-orange-500 to-red-500',
-      href: 'https://calendly.com/careersparushapandey/30min'
+      href: 'https://calendly.com/contact-codewave-it/new-meeting'
     }
   ], []);
 
@@ -258,7 +258,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
 
       {/* Calendly Popup Modal */}
       <CalendlyPopup
-        url="https://calendly.com/careersparushapandey/30min"
+        url="https://calendly.com/contact-codewave-it/new-meeting"
         open={showCalendly}
         onClose={() => setShowCalendly(false)}
         title="Schedule a Meeting"

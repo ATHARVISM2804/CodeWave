@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
     <>
       {/* Calendly Popup */}
       <CalendlyPopup
-        url="https://calendly.com/careersparushapandey/30min"
+        url="https://calendly.com/contact-codewave-it/new-meeting"
         open={calendlyOpen}
         onClose={() => setCalendlyOpen(false)}
         title="Book Free Consultation"

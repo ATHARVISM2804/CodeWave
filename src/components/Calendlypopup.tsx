@@ -52,7 +52,7 @@ export default CalendlyPopup;
 
 // How to use it 
   // <CalendlyPopup
-  //       url="https://calendly.com/careersparushapandey/30min"
+  //       url="https://calendly.com/contact-codewave-it/new-meeting"
   //       open={showCalendly}
   //       onClose={() => setShowCalendly(false)}
   //       title="Schedule a Meeting"
