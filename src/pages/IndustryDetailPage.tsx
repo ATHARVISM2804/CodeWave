@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowRight, TrendingUp, Shield, Zap, Award, GraduationCap, ArrowLeft, CheckCircle, Users, Code, Lightbulb } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import CalendlyPopup from '../components/Calendlypopup';
 
 // Map slugs to their respective icons and colors
 const INDUSTRY_ICONS: Record<string, any> = {
@@ -169,6 +170,7 @@ const IndustryDetailPage: React.FC = () => {
   const industry = slug ? INDUSTRY_DATA[slug] : undefined;
   const iconData = slug ? INDUSTRY_ICONS[slug] : undefined;
   const [isVisible, setIsVisible] = useState(false);
+  const [showCalendly, setShowCalendly] = useState(false); // Add state for Calendly popup
   
   useEffect(() => {
     // Animation trigger
@@ -202,9 +204,17 @@ const IndustryDetailPage: React.FC = () => {
         <meta name="description" content={industry.description} />
       </Helmet>
 
+      {/* Calendly Popup */}
+      <CalendlyPopup
+        url="https://calendly.com/careersparushapandey/30min"
+        open={showCalendly}
+        onClose={() => setShowCalendly(false)}
+        title="Schedule a Consultation"
+      />
+
       <div className="py-20 px-4" style={{ color: 'var(--text-primary)' }}>
         {/* Back navigation */}
-        <div className="container mx-auto mb-12">
+        {/* <div className="container mx-auto mb-12">
           <Link 
             to="/" 
             className="inline-flex items-center gap-2 py-2 px-4 rounded-full text-sm hover:bg-[var(--card-bg)] transition-all duration-300"
@@ -213,9 +223,9 @@ const IndustryDetailPage: React.FC = () => {
             <ArrowLeft size={16} />
             Back to Industries
           </Link>
-        </div>
+        </div> */}
 
-        <div className="container mx-auto">
+        <div className="container mt-10 mx-auto">
           {/* Hero Section */}
           <div className={`relative rounded-3xl overflow-hidden mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="absolute inset-0 bg-gradient-to-br" style={{ 
@@ -266,7 +276,10 @@ const IndustryDetailPage: React.FC = () => {
                 <div className="rounded-2xl p-6 text-center bg-gradient-to-br from-[var(--accent-primary)] to-[var(--accent-secondary)]">
                   <h3 className="text-lg font-bold mb-2 text-white">Ready to get started?</h3>
                   <p className="text-white/80 mb-4">Let's discuss your specific requirements</p>
-                  <button className="w-full py-3 px-6 rounded-xl bg-white/20 text-white font-medium hover:bg-white/30 transition-colors">
+                  <button 
+                    className="w-full py-3 px-6 rounded-xl bg-white/20 text-white font-medium hover:bg-white/30 transition-colors"
+                    onClick={() => setShowCalendly(true)}
+                  >
                     Schedule a Consultation
                   </button>
                 </div>

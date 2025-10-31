@@ -90,7 +90,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ limit = 4, showAllButton = fa
     setNewsletterResult('Sending...');
     try {
       const payload = new FormData();
-      payload.append('access_key', '8cf5247d-b96a-4f34-a3ab-b5990f93409d'); // Use your real access key
+      payload.append('access_key', '8cf5247d-b96a-4f34-a3ab-b5990f93409d'); 
       payload.append('email', newsletterEmail);
       payload.append('subject', 'Newsletter Signup');
       payload.append('message', 'Newsletter signup from blog section.');

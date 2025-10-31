@@ -12,7 +12,8 @@ interface Message {
 }
 
 // Dummy data for context and API key placeholder
-const apiKey = "AIzaSyAdjZkoratnRgTHAloK0PYhp2eOicSRIJI";
+// const apiKey = "AIzaSyAdjZkoratnRgTHAloK0PYhp2eOicSRIJI";
+const apiKey = "AIzaSyBu5oJwXh20hw4bFoTRk7E6NowR4dY_fTM";
 const ai = new GoogleGenAI({ apiKey });
 
 const codeWaveContext = `You are CodeWaveBot, a friendly and professional chatbot for Codewave.it — an Intelligence Studio. You help visitors understand our services, book consultations, and provide detailed information about our capabilities.

@@ -82,7 +82,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setChatbotOpen }) => {
         setFormData({
           name: '',
           email: '',
-          phone: '', // <-- reset phone
+          phone: '', 
           company: '',
           service: '',
           budget: '',
